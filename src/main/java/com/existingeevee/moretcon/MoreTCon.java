@@ -76,7 +76,7 @@ public class MoreTCon {
 	static {
 		CustomFireEffect.init();
 		MinecraftForge.EVENT_BUS.register(MoreTCon.class);
-	}
+	}//LivingHurtEvent EntityPShyco
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
