@@ -251,7 +251,7 @@ public class MiscUtils {
 		for (NBTBase base : list) {
 			NBTTagString string = (NBTTagString) base;
 			Material mat = TinkerRegistry.getMaterial(string.getString());
-			if (mat != null) {
+			if (mat != null) { //BlockToolForge
 				retList.add(mat);
 			}
 		}

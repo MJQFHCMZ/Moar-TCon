@@ -152,7 +152,7 @@ public class ModExtraTrait2 extends ToolModifier {
 		if (blue == null) {
 			blue = new ItemStack(Items.SLIME_BALL);
 		}
-		if (red == null) {
+		if (red == null) {	
 			red = new ItemStack(Items.SLIME_BALL);
 		}
 		if (expensive.isEmpty()) {

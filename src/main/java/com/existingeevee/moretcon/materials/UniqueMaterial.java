@@ -204,7 +204,7 @@ public class UniqueMaterial extends Material {
 	public void handleToolModifyEvent(ToolModifyEvent event) {
 		List<UniqueMaterial> pre = MiscUtils.getUniqueEmbossments(event.getToolBeforeModification());
 		List<UniqueMaterial> post = MiscUtils.getUniqueEmbossments(event.getItemStack());
-
+		
 		if (!pre.contains(this) && post.contains(this)) {
 			if (!UniqueMaterial.getToolFromResourceLocation(new ResourceLocation(getToolResLoc())).getRegistryName().equals(event.getItemStack().getItem().getRegistryName())) {
 				event.setCanceled(I18n.translateToLocal("text.err.unique.not_correct_tool"));

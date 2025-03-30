@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.existingeevee.moretcon.MoreTCon;
+import com.existingeevee.moretcon.other.DelagatedRecipeMatch;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 import com.existingeevee.moretcon.traits.modifiers.Betweenified;
@@ -100,6 +101,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Loader;
+import slimeknights.mantle.util.RecipeMatch;
+import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -109,6 +113,7 @@ import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.shared.TinkerCommons;
+import slimeknights.tconstruct.tools.TinkerTools;
 import thebetweenlands.common.capability.circlegem.CircleGemType;
 import thebetweenlands.common.registries.ItemRegistry;
 import xyz.phanta.tconevo.item.ItemMaterial;
@@ -187,7 +192,7 @@ public class ModTraits {
 	public static Cryogenics cryogenics = new Cryogenics();
 	public static ShockAura shockingAura = new ShockAura();
 	public static Flashbang flashbang = new Flashbang();
-	
+
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 
 	public static AntiGravity antigravity;
@@ -265,25 +270,20 @@ public class ModTraits {
 					modShocked);
 
 		}
+//		if (CompatManager.tic3backport) {
+//			if (TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId) || Config.forceRegisterAll) {
+//				new RefilOverslime("green", 50).addRecipeMatch(new DelagatedRecipeMatch(() -> RecipeMatch.of(TinkerCommons.matSlimeCrystalGreen, 1, 1), 1, 1));
+//				new RefilOverslime("blue", 75).addRecipeMatch(new DelagatedRecipeMatch(() -> RecipeMatch.of(TinkerCommons.matSlimeCrystalBlue, 1, 1), 1, 1));
+//				new RefilOverslime("magma", 150).addRecipeMatch(new DelagatedRecipeMatch(() -> RecipeMatch.of(TinkerCommons.matSlimeCrystalMagma, 1, 1), 1, 1));
+//			}
+//
+//			if (Loader.isModLoaded("tconevo")) {
+//				new RefilOverslime("pink", 200).addRecipeMatch(new DelagatedRecipeMatch(() -> RecipeMatch.of(ItemMaterial.Type.PINK_SLIME_CRYSTAL.newStack(1), 1, 1), 1, 1));
+//			}
+//		}
 	}
 
 	public static void postInit() {
-		if (CompatManager.tic3backport) {
-			if (TinkerCommons.matSlimeCrystalGreen != null) {
-				new RefilOverslime("green", 50).addItem(TinkerCommons.matSlimeCrystalGreen, 1, 1);
-			}
-			if (TinkerCommons.matSlimeCrystalBlue != null) {
-				new RefilOverslime("blue", 75).addItem(TinkerCommons.matSlimeCrystalBlue, 1, 1);
-			}
-			if (TinkerCommons.matSlimeCrystalMagma != null) {
-				new RefilOverslime("magma", 150).addItem(TinkerCommons.matSlimeCrystalMagma, 1, 1);
-			}
-
-			if (Loader.isModLoaded("tconevo")) {
-				new RefilOverslime("pink", 200).addItem(ItemMaterial.Type.PINK_SLIME_CRYSTAL.newStack(1), 1, 1);
-			}
-		}
-
 		registerExtraTraitModifiers();
 		if (MoreTCon.proxy.isClient()) {
 			registerModifier(new ModExtraTraitDisplay2());
