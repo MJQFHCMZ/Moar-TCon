@@ -15,7 +15,10 @@
   	"softdep.thebetweenlands.MixinEntityFortressBossProjectile",
   	
   	"softdep.thebetweenlands.MixinToolCore",
-  	"softdep.thebetweenlands.MixinItemGreataxe"
+  	"softdep.thebetweenlands.MixinItemGreataxe",
+  	
+  	"softdep.tinkertoolleveling.MixinModToolLeveling"
+  
   ],
   "client": [
   	"late.client.MixinContentMaterial",

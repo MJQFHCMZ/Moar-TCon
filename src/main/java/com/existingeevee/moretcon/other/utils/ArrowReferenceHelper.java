@@ -20,6 +20,7 @@ public class ArrowReferenceHelper {
 
 	@Deprecated // Nuh uh dont even think about it
 	public static void saveProjectileStack(ItemStack ammoCopy, ItemStack ammo) {
+		System.out.println("saved " + ammoCopy + " " + ammo);
 		PROJECTILE_STACKS.put(ammoCopy, ammo);
 	}
 

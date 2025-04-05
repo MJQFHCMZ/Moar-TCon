@@ -55,8 +55,8 @@ public class PolyshotProj extends AbstractProjectileTrait {
 	}
 
 	public static void spawnProjectile(EntityProjectileBase projectileBase, EntityLivingBase shooter, float power) {
-		ItemStack stack = projectileBase.tinkerProjectile.getItemStack().copy();
-		ItemStack launcher = projectileBase.tinkerProjectile.getLaunchingStack().copy();
+		ItemStack stack = projectileBase.tinkerProjectile.getItemStack();
+		ItemStack launcher = projectileBase.tinkerProjectile.getLaunchingStack();
 
 		EntityProjectileBase proj = ((ProjectileCore) stack.getItem()).getProjectile(stack, launcher, shooter.world, shooter instanceof EntityPlayer ? (EntityPlayer) shooter : null, 2.1f, 0f, 1f, false);
 
@@ -85,6 +85,6 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 	@Override
 	public int getPriority() {
-		return 6942069; 
+		return 6942069;
 	}
 }

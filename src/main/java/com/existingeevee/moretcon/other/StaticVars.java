@@ -11,4 +11,6 @@ public class StaticVars {
 	public static final ThreadLocal<ItemStack> lastArrowPickup = ThreadLocal.withInitial(() -> ItemStack.EMPTY);
 
 	public static final ThreadLocal<ItemStack> lastArrowFired = ThreadLocal.withInitial(() -> ItemStack.EMPTY);
+	
+	public static final ThreadLocal<Boolean> flagTinkerProjectileHandlerDirectSet = ThreadLocal.withInitial(() -> false);
 }

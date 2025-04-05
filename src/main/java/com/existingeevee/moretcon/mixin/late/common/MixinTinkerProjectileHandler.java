@@ -52,7 +52,7 @@ public abstract class MixinTinkerProjectileHandler {
 
 	@Inject(at = @At(value = "RETURN"), method = "setItemStack", remap = false)
 	public void moretcon$RETURN_Inject$setItemStack(ItemStack stack, CallbackInfo ci) {
-		if (parent == null)
+		if (parent == null || StaticVars.flagTinkerProjectileHandlerDirectSet.get())
 			return;
 		parentOrig = parent.copy();
 		((TinkerProjectileHandler) (Object) this).setLaunchingStack(launcher);
@@ -60,7 +60,7 @@ public abstract class MixinTinkerProjectileHandler {
 
 	@Inject(at = @At(value = "RETURN"), method = "setLaunchingStack", remap = false)
 	public void moretcon$RETURN_Inject$setLaunchingStack(ItemStack launchingStack, CallbackInfo ci) {
-		if (launchingStack == null || parent == null)
+		if (launchingStack == null || parent == null || StaticVars.flagTinkerProjectileHandlerDirectSet.get())
 			return;
 
 		boolean modified = false;

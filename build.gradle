@@ -114,6 +114,7 @@ dependencies {
     implementation  'curse.maven:libnine-322344:3509087'
     implementation  'curse.maven:tinkers-evolution-384589:3362723'
     implementation  'curse.maven:constructs-armory-287683:3174535'
+    implementation  'curse.maven:tinkers-tool-leveling-250957:2630860'
 
     implementation  'curse.maven:jei-238222:4538010'
 
