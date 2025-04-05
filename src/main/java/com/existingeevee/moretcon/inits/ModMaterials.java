@@ -193,6 +193,8 @@ public class ModMaterials implements MaterialTypes {
 			MiscUtils.createNonConflictiveName("impact"), 0x007aba, "moretcon:explosive_charge",
 			"moretcon:bomb");
 	
+	protected static final HeadMaterialStats THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT = new HeadMaterialStats(700, 6f, 4f, 5);
+	
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
 
@@ -758,10 +760,11 @@ public class ModMaterials implements MaterialTypes {
 			materialQuakestruck.addTrait(ModTraits.seismishock);
 			TinkerRegistry.addMaterialStats(materialQuakestruck, new HeadMaterialStats(1800, 17.5f, 10f, 8));
 
-			TinkerRegistry.addMaterialStats(materialCryosplinters, new HeadMaterialStats(2048, 6f, 16f, 5));
 			materialCryosplinters.addTrait(ModTraits.hailshot);
-
+			TinkerRegistry.addMaterialStats(materialCryosplinters, new HeadMaterialStats(2048, 6f, 16f, 5));
+			
 			materialAutoloader.addTrait(ModTraits.autoloading);
+			TinkerRegistry.addMaterialStats(materialAutoloader, THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT);
 			TinkerRegistry.addMaterialStats(materialAutoloader, new ExtraMaterialStats(1024));
 			TinkerRegistry.addMaterialStats(materialAutoloader, new HandleMaterialStats(4f, 1024));
 
@@ -827,6 +830,7 @@ public class ModMaterials implements MaterialTypes {
 			CompositeRegistry.registerComposite(() -> materialVoidSpar, () -> materialIoximite, () -> ModFluids.liquidFusionite);
 
 			TinkerRegistry.addMaterialStats(materialShotgun, new ExtraMaterialStats(1024));
+			TinkerRegistry.addMaterialStats(materialShotgun, THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT);
 			materialShotgun.addTrait(ModTraits.polyshot);
 
 			materialMonolite.addItem("gemMonolite", 1, Material.VALUE_Ingot);
