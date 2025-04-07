@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.existingeevee.moretcon.MoreTCon;
-import com.existingeevee.moretcon.other.DelagatedRecipeMatch;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 import com.existingeevee.moretcon.traits.modifiers.Betweenified;
@@ -20,7 +19,6 @@ import com.existingeevee.moretcon.traits.modifiers.Tarred;
 import com.existingeevee.moretcon.traits.modifiers.Valonite;
 import com.existingeevee.moretcon.traits.modifiers.internal.ModExtraTraitDisplay2;
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterReconstructionGel;
-import com.existingeevee.moretcon.traits.modifiers.misc.RefilOverslime;
 import com.existingeevee.moretcon.traits.traits.Aetheric;
 import com.existingeevee.moretcon.traits.traits.Afterimage;
 import com.existingeevee.moretcon.traits.traits.AntiGravity;
@@ -100,10 +98,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.Loader;
-import slimeknights.mantle.util.RecipeMatch;
-import slimeknights.tconstruct.TConstruct;
-import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -112,11 +106,8 @@ import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.traits.ITrait;
-import slimeknights.tconstruct.shared.TinkerCommons;
-import slimeknights.tconstruct.tools.TinkerTools;
 import thebetweenlands.common.capability.circlegem.CircleGemType;
 import thebetweenlands.common.registries.ItemRegistry;
-import xyz.phanta.tconevo.item.ItemMaterial;
 
 public class ModTraits {
 	public static BloodGodsBlessing bloodGodsBlessing = new BloodGodsBlessing();
