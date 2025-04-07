@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.existingeevee.moretcon.block.blocktypes.BlockCobbledBedrock;
+import com.existingeevee.moretcon.block.ore.IBedrockMineable;
 import com.existingeevee.moretcon.other.OverrideItemUseEvent;
 import com.existingeevee.moretcon.other.utils.ReequipHack;
 import com.existingeevee.moretcon.traits.ModTraits;
@@ -48,17 +48,17 @@ public abstract class MixinForgeHooks {
 	private static void moretcon$HEAD_Inject$blockStrength(@Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, CallbackInfoReturnable<Float> ci) {
 		if (ModTraits.bottomsEnd.getToolCoreClass().isInstance(player.getHeldItemMainhand().getItem())) {
 			float hardness = -1;
-			boolean isBedrock = state.getBlock() == Blocks.BEDROCK || state.getBlock().getRegistryName().toString().equals("thebetweenlands:betweenlands_bedrock");
+			boolean isBedrock = state.getBlock() == Blocks.BEDROCK || state.getBlock().getRegistryName().toString().equals("thebetweenlands:betweenlands_bedrock") || state.getBlock() instanceof IBedrockMineable && ((IBedrockMineable) state.getBlock()).isBedrockLike(state, world, pos) && state.getBlock().canHarvestBlock(world, pos, player);
 
-			boolean isSoftBedrock = state.getBlock() instanceof BlockCobbledBedrock;
+			boolean isSoftBedrock = state.getBlock() instanceof IBedrockMineable && ((IBedrockMineable) state.getBlock()).isBedrockLike(state, world, pos) && ((IBedrockMineable) state.getBlock()).isSoftBedrock(state, world, pos);
 
 			boolean hasTrait = ModTraits.bottomsEnd.isToolWithTrait(player.getHeldItemMainhand()) && !ModTraits.bottomsEnd.isStackBroken(player.getHeldItemMainhand());
 
 			if (isSoftBedrock) {
-				hardness = 30;
+				hardness = Math.min(20, state.getBlockHardness(world, pos) / 2);
 			} else if (isBedrock) {
 				hardness = 50;
-			}
+			} 
 
 			if (hardness >= 0 && hasTrait) {
 				ci.setReturnValue(player.getDigSpeed(state, pos) / hardness / 30F);

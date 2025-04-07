@@ -2,6 +2,9 @@ package com.existingeevee.moretcon.block.blocktypes;
 
 import java.util.Random;
 
+import com.existingeevee.moretcon.block.ore.IBedrockMineable;
+import com.existingeevee.moretcon.inits.ModBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -11,7 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockFallingBase extends BlockBase {
+public class BlockFallingBase extends BlockBase implements IBedrockMineable {
 
 	public BlockFallingBase(String unlocalizedName, Material materialIn, int harvest) {
 		super(unlocalizedName, materialIn, harvest);
@@ -58,6 +61,16 @@ public class BlockFallingBase extends BlockBase {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isBedrockLike(IBlockState blockState, World worldIn, BlockPos pos) {
+		return this == ModBlocks.blockBrokenSand;
+	}
+
+	@Override
+	public boolean isSoftBedrock(IBlockState blockState, World worldIn, BlockPos pos) {
+		return this == ModBlocks.blockBrokenSand;
 	}
 
 	/**
