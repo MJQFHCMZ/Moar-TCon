@@ -35,14 +35,11 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 				double noise = HELLTOP_ISLANDS_GENERATOR.generateOctavedSimplexNoise(x, z, world.getSeed()) * 1d;
 
-				double expFactor = -4.0e-6; // -(2/1000)^2
+				double expFactor = -1.0e-6; // -(2/1000)^2
 				double mulFactor = -50;
 
-				double delX = 2500 - i;
-				double delY = 2500 - j;
-
-				noise += mulFactor * Math.pow(Math.E, expFactor * (delX * delX + delY * delY));
-
+				noise += mulFactor * Math.pow(Math.E, expFactor * (x * x + z * z));
+				
 				if (noise < -0.5)
 					continue;
 
