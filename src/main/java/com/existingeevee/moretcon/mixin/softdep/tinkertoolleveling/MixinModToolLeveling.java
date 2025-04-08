@@ -19,10 +19,10 @@ public abstract class MixinModToolLeveling {
 
 	@Inject(at = @At(value = "HEAD"), method = { "afterHit" }, remap = false, cancellable = true)
 	public void moretcon$HEAD_Inject$afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit, CallbackInfo ci) {
-		ItemStack dirRef = ArrowReferenceHelper.getProjectileStack(tool);
-				
+		ItemStack dirRef = ArrowReferenceHelper.getLinkedItemstackFromInventory(tool, player);
+		
 		if (!dirRef.isEmpty()) { // Oh boy... guess were handling this one
-
+			
 			if (!target.getEntityWorld().isRemote && wasHit && player instanceof EntityPlayer) {
 				// if we killed it the event for distributing xp was already fired and we just do it manually here
 				EntityPlayer entityPlayer = (EntityPlayer) player;
@@ -40,3 +40,4 @@ public abstract class MixinModToolLeveling {
 	@Shadow(remap = false)
 	abstract void addXp(ItemStack tool, int amount, EntityPlayer player);
 }
+//Arrow

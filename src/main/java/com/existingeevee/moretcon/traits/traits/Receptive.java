@@ -188,7 +188,7 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	@Override
 	public void afterHit(EntityProjectileBase projectile, World world, ItemStack ammoStack, EntityLivingBase attacker, Entity target, double impactSpeed) {
 		if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getHealth() <= 0) { // Murder!! YAYYY
-			ItemStack origArrowStack = ArrowReferenceHelper.getProjectileStack(projectile.tinkerProjectile);
+			ItemStack origArrowStack = ArrowReferenceHelper.getLinkedItemstackFromInventory(projectile.tinkerProjectile.getItemStack(), attacker);
 			if (!origArrowStack.isEmpty()) {
 				this.addAttack(origArrowStack);
 			}
