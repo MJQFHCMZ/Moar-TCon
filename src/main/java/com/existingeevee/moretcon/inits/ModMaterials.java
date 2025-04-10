@@ -56,7 +56,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialPenguinite = new Material(MiscUtils.createNonConflictiveName("penguinite"), 0xe6e6ffff);
 	public static final Material materialVoidSpar = new Material(MiscUtils.createNonConflictiveName("voidspar"), 0xb37e15ff);
 	public static final Material materialGarstone = new Material(MiscUtils.createNonConflictiveName("garstone"), 0xff0a0a);
-	public static final Material materialBloodstone = new Material(MiscUtils.createNonConflictiveName("bloodstone"), 0x660a0a);
+	public static final Material materialBloodstone = new Material(MiscUtils.createNonConflictiveName("bloodstone"), 0x6b0000);
 	public static final Material materialGallium = new Material(MiscUtils.createNonConflictiveName("gallium"), 0xffffff);
 	public static final Material materialSlimyBone = new Material(MiscUtils.createNonConflictiveName("slimybone"), 0xede6bf);
 	public static final Material materialEnderal = new Material(MiscUtils.createNonConflictiveName("enderal"), 0xb32d0080);
