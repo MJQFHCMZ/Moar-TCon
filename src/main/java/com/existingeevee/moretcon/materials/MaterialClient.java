@@ -14,8 +14,12 @@ import slimeknights.tconstruct.library.client.MaterialRenderInfo;
 import slimeknights.tconstruct.library.materials.Material;
 
 public class MaterialClient {
+	
+	private static void setCustomRender(Material mat) {
+		mat.setRenderInfo(MiscUtils.createMaterialRenderInfoSafe(mat));
+	}
 
-	static {
+	public static void init() {
 		setCustomRender(ModMaterials.materialFusionite);
 		setCustomRender(ModMaterials.materialIrradium);
 		setCustomRender(ModMaterials.materialEnderexamite);
@@ -59,13 +63,6 @@ public class MaterialClient {
 		ModMaterials.materialSanguiseelium.setRenderInfo(new SanguiseeliumTexture.RenderInfo());
 		ModMaterials.materialSearedStone.setRenderInfo(new MaterialRenderInfo.Default(0x4f4f4f));
 		ModMaterials.materialIoximite.setRenderInfo(new GlintTexture.RenderInfo(0x725ee3, 0x674fe1, 0xd7d3fc, 0xb1aaf1, 0x978cea, 0x8374e6));
-	}
-
-	private static void setCustomRender(Material mat) {
-		mat.setRenderInfo(MiscUtils.createMaterialRenderInfoSafe(mat));
-	}
-
-	public static void init() {
-		//empty method to init class static block
+		ModMaterials.materialBloodstone.setRenderInfo(new GlintTexture.RenderInfo(0x1c0000, 0x1c0000, 0xffadad, 0x8e0000, 0x6b0000, 0x4f0101));
 	}
 }
