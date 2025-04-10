@@ -26,7 +26,7 @@ public class SmelteryInit {
 		TinkerRegistry.registerMelting(new ItemStack(TinkerCommons.blockSlime, 1, SlimeType.BLUE.meta), TinkerFluids.blueslime, 2250);
 		
 		if (CompatManager.tic3backport) {
-			TinkerRegistry.registerAlloy(new FluidStack(ModFluids.liquidSlimesteel, 288), new FluidStack(TinkerFluids.iron, 144), new FluidStack(TinkerFluids.blueslime, 250), new FluidStack(TinkerFluids.searedStone, 72));
+			TinkerRegistry.registerAlloy(new FluidStack(ModFluids.liquidSlimesteel, 288), new FluidStack(TinkerFluids.iron, 72), new FluidStack(TinkerFluids.blueslime, 125), new FluidStack(TinkerFluids.searedStone, 144));
 		}
 
 		if (CompatManager.loadMain) {
