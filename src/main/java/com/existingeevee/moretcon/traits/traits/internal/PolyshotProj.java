@@ -22,7 +22,6 @@ public class PolyshotProj extends AbstractProjectileTrait {
 	}
 
 	public static final ThreadLocal<Boolean> IS_ALREADY_PROCING = ThreadLocal.withInitial(() -> false);
-	public static final ThreadLocal<Integer> HURT_RESISTANT_TIME = ThreadLocal.withInitial(() -> 0);
 
 	@Override
 	public void onLaunch(EntityProjectileBase projectileBase, World world, EntityLivingBase shooter) {
