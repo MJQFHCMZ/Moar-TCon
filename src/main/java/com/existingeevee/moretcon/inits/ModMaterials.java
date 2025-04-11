@@ -295,7 +295,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new HandleMaterialStats(0.6f, 120));
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new ExtraMaterialStats(45));
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new BowMaterialStats(0.9f, 1.0f, 3f));
-		}
+		} 
 
 		if (CompatManager.plustic) {
 			TinkerRegistry.addMaterialStats(materialCrimson, new HandleMaterialStats(4f, 1024));
@@ -1224,7 +1224,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialNahuatl, null);
 			ModMaterials.registerMaterial(materialSlimewood, null);
 			ModMaterials.registerMaterial(materialSearedStone, null);
-			ModMaterials.registerMaterial(materialSlimesteel, null);
+			ModMaterials.registerMaterial(materialSlimesteel).toolforge();
 		}
 
 		if (CompatManager.twilightforest) {
