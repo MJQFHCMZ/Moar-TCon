@@ -3,7 +3,7 @@
   "package": "com.existingeevee.moretcon.mixin",
   "refmap": "refmap.moretcon.json",
   "mixins": [
-  	"early.common.MixinLoadController",
+  	"early.common.MixinLoaderLateConfigs",
    	"early.common.MixinItemStack",
    	"early.common.MixinEntity",
   	"early.common.MixinForgeHooks",

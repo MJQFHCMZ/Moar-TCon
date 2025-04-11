@@ -38,9 +38,6 @@ public class MixinItemGreataxe {
 	@Unique
 	private static List<BlockPos> toCheckStatic;
 
-	@Unique
-	private static final BlockPos DUMMY = new BlockPos(0, 0, 0);
-
 	@Inject(at = @At(value = "HEAD"), method = { "onUpdate", "func_77663_a" }, remap = false)
 	public void moretcon$HEAD_Inject$onUpdate(ItemStack stack, World world, Entity holder, int slot, boolean isHeldItem, CallbackInfo ci) {
 		stackStatic = stack;
