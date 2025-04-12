@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModClassLoader;
 import net.minecraftforge.fml.common.ModContainer;
 
-@Mixin(Loader.class)
+@Mixin(value = Loader.class, remap = false)
 public class MixinLoaderLateConfigs {
     @Shadow
     private List<ModContainer> mods;
