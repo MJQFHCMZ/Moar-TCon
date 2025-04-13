@@ -10,6 +10,7 @@
   	"late.common.MixinTinkerProjectileHandler",
   	"late.common.MixinEntityProjectileBase",
   	"late.common.MixinBowCore",
+  	"late.common.MixinTraitTasty",
   	
   	"softdep.thebetweenlands.MixinBlockEnergyBarrier",
   	"softdep.thebetweenlands.MixinEntityFortressBossProjectile",

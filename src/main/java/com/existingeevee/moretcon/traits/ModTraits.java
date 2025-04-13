@@ -183,6 +183,8 @@ public class ModTraits {
 	public static Cryogenics cryogenics = new Cryogenics();
 	public static ShockAura shockingAura = new ShockAura();
 	public static Flashbang flashbang = new Flashbang();
+	public static DummyTrait saturpigting = new DummyTrait("saturpigting", 0xffffff);
+	public static Burning burning; 
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 
@@ -206,7 +208,6 @@ public class ModTraits {
 	public static Rotten rotten;
 	public static Oxide oxide;
 	public static Wormed wormed;
-	public static Burning burning; // TODO move away from bl
 	public static Inertia inertia;
 
 	public static MatterReconstructionGel repair;
