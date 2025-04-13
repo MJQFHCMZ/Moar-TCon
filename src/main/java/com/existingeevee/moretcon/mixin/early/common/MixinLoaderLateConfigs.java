@@ -42,7 +42,7 @@ public class MixinLoaderLateConfigs {
         }
 
         // Add and reload mixin configs
-        Mixins.addConfiguration("mixins." + ModInfo.MODID + ".mods.json");
+        Mixins.addConfiguration("mixins." + ModInfo.MODID + ".late.json");
 
         try {
             // This will very likely break on the next major mixin release.

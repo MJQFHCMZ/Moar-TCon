@@ -184,7 +184,7 @@ public class ModTraits {
 	public static ShockAura shockingAura = new ShockAura();
 	public static Flashbang flashbang = new Flashbang();
 	public static DummyTrait saturpigting = new DummyTrait("saturpigting", 0xffffff);
-	public static Burning burning; 
+	public static Burning burning = new Burning(); 
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 
@@ -220,7 +220,6 @@ public class ModTraits {
 			modBetweenified = new Betweenified();
 			oxide = new Oxide();
 			wormed = new Wormed();
-			burning = new Burning();
 			inertia = new Inertia();
 		}
 		if (CompatManager.aether_legacy) {

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import net.minecraftforge.fml.common.Loader;
 
-public final class MoreTConMixinPlugin implements IMixinConfigPlugin {
+public final class MoarTConMixinPlugin implements IMixinConfigPlugin {
 
 	private static final String START = "com.existingeevee.moretcon.mixin.softdep.";
 

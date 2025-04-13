@@ -1,8 +1,10 @@
 {
+  "required": true,
   "compatibilityLevel": "JAVA_8",
   "package": "com.existingeevee.moretcon.mixin",
   "refmap": "refmap.moretcon.json",
-  "plugin": "com.existingeevee.moretcon.mixinext.MoreTConMixinPlugin",
+  "plugin": "com.existingeevee.moretcon.mixinext.MoarTConMixinPlugin",
+  "minVersion": "0.8",
   
   "mixins": [
   	"late.common.MixinToolPart",
@@ -19,8 +21,8 @@
   	"softdep.thebetweenlands.MixinItemGreataxe",
   	
   	"softdep.tinkertoolleveling.MixinModToolLeveling"
-  
   ],
+  
   "client": [
   	"late.client.MixinContentMaterial",
   	"late.client.MixinModFortifyDisplay",

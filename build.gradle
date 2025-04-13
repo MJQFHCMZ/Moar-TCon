@@ -35,13 +35,21 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            arg '-torg.spongepowered.asm.launch.MixinTweaker'
+            
+            jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
+            jvmArg "-Dmixin.hotSwap=true"
+            jvmArg "-Dmixin.checks.interfaces=true"
+//            arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
 
         server {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            arg '-torg.spongepowered.asm.launch.MixinTweaker'
+
+            jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
+            jvmArg "-Dmixin.hotSwap=true"
+            jvmArg "-Dmixin.checks.interfaces=true"
+//            arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
     }
 }
@@ -100,7 +108,9 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'gson'
     }
-
+    
+    embed('io.github.llamalad7:mixinextras-common:0.5.0-rc.1')
+    
     implementation  'curse.maven:mantle-74924:2713386'
     implementation  'curse.maven:tinkers-construct-74072:2902483'
 
@@ -122,7 +132,8 @@ dependencies {
 
 	implementation ("net.minecraftforge:mergetool:0.2.3.3") { force = true }
 	
-	
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    annotationProcessor "io.github.llamalad7:mixinextras-common:0.5.0-rc.1"	
 
     /*
     note that to properly build this, the following jars will need to be placed in the ./run/mods/ folder
@@ -150,14 +161,15 @@ processResources {
     }
 }
 
-sourceSets {
-    main {
-        refMap = mod_mixin_refmap.replace('${mod_id}', mod_id)
-    }
-}
+//sourceSets {
+//    main {
+//        refMap = mod_mixin_refmap.replace('${mod_id}', mod_id)
+//    }
+//}
 
 mixin {
-    config mod_mixin_configs.replace('${mod_id}', mod_id)
+    add sourceSets.main, "refmap.${mod_id}.json"
+    //config mod_mixin_configs.replace('${mod_id}', mod_id)
 }
 
 jar {
@@ -170,6 +182,7 @@ jar {
     manifest.attributes(
             'ForceLoadAsMod': 'true',
             'FMLCorePluginContainsFMLMod': 'true',
+            "FMLCorePlugin": mixin_loader_class,
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
             'TweakOrder': '0',
             'FMLAT': 'mt_transformer.cfg'

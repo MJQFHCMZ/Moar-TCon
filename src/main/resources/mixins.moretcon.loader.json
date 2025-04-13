@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.existingeevee.moretcon.mixin",
+  "refmap": "refmap.moretcon.json",
+  "target": "@env(INIT)",
+  "minVersion": "0.8",
+
+  "mixins": [
+  	"early.common.MixinLoaderLateConfigs"
+  ],
+
+  "client": [
+  ],
+
+  "server": [
+  ]
+}
