@@ -33,7 +33,6 @@ public class MaterialClient {
 		setCustomRender(ModMaterials.materialAnglerTooth);
 		setCustomRender(ModMaterials.materialWeedwood);
 		setCustomRender(ModMaterials.materialDragonFlyWing);
-		setCustomRender(ModMaterials.materialRuneSteel);
 		setCustomRender(ModMaterials.materialArkenium);
 		setCustomRender(ModMaterials.materialSkyroot);
 		setCustomRender(ModMaterials.materialZanite);
@@ -52,6 +51,7 @@ public class MaterialClient {
 		ModMaterials.materialAmberwood.setRenderInfo(new LightShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialAmberwood.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
 		ModMaterials.materialSlimewood.setRenderInfo(new LightShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialSlimewood.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
 		ModMaterials.materialEtherstone.setRenderInfo(new LightShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialEtherstone.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
+		ModMaterials.materialRuneSteel.setRenderInfo(new LightShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialRuneSteel.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
 		ModMaterials.materialSolsteel.setRenderInfo(new LightShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialSolsteel.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
 		ModMaterials.materialEbonite.setRenderInfo(new NoShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialEbonite.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
 		ModMaterials.materialIgniglomerate.setRenderInfo(new NoShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialIgniglomerate.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
