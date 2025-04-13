@@ -44,15 +44,15 @@ public class Seismishock extends AbstractTrait {
 
 					for (ITrait t : traits) {
 						dmg = t.damage(stack, playerIn, entity, dmgOrig, dmg, false);
-
 					}
 
 					float hpBefore = entity.getHealth();
 					boolean wasHit = entity.attackEntityFrom(decayingEffect.getDamageSource(), dmg);
 
+					int hurtResistantTime = e.hurtResistantTime;
 					for (ITrait t : traits) {
 						t.onHit(stack, playerIn, entity, dmg, false);
-
+						e.hurtResistantTime = hurtResistantTime;
 					}
 
 					for (ITrait t : traits) {

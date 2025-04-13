@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.traits.traits;
+package com.existingeevee.moretcon.traits.traits.nyi;
 
 import slimeknights.tconstruct.library.traits.AbstractTraitLeveled;
 

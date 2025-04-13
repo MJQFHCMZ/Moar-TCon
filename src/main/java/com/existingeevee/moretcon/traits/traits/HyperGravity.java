@@ -32,14 +32,14 @@ public class HyperGravity extends AbstractTrait {
 
 		double dx = player.posX - target.posX;
 		double dz = player.posZ - target.posZ;
-		double lenXY = Math.sqrt(dx * dx + dz * dz);
+		double lenXZ = Math.sqrt(dx * dx + dz * dz);
 		double kb = lastHypergravityKB.get() + 0.75;
 		double accelerateVal = kb * 0.9;
 
 		if (!player.world.isRemote) {
-			target.motionX += dx / lenXY * accelerateVal;
-			target.motionY += accelerateVal / 8;
-			target.motionZ += dz / lenXY * accelerateVal;
+			target.motionX += dx / lenXZ * accelerateVal;
+			target.motionY += accelerateVal / 8; //do a lil bit up
+			target.motionZ += dz / lenXZ * accelerateVal;
 			target.velocityChanged = true;
 		}
 		if (target instanceof EntityPlayerMP) {

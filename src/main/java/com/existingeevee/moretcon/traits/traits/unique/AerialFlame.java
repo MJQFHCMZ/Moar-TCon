@@ -45,7 +45,7 @@ public class AerialFlame extends AbstractProjectileTrait {
 		double x = tag.getDouble("LaunchX"), y = tag.getDouble("LaunchY"), z = tag.getDouble("LaunchZ");
 		double distSq = entity.getDistanceSq(x, y, z);
 
-		if (entity.inGround || distSq > 96 * 96 || distSq < 2 * 2) { //no in ground, not too far, and def not too close
+		if (entity.inGround || distSq > 96 * 96 || distSq < 2 * 2) { // no in ground, not too far, and def not too close
 			return;
 		}
 
@@ -93,19 +93,20 @@ public class AerialFlame extends AbstractProjectileTrait {
 
 				float dmgOrig = dmg;
 
-				for (ITrait t : traits) {
-					if (e instanceof EntityLivingBase) {
+				if (e instanceof EntityLivingBase) {
+					for (ITrait t : traits) {
 						dmg = t.damage(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, dmgOrig, dmg, false);
 					}
 				}
 
-				for (ITrait t : traits) {
-					if (e instanceof EntityLivingBase) {
+				e.hurtResistantTime = 0;
+				if (e instanceof EntityLivingBase) {					
+					for (ITrait t : traits) {
 						t.onHit(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, dmg, false);
+						e.hurtResistantTime = 0;
 					}
 				}
 
-				e.hurtResistantTime = 0;
 
 				float hpBefore = ((EntityLivingBase) e).getHealth();
 				boolean wasHit = e.attackEntityFrom(source, dmg);

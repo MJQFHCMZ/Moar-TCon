@@ -117,7 +117,7 @@ public class Soulforged extends NumberTrackerTrait implements IProjectileTrait {
 
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
-		//BowCore
+
 	}
 
 	@Override
