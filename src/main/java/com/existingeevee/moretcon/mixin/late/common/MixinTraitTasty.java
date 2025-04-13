@@ -16,7 +16,6 @@ public class MixinTraitTasty {
 
 	@Inject(at = @At("TAIL"), method = "nom", remap = false)
 	private void moretcon$HEAD_Inject$nom(ItemStack tool, EntityPlayer player, CallbackInfo info) {
-		System.out.println("aaa");
 		if (ModTraits.saturpigting.isToolWithTrait(tool)) {
 			player.getFoodStats().addStats(4, 1f); // 4 because vanilla tinkers already adds 1. this totals to 5, which is 2 and a half bars
 		}
