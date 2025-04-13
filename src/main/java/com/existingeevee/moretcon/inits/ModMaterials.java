@@ -91,17 +91,18 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialIoximite = new Material(MiscUtils.createNonConflictiveName("ioximite"), 0x978cea);
 	public static final Material materialMonolite = new Material(MiscUtils.createNonConflictiveName("monolite"), 0x4a74f0);
 	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xbbd190);
+	public static final Material materialPorksteel = new Material(MiscUtils.createNonConflictiveName("porksteel"), 0xc3af7d);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
 	public static final DelagateFluidMaterial materialSearedStone = new DelagateFluidMaterial(MiscUtils.createNonConflictiveName("searedstone"), 0x4f4a47);
 	public static final Material materialSlimesteel = new Material(MiscUtils.createNonConflictiveName("slimesteel"), 0x47efea);
 
-	//really not gonna be used lmao. only really there for explosive charge
-	public static final Material materialGunpowder = new Material(MiscUtils.createNonConflictiveName("gunpowder"), 0x727272); 
-	public static final Material materialIcy = new Material(MiscUtils.createNonConflictiveName("icy"), 0x91bbff); 
-	public static final Material materialGlowstone = new Material(MiscUtils.createNonConflictiveName("glowstone"), 0xffdb78); 
-	public static final Material materialRedstone = new Material(MiscUtils.createNonConflictiveName("redstone"), 0x990000); 
+	// really not gonna be used lmao. only really there for explosive charge
+	public static final Material materialGunpowder = new Material(MiscUtils.createNonConflictiveName("gunpowder"), 0x727272);
+	public static final Material materialIcy = new Material(MiscUtils.createNonConflictiveName("icy"), 0x91bbff);
+	public static final Material materialGlowstone = new Material(MiscUtils.createNonConflictiveName("glowstone"), 0xffdb78);
+	public static final Material materialRedstone = new Material(MiscUtils.createNonConflictiveName("redstone"), 0x990000);
 
 	// TODO
 	// public static final Material materialQueensslime = new
@@ -192,30 +193,30 @@ public class ModMaterials implements MaterialTypes {
 	public static final UniqueMaterial materialImpact = new UniqueMaterial(
 			MiscUtils.createNonConflictiveName("impact"), 0x007aba, "moretcon:explosive_charge",
 			"moretcon:bomb");
-	
+
 	protected static final HeadMaterialStats THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT = new HeadMaterialStats(700, 6f, 4f, 5);
-	
+
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
 
 		Material.UNKNOWN.addStats(new ExplosiveMaterialStats(0.25, 1));
-		
+
 		if (ConfigHandler.enableBomb) {
 			TinkerRegistry.addMaterialStats(materialGunpowder, new ExplosiveMaterialStats(3, 20));
-			
+
 			TinkerRegistry.addMaterialStats(materialIcy, new ExplosiveMaterialStats(4, 40));
 			materialIcy.addTrait(ModTraits.cryogenics);
-			
+
 			TinkerRegistry.addMaterialStats(materialGlowstone, new ExplosiveMaterialStats(2, 10));
 			materialGlowstone.addTrait(ModTraits.flashbang);
-			
+
 			TinkerRegistry.addMaterialStats(materialRedstone, new ExplosiveMaterialStats(2.5, 20));
 			materialRedstone.addTrait(ModTraits.shockingAura);
-			
+
 			TinkerRegistry.addMaterialStats(materialImpact, new ExplosiveMaterialStats(3.25, 0));
 			materialImpact.addTrait(ModTraits.impactDetonated);
 		}
-		
+
 		if (CompatManager.tic3backport) {
 			materialNahuatl.setCastable(false);
 			materialNahuatl.setCraftable(false);
@@ -295,7 +296,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new HandleMaterialStats(0.6f, 120));
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new ExtraMaterialStats(45));
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new BowMaterialStats(0.9f, 1.0f, 3f));
-		} 
+		}
 
 		if (CompatManager.plustic) {
 			TinkerRegistry.addMaterialStats(materialCrimson, new HandleMaterialStats(4f, 1024));
@@ -338,8 +339,8 @@ public class ModMaterials implements MaterialTypes {
 				materialFusionite.addTrait(ModTraits.luminescent, Bomb.EXPLOSIVE_CHARGE);
 			}
 
-			//materialGeodesium MinecraftMixin TextureManager TextureAtlasSprite
-			
+			// materialGeodesium MinecraftMixin TextureManager TextureAtlasSprite
+
 			materialValasium.addItem("oreValasium", 1, Material.VALUE_Ore());
 			materialValasium.setFluid(ModFluids.liquidValasium);
 			materialValasium.addCommonItems("Valasium");
@@ -360,6 +361,21 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialValasium, new ExtraMaterialStats(500));
 			TinkerRegistry.addMaterialStats(materialValasium, new ArrowShaftMaterialStats(3f, 75));
 			TinkerRegistry.addMaterialStats(materialValasium, new BowMaterialStats(0.7f, 1.7f, 12f));
+
+			//materialPorksteel.setFluid(ModFluids.liquidPorksteel); TODO
+			materialPorksteel.addCommonItems("Porksteel");
+			materialPorksteel.setCastable(true);
+			materialPorksteel.setCraftable(false);
+			materialPorksteel.setRepresentativeItem("ingotPorksteelm"); //TinkerMaterials
+			materialPorksteel.addTrait(TinkerTraits.baconlicious, HEAD);
+			materialPorksteel.addTrait(ModTraits.burning, HEAD);
+			materialPorksteel.addTrait(ModTraits.saturpigting, HEAD);
+			materialPorksteel.addTrait(ModTraits.saturpigting);
+			TinkerRegistry.addMaterialStats(materialPorksteel, new HeadMaterialStats(430, 7.40f, 5.50f, 3));
+			TinkerRegistry.addMaterialStats(materialPorksteel, new HandleMaterialStats(1.30f, 20));
+			TinkerRegistry.addMaterialStats(materialPorksteel, new ExtraMaterialStats(190));
+		    TinkerRegistry.addMaterialStats(materialPorksteel, new BowMaterialStats(0.55f, 1.5f, 7.3f));
+
 
 			materialIrradium.addItem("oreIrradium", 1, Material.VALUE_Ore());
 			materialIrradium.setFluid(ModFluids.liquidIrradium);
@@ -762,7 +778,7 @@ public class ModMaterials implements MaterialTypes {
 
 			materialCryosplinters.addTrait(ModTraits.hailshot);
 			TinkerRegistry.addMaterialStats(materialCryosplinters, new HeadMaterialStats(2048, 6f, 16f, 5));
-			
+
 			materialAutoloader.addTrait(ModTraits.autoloading);
 			TinkerRegistry.addMaterialStats(materialAutoloader, THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT);
 			TinkerRegistry.addMaterialStats(materialAutoloader, new ExtraMaterialStats(1024));
@@ -805,7 +821,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialZracohlium, new ExplosiveMaterialStats(5f, 40));
 				materialZracohlium.addTrait(ModTraits.pyrophoric, Bomb.EXPLOSIVE_CHARGE);
 			}
-			
+
 			TinkerRegistry.addMaterialStats(materialDematerializer, new BowMaterialStats(1f, 3.2f, 7f));
 			TinkerRegistry.addMaterialStats(materialDematerializer, new HeadMaterialStats(2069, 10f, 8f, 6));
 			materialDematerializer.addTrait(ModTraits.dematerializing);
@@ -1170,15 +1186,15 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialRedstone);
 			ModMaterials.registerMaterial(materialImpact);
 		}
-		
+
 		if (CompatManager.plustic) {
 			ModMaterials.registerMaterial(materialCrimson);
 		}
-		
+
 		if (CompatManager.easterEggs) {
 			ModMaterials.registerMaterial(materialTechnoblade);
 		}
-		
+
 		if (CompatManager.loadMain) {
 			ModMaterials.registerMaterial(materialZracohlium).toolforge();
 			ModMaterials.registerMaterial(materialPlasma, null);
@@ -1219,6 +1235,9 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialDematerializer, null);
 			ModMaterials.registerMaterial(materialIoximite, null);
 			ModMaterials.registerMaterial(materialShotgun, null);
+			ModMaterials.registerMaterial(materialPorksteel, "Porksteel").toolforge();
+			
+			
 		}
 		if (CompatManager.tic3backport) {
 			ModMaterials.registerMaterial(materialNahuatl, null);
