@@ -47,6 +47,9 @@ public class ModFluidBlocks {
 	public static Block blockLiquidSanguiseelium;
 	public static Block blockLiquidZracohlium;
 	public static Block blockLiquidSlimesteel;
+	public static Block blockLiquidPorksteel;
+	
+	
 	/* ------------------------------------- */
 	private static void registerBlocks(Block... block) {
 		for (Block i : block) {
@@ -79,6 +82,7 @@ public class ModFluidBlocks {
 			blockLiquidBlightsteel = new BlockFluid("liquidblightsteel", ModFluids.liquidBlightsteel, Material.LAVA).setResistance(Float.MAX_VALUE);
 			blockLiquidSanguiseelium = new BlockFluid("liquidsanguiseelium", ModFluids.liquidSanguiseelium, Material.LAVA).setResistance(Float.MAX_VALUE);
 			blockLiquidZracohlium = new BlockFluid("liquidzracohlium", ModFluids.liquidZracohlium, Material.LAVA).setResistance(Float.MAX_VALUE);
+			blockLiquidPorksteel = new BlockFluid("liquidporksteel", ModFluids.liquidPorksteel, Material.LAVA).setResistance(Float.MAX_VALUE);
 
 			blockLiquidFusionLava = new CustomFireBlockFluid("liquidfusionlava", ModFluids.liquidFusionLava, CustomFireEffect.COLD_FIRE, Material.LAVA).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
 			blockLiquifiedSouls = new BlockFluid("liquifiedsouls", ModFluids.liquidLiquifiedSouls, Material.WATER).setResistance(Float.MAX_VALUE);
@@ -101,7 +105,8 @@ public class ModFluidBlocks {
 				blockLiquidBlightsteel,
 				blockLiquidSanguiseelium,
 				blockLiquifiedSouls,
-				blockLiquidZracohlium
+				blockLiquidZracohlium,
+				blockLiquidPorksteel
 /* ------------------------------------- */
 				);
 		}

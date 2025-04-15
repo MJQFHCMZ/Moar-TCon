@@ -362,7 +362,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialValasium, new ArrowShaftMaterialStats(3f, 75));
 			TinkerRegistry.addMaterialStats(materialValasium, new BowMaterialStats(0.7f, 1.7f, 12f));
 
-			//materialPorksteel.setFluid(ModFluids.liquidPorksteel); TODO
+			materialPorksteel.setFluid(ModFluids.liquidPorksteel); 
 			materialPorksteel.addCommonItems("Porksteel");
 			materialPorksteel.setCastable(true);
 			materialPorksteel.setCraftable(false);

@@ -19,7 +19,9 @@ public class FurnaceInit {
 		for (BiValue<Block, ItemStack> val : RegisterHelper.oreDrops) {
 			GameRegistry.addSmelting(val.getA(), val.getB(), 10);
 		}
-
+		if (CompatManager.tic3backport) {
+			initTiC3();
+		}
 		if (CompatManager.twilightforest) {
 			initTF();
 		}
@@ -29,6 +31,13 @@ public class FurnaceInit {
 		if (CompatManager.aether_legacy) {
 			initAL();
 		}
+	}
+
+	public static void initTiC3() {
+		if (ConfigHandler.shouldLoadDust) {
+			GameRegistry.addSmelting(new ItemStack(ModItems.dustSlimesteel, 1), new ItemStack(ModItems.ingotSlimesteel, 1), 0F);
+		}
+		
 	}
 
 	public static void initTF() {
@@ -55,12 +64,14 @@ public class FurnaceInit {
 			GameRegistry.addSmelting(new ItemStack(ModItems.dustHallowsite, 1), new ItemStack(ModItems.ingotHallowsite, 1), 0F);
 			GameRegistry.addSmelting(new ItemStack(ModItems.dustBlightsteel, 1), new ItemStack(ModItems.ingotBlightsteel, 1), 0F);
 			GameRegistry.addSmelting(new ItemStack(ModItems.dustZracohlium, 1), new ItemStack(ModItems.ingotZracohlium, 1), 0F);
-			GameRegistry.addSmelting(new ItemStack(ModItems.dustSlimesteel, 1), new ItemStack(ModItems.ingotSlimesteel, 1), 0F);
+			GameRegistry.addSmelting(new ItemStack(ModItems.dustPorksteel, 1), new ItemStack(ModItems.ingotPorksteel, 1), 0F);
 		}
 		if (ConfigHandler.unfracturedBedrockObtainable) {
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.blockCobbledBedrock, 1), new ItemStack(Blocks.BEDROCK, 1), 0F);
 		}
 		GameRegistry.addSmelting(new ItemStack(ModItems.rawSteel, 1), new ItemStack(ModItems.ingotSteel, 1), 0F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.rawPorksteel, 1), new ItemStack(ModItems.cookedPorksteel, 1), 0F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.cookedPorksteel, 1), new ItemStack(ModItems.ingotPorksteel, 1), 0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreGravitoniumDense, 1), new ItemStack(ModItems.ingotGravitonium, 4), 0F);
 	}
 

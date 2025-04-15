@@ -100,6 +100,12 @@ public class ModItems {
 	public static final Item nuggetBlightsteel = new ItemBase("nuggetBlightsteel");
 	public static final Item dustBlightsteel = new ItemBase("dustBlightsteel");
 
+	public static final Item ingotPorksteel = new ItemBase("ingotPorksteel");
+	public static final Item nuggetPorksteel = new ItemBase("nuggetPorksteel");
+	public static final Item dustPorksteel = new ItemBase("dustPorksteel");
+	public static final Item rawPorksteel = new ItemBase("rawPorksteel").setTab(ModTabs.moarTConMisc);
+	public static final Item cookedPorksteel = new ItemBase("cookedPorksteel").setTab(ModTabs.moarTConMisc);
+
 	public static final Item ingotZracohlium = new ItemBase("ingotZracohlium");
 	public static final Item nuggetZracohlium = new ItemBase("nuggetZracohlium");
 	public static final Item dustZracohlium = new ItemBase("dustZracohlium");
@@ -225,6 +231,9 @@ public class ModItems {
 					ingotZracohlium,
 					nuggetZracohlium,
 
+					ingotPorksteel,
+					nuggetPorksteel,
+					
 					gemVoidSpar,
 					gemEnderal,
 					gemGarstone,
@@ -240,6 +249,8 @@ public class ModItems {
 					matterReconstructionGel,
 					carbonPile,
 					rawSteel,
+					rawPorksteel, 
+					cookedPorksteel, 
 					spaceTimeDisruptionPowder,
 					hydrogenRichRedstonePowder,
 					solidLightning,
@@ -264,7 +275,8 @@ public class ModItems {
 						dustHallowsite,
 						dustBlightsteel,
 						dustSanguiseelium,
-						dustZracohlium
+						dustZracohlium,
+						dustPorksteel
 						);
 			}
 		}

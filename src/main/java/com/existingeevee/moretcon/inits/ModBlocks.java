@@ -83,6 +83,7 @@ public class ModBlocks {
 	public static final Block blockSlimesteel = ((BlockBase) new BlockBase("blockSlimesteel", Material.IRON, 3).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreMonolite = (new BlockOre("oreMonolite", 5, ModItems.gemMonolite).setHardness(12).setResistance(0).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockMonolite = ((BlockBase) new BlockBase("blockMonolite", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true).setLightLevel(0.5f);
+	public static final Block blockPorksteel = ((BlockBase) new BlockBase("blockPorksteel", Material.IRON, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 
 	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.carbonPile).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false); //TODO 
 	
@@ -175,6 +176,7 @@ public class ModBlocks {
 					oreMonolite,
 					blockMonolite,
 					oreGeodesium,
+					blockPorksteel,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
 					blockOtherstone,

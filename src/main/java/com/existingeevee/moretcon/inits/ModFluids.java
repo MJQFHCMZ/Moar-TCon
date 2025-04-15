@@ -84,9 +84,11 @@ public class ModFluids {
 			.setDensity(1000).setViscosity(800).setTemperature(1500);
 	public static Fluid liquidSlimesteel = new LiquidFluid("liquidSlimesteel").setCColor(0x47efea).setLuminosity(15)
 			.setDensity(1000).setViscosity(800).setTemperature(1100);
+	public static Fluid liquidPorksteel = new LiquidFluid("liquidPorksteel").setCColor(0xcbb681).setLuminosity(15)
+			.setDensity(1000).setViscosity(800).setTemperature(1100);
 	
 	public static Fluid liquidFusionLava = new LiquidFluid("liquidfusionlava",
-			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_still"), //were gonna just use the solsteel textures for now until i have more time
+			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_still"),
 			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_flowing")).setCColor(0x00ffff).setLuminosity(15)
 			.setDensity(8000).setViscosity(1500).setTemperature(2000);
 	public static Fluid liquidLiquifiedSouls = new LiquidFluid("liquifiedSouls".toLowerCase()).setCColor(0xffffff).setLuminosity(0)
@@ -118,7 +120,7 @@ public class ModFluids {
 	}
 
 	public static void init() {
-		if (CompatManager.loadMain) {
+		if (CompatManager.tic3backport) {
 			ModFluids.registerFluids(
 					liquidSlimesteel
 			);
@@ -143,7 +145,8 @@ public class ModFluids {
 					liquidBlightsteel,
 					liquidSanguiseelium,
 					liquidLiquifiedSouls,
-					liquidZracohlium
+					liquidZracohlium,
+					liquidPorksteel
 			/** ------------------------------------- **/
 			);
 		} //CustomModelRenderCoreHooks
