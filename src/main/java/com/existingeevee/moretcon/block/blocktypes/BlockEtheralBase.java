@@ -81,8 +81,7 @@ public class BlockEtheralBase extends BlockBase {
 				return;
 			}
 
-			if (ToolHelper.getTraits(event.getEntityPlayer().getHeldItemMainhand()).stream()
-					.anyMatch(t -> t.getIdentifier().equals(ModTraits.etheralHarvest.identifier))) {
+			if (ModTraits.etheralHarvest.isToolWithTrait(event.getEntityPlayer().getHeldItemMainhand())) {
 				float speed = event.getNewSpeed();
 				float hardness = (float) Math.max(Math.pow(10, -1000000), this.blockHardness);
 				float overkill = Float.MAX_VALUE * 0.99f;
@@ -108,7 +107,7 @@ public class BlockEtheralBase extends BlockBase {
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (player != null) {
 			ItemStack stack = player.getHeldItemMainhand();
-			if (ToolHelper.getTraits(stack).contains(ModTraits.etheralHarvest)) {
+			if (ModTraits.etheralHarvest.isToolWithTrait(stack)) {
 				return FULL_BLOCK_AABB;
 			}
 		}
