@@ -95,18 +95,17 @@ public class ModelRegistryHelper {
 				map.put("texturePath", ModInfo.MODID + ":blocks/" + itemName);
 				DevEnvHandler.copyAssetTemplate("blocks/block_cube_all", model, "models/block", map);	
 			}
-		}
-		
-		map = new HashMap<>();
-
-		//the item model tho, we register regardless of the blockmodel, or at least tries its best to
-		if (block instanceof IFluidBlock) {
-			IFluidBlock fluidBlock = (IFluidBlock) block;
-			map.put("texturePath", ModInfo.MODID + ":blocks/fluids/" + fluidBlock.getFluid().getName() + "_still");
-			DevEnvHandler.copyAssetTemplate("items/default_item", model, "models/item", map);		
-		} else {
-			map.put("parentBlockModel", ModInfo.MODID + ":block/" + itemName);
-			DevEnvHandler.copyAssetTemplate("items/block_item", model, "models/item", map);	
+			
+			map = new HashMap<>();
+			//the item model tho, we register regardless of the blockmodel, or at least tries its best to
+			if (block instanceof IFluidBlock) {
+				IFluidBlock fluidBlock = (IFluidBlock) block;
+				map.put("texturePath", ModInfo.MODID + ":blocks/fluids/" + fluidBlock.getFluid().getName() + "_still");
+				DevEnvHandler.copyAssetTemplate("items/default_item", model, "models/item", map);		
+			} else {
+				map.put("parentBlockModel", ModInfo.MODID + ":block/" + itemName);
+				DevEnvHandler.copyAssetTemplate("items/block_item", model, "models/item", map);	
+			}
 		}
 	}
 }
