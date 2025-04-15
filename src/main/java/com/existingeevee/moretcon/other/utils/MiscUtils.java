@@ -177,22 +177,17 @@ public class MiscUtils {
 		}
 	}
 
-	public static String fileread(String str) {
-		String textfile = "";
-		try {
-			File myObj = new File(new File(ClassLoader.getSystemClassLoader().getResource(".").getPath())
-					.getAbsolutePath().replace("%20", " ") + "/" + str);
-			Scanner myReader = new Scanner(myObj);
-			while (myReader.hasNextLine()) {
-				String data = myReader.nextLine();
-				textfile += (data + "\n");
+	public static String readTextFile(File file) throws FileNotFoundException {
+		String text = "";
+		Scanner scanner = new Scanner(file);
+		while (scanner.hasNextLine()) {
+			String data = scanner.nextLine();
+			text += (data + "\n");
 
-			}
-			myReader.close();
-		} catch (FileNotFoundException e) {
-			return null;
 		}
-		return textfile;
+		scanner.close();
+
+		return text;
 
 	}
 
@@ -251,7 +246,7 @@ public class MiscUtils {
 		for (NBTBase base : list) {
 			NBTTagString string = (NBTTagString) base;
 			Material mat = TinkerRegistry.getMaterial(string.getString());
-			if (mat != null) { //BlockToolForge
+			if (mat != null) { // BlockToolForge
 				retList.add(mat);
 			}
 		}
@@ -411,7 +406,7 @@ public class MiscUtils {
 		if (vec.lengthSquared() != 1) {
 			vec = vec.normalize();
 		}
-		
+
 		double pitch = Math.asin(-vec.y);
 		double yaw = Math.atan2(vec.z, vec.z);
 

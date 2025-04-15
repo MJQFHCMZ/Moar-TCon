@@ -26,9 +26,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.tconstruct.common.ModelRegisterUtil;
@@ -59,9 +59,9 @@ public class RegisterHelper {
 		if (itemBlock != null) {
 			ForgeRegistries.ITEMS.register(itemBlock.apply(block).setRegistryName(block.getRegistryName()));
 			if (MiscUtils.isClient()) {
-				RenderHandler.registerBlockModel(block);
-				if (block instanceof BlockFluidClassic) {
-					RenderHandler.registerFluidCustomMeshesAndStates(block);
+				ModelRegistryHelper.registerBlockModel(block);
+				if (block instanceof IFluidBlock) {
+					ModelRegistryHelper.registerFluidCustomMeshesAndStates(block);
 				}
 			}
 		}
@@ -95,11 +95,11 @@ public class RegisterHelper {
 			} else if (item instanceof ToolPart) {
 				ModelRegisterUtil.registerPartModel((ToolPart) item);
 			} else if (item instanceof GravitoniumSpongeItem) {
-				RenderHandler.registerSponge((GravitoniumSpongeItem) item);
+				ModelRegistryHelper.registerSponge((GravitoniumSpongeItem) item);
 			} else if (item instanceof ItemCompositeRep) {
 				//Nothing here. it will be handled later
 			} else {
-				RenderHandler.registerItemModel(item);
+				ModelRegistryHelper.registerItemModel(item);
 			}
 		}
 	}

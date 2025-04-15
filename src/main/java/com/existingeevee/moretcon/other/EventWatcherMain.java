@@ -1,6 +1,7 @@
 package com.existingeevee.moretcon.other;
 
 import com.existingeevee.moretcon.ModInfo;
+import com.existingeevee.moretcon.devtools.DevEnvHandler;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
@@ -29,20 +30,33 @@ public class EventWatcherMain {
 	@SubscribeEvent
 	@SideOnly(value = Side.CLIENT)
 	public void sendBeta(WorldTickEvent e) {
-		if (ModInfo.BETA && !sent && Minecraft.getMinecraft().player != null) {
+		if (!sent && Minecraft.getMinecraft().player != null) {
 			sent = true;
 			TextComponentString linkComponent = new TextComponentString(ModInfo.ISSUE_TRACKER);
 			linkComponent.setStyle(linkComponent.getStyle().setUnderlined(true).setColor(TextFormatting.BLUE).setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, ModInfo.ISSUE_TRACKER)));
+			
+			if (DevEnvHandler.inDevMode()) {
+				String[] strings = ("[" + "\u00A7" + ChatFormatting.BLUE.getChar() + ModInfo.NAME + "\u00A7"
+						+ ChatFormatting.RED.getChar() + " " + I18n.translateToLocal("text.dev.name") + "\u00A7"
+						+ ChatFormatting.WHITE.getChar() + "] " + I18n.translateToLocal("text.dev.desc")).split("__n__");
 
-			String[] strings = ("[" + "\u00A7" + ChatFormatting.BLUE.getChar() + ModInfo.NAME + "\u00A7"
-					+ ChatFormatting.RED.getChar() + " " + I18n.translateToLocal("text.beta.name") + "\u00A7"
-					+ ChatFormatting.WHITE.getChar() + "] " + I18n.translateToLocal("text.beta.desc")).split("__n__");
+				for (int i = 0; i < strings.length - 1; i++) {
+					Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[i]), false);
+				}
+				if (strings.length >= 1) {
+					Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[strings.length - 1]).appendSibling(linkComponent), false);
+				}
+			} else if (ModInfo.BETA) {
+				String[] strings = ("[" + "\u00A7" + ChatFormatting.BLUE.getChar() + ModInfo.NAME + "\u00A7"
+						+ ChatFormatting.RED.getChar() + " " + I18n.translateToLocal("text.beta.name") + "\u00A7"
+						+ ChatFormatting.WHITE.getChar() + "] " + I18n.translateToLocal("text.beta.desc")).split("__n__");
 
-			for (int i = 0; i < strings.length - 1; i++) {
-				Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[i]), false);
-			}
-			if (strings.length >= 1) {
-				Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[strings.length - 1]).appendSibling(linkComponent), false);
+				for (int i = 0; i < strings.length - 1; i++) {
+					Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[i]), false);
+				}
+				if (strings.length >= 1) {
+					Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[strings.length - 1]).appendSibling(linkComponent), false);
+				}
 			}
 		}
 	}
