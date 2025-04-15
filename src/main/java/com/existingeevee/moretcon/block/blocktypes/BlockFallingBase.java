@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockFallingBase extends BlockBase implements IBedrockMineable {
@@ -63,6 +64,11 @@ public class BlockFallingBase extends BlockBase implements IBedrockMineable {
 		}
 	}
 
+	@Override
+	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+		return this != ModBlocks.blockBrokenSand;
+	}
+	
 	@Override
 	public boolean isBedrockLike(IBlockState blockState, World worldIn, BlockPos pos) {
 		return this == ModBlocks.blockBrokenSand;

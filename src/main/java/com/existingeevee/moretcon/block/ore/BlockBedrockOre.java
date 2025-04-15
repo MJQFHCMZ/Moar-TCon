@@ -13,14 +13,8 @@ public class BlockBedrockOre extends BlockOre implements IBedrockMineable {
 
 	public BlockBedrockOre(String name, int harvest, Item toDrop, int minDropAmount, int maxDropAmount) {
 		super(name, harvest, toDrop, minDropAmount, maxDropAmount);
-//		MinecraftForge.EVENT_BUS.register(this);
 		this.setBlockUnbreakable();
 	}
-
-//	@Override
-//	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
-//		return Float.MAX_VALUE * 0.99f;
-//	}
 
 	@Override
 	public EnumPushReaction getMobilityFlag(IBlockState state) {
@@ -36,25 +30,9 @@ public class BlockBedrockOre extends BlockOre implements IBedrockMineable {
 		} 
 		return true;
 	}
-
-//	@SubscribeEvent(priority = EventPriority.LOWEST)
-//	public void onBlockStrength(PlayerEvent.BreakSpeed event) {
-//		if (event.getState().getBlock().equals(this)) {
-//			if (ToolHelper.isBroken(event.getEntityPlayer().getHeldItemMainhand())) {
-//				return;
-//			}
-//
-//			if (ToolHelper.getTraits(event.getEntityPlayer().getHeldItemMainhand()).stream()
-//					.anyMatch(t -> t.getIdentifier().equals(ModTraits.bottomsEnd.identifier))) {
-//				float speed = event.getNewSpeed();
-//				float hardness = (float) Math.max(Math.pow(10, -1000000), this.blockHardness);
-//				float overkill = Float.MAX_VALUE * 0.99f;
-//				float good = speed / hardness;
-//				event.setNewSpeed(overkill * good);
-//			} else {
-//				event.setNewSpeed(0);
-//			}
-//		}
-//	}
-
+	
+	@Override
+	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+		return false;
+	}
 }

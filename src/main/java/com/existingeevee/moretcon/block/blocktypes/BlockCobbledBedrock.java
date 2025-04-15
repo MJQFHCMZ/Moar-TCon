@@ -29,4 +29,9 @@ public class BlockCobbledBedrock extends BlockBase implements IBedrockMineable {
 	public boolean isToolEffective(String type, IBlockState state) {
 		return false;
 	}
+
+	@Override
+	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+		return false;
+	}
 }
