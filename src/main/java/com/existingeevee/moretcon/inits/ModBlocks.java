@@ -8,6 +8,7 @@ import com.existingeevee.moretcon.block.blocktypes.HotBlockBase;
 import com.existingeevee.moretcon.block.blocktypes.RadiationBlockBase;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockGravitoniumFaucet;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockIgniglomerateCluster;
+import com.existingeevee.moretcon.block.blocktypes.unique.BlockRunesteel;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidColumn;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidCore;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidPrismBottom;
@@ -43,7 +44,7 @@ public class ModBlocks {
 	public static final Block blockEnderal = ((BlockBase) new BlockBase("blockEnderal", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block blockGarstone = ((BlockBase) new BlockBase("blockGarstone", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreGarstone = ((BlockBase) new BlockOre("oreGarstone", 4, ModItems.gemGarstone, 1).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);
-	public static final Block blockRuneSteel = ((BlockBase) new BlockBase("blockRuneSteel", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
+	public static final Block blockRuneSteel = ((BlockBase) new BlockRunesteel("blockRuneSteel", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block blockGallium = ((BlockBase) new BlockBase("blockGallium", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreGallium = ((BlockBase) new BlockOreMetal("oreGallium", 5, ModItems.ingotGallium).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);
 	public static final Block oreArkenium = ((BlockBase) new BlockOreMetal("oreArkenium", 2, ModItems.ingotArkenium).setHardness(7.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);
@@ -91,6 +92,8 @@ public class ModBlocks {
 	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockCobbledBetweenBedrock = (new BlockBase("blockCobbledBetweenBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockBrokenSand = (new BlockFallingBase("blockBrokenSand", Material.SAND, 0).setHarvestLevelC("shovel", 0).setSoundType(SoundType.SAND).setHardness(10).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockBrinkstone = (new BlockBase("blockBrinkstone", Material.ROCK, 3).setHardness(15).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockMossyBrinkstone = (new BlockBase("blockMossyBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
 	
 	//Block
 	
@@ -179,8 +182,12 @@ public class ModBlocks {
 					blockPorksteel,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
+					blockBrinkstone,
 					blockOtherstone,
-					blockBrokenSand);
+					blockBrokenSand,
+					blockMossyBrinkstone
+					
+					);
 		}
 		if (CompatManager.twilightforest) {
 			ModBlocks.registerBlocks(

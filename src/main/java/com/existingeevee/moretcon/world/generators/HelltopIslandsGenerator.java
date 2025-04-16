@@ -52,9 +52,9 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 						world.setBlockState(pos, ModBlocks.blockBrokenSand.getDefaultState(), 2);
 					} else {
 						if (y == 128 + height - 1) {
-							world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState(), 2);
+							world.setBlockState(pos, ModBlocks.blockMossyBrinkstone.getDefaultState(), 2);
 						} else {
-							world.setBlockState(pos, Blocks.PURPLE_GLAZED_TERRACOTTA.getDefaultState(), 2);
+							world.setBlockState(pos, ModBlocks.blockBrinkstone.getDefaultState(), 2);
 						}
 					}
 				}

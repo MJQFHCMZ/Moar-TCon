@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.existingeevee.moretcon.block.ISimpleBlockItemProvider;
+import com.existingeevee.moretcon.block.ore.IBedrockMineable;
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.other.utils.FireproofItemUtil;
@@ -18,17 +19,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBase extends Block implements ISimpleBlockItemProvider {
+public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedrockMineable {
 
 	private boolean canBeBeacon = false;
 	private boolean canBurn = true;
 
 	public BlockBase(String itemName, Material material, int harvestLevel) {
-
 		super(material);
 		setUnlocalizedName(MiscUtils.createNonConflictiveName(itemName.toLowerCase()));
 		if (harvestLevel > 0) {
@@ -48,8 +50,11 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider {
 
 	@Override
 	public int quantityDropped(Random random) {
-		if (this.equals(ModBlocks.blockSiltClay)) {
+		if (this == ModBlocks.blockSiltClay) { // BlockGrass
 			return 4;
+		}
+		if (this == ModBlocks.blockMossyBrinkstone) { // BlockGrass
+			return random.nextInt(2) + 1;
 		}
 		return 1;
 	}
@@ -59,13 +64,19 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider {
 		if (this.equals(ModBlocks.blockSiltClay)) {
 			return 4;
 		}
+		if (this == ModBlocks.blockMossyBrinkstone) { // BlockGrass
+			return random.nextInt(2 + fortune) + 1;
+		}
 		return 1;
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if (state.getBlock().equals(ModBlocks.blockSiltClay)) {
+		if (state.getBlock() == ModBlocks.blockSiltClay) {
 			return ModItems.itemSiltClay == null ? Item.getItemFromBlock(this) : ModItems.itemSiltClay;
+		}
+		if (state.getBlock() == ModBlocks.blockMossyBrinkstone) {
+			return ModItems.perimimoss == null ? Item.getItemFromBlock(this) : ModItems.perimimoss;
 		}
 		return super.getItemDropped(state, rand, fortune);
 	}
@@ -105,9 +116,32 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider {
 			}
 		};
 	}
-	
+
 	public BlockBase setHarvestLevelC(String string, int i) {
 		super.setHarvestLevel(string, i);
 		return this;
+	}
+
+	@Override
+	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+		return this != ModBlocks.blockBrinkstone && this != ModBlocks.blockMossyBrinkstone;
+	}
+
+	@Override
+	public boolean isBedrockLike(IBlockState blockState, World worldIn, BlockPos pos) {
+		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockMossyBrinkstone;
+	}
+
+	@Override
+	public boolean isSoftBedrock(IBlockState blockState, World worldIn, BlockPos pos) {
+		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockMossyBrinkstone;
+	}
+
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		if (this == ModBlocks.blockMossyBrinkstone) {
+			drops.add(new ItemStack(ModBlocks.blockBrinkstone));
+		}
+		super.getDrops(drops, world, pos, state, fortune);
 	}
 }

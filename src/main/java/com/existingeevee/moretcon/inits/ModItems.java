@@ -126,6 +126,8 @@ public class ModItems {
 
 	public static final Item dustSyrmorite = new ItemBase("dustSyrmorite");
 
+	public static final Item perimimoss = new ItemBase("perimimoss");
+
 	//Gems
 	public static final Item gemVoidSpar = new ItemBase("gemVoidSpar", 0x7e15ff);
 	public static final Item gemEnderal = new ItemBase("gemEnderal", GlowType.CIRCLE_BIG, 0x2b0082);
@@ -254,6 +256,7 @@ public class ModItems {
 					spaceTimeDisruptionPowder,
 					hydrogenRichRedstonePowder,
 					solidLightning,
+					perimimoss,
 
 					reforgeHeavy,
 					reforgeSharpened,

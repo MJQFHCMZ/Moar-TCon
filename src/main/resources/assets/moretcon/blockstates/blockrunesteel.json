@@ -1,7 +1,10 @@
 {
   "variants": {
-    "normal": {
+    "alt=false": {
       "model": "moretcon:blockrunesteel"
-    }
+    },
+    "alt=true": {
+      "model": "moretcon:blockrunesteelalt"
+    }  
   }
 }
