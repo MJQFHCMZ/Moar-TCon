@@ -187,7 +187,7 @@ public class ModMaterials implements MaterialTypes {
 			"tconstruct:longbow");
 
 	public static final UniqueMaterial materialShotgun = new UniqueMaterial(
-			MiscUtils.createNonConflictiveName("shotgun"), 0xefefef, "tconstruct:tough_binding",
+			MiscUtils.createNonConflictiveName("shotgun"), 0x98f1d9, "tconstruct:tough_binding",
 			"tconstruct:crossbow");
 
 	public static final UniqueMaterial materialImpact = new UniqueMaterial(
