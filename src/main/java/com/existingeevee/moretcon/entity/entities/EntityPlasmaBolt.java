@@ -125,7 +125,7 @@ public class EntityPlasmaBolt extends Entity {
 		List<ITrait> traits = new ArrayList<>(TinkerUtil.getTraitsOrdered(sourceStack));
 		traits.remove(ModTraits.plasmaMissiles);
 		
-		traits.removeIf(p -> rand.nextInt(5) != 0);
+		traits.removeIf(p -> rand.nextInt(2) != 0);
 		
 		float dmg = damage;
 		float dmgOrig = dmg;
