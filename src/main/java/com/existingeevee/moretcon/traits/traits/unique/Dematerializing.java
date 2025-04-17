@@ -117,7 +117,8 @@ public class Dematerializing extends AbstractTrait {
 				EntityArrow arrowToHit = bow.getProjectileEntity(StaticVars.lastArrowFired.get().copy(), event.launcher, world, (EntityPlayer) event.shooter, power, 0, progress, false);
 				arrowToHit.setPosition(intercept.hitVec.x, intercept.hitVec.y, intercept.hitVec.z);
 				arrowToHit.setSilent(true);
-
+				arrow.getTags().forEach(arrowToHit::addTag);
+				
 				if (arrowToHit instanceof EntityProjectileBase) {
 					((EntityProjectileBase) arrowToHit).onHitEntity(new RayTraceResult(e));
 				} else {

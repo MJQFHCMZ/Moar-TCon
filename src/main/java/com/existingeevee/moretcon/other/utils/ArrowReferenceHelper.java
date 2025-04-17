@@ -57,9 +57,7 @@ public class ArrowReferenceHelper {
 				stack.setTagCompound(new NBTTagCompound());
 			}
 			stack.getTagCompound().setString("UniqueToolID", id);
-		}
-		
-		System.out.println(copies[0] + " " + copies[1]);
+		}		
 	}
 
 	public static ItemStack getLinkedItemstackFromInventory(ItemStack stack, Entity entity) {
