@@ -22,7 +22,7 @@ public class PlasmaMissiles extends AbstractTrait {
 
 		double dist = player.getPositionEyes(1f).distanceTo(target.getPositionVector());
 		EntityPlasmaBolt bolt = new EntityPlasmaBolt(target.world, player, target, tool)
-				.setImpactTime(Math.max(5, (int) dist))
+				.setImpactTime(Math.max(15, (int) dist))
 				.setDamage(Math.max(2, ToolHelper.getActualAttack(tool) * 0.5f));
 		
 		bolt.setPosition(player.posX, player.posY + player.getEyeHeight(), player.posZ);
