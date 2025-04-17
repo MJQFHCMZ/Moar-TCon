@@ -54,12 +54,13 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 			this.setEmpowered(projectile, false);
 			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
 
+			float origPower = projectile.tinkerProjectile.getPower();
+
 			for (Entity e : world.getEntitiesInAABBexcluding(target, projectile.getEntityBoundingBox().grow(2), e -> e != attacker && e != projectile && e != target)) {
 				if (!(e instanceof EntityLivingBase)) {
 					continue;
 				}
 
-				float origPower = projectile.tinkerProjectile.getPower();
 				float damageMultiplier = (float) (0.5 * Math.pow(Math.E, -0.25 * target.getDistanceSq(e)) + 0.25);
 
 				projectile.tinkerProjectile.setPower(origPower * damageMultiplier);
@@ -67,9 +68,14 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 				projectile.tinkerProjectile.setPower(origPower);
 
 			}
+			
+			target.hurtResistantTime = 0;
+			projectile.tinkerProjectile.setPower(origPower * 0.1f);
+			projectile.onHitEntity(new RayTraceResult(target));
+			projectile.tinkerProjectile.setPower(origPower);
 		}
 	}
-
+	
 	public boolean isEmpowered(EntityProjectileBase projectileBase) {
 		return projectileBase.getTags().contains(getModifierIdentifier() + ".empowered");
 	}
@@ -84,6 +90,24 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
+		if (projectile.inGround && isEmpowered(projectile)) {
+			this.setEmpowered(projectile, false);
+			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
+
+			for (Entity e : world.getEntitiesInAABBexcluding(projectile, projectile.getEntityBoundingBox().grow(2), e -> e != projectile.shootingEntity)) {
+				if (!(e instanceof EntityLivingBase)) {
+					continue;
+				}
+
+				float origPower = projectile.tinkerProjectile.getPower();
+				float damageMultiplier = (float) (0.5 * Math.pow(Math.E, -0.25 * projectile.getDistanceSq(e)) + 0.25);
+
+				projectile.tinkerProjectile.setPower(origPower * damageMultiplier);
+				projectile.onHitEntity(new RayTraceResult(e));
+				projectile.tinkerProjectile.setPower(origPower);
+			}
+			projectile.setDead();
+		}
 	}
 
 	@Override
