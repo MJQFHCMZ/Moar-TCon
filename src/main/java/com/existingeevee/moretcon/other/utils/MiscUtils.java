@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.other.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -105,6 +107,24 @@ public class MiscUtils {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Entity> T copyEntity(T entity) {
+		if (!entity.world.isRemote && entity != null) {
+			try {
+				Class<T> c = (Class<T>) entity.getClass();
+				Constructor<T> constructor = c.getDeclaredConstructor(World.class);
+				T newInstance = constructor.newInstance(entity.world);
+				newInstance.deserializeNBT(entity.serializeNBT());
+				newInstance.setUniqueId(UUID.randomUUID()); // Prevent UUID fuckups
+ 
+				return newInstance;
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
