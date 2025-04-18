@@ -19,8 +19,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -53,9 +51,6 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 		if (this == ModBlocks.blockSiltClay) { // BlockGrass
 			return 4;
 		}
-		if (this == ModBlocks.blockMossyBrinkstone) { // BlockGrass
-			return random.nextInt(2) + 1;
-		}
 		return 1;
 	}
 
@@ -64,9 +59,6 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 		if (this.equals(ModBlocks.blockSiltClay)) {
 			return 4;
 		}
-		if (this == ModBlocks.blockMossyBrinkstone) { // BlockGrass
-			return random.nextInt(2 + fortune) + 1;
-		}
 		return 1;
 	}
 
@@ -74,9 +66,6 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		if (state.getBlock() == ModBlocks.blockSiltClay) {
 			return ModItems.itemSiltClay == null ? Item.getItemFromBlock(this) : ModItems.itemSiltClay;
-		}
-		if (state.getBlock() == ModBlocks.blockMossyBrinkstone) {
-			return ModItems.perimimoss == null ? Item.getItemFromBlock(this) : ModItems.perimimoss;
 		}
 		return super.getItemDropped(state, rand, fortune);
 	}
@@ -124,24 +113,16 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	@Override
 	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
-		return this != ModBlocks.blockBrinkstone && this != ModBlocks.blockMossyBrinkstone;
+		return this != ModBlocks.blockBrinkstone;
 	}
 
 	@Override
 	public boolean isBedrockLike(IBlockState blockState, World worldIn, BlockPos pos) {
-		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockMossyBrinkstone;
+		return this == ModBlocks.blockBrinkstone;
 	}
 
 	@Override
 	public boolean isSoftBedrock(IBlockState blockState, World worldIn, BlockPos pos) {
-		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockMossyBrinkstone;
-	}
-
-	@Override
-	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		if (this == ModBlocks.blockMossyBrinkstone) {
-			drops.add(new ItemStack(ModBlocks.blockBrinkstone));
-		}
-		super.getDrops(drops, world, pos, state, fortune);
+		return this == ModBlocks.blockBrinkstone;
 	}
 }

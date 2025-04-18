@@ -19,7 +19,7 @@ public class SimplexNoiseGenerator {
 		this.offset = offset; // Added to the final amount. essentially shifting the entire noise up or down
 	}
 
-	public double generateOctavedSimplexNoise(int x, int y, long seed) {
+	public double generateOctavedSimplexNoise(double x, double y, long seed) {
 		double totalNoise = 0;
 		double layerFrequency = scale;
 		double layerWeight = 1;

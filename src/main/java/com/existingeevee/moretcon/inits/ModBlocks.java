@@ -4,6 +4,7 @@ import com.existingeevee.moretcon.block.blocktypes.BlockBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockElectarite;
 import com.existingeevee.moretcon.block.blocktypes.BlockEtheralBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockFallingBase;
+import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
 import com.existingeevee.moretcon.block.blocktypes.HotBlockBase;
 import com.existingeevee.moretcon.block.blocktypes.RadiationBlockBase;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockGravitoniumFaucet;
@@ -93,7 +94,7 @@ public class ModBlocks {
 	public static final Block blockCobbledBetweenBedrock = (new BlockBase("blockCobbledBetweenBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockBrokenSand = (new BlockFallingBase("blockBrokenSand", Material.SAND, 0).setHarvestLevelC("shovel", 0).setSoundType(SoundType.SAND).setHardness(10).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockBrinkstone = (new BlockBase("blockBrinkstone", Material.ROCK, 3).setHardness(15).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockMossyBrinkstone = (new BlockBase("blockMossyBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockMossyBrinkstone = (new BlockMossyBrinkstone("blockMossyBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
 	
 	//Block
 	
