@@ -134,6 +134,9 @@ public class Dematerializing extends AbstractTrait {
 		if (!arrow.world.isRemote) {
 			if (hitBlock) {
 				world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);
+				arrow.setPosition( end.x, end.y, end.z);
+				arrow.inGround = true;
+				arrow.onUpdate();
 			}
 
 			int arrowColor = 0xffffff;
