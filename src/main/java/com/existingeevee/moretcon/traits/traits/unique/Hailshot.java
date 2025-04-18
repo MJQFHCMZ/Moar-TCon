@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.traits.traits.unique;
 
 import javax.annotation.Nullable;
 
+import com.existingeevee.moretcon.client.actions.GlacialParticleAction;
 import com.existingeevee.moretcon.other.utils.ArrowReferenceHelper;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.SoundHandler;
@@ -51,6 +52,8 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 		}
 
 		if (isEmpowered(projectile)) {
+			if (!world.isRemote)
+				GlacialParticleAction.INSTANCE.run(world, projectile.posX, projectile.posY, projectile.posZ, null);
 			this.setEmpowered(projectile, false);
 			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
 
@@ -68,14 +71,14 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 				projectile.tinkerProjectile.setPower(origPower);
 
 			}
-			
+
 			target.hurtResistantTime = 0;
 			projectile.tinkerProjectile.setPower(origPower * 0.1f);
 			projectile.onHitEntity(new RayTraceResult(target));
 			projectile.tinkerProjectile.setPower(origPower);
 		}
 	}
-	
+
 	public boolean isEmpowered(EntityProjectileBase projectileBase) {
 		return projectileBase.getTags().contains(getModifierIdentifier() + ".empowered");
 	}
@@ -91,6 +94,8 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
 		if (projectile.inGround && isEmpowered(projectile)) {
+			if (!world.isRemote)
+				GlacialParticleAction.INSTANCE.run(world, projectile.posX, projectile.posY, projectile.posZ, null);
 			this.setEmpowered(projectile, false);
 			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
 
