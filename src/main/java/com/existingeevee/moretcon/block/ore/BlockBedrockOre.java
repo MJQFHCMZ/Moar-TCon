@@ -8,6 +8,7 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockBedrockOre extends BlockOre implements IBedrockMineable {
 
@@ -33,6 +34,16 @@ public class BlockBedrockOre extends BlockOre implements IBedrockMineable {
 	
 	@Override
 	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
+		return false;
+	}
+	
+	@Override
+	public boolean isBedrockLike(IBlockState blockState, World worldIn, BlockPos pos) {
+		return true;
+	}
+	
+	@Override
+	public boolean isSoftBedrock(IBlockState blockState, World worldIn, BlockPos pos) {
 		return false;
 	}
 }

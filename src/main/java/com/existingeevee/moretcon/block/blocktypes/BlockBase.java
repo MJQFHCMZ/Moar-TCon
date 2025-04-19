@@ -113,16 +113,16 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	@Override
 	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
-		return this != ModBlocks.blockBrinkstone;
+		return this != ModBlocks.blockBrinkstone && this != ModBlocks.blockDarkBrinkstone && this != ModBlocks.orePerimidum && super.canCreatureSpawn(state, world, pos, type);
 	}
 
 	@Override
 	public boolean isBedrockLike(IBlockState blockState, World worldIn, BlockPos pos) {
-		return this == ModBlocks.blockBrinkstone;
+		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockDarkBrinkstone || this == ModBlocks.orePerimidum;
 	}
 
 	@Override
 	public boolean isSoftBedrock(IBlockState blockState, World worldIn, BlockPos pos) {
-		return this == ModBlocks.blockBrinkstone;
+		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockDarkBrinkstone || this == ModBlocks.orePerimidum;
 	}
 }
