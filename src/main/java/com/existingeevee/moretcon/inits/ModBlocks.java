@@ -5,10 +5,12 @@ import com.existingeevee.moretcon.block.blocktypes.BlockElectarite;
 import com.existingeevee.moretcon.block.blocktypes.BlockEtheralBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockFallingBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
+import com.existingeevee.moretcon.block.blocktypes.BrinkstonePlant;
 import com.existingeevee.moretcon.block.blocktypes.HotBlockBase;
 import com.existingeevee.moretcon.block.blocktypes.RadiationBlockBase;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockGravitoniumFaucet;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockIgniglomerateCluster;
+import com.existingeevee.moretcon.block.blocktypes.unique.BlockPerimidumOre;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockRunesteel;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidColumn;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidCore;
@@ -86,7 +88,8 @@ public class ModBlocks {
 	public static final Block oreMonolite = (new BlockOre("oreMonolite", 5, ModItems.gemMonolite).setHardness(12).setResistance(0).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockMonolite = ((BlockBase) new BlockBase("blockMonolite", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true).setLightLevel(0.5f);
 	public static final Block blockPorksteel = ((BlockBase) new BlockBase("blockPorksteel", Material.IRON, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
-
+	public static final Block orePerimidum = ((BlockBase) new BlockPerimidumOre().setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false).setLightLevel(1);
+	
 	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.carbonPile).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false); //TODO 
 	
 	public static final Block blockOtherstone = (new BlockEtheralBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConMaterials));
@@ -95,6 +98,10 @@ public class ModBlocks {
 	public static final Block blockBrokenSand = (new BlockFallingBase("blockBrokenSand", Material.SAND, 0).setHarvestLevelC("shovel", 0).setSoundType(SoundType.SAND).setHardness(10).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockBrinkstone = (new BlockBase("blockBrinkstone", Material.ROCK, 3).setHardness(15).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockMossyBrinkstone = (new BlockMossyBrinkstone("blockMossyBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockPerimigrowth = (new BrinkstonePlant("blockPerimigrowth").setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockPerimishroom = (new BrinkstonePlant("blockPerimishroom").setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockDarkBrinkstone = (new BlockMossyBrinkstone("blockDarkBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
+
 	
 	//Block
 	
@@ -181,13 +188,16 @@ public class ModBlocks {
 					blockMonolite,
 					oreGeodesium,
 					blockPorksteel,
+					orePerimidum,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
 					blockBrinkstone,
 					blockOtherstone,
 					blockBrokenSand,
-					blockMossyBrinkstone
-					
+					blockMossyBrinkstone,
+					blockPerimishroom,
+					blockPerimigrowth,
+					blockDarkBrinkstone
 					);
 		}
 		if (CompatManager.twilightforest) {

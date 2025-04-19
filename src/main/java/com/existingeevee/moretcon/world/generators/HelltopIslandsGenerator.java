@@ -87,8 +87,8 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 		curFogP = Math.max(0, Math.min(60, curFogP + (inHelltopIslandRegion ? 1 : -1)));
 
-		if (event.phase != Phase.END || mc.world == null || mc.player == null || !inHelltopIslandRegion)
-			return;
+		if (event.phase != Phase.END || mc.world == null || mc.player == null || !inHelltopIslandRegion || mc.isGamePaused() && mc.isSingleplayer())
+			return; 
 
 		for (int i = 0; i < 10; i++) {
 			double rX = MiscUtils.randomN1T1() * 15;
@@ -163,6 +163,9 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 					} else {
 						if (y == 128 + height - 1) {
 							world.setBlockState(pos, ModBlocks.blockMossyBrinkstone.getDefaultState(), 2);
+							if (ctx.rand.nextInt(6) == 0 && canReplace(world, pos.up())) {
+								world.setBlockState(pos.up(), ctx.rand.nextInt(4) == 0 ? ModBlocks.blockPerimishroom.getDefaultState() : ModBlocks.blockPerimigrowth.getDefaultState(), 2);
+							}
 						} else {
 							world.setBlockState(pos, ModBlocks.blockBrinkstone.getDefaultState(), 2);
 						}
