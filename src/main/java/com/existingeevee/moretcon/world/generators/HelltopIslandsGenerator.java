@@ -148,20 +148,20 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 			},
 
 			{
-					{ 'C', 'S', 'S' },
+					{ 'S', 'S', 'S' },
 					{ 'S', 'C', 'S' },
-					{ 'S', 'S', 'C' }
+					{ 'S', 'S', 'S' }
 			},
 
 			{
 					{ 'C', 'C', 'C' },
-					{ 'S', 'C', 'S' },
-					{ 'C', 'S', 'C' }
+					{ 'C', 'C', 'C' },
+					{ 'C', 'C', 'C' }
 			},
 
 			{
 					{ '-', 'C', 'C' },
-					{ 'C', 'C', 'S' },
+					{ 'C', 'C', 'C' },
 					{ 'C', 'C', 'C' }
 			},
 
