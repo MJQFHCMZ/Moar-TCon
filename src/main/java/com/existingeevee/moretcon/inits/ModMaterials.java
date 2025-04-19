@@ -366,7 +366,7 @@ public class ModMaterials implements MaterialTypes {
 			materialPorksteel.addCommonItems("Porksteel");
 			materialPorksteel.setCastable(true);
 			materialPorksteel.setCraftable(false);
-			materialPorksteel.setRepresentativeItem("ingotPorksteelm"); //TinkerMaterials
+			materialPorksteel.setRepresentativeItem("ingotPorksteel"); //TinkerMaterials
 			materialPorksteel.addTrait(TinkerTraits.baconlicious, HEAD);
 			materialPorksteel.addTrait(ModTraits.burning, HEAD);
 			materialPorksteel.addTrait(ModTraits.saturpigting, HEAD);
