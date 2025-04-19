@@ -36,6 +36,7 @@ public class OreRecipes {
 		MiscUtils.register9x9Recipes("gemEtherstone", "blockEtherstone", event);
 		MiscUtils.register9x9Recipes("gemElectarite", "blockElectarite", event);
 		MiscUtils.register9x9Recipes("gemMonolite", "blockMonolite", event);
+		MiscUtils.register9x9Recipes("gemPerimidum", "blockPerimidum", event);
 		
 		MiscUtils.registerBlockNuggetIngotRecipeOre("Slimesteel", event);
 		

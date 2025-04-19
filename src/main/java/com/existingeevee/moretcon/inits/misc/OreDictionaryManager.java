@@ -123,7 +123,7 @@ public class OreDictionaryManager {
 			registerOre("blockErythynite", ModBlocks.blockErythynite);
 			registerOre("gemErythynite", ModItems.gemErythynite);
 			registerOre("oreErythynite", ModBlocks.oreErythynite);
-
+			
 			registerOre("blockEtherstone", ModBlocks.blockEtherstone);
 			registerOre("gemEtherstone", ModItems.gemEtherstone);
 			registerOre("oreEtherstone", ModBlocks.oreEtherstone);
@@ -149,6 +149,10 @@ public class OreDictionaryManager {
 			registerOre("blockPorksteel", ModBlocks.blockPorksteel);
 			registerOre("ingotPorksteel", ModItems.ingotPorksteel);
 			registerOre("nuggetPorksteel", ModItems.nuggetPorksteel);
+			
+			registerOre("blockPerimidum", ModBlocks.blockPerimidum);
+			registerOre("gemPerimidum", ModItems.gemPerimidum);
+			registerOre("orePerimidum", ModBlocks.orePerimidum);
 			
 			if (ConfigHandler.shouldLoadDust) {
 				registerOre("dustIrradium", ModItems.dustIrradium);

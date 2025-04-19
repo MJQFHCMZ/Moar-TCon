@@ -16,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
@@ -88,7 +89,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 		curFogP = Math.max(0, Math.min(60, curFogP + (inHelltopIslandRegion ? 1 : -1)));
 
 		if (event.phase != Phase.END || mc.world == null || mc.player == null || !inHelltopIslandRegion || mc.isGamePaused() && mc.isSingleplayer())
-			return; 
+			return;
 
 		for (int i = 0; i < 10; i++) {
 			double rX = MiscUtils.randomN1T1() * 15;
@@ -115,7 +116,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 		float renderFogP = curFogP + (curFogP - prevFogP) * Minecraft.getMinecraft().getRenderPartialTicks();
 
 		renderFogP /= 60;
-		
+
 		if (renderFogP < 1e-6)
 			return;
 
@@ -128,6 +129,130 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 		event.setBlue(b * 1.2f);
 	}
 
+	public static final char[][][] CRYSTAL_LAYOUT_BASE = {
+			{
+					{ '-', 'S', '-' },
+					{ 'S', 'S', 'S' },
+					{ '-', 'S', '-' }
+			},
+			{
+					{ 'S', 'S', 'S' },
+					{ 'S', 'S', 'S' },
+					{ 'S', 'S', 'S' }
+			},
+
+			{
+					{ 'S', 'S', 'S' },
+					{ 'S', 'S', 'S' },
+					{ 'S', 'S', 'S' }
+			},
+
+			{
+					{ 'C', 'S', 'S' },
+					{ 'S', 'C', 'S' },
+					{ 'S', 'S', 'C' }
+			},
+
+			{
+					{ 'C', 'C', 'C' },
+					{ 'S', 'C', 'S' },
+					{ 'C', 'S', 'C' }
+			},
+
+			{
+					{ '-', 'C', 'C' },
+					{ 'C', 'C', 'S' },
+					{ 'C', 'C', 'C' }
+			},
+
+			{
+					{ '-', 'C', '-' },
+					{ 'C', 'C', 'C' },
+					{ 'C', 'C', '-' }
+			},
+
+			{
+					{ '-', 'C', '-' },
+					{ 'C', 'C', '-' },
+					{ '-', 'C', '-' }
+			},
+
+			{
+					{ '-', 'C', '-' },
+					{ '-', 'C', '-' },
+					{ '-', '-', '-' }
+			},
+
+			{
+					{ '-', '-', '-' },
+					{ '-', 'C', '-' },
+					{ '-', '-', '-' }
+			},
+
+			{
+					{ '-', '-', '-' },
+					{ '-', 'C', '-' },
+					{ '-', '-', '-' }
+			},
+
+			{
+					{ '-', '-', '-' },
+					{ '-', 'C', '-' },
+					{ '-', '-', '-' }
+			},
+	};
+
+	public static final char[][][][] CRYSTAL_LAYOUTS = { CRYSTAL_LAYOUT_BASE, {}, {}, {} };
+	
+	static {
+		for (int r = 1; r < 4; r++) {
+			char[][][] newLayout = new char[CRYSTAL_LAYOUT_BASE.length][0][0];
+			for (int y = 0; y < CRYSTAL_LAYOUT_BASE.length; y++) {
+				
+				char[][] layer = CRYSTAL_LAYOUT_BASE[y];
+				
+				switch (r) {
+				case 3:
+					layer = rotateCW(layer);
+				case 2:
+					layer = rotateCW(layer);
+				case 1:
+					layer = rotateCW(layer);
+				}
+				
+				newLayout[y] = layer;
+			}
+			
+			CRYSTAL_LAYOUTS[r] = newLayout;
+		}
+	}
+	
+	public static char getCrystalBlock(int x, int y, int z, int r) {
+		if (x < -1 || x > 1 || y < 0 || y >= CRYSTAL_LAYOUT_BASE.length || z < -1 || z > 1)
+			return '-';
+
+		while (r < 0)
+			r += 4;
+		r %= 4;
+
+		char[][] layer = CRYSTAL_LAYOUTS[r][y];
+
+		return layer[x + 1][z + 1];
+	}
+
+	static char[][] rotateCW(char[][] mat) {
+		final int M = mat.length;
+		final int N = mat[0].length;
+		char[][] ret = new char[N][M];
+		for (int r = 0; r < M; r++) {
+			for (char c = 0; c < N; c++) {
+				ret[c][M - 1 - r] = mat[r][c];
+			}
+		}
+		return ret;
+	}
+
+	@SuppressWarnings("unused")
 	@Override
 	public void generate(IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, WorldgenContext ctx) {
 		World world = ctx.world;
@@ -163,8 +288,56 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 					} else {
 						if (y == 128 + height - 1) {
 							world.setBlockState(pos, ModBlocks.blockMossyBrinkstone.getDefaultState(), 2);
+
+							// plants
 							if (ctx.rand.nextInt(6) == 0 && canReplace(world, pos.up())) {
 								world.setBlockState(pos.up(), ctx.rand.nextInt(4) == 0 ? ModBlocks.blockPerimishroom.getDefaultState() : ModBlocks.blockPerimigrowth.getDefaultState(), 2);
+							}
+
+							if (ctx.rand.nextInt(10000) == 0 && y > 131) { // crystal
+								int cy = 0;
+								int r = ctx.rand.nextInt(4);
+								for (char[][] layer : CRYSTAL_LAYOUT_BASE) {
+									for (int cx = -1; cx < 2; cx++) {
+										for (int cz = -1; cz < 2; cz++) {
+											switch (getCrystalBlock(cx, cy, cz, r)) {
+											case 'S':
+												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.blockDarkBrinkstone.getDefaultState(), 2);
+												break;
+											case 'C':
+												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.orePerimidum.getDefaultState(), 2);
+												break;
+											}
+										}
+									}
+									cy++;
+								}
+							}
+
+							if (ctx.rand.nextInt(100) == 0 && y > 131) { // crystal
+								int cy = 0;
+								int r = ctx.rand.nextInt(4);
+								
+								Block block = ModBlocks.blockDarkBrinkstone;
+
+								if (ctx.rand.nextInt(3) == 0) {
+									block = ctx.rand.nextBoolean() ? Blocks.BEDROCK : ModBlocks.blockBrinkstone;
+								}
+								
+								for (char[][] layer : CRYSTAL_LAYOUT_BASE) {
+
+									for (int cx = -1; cx < 2; cx++) {
+										for (int cz = -1; cz < 2; cz++) {
+											switch (getCrystalBlock(cx, cy, cz, r)) {
+											case 'S':
+											case 'C':
+												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), block.getDefaultState(), 2);
+												break;
+											}
+										}
+									}
+									cy++;
+								}
 							}
 						} else {
 							world.setBlockState(pos, ModBlocks.blockBrinkstone.getDefaultState(), 2);

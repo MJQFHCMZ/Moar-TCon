@@ -7,6 +7,6 @@
     "east": "moretcon:blocks/oreperimidumcovered",
     "south": "moretcon:blocks/oreperimidumcovered",
     "west": "moretcon:blocks/oreperimidumcovered",
-    "particle": "moretcon:blocks/blockcragravel"
+    "particle": "moretcon:blocks/oreperimidumexposed"
   }
 }

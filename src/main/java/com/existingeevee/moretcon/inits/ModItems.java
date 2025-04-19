@@ -139,6 +139,7 @@ public class ModItems {
 	public static final Item gemEtherstone = new ItemBase("gemEtherstone", GlowType.CIRCLE_BIG, 0xffff00);
 	public static final Item gemElectarite = new ItemBase("gemElectarite", GlowType.CIRCLE_BIG, 0x6666ff);
 	public static final Item gemMonolite = new ItemBase("gemMonolite", GlowType.CIRCLE_BIG, 0x4a74f0);
+	public static final Item gemPerimidum = new ItemBase("gemPerimidum", GlowType.CIRCLE_BIG, 0xdfd3ff);
 
 	//Ingriedients
 	public static final Item itemSiltClay = new ItemBase("itemSiltClay").setTab(ModTabs.moarTConMisc);
@@ -246,6 +247,7 @@ public class ModItems {
 					gemEtherstone,
 					gemElectarite,
 					gemMonolite,
+					gemPerimidum,
 
 					crushingModifier,
 					matterReconstructionGel,

@@ -3,6 +3,7 @@ package com.existingeevee.moretcon.block.ore;
 import java.util.Random;
 
 import com.existingeevee.moretcon.block.blocktypes.BlockBase;
+import com.existingeevee.moretcon.inits.ModItems;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
