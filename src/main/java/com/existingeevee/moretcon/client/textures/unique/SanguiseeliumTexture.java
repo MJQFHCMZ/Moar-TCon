@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.client.textures;
+package com.existingeevee.moretcon.client.textures.unique;
 
 import java.awt.image.DirectColorModel;
 

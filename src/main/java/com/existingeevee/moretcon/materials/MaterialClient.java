@@ -4,9 +4,10 @@ import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.client.textures.GlintTexture;
 import com.existingeevee.moretcon.client.textures.LightShadingTextureColoredTexture;
 import com.existingeevee.moretcon.client.textures.NoShadingTextureColoredTexture;
-import com.existingeevee.moretcon.client.textures.SanguiseeliumTexture;
-import com.existingeevee.moretcon.client.textures.ValasiumTexture;
 import com.existingeevee.moretcon.client.textures.WhiteShadingTextureColoredTexture;
+import com.existingeevee.moretcon.client.textures.unique.PerimidumTexture;
+import com.existingeevee.moretcon.client.textures.unique.SanguiseeliumTexture;
+import com.existingeevee.moretcon.client.textures.unique.ValasiumTexture;
 import com.existingeevee.moretcon.inits.ModMaterials;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
@@ -66,5 +67,8 @@ public class MaterialClient {
 		ModMaterials.materialIoximite.setRenderInfo(new GlintTexture.RenderInfo(0x725ee3, 0x674fe1, 0xd7d3fc, 0xb1aaf1, 0x978cea, 0x8374e6));
 		ModMaterials.materialBloodstone.setRenderInfo(new GlintTexture.RenderInfo(0x1c0000, 0x1c0000, 0xffadad, 0x8e0000, 0x6b0000, 0x4f0101));
 		ModMaterials.materialValasium.setRenderInfo(new ValasiumTexture.RenderInfo());
+		ModMaterials.materialPerimidum.setRenderInfo(new PerimidumTexture.RenderInfo());
+	
+		
 	}
 }

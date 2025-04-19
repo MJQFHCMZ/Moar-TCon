@@ -92,6 +92,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialMonolite = new Material(MiscUtils.createNonConflictiveName("monolite"), 0x4a74f0);
 	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xbbd190);
 	public static final Material materialPorksteel = new Material(MiscUtils.createNonConflictiveName("porksteel"), 0xc3af7d);
+	public static final Material materialPerimidum = new Material(MiscUtils.createNonConflictiveName("perimidum"), 0xdfd3ff);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -864,6 +865,23 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialMonolite, new ExtraMaterialStats(500));
 			TinkerRegistry.addMaterialStats(materialMonolite, whyWouldYouMakeABowOutOfThis);
 			TinkerRegistry.addMaterialStats(materialMonolite, new ArrowShaftMaterialStats(1.2f, 35));
+			
+			materialPerimidum.addItem("gemPerimidum", 1, Material.VALUE_Ingot);
+			materialPerimidum.addItem("blockPerimidum", 1, Material.VALUE_Block);
+			materialPerimidum.setCastable(false);
+			materialPerimidum.setCraftable(true);
+			materialPerimidum.setRepresentativeItem("gemPerimidum");
+			materialPerimidum.addTrait(ModTraits.bottomsEnd, HEAD);
+			materialPerimidum.addTrait(ModTraits.approximate2, HEAD);
+			materialPerimidum.addTrait(ModTraits.approximate);
+			materialPerimidum.addTrait(ModTraits.hardcore);
+			materialPerimidum.addTrait(ModTraits.luminescent, HEAD);
+			materialPerimidum.addTrait(ModTraits.luminescent);
+			TinkerRegistry.addMaterialStats(materialPerimidum, new HeadMaterialStats(1230, 15.5f, 15f, 6));
+			TinkerRegistry.addMaterialStats(materialPerimidum, new HandleMaterialStats(2.6f, -50));
+			TinkerRegistry.addMaterialStats(materialPerimidum, new ExtraMaterialStats(610));
+			TinkerRegistry.addMaterialStats(materialPerimidum, whyWouldYouMakeABowOutOfThis);
+
 		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
@@ -1237,7 +1255,8 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialDematerializer, null);
 			ModMaterials.registerMaterial(materialIoximite, null);
 			ModMaterials.registerMaterial(materialShotgun, null);
-			ModMaterials.registerMaterial(materialPorksteel, "Porksteel").toolforge();
+			ModMaterials.registerMaterial(materialPorksteel).toolforge();
+			ModMaterials.registerMaterial(materialPerimidum).toolforge();
 			
 			
 		}

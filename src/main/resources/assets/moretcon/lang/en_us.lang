@@ -248,6 +248,7 @@ material.moretcon.icy.name=Icy
 material.moretcon.redstone.name=Redstone
 material.moretcon.glowstone.name=Glowstone
 material.moretcon.porksteel.name=Porksteel
+material.moretcon.perimidum.name=Perimidum
 
 material.uniquetoolpart.name=Unique
 
@@ -430,6 +431,8 @@ modifier.moretcon.flashbang.name=Flashbang
 modifier.moretcon.flashbang.desc=§oDiscord lightmode noooooooo :c§r\nYour bomb will blind and stun any targets caught in its blast.
 modifier.moretcon.shock_aura.name=Shock Aura
 modifier.moretcon.shock_aura.desc=§oToaster bath!!!§r\nYour bomb will leave behind a damaging aura.
+modifier.moretcon.approximate.name=Approximate
+modifier.moretcon.shock_aura.desc=§oEh, close enough ¯\_(ツ)_/¯§r\nYour tool will gain a bit of aim-assist when fighting melee targets.
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??
