@@ -122,15 +122,17 @@ item.moretcon.gembloodstone.name=Bloodstone
 item.moretcon.gemechostone.name=Echostone
 item.moretcon.gemenderal.name=Enderal
 item.moretcon.gemgarstone.name=Garstone
-item.moretcon.gemigniglomerate.name=Igniglomerate Shard
+item.moretcon.gemigniglomerate.name=Igniglomerate
 item.moretcon.gemerythynite.name=Erythynite
 item.moretcon.gemetherstone.name=Etherstone
 item.moretcon.gemvoidspar.name=Void Spar
 item.moretcon.gemelectarite.name=Electarite
 item.moretcon.gemmonolite.name=Monolite
+item.moretcon.gemperimidum.name=Perimidum
 
 item.moretcon.hydrogenrichredstonepowder.name=Hydrogen Rich Redstone Powder
 item.moretcon.solidlightning.name=Solid Lightning
+item.moretcon.perimimoss.name=Perimomoss
 
 item.moretcon.ingotarkenium.name=Arkenium Ingot
 item.moretcon.ingotatronium.name=Atronium Ingot
@@ -500,9 +502,17 @@ tile.moretcon.blockzracohlium.name=Block of Zracohlium
 tile.moretcon.blockslimesteel.name=Block of Slimesteel
 tile.moretcon.blockmonolite.name=Block of Monolite
 tile.moretcon.blockporksteel.name=Block of Porksteel
+tile.moretcon.blockperimidum.name=Block of Perimidum
 
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
+tile.moretcon.blockotherstone.name=Otherstone
+tile.moretcon.blockbrinkstone.name=Brinkstone
+tile.moretcon.blockdarkbrinkstone.name=Darkened Brinkstone
+tile.moretcon.blockbrokensand.name=Broken Sand
+tile.moretcon.blockmossybrinkstone.name=Perimimossy Brinkstone
+tile.moretcon.blockperimishroom.name=Perimishroom
+tile.moretcon.blockperimigrowth.name=Perimigrowth
 
 tile.moretcon.burningsulfurflow.name=Molten Sulfur
 tile.moretcon.liquidarkenium.name=Molten Arkenium
@@ -559,8 +569,9 @@ tile.moretcon.oreelectarite.name=Electarite Ore
 tile.moretcon.orehallowsite.name=Hallowsite Ore
 tile.moretcon.orezracohlium.name=Zracohlium Ore
 tile.moretcon.oremonolite.name=Monolite Ore
+tile.moretcon.oreperimidum.name=Perimidum Cluster
+tile.moretcon.oregeodesium.name=Geodesium Cluster
 
-tile.moretcon.blockotherstone.name=Otherstone
 tile.moretcon.rottensludge.name=Rotten Sludge
 
 traits.bloody_arc.slash=Bloody slash ka-shing
