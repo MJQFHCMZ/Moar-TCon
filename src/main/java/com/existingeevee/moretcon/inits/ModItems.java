@@ -106,6 +106,10 @@ public class ModItems {
 	public static final Item rawPorksteel = new ItemBase("rawPorksteel").setTab(ModTabs.moarTConMisc);
 	public static final Item cookedPorksteel = new ItemBase("cookedPorksteel").setTab(ModTabs.moarTConMisc);
 
+	public static final Item ingotGeodesium = new ItemBase("ingotGeodesium", GlowType.EXTREME, 0xffffff);
+	public static final Item nuggetGeodesium = new ItemBase("nuggetGeodesium", GlowType.EXTREME, 0xffffff);
+	public static final Item dustGeodesium = new ItemBase("dustGeodesium", GlowType.EXTREME, 0xffffff);
+	
 	public static final Item ingotZracohlium = new ItemBase("ingotZracohlium");
 	public static final Item nuggetZracohlium = new ItemBase("nuggetZracohlium");
 	public static final Item dustZracohlium = new ItemBase("dustZracohlium");
@@ -236,6 +240,10 @@ public class ModItems {
 
 					ingotPorksteel,
 					nuggetPorksteel,
+					
+					ingotGeodesium,
+					nuggetGeodesium,
+					dustGeodesium,
 					
 					gemVoidSpar,
 					gemEnderal,

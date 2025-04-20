@@ -167,10 +167,18 @@ public class ValasiumTexture extends AbstractColoredTexture { // FieryTexture
 	}
 
 	@Override
+	protected void postProcess(int[] data) {
+		blank = null;
+		border = null;
+		onTop = null;
+		brightnessData = null;
+	}
+
+	@Override
 	protected int colorPixel(int pixel, int pxCoord) {
 		if (!blank[pxCoord]) {
 			int a = RenderUtil.alpha(pixel);
-			
+
 			if (a == 0) {
 				return pixel;
 			}

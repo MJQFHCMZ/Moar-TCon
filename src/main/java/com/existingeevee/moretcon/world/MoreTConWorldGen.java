@@ -34,11 +34,12 @@ public class MoreTConWorldGen implements IWorldGenerator {
 			modifiers.add(new AetherOreGenerator());
 		}
 		if (CompatManager.loadMain) {
-			//Loaded first
-			modifiers.add(new EtheralToplayerGenerator());
+			// Loaded first
+			if (ConfigHandler.invasiveWorldgen) {
+				modifiers.add(new EtheralToplayerGenerator());
+			}
 
-			//Order dosent really matter at this point
-			modifiers.add(new MainOreGenerator());
+			// Order dosent really matter at this point
 			modifiers.add(new AsteroidGenerator());
 			modifiers.add(new NetherSpikeGenerator());
 			modifiers.add(new IgniglomerateGenerator());
@@ -46,8 +47,11 @@ public class MoreTConWorldGen implements IWorldGenerator {
 			modifiers.add(new MonoliteGenerator());
 			
 			if (ConfigHandler.invasiveWorldgen) {
-				modifiers.add(new HelltopIslandsGenerator());
+				modifiers.add(new HelltopIslandsGenerator()); // perimidum crystals are here also
 			}
+			
+			// main generator last
+			modifiers.add(new MainOreGenerator());
 		}
 	}
 
@@ -57,7 +61,7 @@ public class MoreTConWorldGen implements IWorldGenerator {
 		if (ConfigHandler.disableOreGen) {
 			return;
 		}
-		
+
 		modifiers.forEach(w -> w.generate(chunkGenerator, chunkProvider, ctx));
 	}
 }

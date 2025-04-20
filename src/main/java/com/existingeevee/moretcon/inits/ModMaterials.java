@@ -90,7 +90,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialZracohlium = new Material(MiscUtils.createNonConflictiveName("zracohlium"), 0x444c2a);
 	public static final Material materialIoximite = new Material(MiscUtils.createNonConflictiveName("ioximite"), 0x978cea);
 	public static final Material materialMonolite = new Material(MiscUtils.createNonConflictiveName("monolite"), 0x4a74f0);
-	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xbbd190);
+	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xf6e6ce); //0xbbd190
 	public static final Material materialPorksteel = new Material(MiscUtils.createNonConflictiveName("porksteel"), 0xc3af7d);
 	public static final Material materialPerimidum = new Material(MiscUtils.createNonConflictiveName("perimidum"), 0xdfd3ff);
 
@@ -340,7 +340,7 @@ public class ModMaterials implements MaterialTypes {
 				materialFusionite.addTrait(ModTraits.luminescent, Bomb.EXPLOSIVE_CHARGE);
 			}
 
-			// materialGeodesium MinecraftMixin TextureManager TextureAtlasSprite
+			// MinecraftMixin TextureManager TextureAtlasSprite
 
 			materialValasium.addItem("oreValasium", 1, Material.VALUE_Ore());
 			materialValasium.setFluid(ModFluids.liquidValasium);
@@ -804,7 +804,7 @@ public class ModMaterials implements MaterialTypes {
 
 			TinkerRegistry.addMaterialStats(materialVengeance, new HeadMaterialStats(1024, 6f, 10f, 7));
 			materialVengeance.addTrait(ModTraits.offense);
-
+			
 			materialZracohlium.addCommonItems("Zracohlium");
 			materialZracohlium.setFluid(ModFluids.liquidZracohlium);
 			materialZracohlium.setCastable(true);
@@ -882,6 +882,24 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialPerimidum, new ExtraMaterialStats(610));
 			TinkerRegistry.addMaterialStats(materialPerimidum, whyWouldYouMakeABowOutOfThis);
 
+			materialGeodesium.addCommonItems("Geodesium");
+			materialGeodesium.setFluid(ModFluids.liquidGeodesium);
+			materialGeodesium.setCastable(true);
+			materialGeodesium.setCraftable(false);
+			materialGeodesium.setRepresentativeItem("ingotGeodesium");
+			materialGeodesium.addTrait(TinkerTraits.aridiculous, HEAD);
+			materialGeodesium.addTrait(ModTraits.pyrophoric, HEAD);
+			materialGeodesium.addTrait(ModTraits.liquid, HEAD);
+			materialGeodesium.addTrait(ModTraits.liquid);
+			materialGeodesium.addTrait(ModTraits.pyrophoric);
+			materialGeodesium.addTrait(ModTraits.burning);
+			materialGeodesium.addTrait(ModTraits.luminescent, HEAD);
+			materialGeodesium.addTrait(ModTraits.luminescent);
+			TinkerRegistry.addMaterialStats(materialGeodesium, new HeadMaterialStats(1350, 7f, 13.5f, 7));
+			TinkerRegistry.addMaterialStats(materialGeodesium, new HandleMaterialStats(1.25f, 125));
+			TinkerRegistry.addMaterialStats(materialGeodesium, new ExtraMaterialStats(161));
+			TinkerRegistry.addMaterialStats(materialGeodesium, new ArrowShaftMaterialStats(1.3f, 125));
+			TinkerRegistry.addMaterialStats(materialGeodesium, new BowMaterialStats(1.6f, 1.3f, 0.4f));
 		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
@@ -1257,6 +1275,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialShotgun, null);
 			ModMaterials.registerMaterial(materialPorksteel).toolforge();
 			ModMaterials.registerMaterial(materialPerimidum).toolforge();
+			ModMaterials.registerMaterial(materialGeodesium).toolforge();
 			
 			
 		}

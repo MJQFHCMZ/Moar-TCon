@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -24,9 +25,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -68,7 +69,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 			noise += mulFactor * Math.pow(Math.E, expFactor * (x * x + z * z));
 
-			boolean inHelltop = event.world.provider.getDimensionType().getId() == DimensionType.NETHER.getId() && player.posY >= 128 && player.posY < 170 && noise > -0.4;
+			boolean inHelltop = event.world.provider.getDimensionType().getId() == DimensionType.NETHER.getId() && player.posY + player.eyeHeight >= 128 && player.posY + player.eyeHeight < 170 && noise > -0.4;
 
 			NetworkHandler.HANDLER.sendTo(new HelltopStatusMessage(inHelltop), (EntityPlayerMP) player);
 		}
@@ -76,6 +77,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 	public static final Color FOG_COLOR = new Color(0xe8e0ff);
 	private static boolean inHelltopIslandRegion = false;
+	private static World curWorld = null;
 	private static int curFogP = 0;
 	private static int prevFogP = 0;
 
@@ -84,13 +86,23 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 	public static void onClientTick(ClientTickEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
 
-		prevFogP = curFogP;
-
-		curFogP = Math.max(0, Math.min(60, curFogP + (inHelltopIslandRegion ? 1 : -1)));
-
-		if (event.phase != Phase.END || mc.world == null || mc.player == null || !inHelltopIslandRegion || mc.isGamePaused() && mc.isSingleplayer())
+		if (event.phase != Phase.END || mc.world == null || mc.player == null || mc.isGamePaused() && mc.isSingleplayer()	)
 			return;
 
+		prevFogP = curFogP;
+		curFogP = Math.max(0, Math.min(60, curFogP + (inHelltopIslandRegion ? 1 : -1)));
+
+		if (curWorld != mc.world) {
+			curWorld = mc.world;
+			
+			inHelltopIslandRegion = false;
+			prevFogP = 0;
+			curFogP = 0;
+		}
+		
+		if (!inHelltopIslandRegion)
+			return;
+		
 		for (int i = 0; i < 10; i++) {
 			double rX = MiscUtils.randomN1T1() * 15;
 			double rY = MiscUtils.randomN1T1() * 15;
@@ -104,18 +116,10 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public static void onChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-		inHelltopIslandRegion = false;
-		prevFogP = 0;
-		curFogP = 0;
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
 	public static void onFogColors(FogColors event) {
 		float renderFogP = curFogP + (curFogP - prevFogP) * Minecraft.getMinecraft().getRenderPartialTicks();
 
-		renderFogP /= 60;
+		renderFogP /= 60f;
 
 		if (renderFogP < 1e-6)
 			return;
@@ -129,6 +133,22 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 		event.setBlue(b * 1.2f);
 	}
 
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public static void onFogDensity(FogDensity event) {
+		float renderFogP = curFogP + (curFogP - prevFogP) * Minecraft.getMinecraft().getRenderPartialTicks();
+
+		renderFogP /= 60f;
+
+		if (renderFogP < 1e-6)
+			return;
+				
+        GlStateManager.setFog(GlStateManager.FogMode.EXP);
+		
+		event.setDensity(0.15f * renderFogP);
+		event.setCanceled(true);
+	}
+	
 	public static final char[][][] CRYSTAL_LAYOUT_BASE = {
 			{
 					{ '-', 'S', '-' },
@@ -154,31 +174,31 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 			},
 
 			{
-					{ 'C', 'C', 'C' },
-					{ 'C', 'C', 'C' },
-					{ 'C', 'C', 'C' }
-			},
-
-			{
-					{ '-', 'C', 'C' },
+					{ 'T', 'C', 'C' },
 					{ 'C', 'C', 'C' },
 					{ 'C', 'C', 'C' }
 			},
 
 			{
-					{ '-', 'C', '-' },
+					{ '-', 'C', 'T' },
 					{ 'C', 'C', 'C' },
-					{ 'C', 'C', '-' }
+					{ 'C', 'C', 'T' }
 			},
 
 			{
 					{ '-', 'C', '-' },
-					{ 'C', 'C', '-' },
-					{ '-', 'C', '-' }
+					{ 'C', 'C', 'T' },
+					{ 'T', 'C', '-' }
 			},
 
 			{
 					{ '-', 'C', '-' },
+					{ 'T', 'C', '-' },
+					{ '-', 'T', '-' }
+			},
+
+			{
+					{ '-', 'T', '-' },
 					{ '-', 'C', '-' },
 					{ '-', '-', '-' }
 			},
@@ -197,7 +217,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 			{
 					{ '-', '-', '-' },
-					{ '-', 'C', '-' },
+					{ '-', 'T', '-' },
 					{ '-', '-', '-' }
 			},
 	};
@@ -301,6 +321,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 									for (int cx = -1; cx < 2; cx++) {
 										for (int cz = -1; cz < 2; cz++) {
 											switch (getCrystalBlock(cx, cy, cz, r)) {
+											case 'T':
 											case 'S':
 												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.blockDarkBrinkstone.getDefaultState(), 2);
 												break;
@@ -329,6 +350,11 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 									for (int cx = -1; cx < 2; cx++) {
 										for (int cz = -1; cz < 2; cz++) {
 											switch (getCrystalBlock(cx, cy, cz, r)) {
+											case 'T':
+												if (block == ModBlocks.blockBrinkstone) {
+													world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.blockMossyBrinkstone.getDefaultState(), 2);
+													break;
+												}
 											case 'S':
 											case 'C':
 												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), block.getDefaultState(), 2);

@@ -3,6 +3,7 @@ package com.existingeevee.moretcon.devtools;
 import java.util.List;
 
 import com.existingeevee.moretcon.item.ItemBase;
+import com.existingeevee.moretcon.materials.MaterialClient;
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.ModTabs;
 
@@ -26,6 +27,7 @@ public class ItemDebugTool extends ItemBase {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if (DevEnvHandler.inDevMode() && debugFunction(worldIn, playerIn)) {
+			playerIn.getCooldownTracker().setCooldown(this, 5);
 			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 		}
 
@@ -54,7 +56,7 @@ public class ItemDebugTool extends ItemBase {
 
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (worldIn.isRemote) {
-
+			MaterialClient.init();
 		}
 		return false;
 	}

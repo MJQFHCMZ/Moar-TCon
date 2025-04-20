@@ -39,6 +39,7 @@ fluid.moretcon.liquifiedsouls=Liquified Souls
 fluid.moretcon.liquidzracohlium=Molten Zracohlium
 fluid.moretcon.liquidslimesteel=Molten Slimesteel
 fluid.moretcon.liquidporksteel=Molten Porksteel
+fluid.moretcon.liquidgeodesium=Molten Geodesium
 
 item.moretcon.betweenifiedmodifier.desc=Adding this to any tool will allow for its full efficiency to be used in the Betweenlands.
 item.moretcon.crushingmodifier.desc=Adding this to any tool will convert 1% of its damage to true damage per level.
@@ -117,6 +118,7 @@ item.moretcon.dustsanguiseelium.name=Sanguiseelium Dust
 item.moretcon.dustzracohlium.name=Zracohlium Dust
 item.moretcon.dustslimesteel.name=Slimesteel Dust
 item.moretcon.dustporksteel.name=Porksteel Dust
+item.moretcon.dustgeodesium.name=Geodesium Dust
 
 item.moretcon.gembloodstone.name=Bloodstone
 item.moretcon.gemechostone.name=Echostone
@@ -157,6 +159,7 @@ item.moretcon.ingotsanguiseelium.name=Sanguiseelium Ingot
 item.moretcon.ingotzracohlium.name=Zracohlium Ingot
 item.moretcon.ingotslimesteel.name=Slimesteel Ingot
 item.moretcon.ingotporksteel.name=Porksteel Ingot
+item.moretcon.ingotgeodesium.name=Geodesium Ingot
 
 item.moretcon.itemsiltclay.name=Silt Clay
 item.moretcon.lightning.name=Lightning
@@ -184,6 +187,7 @@ item.moretcon.nuggetsanguiseelium.name=Sanguiseelium Nugget
 item.moretcon.nuggetzracohlium.name=Zracohlium Nugget
 item.moretcon.nuggetslimesteel.name=Slimesteel Nugget
 item.moretcon.nuggetporksteel.name=Porksteel Nugget
+item.moretcon.nuggetgeodesium.name=Geodesium Nugget
 
 itemGroup.moarTConMaterials=Moar TCon: Materials
 itemGroup.moarTConMisc=Moar TCon: Misc
@@ -249,6 +253,7 @@ material.moretcon.redstone.name=Redstone
 material.moretcon.glowstone.name=Glowstone
 material.moretcon.porksteel.name=Porksteel
 material.moretcon.perimidum.name=Perimidum
+material.moretcon.geodesium.name=Geodesium
 
 material.uniquetoolpart.name=Unique
 
@@ -506,6 +511,7 @@ tile.moretcon.blockslimesteel.name=Block of Slimesteel
 tile.moretcon.blockmonolite.name=Block of Monolite
 tile.moretcon.blockporksteel.name=Block of Porksteel
 tile.moretcon.blockperimidum.name=Block of Perimidum
+tile.moretcon.blockgeodesium.name=Block of Geodesium
 
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
@@ -550,6 +556,7 @@ tile.moretcon.liquifiedsouls.name=Liquified Souls
 tile.moretcon.liquidzracohlium.name=Molten Zracohlium
 tile.moretcon.liquidslimesteel.name=Molten Slimesteel
 tile.moretcon.liquidporksteel.name=Molten Porksteel
+tile.moretcon.liquidgeodesium.name=Molten Geodesium
 
 tile.moretcon.orearkenium.name=Arkenium Ore
 tile.moretcon.orebloodstone.name=Bloodstone Ore
@@ -573,7 +580,7 @@ tile.moretcon.orehallowsite.name=Hallowsite Ore
 tile.moretcon.orezracohlium.name=Zracohlium Ore
 tile.moretcon.oremonolite.name=Monolite Ore
 tile.moretcon.oreperimidum.name=Perimidum Cluster
-tile.moretcon.oregeodesium.name=Geodesium Cluster
+tile.moretcon.oregeodesium.name=Geodesium Ore
 
 tile.moretcon.rottensludge.name=Rotten Sludge
 

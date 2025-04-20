@@ -90,8 +90,8 @@ public class ModBlocks {
 	public static final Block blockPorksteel = ((BlockBase) new BlockBase("blockPorksteel", Material.IRON, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block orePerimidum = ((BlockBase) new BlockPerimidumOre().setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false).setLightLevel(1);
 	public static final Block blockPerimidum = ((BlockBase) new BlockBase("blockPerimidum", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
-
-	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.carbonPile).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false); //TODO 
+	public static final Block blockGeodesium = ((BlockBase) new BlockBase("blockGeodesium", Material.IRON, 6).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
+	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
 	
 	public static final Block blockOtherstone = (new BlockEtheralBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
@@ -105,7 +105,6 @@ public class ModBlocks {
 
 	
 	//Block
-	
 	public static final Block blockGravitoniumFaucet = new BlockGravitoniumFaucet();
 	public static final Block blockCragravel = ((BlockBase) new BlockFallingBase("blockCragravel", Material.GROUND, 0).setHarvestLevelC("shovel", 0).setHardness(0.6f).setResistance(0.6f)).canBeBeacon(false).setCreativeTab(ModTabs.moarTConMisc);
 	public static final Block blockSiltClay = ((BlockBase) new BlockBase("blockSiltClay", Material.CLAY, 0).setHarvestLevelC("shovel", 0).setHardness(0.6f).setResistance(0.6f)).canBeBeacon(false).setCreativeTab(ModTabs.moarTConMisc);
@@ -187,10 +186,11 @@ public class ModBlocks {
 					blockZracohlium,
 					oreMonolite,
 					blockMonolite,
-					oreGeodesium,
 					blockPorksteel,
 					orePerimidum,
 					blockPerimidum,
+					oreGeodesium,
+					blockGeodesium,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
 					blockBrinkstone,

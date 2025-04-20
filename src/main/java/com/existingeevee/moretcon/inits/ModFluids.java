@@ -90,7 +90,7 @@ public class ModFluids {
 	public static Fluid liquidFusionLava = new LiquidFluid("liquidfusionlava",
 			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_still"),
 			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_flowing")).setCColor(0x00ffff).setLuminosity(15)
-			.setDensity(8000).setViscosity(1500).setTemperature(6500);
+			.setDensity(8000).setViscosity(1500).setTemperature(4500);
 	public static Fluid liquidLiquifiedSouls = new LiquidFluid("liquifiedSouls".toLowerCase()).setCColor(0xffffff).setLuminosity(0)
 			.setDensity(1000).setViscosity(800).setTemperature(0);
 
@@ -110,6 +110,9 @@ public class ModFluids {
 
 	public static Fluid liquidAncientAlloy = new LiquidFluid("liquidAncientAlloy".toLowerCase()).setCColor(0x9fc1c0).setLuminosity(13)
 			.setDensity(1000).setViscosity(800).setTemperature(1100);
+	
+	public static Fluid liquidGeodesium = new LiquidFluid("liquidGeodesium".toLowerCase()).setCColor(0x9fc1c0).setLuminosity(20)
+			.setDensity(1000).setViscosity(800).setTemperature(3000);
 
 	/** ------------------------------------- **/
 
@@ -146,7 +149,8 @@ public class ModFluids {
 					liquidSanguiseelium,
 					liquidLiquifiedSouls,
 					liquidZracohlium,
-					liquidPorksteel
+					liquidPorksteel,
+					liquidGeodesium
 			/** ------------------------------------- **/
 			);
 		} //CustomModelRenderCoreHooks

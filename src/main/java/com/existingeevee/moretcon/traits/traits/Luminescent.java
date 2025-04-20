@@ -23,6 +23,7 @@ public class Luminescent extends AbstractTrait {
 		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialFusionite, 0x0000ff);
 		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialTrichromadentium, 0xaaaaaa);
 		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialGravitonium, 0x00a000);
+		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialGeodesium, 0xffffff);
 	}
 
 	public Luminescent(String identifier, int color) {
