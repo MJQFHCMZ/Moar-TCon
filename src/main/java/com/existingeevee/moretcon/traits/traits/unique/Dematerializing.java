@@ -27,6 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
+import slimeknights.tconstruct.library.events.ProjectileEvent;
 import slimeknights.tconstruct.library.events.ProjectileEvent.OnLaunch;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.ProjectileLauncherNBT;
@@ -118,7 +119,7 @@ public class Dematerializing extends AbstractTrait {
 				arrowToHit.setPosition(intercept.hitVec.x, intercept.hitVec.y, intercept.hitVec.z);
 				arrowToHit.setSilent(true);
 				arrow.getTags().forEach(arrowToHit::addTag);
-				
+
 				if (arrowToHit instanceof EntityProjectileBase) {
 					((EntityProjectileBase) arrowToHit).onHitEntity(new RayTraceResult(e));
 				} else {
@@ -134,9 +135,12 @@ public class Dematerializing extends AbstractTrait {
 		if (!arrow.world.isRemote) {
 			if (hitBlock) {
 				world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);
-				arrow.setPosition( end.x, end.y, end.z);
+				arrow.setPosition(end.x, end.y, end.z);
 				arrow.inGround = true;
 				arrow.onUpdate();
+
+				if (arrow instanceof EntityProjectileBase)
+					ProjectileEvent.OnHitBlock.fireEvent((EntityProjectileBase) arrow, launcherData.range * 20, firstTrace.getBlockPos(), world.getBlockState(firstTrace.getBlockPos()));
 			}
 
 			int arrowColor = 0xffffff;
@@ -161,7 +165,7 @@ public class Dematerializing extends AbstractTrait {
 		}
 	}
 
-    public static List<Material> getToolMaterials(ItemStack stack) {
-        return TinkerUtil.getMaterialsFromTagList(TagUtil.getBaseMaterialsTagList(stack));
-    }
+	public static List<Material> getToolMaterials(ItemStack stack) {
+		return TinkerUtil.getMaterialsFromTagList(TagUtil.getBaseMaterialsTagList(stack));
+	}
 }
