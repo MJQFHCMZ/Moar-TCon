@@ -114,6 +114,15 @@ public class GeodesiumTexture extends AbstractColoredTexture {
 	private static final int[] RAND_BORD = { 0xfff6d2, 0xfffff3, 0xfffbe1 };
 
 	@Override
+	protected void postProcess(int[] data) {
+		blank = null;
+		border = null;
+		onTop = null;
+		brightnessData = null;
+	}
+
+	
+	@Override
 	protected int colorPixel(int pixel, int pxCoord) {
 		if (!blank[pxCoord]) {
 			int a = RenderUtil.alpha(pixel);

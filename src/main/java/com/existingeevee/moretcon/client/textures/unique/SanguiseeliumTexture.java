@@ -107,6 +107,14 @@ public class SanguiseeliumTexture extends AbstractColoredTexture {
 	}
 
 	@Override
+	protected void postProcess(int[] data) {
+		blank = null;
+		border = null;
+		onTop = null;
+		brightnessData = null;
+	}
+	
+	@Override
 	protected int colorPixel(int pixel, int pxCoord) {
 		if (!blank[pxCoord]) {
 			int a = RenderUtil.alpha(pixel);
