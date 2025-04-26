@@ -909,6 +909,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialGeodesium, new ArrowShaftMaterialStats(1.3f, 125));
 			TinkerRegistry.addMaterialStats(materialGeodesium, new BowMaterialStats(1.6f, 1.3f, 0.4f));
 			
+			materialInertialRedirector.addTrait(ModTraits.reflecting);
 			TinkerRegistry.addMaterialStats(materialInertialRedirector, new HeadMaterialStats(2048, 6f, 16f, 5));
 		}	
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts

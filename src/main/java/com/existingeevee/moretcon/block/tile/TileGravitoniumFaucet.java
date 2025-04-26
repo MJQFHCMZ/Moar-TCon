@@ -27,11 +27,11 @@ public class TileGravitoniumFaucet extends TileFaucet {
 			FluidStack fillStack = drained.copy();
 			
 			int normalDrainAmount = 6; //set this to the default val.
-			if (LIQUID_TRANSFER$TileFaucet.isPresent()) {
-				normalDrainAmount = LIQUID_TRANSFER$TileFaucet.get().get(null);
-			} else if (LIQUID_TRANSFER$Config.isPresent()){
+			if (LIQUID_TRANSFER$Config.isPresent()){
 				normalDrainAmount = LIQUID_TRANSFER$Config.get().get(null);
-			}
+			} else if (LIQUID_TRANSFER$TileFaucet.isPresent()) {
+				normalDrainAmount = LIQUID_TRANSFER$TileFaucet.get().get(null);
+			}  
 			
 			fillStack.amount = Math.min(drained.amount, normalDrainAmount * 6);
 
