@@ -37,9 +37,6 @@ public class Seismishock extends AbstractTrait {
 				decayingEffect.setPosition(target.posX, target.posY, target.posZ);
 				target.getEntityWorld().spawnEntity(decayingEffect);
 
-				// TraitSpiky
-
-//				System.out.pr
 				for (Entity e : decayingEffect.getAffectedEntities()) {
 
 					if (!(e instanceof EntityLivingBase)) {
