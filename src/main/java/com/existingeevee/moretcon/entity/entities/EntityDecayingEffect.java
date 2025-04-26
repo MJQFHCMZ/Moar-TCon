@@ -166,7 +166,7 @@ public class EntityDecayingEffect extends EntityLiving {
 		if (attackerEntity == null) {
 			attackerEntity = this.world.getEntities(EntityLivingBase.class, e -> e.getUniqueID().equals(attacker)).stream().findAny().orElse(null);
 		}
-
+		
 		if (attackerEntity instanceof EntityPlayer) {
 			return DamageSource.causePlayerDamage((EntityPlayer) attackerEntity);
 		} else {
