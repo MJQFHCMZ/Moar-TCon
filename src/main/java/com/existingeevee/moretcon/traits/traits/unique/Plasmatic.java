@@ -52,7 +52,7 @@ public class Plasmatic extends AbstractTrait {
 		Vec3d start = player.getPositionEyes(0.5f);
 		Vec3d lookVec = player.getLook(0.5f);
 		Vec3d end = start.add(lookVec.scale(maxRange));
-		AxisAlignedBB area = new AxisAlignedBB(start, end);
+		AxisAlignedBB area = new AxisAlignedBB(start, end.add(lookVec.scale(2)));
 		List<Entity> entities = player.world.getEntitiesWithinAABBExcludingEntity(player, area);
 
 		for (Entity e : entities) {
@@ -62,7 +62,7 @@ public class Plasmatic extends AbstractTrait {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().calculateIntercept(start, end);
 
-			if (intercept != null) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= intercept.hitVec.squareDistanceTo(end)) {
 				try {
 					IS_ALREADY_PROCING.set(true);
 					int orig = ticksSinceLastAtt.getInt(player);

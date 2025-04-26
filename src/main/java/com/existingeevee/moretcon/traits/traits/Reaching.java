@@ -57,6 +57,8 @@ public class Reaching extends AbstractTraitLeveled {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onMouseClick(PlayerInteractEvent.LeftClickEmpty event) {
+		if (!event.getWorld().isRemote)
+			return;
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stack = player.getHeldItemMainhand();
 		NBTTagList tagList = TagUtil.getModifiersTagList(stack);

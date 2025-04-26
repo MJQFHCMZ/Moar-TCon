@@ -43,7 +43,32 @@ public class Approximate extends AbstractTraitLeveled {
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
+	public void onMouseClick(PlayerInteractEvent.LeftClickBlock event) {
+		if (!event.getWorld().isRemote)
+			return;
+		EntityPlayer player = event.getEntityPlayer();
+		ItemStack stack = player.getHeldItemMainhand();
+		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
+		int index = TinkerUtil.getIndexInCompoundList(tagList, getModifierIdentifier());
+
+		if (index > -1 && shouldHaveApprox(stack)) {
+			ModifierNBT modifier = ModifierNBT.readTag(tagList.getCompoundTagAt(index));
+			List<Entity> exclude = player.getRidingEntity() == null ? null : Lists.newArrayList(player.getRidingEntity());
+			RayTraceResult result = rayTraceWithExp(player, 4.5, exclude, modifier.level * 0.25);
+			if (result != null && result.entityHit != null) {
+				if (!player.isCreative()) {
+					ToolHelper.damageTool(stack, 1, player);
+				}
+				NetworkHandler.HANDLER.sendToServer(new ExtendedAttackMessage(result.entityHit));
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void onMouseClick(PlayerInteractEvent.LeftClickEmpty event) {
+		if (!event.getWorld().isRemote)
+			return;
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stack = player.getHeldItemMainhand();
 		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
@@ -79,7 +104,7 @@ public class Approximate extends AbstractTraitLeveled {
 	public static RayTraceResult rayTraceWithExp(Vec3d start, Vec3d direction, World world, double maxRange, List<Entity> exclude, boolean affectedByBlocks, boolean ignoreNoBounding, double exp) {
 		Vec3d end = start.add(direction.scale(maxRange));
 		RayTraceResult firstTrace = affectedByBlocks ? world.rayTraceBlocks(start, end, false, ignoreNoBounding, true) : null;
-		AxisAlignedBB area = new AxisAlignedBB(start, firstTrace != null ? firstTrace.hitVec : end);
+		AxisAlignedBB area = new AxisAlignedBB(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2)));
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, area);
 
 		Entity closestValid = null;
@@ -92,7 +117,7 @@ public class Approximate extends AbstractTraitLeveled {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().grow(exp).calculateIntercept(start, end);
 
-			if (intercept != null) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= intercept.hitVec.squareDistanceTo(end)) {
 				double distSq = intercept.hitVec.squareDistanceTo(start);
 				if (closestDistSq > distSq) {
 					closestValid = e;

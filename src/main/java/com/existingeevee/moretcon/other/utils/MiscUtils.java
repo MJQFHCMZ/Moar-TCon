@@ -386,7 +386,7 @@ public class MiscUtils {
 	public static RayTraceResult rayTrace(Vec3d start, Vec3d direction, World world, double maxRange, List<Entity> exclude, boolean affectedByBlocks, boolean ignoreNoBounding) {
 		Vec3d end = start.add(direction.scale(maxRange));
 		RayTraceResult firstTrace = affectedByBlocks ? world.rayTraceBlocks(start, end, false, ignoreNoBounding, true) : null;
-		AxisAlignedBB area = new AxisAlignedBB(start, firstTrace != null ? firstTrace.hitVec : end);
+		AxisAlignedBB area = new AxisAlignedBB(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2)));
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, area);
 
 		Entity closestValid = null;
@@ -399,7 +399,7 @@ public class MiscUtils {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().calculateIntercept(start, end);
 
-			if (intercept != null) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= intercept.hitVec.squareDistanceTo(end)) {
 				double distSq = intercept.hitVec.squareDistanceTo(start);
 				if (closestDistSq > distSq) {
 					closestValid = e;
