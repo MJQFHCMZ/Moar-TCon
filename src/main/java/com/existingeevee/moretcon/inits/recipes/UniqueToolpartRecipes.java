@@ -19,7 +19,11 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.materials.MaterialTypes;
+import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.tools.TinkerMaterials;
+import slimeknights.tconstruct.tools.ranged.item.BoltCore;
 
 public class UniqueToolpartRecipes {
 
@@ -57,7 +61,7 @@ public class UniqueToolpartRecipes {
 								Pair.of('R', new OreIngredient("dustRedstone"))));
 			}
 		}
-		
+
 		if (ConfigHandler.shouldAllowPlusTiC) {
 			if (canRegisterUniqueRecipe(ModMaterials.materialCrimson)) {
 				event.getRegistry().register(
@@ -243,9 +247,9 @@ public class UniqueToolpartRecipes {
 								Pair.of('L', Ingredient.fromItem(ModItems.solidLightning)),
 								Pair.of('S', new OreIngredient("netherStar")),
 								Pair.of('E', new TinkerPartIngredient(ModMaterials.materialElectarite, "tconstruct:bow_limb")),
-								Pair.of('R',  Ingredient.fromStacks(new ItemStack(Blocks.END_ROD)))));
+								Pair.of('R', Ingredient.fromStacks(new ItemStack(Blocks.END_ROD)))));
 			}
-			
+
 			if (canRegisterUniqueRecipe(ModMaterials.materialShotgun)) {
 				event.getRegistry().register(
 						RecipeHelper.createRecipe("shotgun_recipe", ModMaterials.materialShotgun.getUniqueToolPart(),
@@ -256,7 +260,28 @@ public class UniqueToolpartRecipes {
 								},
 								Pair.of('Z', new TinkerPartIngredient(ModMaterials.materialZracohlium, "tconstruct:tough_binding")),
 								Pair.of('V', new OreIngredient("ingotValasium")),
-								Pair.of('T',  Ingredient.fromStacks(new ItemStack(Blocks.TNT)))));
+								Pair.of('T', Ingredient.fromStacks(new ItemStack(Blocks.TNT)))));
+			}
+
+			if (canRegisterUniqueRecipe(ModMaterials.materialInertialRedirector)) {
+				for (Material mat : TinkerRegistry.getAllMaterialsWithStats(MaterialTypes.SHAFT)) { //FIX
+					if (!PartMaterialType.arrowShaft(null).isValidMaterial(mat)) {
+						continue;
+					}
+					
+					event.getRegistry().register( //ModMaterials.materialInertialRedirector.getUniqueToolPart()
+							RecipeHelper.createRecipe("inertial_redirector_recipe_" + mat.identifier, BoltCore.getItemstackWithMaterials(mat, ModMaterials.materialInertialRedirector),
+									new String[] {
+											"KST",
+											"VmS",
+											" VK"
+									},
+									Pair.of('m', new TinkerPartIngredient(mat, "tconstruct:arrow_shaft")),
+									Pair.of('V', new OreIngredient("ingotValasium")),
+									Pair.of('K', new TinkerPartIngredient(TinkerMaterials.knightslime, "moretcon:smallplate")),
+									Pair.of('S', new TinkerPartIngredient(ModMaterials.materialValasium, "moretcon:shrapnel")),
+									Pair.of('T', new TinkerPartIngredient(ModMaterials.materialSlimesteel, "tconstruct:large_plate"))));
+				}
 			}
 		}
 	}

@@ -321,10 +321,10 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 									for (int cx = -1; cx < 2; cx++) {
 										for (int cz = -1; cz < 2; cz++) {
 											switch (getCrystalBlock(cx, cy, cz, r)) {
-											case 'T':
 											case 'S':
 												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.blockDarkBrinkstone.getDefaultState(), 2);
 												break;
+											case 'T':
 											case 'C':
 												world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.orePerimidum.getDefaultState(), 2);
 												break;

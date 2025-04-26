@@ -159,6 +159,9 @@ public class OreDictionaryManager {
 			registerOre("gemPerimidum", ModItems.gemPerimidum);
 			registerOre("orePerimidum", ModBlocks.orePerimidum);
 			
+			registerOre("stone", ModBlocks.blockBrinkstone, ModBlocks.blockDarkBrinkstone);
+			registerOre("brinkstone", ModBlocks.blockBrinkstone, ModBlocks.blockDarkBrinkstone);
+			
 			if (ConfigHandler.shouldLoadDust) {
 				registerOre("dustIrradium", ModItems.dustIrradium);
 				registerOre("dustValasium", ModItems.dustValasium);

@@ -1,11 +1,11 @@
 package com.existingeevee.moretcon.client.textures.unique;
 
 import java.awt.image.DirectColorModel;
+import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
 import slimeknights.tconstruct.library.client.MaterialRenderInfo.AbstractMaterialRenderInfo;
 import slimeknights.tconstruct.library.client.RenderUtil;
 import slimeknights.tconstruct.library.client.texture.AbstractColoredTexture;

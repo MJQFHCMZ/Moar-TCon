@@ -24,6 +24,8 @@ public class JeiInit {
 		CUSTOM.add(new JeiHideBadToolparts());
 		CUSTOM.add(new JeiAddBoltCoreBreakingContainer());
 
+		CUSTOM.add(new JeiSupportDIRecipes());
+		
 		if (CompatManager.thebetweenlands) {
 			CUSTOM.add(new JeiInformationContainer<>(fluidstack, new FluidStack(ModFluids.liquidMummySludge, 1000), "Obtained by melting down a Dreadful Peat Mummy.", () -> CompatManager.thebetweenlands));
 		}

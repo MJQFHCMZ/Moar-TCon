@@ -8,9 +8,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class HotBlockBase extends BlockBase {
+public class BlockHot extends BlockBase {
 
-	public HotBlockBase(String itemName, Material material, int harvestLevel) {
+	public BlockHot(String itemName, Material material, int harvestLevel) {
 
 		super(itemName, material, harvestLevel);
 

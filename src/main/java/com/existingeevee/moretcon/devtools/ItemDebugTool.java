@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.devtools;
 
 import java.util.List;
 
+import com.existingeevee.moretcon.inits.ModMaterials;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.materials.MaterialClient;
 import com.existingeevee.moretcon.other.BiValue;
@@ -57,6 +58,8 @@ public class ItemDebugTool extends ItemBase {
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (worldIn.isRemote) {
 			MaterialClient.init();
+		} else {
+			playerIn.entityDropItem(ModMaterials.materialInertialRedirector.buildSampleTool(), 1);
 		}
 		return false;
 	}

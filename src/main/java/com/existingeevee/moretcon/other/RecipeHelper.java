@@ -2,7 +2,9 @@ package com.existingeevee.moretcon.other;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -70,6 +72,26 @@ public class RecipeHelper {
 		}
 
 		return new ShapedRecipes(name, recipe[0].length(), recipe.length, list, out).setRegistryName(GameData.checkPrefix(name, true));
+	}
+
+	@SafeVarargs
+	public static IRecipe createDynRecipe(String name, Function<ItemStack, Boolean> isValid, Function<ItemStack, ItemStack> getOutput, List<ItemStack> sampleInputs, String[] recipe, final Pair<Character, Ingredient>... key) {
+		Map<Character, Ingredient> map = new HashMap<>();
+		Arrays.stream(key).forEach(p -> map.put(p.getKey(), p.getValue()));
+
+		if (recipe.length > 3 || recipe.length <= 0 || !allEqualLength(recipe) || recipe[0].length() <= 0) {
+			throw new IllegalArgumentException("invalid length for recipe");
+		}
+
+		NonNullList<Ingredient> list = NonNullList.create();
+
+		for (String s : recipe) {
+			for (char c : s.toCharArray()) {
+				list.add(map.getOrDefault(c, Ingredient.EMPTY));
+			}
+		}
+
+		return new DynamicInputRecipe(name, recipe[0].length(), recipe.length, list, isValid, getOutput, sampleInputs).setRegistryName(GameData.checkPrefix(name, true));
 	}
 
 	private static boolean allEqualLength(String[] array) {

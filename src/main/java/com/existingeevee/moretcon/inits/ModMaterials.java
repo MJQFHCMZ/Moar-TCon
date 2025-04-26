@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.inits;
+	package com.existingeevee.moretcon.inits;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.config.ConfigHandler;
@@ -195,10 +195,14 @@ public class ModMaterials implements MaterialTypes {
 			MiscUtils.createNonConflictiveName("impact"), 0x007aba, "moretcon:explosive_charge",
 			"moretcon:bomb");
 
-	protected static final HeadMaterialStats THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT = new HeadMaterialStats(700, 6f, 4f, 5);
+	public static final UniqueMaterial materialInertialRedirector = new UniqueMaterial(
+			MiscUtils.createNonConflictiveName("intertial_redirector"), 0xffffff, "tconstruct:bolt_core",
+			"tconstruct:bolt");
+	
 
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
+		HeadMaterialStats thankYouTinkersForNeedingAHeadMat = new HeadMaterialStats(700, 6f, 4f, 5);
 
 		Material.UNKNOWN.addStats(new ExplosiveMaterialStats(0.25, 1));
 
@@ -783,7 +787,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialCryosplinters, new HeadMaterialStats(2048, 6f, 16f, 5));
 
 			materialAutoloader.addTrait(ModTraits.autoloading);
-			TinkerRegistry.addMaterialStats(materialAutoloader, THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT);
+			TinkerRegistry.addMaterialStats(materialAutoloader, thankYouTinkersForNeedingAHeadMat);
 			TinkerRegistry.addMaterialStats(materialAutoloader, new ExtraMaterialStats(1024));
 			TinkerRegistry.addMaterialStats(materialAutoloader, new HandleMaterialStats(4f, 1024));
 
@@ -849,7 +853,7 @@ public class ModMaterials implements MaterialTypes {
 			CompositeRegistry.registerComposite(() -> materialVoidSpar, () -> materialIoximite, () -> ModFluids.liquidFusionite);
 
 			TinkerRegistry.addMaterialStats(materialShotgun, new ExtraMaterialStats(1024));
-			TinkerRegistry.addMaterialStats(materialShotgun, THANK_YOU_TINKERS_FOR_NEEDING_A_HEAD_MAT);
+			TinkerRegistry.addMaterialStats(materialShotgun, thankYouTinkersForNeedingAHeadMat);
 			materialShotgun.addTrait(ModTraits.polyshot);
 
 			materialMonolite.addItem("gemMonolite", 1, Material.VALUE_Ingot);
@@ -900,7 +904,9 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialGeodesium, new ExtraMaterialStats(161));
 			TinkerRegistry.addMaterialStats(materialGeodesium, new ArrowShaftMaterialStats(1.3f, 125));
 			TinkerRegistry.addMaterialStats(materialGeodesium, new BowMaterialStats(1.6f, 1.3f, 0.4f));
-		}
+			
+			TinkerRegistry.addMaterialStats(materialInertialRedirector, new HeadMaterialStats(2048, 6f, 16f, 5));
+		}	
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
 			materialZanite.addItem("blockZanite", 1, Material.VALUE_Block);
@@ -1276,6 +1282,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialPorksteel).toolforge();
 			ModMaterials.registerMaterial(materialPerimidum).toolforge();
 			ModMaterials.registerMaterial(materialGeodesium).toolforge();
+			ModMaterials.registerMaterial(materialInertialRedirector, null);
 			
 			
 		}

@@ -8,9 +8,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RadiationBlockBase extends BlockBase {
+public class BlockRadioactive extends BlockBase {
 
-	public RadiationBlockBase(String itemName, Material material, int harvestLevel) {
+	public BlockRadioactive(String itemName, Material material, int harvestLevel) {
 
 		super(itemName, material, harvestLevel);
 	}

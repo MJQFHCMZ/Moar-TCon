@@ -13,6 +13,7 @@
   	"late.common.MixinEntityProjectileBase",
   	"late.common.MixinBowCore",
   	"late.common.MixinTraitTasty",
+  	"late.common.MixinBoltHeadPartMaterialType",
   	
   	"softdep.thebetweenlands.MixinBlockEnergyBarrier",
   	"softdep.thebetweenlands.MixinEntityFortressBossProjectile",

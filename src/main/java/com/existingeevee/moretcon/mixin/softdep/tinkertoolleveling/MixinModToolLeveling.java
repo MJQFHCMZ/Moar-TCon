@@ -40,4 +40,3 @@ public abstract class MixinModToolLeveling {
 	@Shadow(remap = false)
 	abstract void addXp(ItemStack tool, int amount, EntityPlayer player);
 }
-//Arrow

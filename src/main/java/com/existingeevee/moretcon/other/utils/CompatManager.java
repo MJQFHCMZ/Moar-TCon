@@ -4,6 +4,7 @@ import com.existingeevee.moretcon.config.ConfigHandler;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.oredict.OreDictionary;
+import slimeknights.tconstruct.TConstruct;
 
 public class CompatManager {
 
@@ -18,7 +19,8 @@ public class CompatManager {
 	public static boolean conarm;
 	public static boolean oredict;
 	public static boolean tic3backport;
-
+	public static boolean tinkersAntique;
+	
 	public static void init() {
 		CompatManager.twilightforest = (Loader.isModLoaded("twilightforest") && ConfigHandler.shouldAllowTwilightForest);
 		CompatManager.iceandfire = (Loader.isModLoaded("iceandfire") && ConfigHandler.shouldAllowIceAndFire);
@@ -31,6 +33,7 @@ public class CompatManager {
 		CompatManager.loadMain = ConfigHandler.shouldAllowMainContent;
 		CompatManager.oredict = ConfigHandler.shouldAllowOreDictionary;
 		CompatManager.tic3backport = ConfigHandler.shouldAllowTiC3ContentBackport;
+		CompatManager.tinkersAntique = TConstruct.modName.equals("Tinkers' Antique");
 	}
 
 	public static boolean isOredictLoaded(String dictEntry) {

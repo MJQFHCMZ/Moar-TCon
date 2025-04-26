@@ -3,12 +3,16 @@ package com.existingeevee.moretcon.materials;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.utils.MaterialUtils;
+import com.existingeevee.moretcon.other.utils.MirrorUtils;
+import com.existingeevee.moretcon.other.utils.MirrorUtils.IField;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.traits.modifiers.ModExtraTrait2;
+import com.google.common.collect.ImmutableList;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.init.Blocks;
@@ -26,11 +30,14 @@ import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolCraftingEv
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolModifyEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartReplaceEvent;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
+import slimeknights.tconstruct.tools.TinkerMaterials;
 import slimeknights.tconstruct.tools.modifiers.ModExtraTrait;
+import slimeknights.tconstruct.tools.ranged.item.BoltCore;
 
 public class UniqueMaterial extends Material {
 
@@ -82,6 +89,8 @@ public class UniqueMaterial extends Material {
 
 		ToolPart part = getPartType();
 		if (part != null) {
+			if (part instanceof BoltCore)
+				return BoltCore.getItemstackWithMaterials(TinkerMaterials.wood, this);
 			return part.getItemstackWithMaterial(this);
 		}
 		return ItemStack.EMPTY;
@@ -119,8 +128,15 @@ public class UniqueMaterial extends Material {
 			if (stacktrace[3].getClassName().equals("slimeknights.tconstruct.library.book.content.ContentSingleStatMultMaterial") && (stacktrace[3].getMethodName().equals("build"))) {
 				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + I18n.translateToLocal("uniquetoolpart." + this.getIdentifier() + ".name") + ")";
 			}
+			if (stacktrace[3].getClassName().equals(BoltCore.class.getName()) && (stacktrace[3].getMethodName().equals("getItemStackDisplayName") || stacktrace[3].getMethodName().equals("func_77653_i"))) {
+				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + I18n.translateToLocal("uniquetoolpart." + this.getIdentifier() + ".name") + ")";
+			}
+			if (stacktrace[4].getClassName().equals(BoltCore.class.getName()) && (stacktrace[4].getMethodName().equals("getItemStackDisplayName") || stacktrace[4].getMethodName().equals("func_77653_i"))) {
+				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + I18n.translateToLocal("uniquetoolpart." + this.getIdentifier() + ".name") + ")";
+			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-		}
+		} // Bolt
+
 		return I18n.translateToLocal("material.uniquetoolpart.name");
 	}
 
@@ -204,7 +220,7 @@ public class UniqueMaterial extends Material {
 	public void handleToolModifyEvent(ToolModifyEvent event) {
 		List<UniqueMaterial> pre = MiscUtils.getUniqueEmbossments(event.getToolBeforeModification());
 		List<UniqueMaterial> post = MiscUtils.getUniqueEmbossments(event.getItemStack());
-		
+
 		if (!pre.contains(this) && post.contains(this)) {
 			if (!UniqueMaterial.getToolFromResourceLocation(new ResourceLocation(getToolResLoc())).getRegistryName().equals(event.getItemStack().getItem().getRegistryName())) {
 				event.setCanceled(I18n.translateToLocal("text.err.unique.not_correct_tool"));
@@ -233,5 +249,58 @@ public class UniqueMaterial extends Material {
 			}
 		} catch (NullPointerException e) {
 		}
+	}
+
+	private static final IField<Set<IToolPart>> field$neededPart = MirrorUtils.reflectField(PartMaterialType.class, "neededPart");
+	private static final Map<PartMaterialType, Material> PMT_LOOKUP_MAP = new HashMap<>();
+
+	private static final Material[] standardMats = { TinkerRegistry.getMaterial(TinkerMaterials.iron.identifier), TinkerRegistry.getMaterial(TinkerMaterials.wood.identifier), TinkerRegistry.getMaterial(TinkerMaterials.feather.identifier) };
+
+	@SuppressWarnings("unlikely-arg-type")
+	public ItemStack buildSampleTool() {
+		ToolCore tool = UniqueMaterial.getToolFromResourceLocation(new ResourceLocation(this.getToolResLoc()));
+		if (tool != null) {
+			boolean added = false;
+			ImmutableList.Builder<Material> builder = ImmutableList.builder();
+			for (PartMaterialType pmt : tool.getRequiredComponents()) {
+				Set<IToolPart> neededPart = field$neededPart.get(pmt);
+				if (!added && pmt.isValidMaterial(this) && neededPart.contains(getUniqueToolPart().getItem())) {
+					builder.add(this);
+					added = true;
+				} else {
+					if (PMT_LOOKUP_MAP.containsKey(pmt)) {
+						builder.add(PMT_LOOKUP_MAP.get(pmt));
+					}
+
+					boolean found = false;
+					for (Material m : standardMats) {
+						if (pmt.isValidMaterial(m)) {
+							PMT_LOOKUP_MAP.put(pmt, m);
+							builder.add(m);
+							found = true;
+							break;
+						}
+					}
+					if (!found)
+						for (Material m : TinkerRegistry.getAllMaterials()) {
+							if (pmt.isValidMaterial(m)) {
+								PMT_LOOKUP_MAP.put(pmt, m);
+								builder.add(m);
+								found = true;
+								break;
+							}
+						}
+
+					if (!found) {
+						PMT_LOOKUP_MAP.put(pmt, Material.UNKNOWN);
+						builder.add(Material.UNKNOWN);
+					}
+				}
+			}
+
+			ItemStack builtTool = tool.buildItem(builder.build());
+			return builtTool;
+		}
+		return ItemStack.EMPTY;
 	}
 }
