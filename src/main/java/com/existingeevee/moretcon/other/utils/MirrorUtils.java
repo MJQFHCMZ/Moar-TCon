@@ -7,6 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -64,7 +65,29 @@ public class MirrorUtils {
 			throw new MirrorException(String.format("Could not reflect field: %s/%s", clazz.getName(), name), e);
 		}
 	}
-
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static <T> Optional<IMethod<T>> reflectMethodOptional(Class<?> clazz, String name, Class<?>... args) {
+		try {
+			Method method = clazz.getDeclaredMethod(name, args);
+			method.setAccessible(true);
+			return Optional.of(new IMethod.Impl(method));
+		} catch (NoSuchMethodException e) {
+			return Optional.empty();
+		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static <T> Optional<IField<T>> reflectFieldOptional(Class<?> clazz, String name) {
+		try {
+			Field field = clazz.getDeclaredField(name);
+			field.setAccessible(true);
+			return Optional.of(new IField.Impl(field));
+		} catch (NoSuchFieldException e) {
+			return Optional.empty();
+		}
+	}
+	
 	public interface IMethod<T> {
 
 		@SuppressWarnings("unchecked")
@@ -90,9 +113,7 @@ public class MirrorUtils {
 			public Method unwrap() {
 				return method;
 			}
-
 		}
-
 	}
 
 	public interface IField<T> {
