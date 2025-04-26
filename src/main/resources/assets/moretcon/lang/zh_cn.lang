@@ -38,6 +38,7 @@ fluid.moretcon.liquidsanguiseelium=熔融汲血魂金
 fluid.moretcon.liquifiedsouls=液态灵魂
 fluid.moretcon.liquidzracohlium=熔融临界辐金
 fluid.moretcon.liquidslimesteel=熔融史莱姆钢
+fluid.moretcon.liquidporksteel=熔融熟铁
 
 item.moretcon.betweenifiedmodifier.desc=将它给任何工具进行强化，都可以使它在交错次元中正常使用。
 item.moretcon.crushingmodifier.desc=为任何工具添加这一强化都会将其 5% 的伤害转化为真实伤害。
@@ -113,6 +114,7 @@ item.moretcon.dustblightsteel.name=枯萎钢粉
 item.moretcon.dustsanguiseelium.name=汲血魂金粉
 item.moretcon.dustzracohlium.name=临界辐金粉
 item.moretcon.dustslimesteel.name=史莱姆钢粉
+item.moretcon.dustporksteel.name=熟铁粉
 
 item.moretcon.gembloodstone.name=血石
 item.moretcon.gemechostone.name=回音石
@@ -150,6 +152,7 @@ item.moretcon.ingotblightsteel.name=枯萎钢锭
 item.moretcon.ingotsanguiseelium.name=汲血魂金锭
 item.moretcon.ingotzracohlium.name=临界辐金锭
 item.moretcon.ingotslimesteel.name=史莱姆钢锭
+item.moretcon.ingotporksteel.name=熟铁锭
 
 item.moretcon.itemsiltclay.name=粉质粘土
 item.moretcon.lightning.name=闪电
@@ -176,6 +179,7 @@ item.moretcon.nuggetblightsteel.name=枯萎钢粒
 item.moretcon.nuggetsanguiseelium.name=汲血魂金粒
 item.moretcon.nuggetzracohlium.name=临界辐金粒
 item.moretcon.nuggetslimesteel.name=史莱姆钢粒
+item.moretcon.nuggetporksteel.name=熟铁粒
 
 itemGroup.moarTConMaterials=更多匠魂材料丨材料
 itemGroup.moarTConMisc=更多匠魂材料丨杂项
@@ -239,6 +243,7 @@ material.moretcon.gunpowder.name=火药
 material.moretcon.icy.name=冰
 material.moretcon.redstone.name=红石
 material.moretcon.glowstone.name=萤石
+material.moretcon.porksteel.name=熟铁
 
 material.uniquetoolpart.name=独特
 
@@ -367,7 +372,7 @@ modifier.moretcon.soulforged.desc=§o嘻嘻嘻嘻，你的灵魂现在是我的�
 modifier.moretcon.blinkdrawn.name=快拔
 modifier.moretcon.blinkdrawn.desc=§o快速上膛！！§r\n你的工具可以无延迟立即装载，但每次射击会消耗更多的耐久度，并且造成的伤害也会显著减少。
 modifier.moretcon.seismishock.name=地震冲击
-modifier.moretcon.seismishock.desc=§obonk§r\n你的工具在产生暴击时会发出一道冲击波，对周围区域造成大量范围伤害
+modifier.moretcon.seismishock.desc=§obonk§r\n你的工具在产生暴击时会发出一道冲击波，对周围区域造成大量范围伤害，伤害和面积随玩家的坠落距离而获得提高。
 modifier.moretcon.inertia.name=惯性
 modifier.moretcon.inertia.desc=§o咻§r\n在不潜行的情况下，你可以用类似巨剑和巨斧的方式挥动工具。
 modifier.moretcon.inertia.advancedtoolsonly.desc=§o咻§r\n如果你的工具只能在工具装配台上制造，那么在不潜行的情况下，你可以用类似巨剑和巨斧的方式挥动工具。
@@ -415,6 +420,12 @@ modifier.moretcon.impact_detonated.name=爆破冲击
 modifier.moretcon.impact_detonated.desc=§o要不要来杯好喝的自由茶？§r\n你的炸弹将在命中敌人时立刻爆炸，但造成的伤害减少25%
 modifier.moretcon.cryogenics.name=低温技术
 modifier.moretcon.cryogenics.desc=§o冰棍！§r\n你的工具会冻结被命中的敌人，并对敌人施加迟缓、挖掘疲劳与抗性，且对未结冰的敌人造成的伤害提高。
+modifier.moretcon.saturpigting.name=饱和
+modifier.moretcon.saturpigting.desc=§o令人满足的美味！！§r\n你的工具不止味道好，吃起来也会更充实，更饱满
+modifier.moretcon.flashbang.name=闪光弹
+modifier.moretcon.flashbang.desc=§o请关掉那不和谐的闪光灯§r\n您的炸弹会使任何被爆炸波及的目标失明和眩晕。
+modifier.moretcon.shock_aura.name=冲击环
+modifier.moretcon.shock_aura.desc=§o吐司浴！！！§r\n你的炸弹将在爆炸后产生一个能造成伤害的光环。
 
 modifier.moretcon.reforgeheavy.name=沉重
 modifier.moretcon.reforgeheavy.flavor=§o你都不抬吗？？
@@ -439,6 +450,8 @@ text.uniquely_crafted.shockwave=在活化器里用粉碎冲击波剑合成
 text.composite=可用__s____n__与__l__复合形成
 text.beta.desc=感谢您游玩测试版！请向__n__ ExistingEevee 报告任何问题！__n____n__ 你可以在此处找到问题跟踪器：__n__ 
 text.beta.name=BETA
+text.dev.desc=谢谢你的贡献！你的贡献将使每个人的体验都变得更好。如果你有些什么好点子或问题，请来到github创建Issues进行反馈。__n____n__ 您可以可以通过此链接来进行Issues反馈: __n__ 
+text.dev.name=DEV
 text.err.unique.not_correct_tool=提供的独一工具零件不能用于创建此工具！
 text.err.unique.unobtainable=警告：此物品应该是无法获得的。
 text.err.unique.only_make=此部分只能用于创造__s__
@@ -484,6 +497,7 @@ tile.moretcon.blocksanguiseelium.name=汲血魂金块
 tile.moretcon.blockzracohlium.name=临界辐金块
 tile.moretcon.blockslimesteel.name=史莱姆钢块
 tile.moretcon.blockmonolite.name=回音水晶块
+tile.moretcon.blockporksteel.name=熟铁块
 
 tile.moretcon.blockcobbledbedrock.name=基岩圆石
 tile.moretcon.blockcobbledbetweenbedrock.name=交错基岩圆石
@@ -520,6 +534,7 @@ tile.moretcon.mummysludge.name=木乃伊淤泥
 tile.moretcon.liquifiedsouls.name=液态灵魂
 tile.moretcon.liquidzracohlium.name=熔融临界辐金
 tile.moretcon.liquidslimesteel.name=熔融史莱姆钢
+tile.moretcon.liquidporksteel.name=熔融熟铁
 
 tile.moretcon.orearkenium.name=阿肯钢矿石
 tile.moretcon.orebloodstone.name=血石矿石
