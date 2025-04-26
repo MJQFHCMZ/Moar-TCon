@@ -112,7 +112,8 @@ dependencies {
     embed('io.github.llamalad7:mixinextras-common:0.5.0-rc.1')
     
     implementation  'curse.maven:mantle-74924:2713386'
-    implementation  'curse.maven:tinkers-construct-74072:2902483'
+    //implementation  'curse.maven:tinkers-construct-74072:2902483'
+    implementation  'curse.maven:tinkers-antique-1242239:6460333'
 
     implementation  'com.azanor.baubles:Baubles:1.12-1.5.2'
     implementation  'curse.maven:plusticminusbad-376903:3648592'
