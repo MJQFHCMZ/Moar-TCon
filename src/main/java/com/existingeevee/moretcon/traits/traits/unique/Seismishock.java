@@ -1,22 +1,20 @@
 package com.existingeevee.moretcon.traits.traits.unique;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.existingeevee.moretcon.entity.entities.EntityDecayingEffect;
 import com.existingeevee.moretcon.entity.entities.EntityDecayingEffect.EnumDecayingEffectType;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
-import com.mojang.authlib.GameProfile;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.FakePlayer;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
@@ -39,7 +37,8 @@ public class Seismishock extends AbstractTrait {
 				decayingEffect.setPosition(target.posX, target.posY, target.posZ);
 				target.getEntityWorld().spawnEntity(decayingEffect);
 
-				
+				// TraitSpiky
+
 //				System.out.pr
 				for (Entity e : decayingEffect.getAffectedEntities()) {
 
@@ -61,22 +60,22 @@ public class Seismishock extends AbstractTrait {
 					}
 
 					int hurtResistantTime = e.hurtResistantTime;
-					
+
 					float hpBefore = entity.getHealth();
-					
+
 					for (ITrait t : traits) {
 						if (t == this)
 							continue;
 						t.onHit(stack, playerIn, entity, dmg, false);
 						e.hurtResistantTime = hurtResistantTime;
 					}
-					
+
 					boolean wasHit = false;
 
-					if (e != target) {
-						wasHit = entity.attackEntityFrom(DamageSource.GENERIC, dmg); 
-						e.hurtResistantTime = hurtResistantTime;
-					}
+					DamageSource source = playerIn instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer) playerIn) : DamageSource.causeMobDamage(playerIn);
+
+					wasHit = entity.attackEntityFrom(source, dmg);
+					e.hurtResistantTime = hurtResistantTime;
 
 					for (ITrait t : traits) {
 						if (t == this)
@@ -86,11 +85,17 @@ public class Seismishock extends AbstractTrait {
 				}
 			}
 			target.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS, 1, 2);
+			if (target.getHealth() <= 0) {
+				playerIn.fallDistance = 3;
+				target.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1, 1);
+			}
 		}
 	}
 
 	@Override
 	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
-
+		if (wasCritical) {
+			player.fallDistance = 3;
+		}
 	}
 }
