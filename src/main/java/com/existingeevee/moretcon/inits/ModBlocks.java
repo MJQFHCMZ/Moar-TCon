@@ -1,12 +1,12 @@
 package com.existingeevee.moretcon.inits;
 
 import com.existingeevee.moretcon.block.blocktypes.BlockBase;
+import com.existingeevee.moretcon.block.blocktypes.BlockBrinkstonePlant;
 import com.existingeevee.moretcon.block.blocktypes.BlockElectarite;
 import com.existingeevee.moretcon.block.blocktypes.BlockEtheralBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockFallingBase;
-import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
-import com.existingeevee.moretcon.block.blocktypes.BlockBrinkstonePlant;
 import com.existingeevee.moretcon.block.blocktypes.BlockHot;
+import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
 import com.existingeevee.moretcon.block.blocktypes.BlockRadioactive;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockGravitoniumFaucet;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockIgniglomerateCluster;

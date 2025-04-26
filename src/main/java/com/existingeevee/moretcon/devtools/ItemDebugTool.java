@@ -8,6 +8,7 @@ import com.existingeevee.moretcon.materials.MaterialClient;
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.ModTabs;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -57,10 +58,10 @@ public class ItemDebugTool extends ItemBase {
 
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (worldIn.isRemote) {
-			MaterialClient.init();
-		} else {
-			playerIn.entityDropItem(ModMaterials.materialInertialRedirector.buildSampleTool(), 1);
+			System.out.println("aaa");
+			
+			Minecraft.getMinecraft().mcProfiler.getProfilingData("root.display_update").forEach(p -> System.out.println(p.profilerName));
 		}
-		return false;
+		return true;
 	}
 }

@@ -86,7 +86,7 @@ public class ValasiumTexture extends AbstractColoredTexture { // FieryTexture
 			datas.forEach(this.framesTextureData::add);
 		}
 
-		this.animationMetadata = new AnimationMetadataSection(IntStream.range(0, 4).mapToObj(AnimationFrame::new).collect(Collectors.toList()), width, height, 2, true);
+		this.animationMetadata = new AnimationMetadataSection(IntStream.range(0, 4).mapToObj(AnimationFrame::new).collect(Collectors.toList()), width, height, 2, false);
 
 		return false;
 	}

@@ -120,7 +120,7 @@ public class PerimidumTexture extends AbstractColoredTexture {
 		if (this.framesTextureData.isEmpty()) {
 			datas.forEach(this.framesTextureData::add);
 		}
-		this.animationMetadata = new AnimationMetadataSection(IntStream.range(0, 2).mapToObj(AnimationFrame::new).collect(Collectors.toList()), width, height, 100, true);
+		this.animationMetadata = new AnimationMetadataSection(IntStream.range(0, 2).mapToObj(AnimationFrame::new).collect(Collectors.toList()), width, height, 10, true);
 
 		return false;
 	}

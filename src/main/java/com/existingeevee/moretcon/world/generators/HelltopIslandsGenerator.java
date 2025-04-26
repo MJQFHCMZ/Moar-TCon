@@ -51,7 +51,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 	@SubscribeEvent
 	public static void onWorldTick(TickEvent.WorldTickEvent event) {
-		if (event.phase != Phase.END || event.world.getWorldTime() % 20 != 0) {
+		if (event.phase != Phase.END || event.world.getWorldTime() % 20 != 0 || event.world.isRemote) {
 			return;
 		}
 
@@ -86,7 +86,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 	public static void onClientTick(ClientTickEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
 
-		if (event.phase != Phase.END || mc.world == null || mc.player == null || mc.isGamePaused() && mc.isSingleplayer()	)
+		if (event.phase != Phase.END || mc.world == null || mc.player == null || mc.isGamePaused() && mc.isSingleplayer())
 			return;
 
 		prevFogP = curFogP;
