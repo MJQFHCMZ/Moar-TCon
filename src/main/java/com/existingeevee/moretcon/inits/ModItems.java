@@ -4,6 +4,7 @@ import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.devtools.ItemDebugTool;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.item.ItemCompositeRep;
+import com.existingeevee.moretcon.item.ItemNoGravity;
 import com.existingeevee.moretcon.item.ItemNonflamable;
 import com.existingeevee.moretcon.item.ItemReforgeStone;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer.GlowType;
@@ -139,7 +140,7 @@ public class ModItems {
 	public static final Item gemBloodstone = new ItemBase("gemBloodstone");
 	public static final Item gemEchostone = new ItemBase("gemEchostone", 0x00725a);
 	public static final Item gemIgniglomerate = new ItemNonflamable("gemIgniglomerate").withColor(0xda6540).withType(GlowType.EXTREME);
-	public static final Item gemErythynite = new ItemBase("gemErythynite", GlowType.CIRCLE_BIG, 0x32ff00);
+	public static final Item gemErythynite = new ItemNoGravity("gemErythynite", GlowType.CIRCLE_BIG, 0x32ff00);
 	public static final Item gemEtherstone = new ItemBase("gemEtherstone", GlowType.CIRCLE_BIG, 0xffff00);
 	public static final Item gemElectarite = new ItemBase("gemElectarite", GlowType.CIRCLE_BIG, 0x6666ff);
 	public static final Item gemMonolite = new ItemBase("gemMonolite", GlowType.CIRCLE_BIG, 0x4a74f0);

@@ -568,7 +568,9 @@ public class ModMaterials implements MaterialTypes {
 			materialErythynite.addTrait(TinkerTraits.unnatural, HEAD);
 			materialErythynite.addTrait(ModTraits.hardcore, HEAD);
 			materialErythynite.addTrait(ModTraits.luminescent, HEAD);
+			materialErythynite.addTrait(TinkerTraits.hovering, HEAD);
 			materialErythynite.addTrait(ModTraits.leeching);
+			materialErythynite.addTrait(TinkerTraits.hovering);
 			materialErythynite.addTrait(ModTraits.weightless);
 			materialErythynite.addTrait(TinkerTraits.enderference);
 			materialErythynite.addTrait(ModTraits.luminescent);
@@ -667,12 +669,13 @@ public class ModMaterials implements MaterialTypes {
 			materialShadowglass.addTrait(ModTraits.darkened, HEAD);
 			materialShadowglass.addTrait(TinkerTraits.unnatural);
 			materialShadowglass.addTrait(ModTraits.hardcore);
-			TinkerRegistry.addMaterialStats(materialShadowglass, new HeadMaterialStats(1500, 8f, 12f, 7));
-			TinkerRegistry.addMaterialStats(materialShadowglass, new HandleMaterialStats(2.3f, 20));
-			TinkerRegistry.addMaterialStats(materialShadowglass, new ExtraMaterialStats(15));
-			TinkerRegistry.addMaterialStats(materialShadowglass, new ArrowShaftMaterialStats(1.2f, 18));
-			TinkerRegistry.addMaterialStats(materialShadowglass, new BowMaterialStats(2f, 0.9f, 6f));
-			CompositeRegistry.registerComposite(() -> materialErythynite, () -> materialShadowglass, () -> ModFluids.liquidEbonite);
+			TinkerRegistry.addMaterialStats(materialShadowglass, new HeadMaterialStats(1630, 17f, 17f, 6));
+			TinkerRegistry.addMaterialStats(materialShadowglass, new HandleMaterialStats(2.2f, 120));
+			TinkerRegistry.addMaterialStats(materialShadowglass, new ExtraMaterialStats(650));
+			TinkerRegistry.addMaterialStats(materialShadowglass, new ArrowShaftMaterialStats(1.1f, 22));
+			TinkerRegistry.addMaterialStats(materialShadowglass, new BowMaterialStats(0.55f, 2.5f, 6f));
+			
+			CompositeRegistry.registerComposite(() -> materialPerimidum, () -> materialShadowglass, () -> ModFluids.liquidEbonite);
 
 			TinkerRegistry.addMaterialStats(materialPlasma, new HeadMaterialStats(4096, 6f, 12f, 5));
 			materialPlasma.addTrait(ModTraits.plasmatic);
@@ -882,6 +885,7 @@ public class ModMaterials implements MaterialTypes {
 			materialPerimidum.addTrait(ModTraits.luminescent, HEAD);
 			materialPerimidum.addTrait(ModTraits.luminescent);
 			TinkerRegistry.addMaterialStats(materialPerimidum, new HeadMaterialStats(1230, 15.5f, 15f, 6));
+			TinkerRegistry.addMaterialStats(materialPerimidum, new ArrowShaftMaterialStats(1.2f, 24));
 			TinkerRegistry.addMaterialStats(materialPerimidum, new HandleMaterialStats(2.6f, -50));
 			TinkerRegistry.addMaterialStats(materialPerimidum, new ExtraMaterialStats(610));
 			TinkerRegistry.addMaterialStats(materialPerimidum, whyWouldYouMakeABowOutOfThis);

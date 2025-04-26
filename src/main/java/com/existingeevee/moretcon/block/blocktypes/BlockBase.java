@@ -94,6 +94,15 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	@Override
 	public ItemBlock createBlockItem() {
+		if (this == ModBlocks.blockErythynite || this == ModBlocks.oreErythynite) {
+			return new ItemBlock(this) {
+				@Override
+				public boolean onEntityItemUpdate(EntityItem entityItem) {
+			        entityItem.motionY += 0.039f;
+					return false;
+				}
+			};
+		}
 		if (this.canBurn) {
 			return new ItemBlock(this);
 		}
