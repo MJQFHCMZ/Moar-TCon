@@ -1,5 +1,6 @@
 package com.existingeevee.moretcon.traits.modifiers;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.existingeevee.moretcon.inits.ModItems;
@@ -19,7 +20,7 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class Crushing extends ModifierTrait {
 
 	public Crushing() {
-		super(MiscUtils.createNonConflictiveName("modcrushing"), 0x555555, 5, 0);
+		super(MiscUtils.createNonConflictiveName("modcrushing"), 0x555555, 3, 3);
 		this.addItem(ModItems.crushingModifier);
 	}
 
@@ -32,7 +33,7 @@ public class Crushing extends ModifierTrait {
 
 		target.getEntityData().setFloat(getModifierIdentifier(), actualDMG);
 
-		return newDamage * (1 - getPercentage( TinkerUtil.getModifierTag(tool, getModifierIdentifier())));
+		return newDamage * (1 - getPercentage(TinkerUtil.getModifierTag(tool, getModifierIdentifier())));
 	}
 
 	@Override
@@ -46,7 +47,9 @@ public class Crushing extends ModifierTrait {
 	}
 
 	public static float getPercentage(NBTTagCompound tag) {
-		return 0.01f * new ModifierNBT(tag).level;
+		ModifierNBT.IntegerNBT data = ModifierNBT.readInteger(tag);
+		int level = data.current / 3;
+		return 0.01f * data.current + 0.01f * level / 3;
 	}
 
 	@Override
@@ -54,10 +57,12 @@ public class Crushing extends ModifierTrait {
 		return Integer.MAX_VALUE / 2; // we need this to run last. divide by 2 to prevent wierd overflow issues
 	}
 
+	public static final DecimalFormat format = new DecimalFormat("#.##%");
+
 	@Override
 	public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
 		String loc = String.format(LOC_Extra, getModifierIdentifier());
 		float amount = getPercentage(modifierTag);
-		return ImmutableList.of(Util.translateFormatted(loc, Util.dfPercent.format(amount)));
+		return ImmutableList.of(Util.translateFormatted(loc, format.format(amount)));
 	}
 }
