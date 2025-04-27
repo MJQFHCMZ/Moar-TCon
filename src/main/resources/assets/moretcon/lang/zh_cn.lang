@@ -39,7 +39,7 @@ fluid.moretcon.liquifiedsouls=液态灵魂
 fluid.moretcon.liquidzracohlium=熔融临界辐金
 fluid.moretcon.liquidslimesteel=熔融史莱姆钢
 fluid.moretcon.liquidporksteel=熔融熟铁
-fluid.moretcon.liquidgeodesium=熔融阳极铁
+fluid.moretcon.liquidgeodesium=熔融地铱
 
 item.moretcon.betweenifiedmodifier.desc=将它给任何工具进行强化，都可以使它在交错次元中正常使用。
 item.moretcon.crushingmodifier.desc=为任何工具添加这一强化都会将其 5% 的伤害转化为真实伤害。
@@ -118,7 +118,7 @@ item.moretcon.dustsanguiseelium.name=汲血魂金粉
 item.moretcon.dustzracohlium.name=临界辐金粉
 item.moretcon.dustslimesteel.name=史莱姆钢粉
 item.moretcon.dustporksteel.name=熟铁粉
-item.moretcon.dustgeodesium.name=阳极铁粉
+item.moretcon.dustgeodesium.name=地铱粉
 
 item.moretcon.gembloodstone.name=血石
 item.moretcon.gemechostone.name=回音石
@@ -130,11 +130,11 @@ item.moretcon.gemetherstone.name=以太石
 item.moretcon.gemvoidspar.name=虚空晶体
 item.moretcon.gemelectarite.name=雷电石
 item.moretcon.gemmonolite.name=回音水晶
-item.moretcon.gemperimidum.name=珍珠石
+item.moretcon.gemperimidum.name=世际石
 
 item.moretcon.hydrogenrichredstonepowder.name=富氢红石粉
 item.moretcon.solidlightning.name=固态闪电
-item.moretcon.perimimoss.name=珍珠藓
+item.moretcon.perimimoss.name=世际藓
 
 item.moretcon.ingotarkenium.name=阿肯钢锭
 item.moretcon.ingotatronium.name=阿特尼亚锭
@@ -159,7 +159,7 @@ item.moretcon.ingotsanguiseelium.name=汲血魂金锭
 item.moretcon.ingotzracohlium.name=临界辐金锭
 item.moretcon.ingotslimesteel.name=史莱姆钢锭
 item.moretcon.ingotporksteel.name=熟铁锭
-item.moretcon.ingotgeodesium.name=阳极铁锭
+item.moretcon.ingotgeodesium.name=地铱锭
 
 item.moretcon.itemsiltclay.name=粉质粘土
 item.moretcon.lightning.name=闪电
@@ -187,7 +187,7 @@ item.moretcon.nuggetsanguiseelium.name=汲血魂金粒
 item.moretcon.nuggetzracohlium.name=临界辐金粒
 item.moretcon.nuggetslimesteel.name=史莱姆钢粒
 item.moretcon.nuggetporksteel.name=熟铁粒
-item.moretcon.nuggetgeodesium.name=阳极铁粒
+item.moretcon.nuggetgeodesium.name=地铱粒
 
 itemGroup.moarTConMaterials=更多匠魂材料丨材料
 itemGroup.moarTConMisc=更多匠魂材料丨杂项
@@ -252,8 +252,8 @@ material.moretcon.icy.name=冰
 material.moretcon.redstone.name=红石
 material.moretcon.glowstone.name=萤石
 material.moretcon.porksteel.name=熟铁
-material.moretcon.perimidum.name=珍珠石
-material.moretcon.geodesium.name=阳极铁
+material.moretcon.perimidum.name=世际石
+material.moretcon.geodesium.name=地铱
 
 material.uniquetoolpart.name=独特
 
@@ -510,8 +510,8 @@ tile.moretcon.blockzracohlium.name=临界辐金块
 tile.moretcon.blockslimesteel.name=史莱姆钢块
 tile.moretcon.blockmonolite.name=回音水晶块
 tile.moretcon.blockporksteel.name=熟铁块
-tile.moretcon.blockperimidum.name=珍珠石块
-tile.moretcon.blockgeodesium.name=阳极铁块
+tile.moretcon.blockperimidum.name=世际石块
+tile.moretcon.blockgeodesium.name=地铱块
 
 tile.moretcon.blockcobbledbedrock.name=基岩圆石
 tile.moretcon.blockcobbledbetweenbedrock.name=交错基岩圆石
@@ -520,8 +520,8 @@ tile.moretcon.blockbrinkstone.name=边缘原石
 tile.moretcon.blockdarkbrinkstone.name=暗化边缘原石
 tile.moretcon.blockbrokensand.name=损坏的沙子
 tile.moretcon.blockmossybrinkstone.name=覆藓边缘原石
-tile.moretcon.blockperimishroom.name=珍珠菇
-tile.moretcon.blockperimigrowth.name=珍珠菇杆
+tile.moretcon.blockperimishroom.name=世际菇
+tile.moretcon.blockperimigrowth.name=世际菇杆
 
 tile.moretcon.burningsulfurflow.name=熔融硫磺
 tile.moretcon.liquidarkenium.name=熔融阿肯钢
@@ -556,7 +556,7 @@ tile.moretcon.liquifiedsouls.name=液态灵魂
 tile.moretcon.liquidzracohlium.name=熔融临界辐金
 tile.moretcon.liquidslimesteel.name=熔融史莱姆钢
 tile.moretcon.liquidporksteel.name=熔融熟铁
-tile.moretcon.liquidgeodesium.name=熔融阳极铁
+tile.moretcon.liquidgeodesium.name=熔融地铱
 
 tile.moretcon.orearkenium.name=阿肯钢矿石
 tile.moretcon.orebloodstone.name=血石矿石
@@ -579,8 +579,8 @@ tile.moretcon.oreelectarite.name=雷电石矿石
 tile.moretcon.orehallowsite.name=神圣石矿石
 tile.moretcon.orezracohlium.name=临界辐金矿石
 tile.moretcon.oremonolite.name=回音水晶矿
-tile.moretcon.oreperimidum.name=珍珠石簇
-tile.moretcon.oregeodesium.name=阳极铁矿
+tile.moretcon.oreperimidum.name=世际石簇
+tile.moretcon.oregeodesium.name=地铱矿
 
 tile.moretcon.rottensludge.name=烂泥
 
