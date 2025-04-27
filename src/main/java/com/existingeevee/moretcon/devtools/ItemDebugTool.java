@@ -60,6 +60,6 @@ public class ItemDebugTool extends ItemBase {
 			
 			Minecraft.getMinecraft().mcProfiler.getProfilingData("root.display_update").forEach(p -> System.out.println(p.profilerName));
 		}
-		return true;
+		return false;
 	}
 }

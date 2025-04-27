@@ -1,11 +1,14 @@
 package com.existingeevee.moretcon.other;
 
+import java.util.UUID;
+
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.devtools.DevEnvHandler;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
@@ -16,10 +19,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.library.traits.ITrait;
+import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
@@ -34,7 +39,7 @@ public class EventWatcherMain {
 			sent = true;
 			TextComponentString linkComponent = new TextComponentString(ModInfo.ISSUE_TRACKER);
 			linkComponent.setStyle(linkComponent.getStyle().setUnderlined(true).setColor(TextFormatting.BLUE).setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, ModInfo.ISSUE_TRACKER)));
-			
+
 			if (DevEnvHandler.inDevMode()) {
 				String[] strings = ("[" + "\u00A7" + ChatFormatting.BLUE.getChar() + ModInfo.NAME + "\u00A7"
 						+ ChatFormatting.RED.getChar() + " " + I18n.translateToLocal("text.dev.name") + "\u00A7"
@@ -59,6 +64,12 @@ public class EventWatcherMain {
 				}
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public void onTinkerCraftingEvent(TinkerCraftingEvent event) {
+		NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
+		comp.setString("UniqueToolID", UUID.randomUUID().toString());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
