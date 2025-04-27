@@ -6,8 +6,7 @@
     }
   ],
   "effects": [
-    "On Tool: Chance to heal when attacking.",
-    "On Armor: Chance to absorb damage when attacked.",
+    "Chance to heal when attacking.",
     "Not compatible with other middle gem modifiers",
     "Single level"
   ],

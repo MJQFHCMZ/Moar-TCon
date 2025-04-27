@@ -6,10 +6,11 @@
     }
   ],
   "effects": [
-    "Constant mining fatigue when holding tool.",
-    "10% chance to give your opponent blindness.",
-    "75% chance to give your opponent slowness.",
-    "Single level"
+    "Constant mining fatigue when holding tool",
+    "10% chance to give your opponent blindness",
+    "75% chance to give your opponent slowness",
+    "Single level",
+    "Smells awful :c"
   ],
   "demoTool": [
     "moretcon:blsword"

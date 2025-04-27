@@ -6,8 +6,7 @@
     }
   ],
   "effects": [
-    "On Tool: Chance to gain strength when attacking.",
-    "On Armor: Chance to hurt enemy when attacked.",
+    "Chance to gain strength when attacking.",
     "Not compatible with other middle gem modifiers",
     "Single level"
   ],
