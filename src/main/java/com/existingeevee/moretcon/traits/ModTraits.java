@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.existingeevee.moretcon.MoreTCon;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
+import com.existingeevee.moretcon.traits.modifiers.Autocrit;
 import com.existingeevee.moretcon.traits.modifiers.Betweenified;
 import com.existingeevee.moretcon.traits.modifiers.Crushing;
 import com.existingeevee.moretcon.traits.modifiers.Debug;
@@ -200,12 +201,13 @@ public class ModTraits {
 	public static Tarred modTarred;
 	public static Betweenified modBetweenified;
 
-	public static Corroding corroding;
 
 	public static Crushing modCrushing;
+	public static Autocrit modAutocrit;
 
 	public static Debug modDebug;
 
+	public static Corroding corroding;
 	public static Shockwaving shockwaving;
 	public static Rotten rotten;
 	public static Oxide oxide;
@@ -244,7 +246,9 @@ public class ModTraits {
 			modDebug = new Debug();
 			repair = new MatterReconstructionGel();
 			modCrushing = new Crushing();
+			modAutocrit = new Autocrit();
 			registerModifier(
+					modAutocrit,
 					modCrushing);
 		}
 		if (CompatManager.thebetweenlands) {

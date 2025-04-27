@@ -160,6 +160,7 @@ public class ModItems {
 	//Modifier items
 	public static final Item betweenifiedModifier = new ItemBase("betweenifiedModifier").setTab(ModTabs.moarTConMisc);
 	public static final Item crushingModifier = new ItemBase("crushingModifier").setTab(ModTabs.moarTConMisc);
+	public static final Item autocritModifier = new ItemBase("autocritModifier").setTab(ModTabs.moarTConMisc);
 
 	//Reforge stones
 	public static final Item reforgeHeavy = new ItemReforgeStone("reforgeheavy", () -> ModReforges.reforgeHeavy);
@@ -259,6 +260,7 @@ public class ModItems {
 					gemPerimidum,
 
 					crushingModifier,
+					autocritModifier,
 					matterReconstructionGel,
 					carbonPile,
 					rawSteel,
@@ -268,7 +270,7 @@ public class ModItems {
 					hydrogenRichRedstonePowder,
 					solidLightning,
 					perimimoss,
-
+					
 					reforgeHeavy,
 					reforgeSharpened,
 					reforgeConsistant
