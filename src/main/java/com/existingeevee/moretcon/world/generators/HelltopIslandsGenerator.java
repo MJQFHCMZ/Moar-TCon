@@ -143,9 +143,9 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 		if (renderFogP < 1e-6)
 			return;
 				
-        GlStateManager.setFog(GlStateManager.FogMode.EXP);
+        GlStateManager.setFog(GlStateManager.FogMode.EXP2);
 		
-		event.setDensity(0.15f * renderFogP);
+		event.setDensity(Math.max(0.025f, 0.15f * renderFogP));
 		event.setCanceled(true);
 	}
 	
