@@ -437,7 +437,7 @@ modifier.moretcon.flashbang.desc=§o请关掉那不和谐的闪光灯§r\n您的
 modifier.moretcon.shock_aura.name=冲击环
 modifier.moretcon.shock_aura.desc=§o吐司浴！！！§r\n你的炸弹将在爆炸后产生一个能造成伤害的光环。
 modifier.moretcon.approximate.name=近似值
-modifier.moretcon.approximate.desc=§o啊，够近了 ¯\_(ツ)_/¯§r\n在近战目标作战时，您的工具将获得一定的瞄准辅助效果。
+modifier.moretcon.approximate.desc=§o啊，够近了 ¯\_(ツ)_/¯§r\n在与近战目标作战时，您的工具将获得一定的瞄准辅助效果。
 
 modifier.moretcon.reforgeheavy.name=沉重
 modifier.moretcon.reforgeheavy.flavor=§o你都不抬吗？？
