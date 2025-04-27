@@ -7,14 +7,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.existingeevee.moretcon.other.StaticVars;
-import com.existingeevee.moretcon.other.utils.ArrowReferenceHelper;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import slimeknights.tconstruct.library.tools.ranged.ProjectileCore;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
@@ -29,11 +25,5 @@ public class MixinProjectileCore {
 				((IAdditionalTraitMethods) t).onAmmoConsumed(stack, player);
 			}
 		}
-	}
-
-	@Inject(at = @At(value = "RETURN"), method = "getProjectileStack", remap = false)
-	protected void moretcon$RETURN_Inject$getProjectileStack(ItemStack itemStack, World world, EntityPlayer player, boolean usedAmmo, CallbackInfoReturnable<ItemStack> ci) {
-		ArrowReferenceHelper.linkItems(StaticVars.lastArrowFired.get(), ci.getReturnValue(), itemStack);
-//		ArrowReferenceHelper.saveProjectileStack(ci.getReturnValue(), StaticVars.lastArrowFired.get());
 	}
 }
