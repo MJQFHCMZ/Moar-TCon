@@ -20,9 +20,9 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -37,7 +37,6 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import thebetweenlands.api.item.CorrosionHelper;
 import thebetweenlands.api.item.IAnimatorRepairable;
 import thebetweenlands.api.item.ICorrodible;
-import thebetweenlands.util.NBTHelper;
 
 public class BetweenSword extends SwordCore implements ICorrodible, IAnimatorRepairable, IBetweenTinkerTool {
 
@@ -50,8 +49,6 @@ public class BetweenSword extends SwordCore implements ICorrodible, IAnimatorRep
 		this.setUnlocalizedName(MiscUtils.createNonConflictiveName("blsword"));
 		TinkerRegistry.registerToolCrafting(this);
 		CorrosionHelper.addCorrosionPropertyOverrides(this);
-
-
 
 		addCategory(Category.WEAPON);
 	}
@@ -68,13 +65,16 @@ public class BetweenSword extends SwordCore implements ICorrodible, IAnimatorRep
 
 	@Override
 	public void setCorrosion(ItemStack stack, int corrosion) {
-		boolean bad = this.getCorrosion(stack) < corrosion;
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			boolean bad = this.getCorrosion(stack) < corrosion;
 
-		if (bad && Math.random() < 0.5 && ToolHelper.getTraits(stack).contains(ModTraits.modValonite)) {
-			return;
+			if (bad && Math.random() < 0.5 && ToolHelper.getTraits(stack).contains(ModTraits.modValonite)) {
+				ModTraits.modValonite.boostToolStats(stack);
+				return;
+			}
 		}
-		NBTTagCompound nbt = NBTHelper.getStackNBTSafe(stack);
-		nbt.setInteger(CorrosionHelper.ITEM_CORROSION_NBT_TAG, corrosion);
+
+		ICorrodible.super.setCorrosion(stack, corrosion);
 	}
 
 	// sword sweep attack
@@ -155,7 +155,7 @@ public class BetweenSword extends SwordCore implements ICorrodible, IAnimatorRep
 
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity holder, int slot, boolean isHeldItem) {
-        super.onUpdate(itemStack, world, holder, slot, isHeldItem);
+		super.onUpdate(itemStack, world, holder, slot, isHeldItem);
 		CorrosionHelper.updateCorrosion(itemStack, world, holder, slot, isHeldItem);
 	}
 
@@ -165,17 +165,17 @@ public class BetweenSword extends SwordCore implements ICorrodible, IAnimatorRep
 				ATTACK_DAMAGE_MODIFIER, ToolHelper.getActualAttack(stack));
 	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        boolean shift = Util.isShiftKeyDown();
-        boolean ctrl = Util.isCtrlKeyDown();
-    	if (!shift && !ctrl) {
-    		CorrosionHelper.addCorrosionTooltips(stack, tooltip, flagIn.isAdvanced());
-    		tooltip.add("");
-    	}
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		boolean shift = Util.isShiftKeyDown();
+		boolean ctrl = Util.isCtrlKeyDown();
+		if (!shift && !ctrl) {
+			CorrosionHelper.addCorrosionTooltips(stack, tooltip, flagIn.isAdvanced());
+			tooltip.add("");
+		}
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
 
 	@Override
 	public boolean isRepairableByAnimator(ItemStack stack) {

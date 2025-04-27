@@ -25,12 +25,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -47,7 +47,6 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import thebetweenlands.api.item.CorrosionHelper;
 import thebetweenlands.api.item.IAnimatorRepairable;
 import thebetweenlands.api.item.ICorrodible;
-import thebetweenlands.util.NBTHelper;
 
 public class BetweenShovel extends AoeToolCore implements ICorrodible, IAnimatorRepairable, IBetweenTinkerTool {
 
@@ -72,13 +71,16 @@ public class BetweenShovel extends AoeToolCore implements ICorrodible, IAnimator
 
 	@Override
 	public void setCorrosion(ItemStack stack, int corrosion) {
-		boolean bad = this.getCorrosion(stack) < corrosion;
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			boolean bad = this.getCorrosion(stack) < corrosion;
 
-		if (bad && Math.random() < 0.5 && ToolHelper.getTraits(stack).contains(ModTraits.modValonite)) {
-			return;
+			if (bad && Math.random() < 0.5 && ToolHelper.getTraits(stack).contains(ModTraits.modValonite)) {
+				ModTraits.modValonite.boostToolStats(stack);
+				return;
+			}
 		}
-		NBTTagCompound nbt = NBTHelper.getStackNBTSafe(stack);
-		nbt.setInteger(CorrosionHelper.ITEM_CORROSION_NBT_TAG, corrosion);
+
+		ICorrodible.super.setCorrosion(stack, corrosion);
 	}
 
 	protected BetweenShovel(PartMaterialType... requiredComponents) {

@@ -19,9 +19,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -47,7 +47,6 @@ import slimeknights.tconstruct.tools.ranged.TinkerRangedWeapons;
 import thebetweenlands.api.item.CorrosionHelper;
 import thebetweenlands.api.item.IAnimatorRepairable;
 import thebetweenlands.api.item.ICorrodible;
-import thebetweenlands.util.NBTHelper;
 
 public class BetweenBow extends BowCore implements ICorrodible, IAnimatorRepairable, IBetweenTinkerTool, ICustomCrosshairUser {
 
@@ -77,13 +76,16 @@ public class BetweenBow extends BowCore implements ICorrodible, IAnimatorRepaira
 
 	@Override
 	public void setCorrosion(ItemStack stack, int corrosion) {
-		boolean bad = this.getCorrosion(stack) < corrosion;
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			boolean bad = this.getCorrosion(stack) < corrosion;
 
-		if (bad && Math.random() < 0.5 && ToolHelper.getTraits(stack).contains(ModTraits.modValonite)) {
-			return;
+			if (bad && Math.random() < 0.5 && ToolHelper.getTraits(stack).contains(ModTraits.modValonite)) {
+				ModTraits.modValonite.boostToolStats(stack);
+				return;
+			}
 		}
-		NBTTagCompound nbt = NBTHelper.getStackNBTSafe(stack);
-		nbt.setInteger(CorrosionHelper.ITEM_CORROSION_NBT_TAG, corrosion);
+
+		ICorrodible.super.setCorrosion(stack, corrosion);
 	}
 
 	/* Tic Tool Stuff */
