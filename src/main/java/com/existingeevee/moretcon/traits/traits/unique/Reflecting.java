@@ -33,6 +33,9 @@ public class Reflecting extends AbstractTrait implements IProjectileTrait {
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
 		NBTTagCompound comp = projectile.getEntityData().getCompoundTag(this.getIdentifier());
+		if (comp.getInteger("Bounces") >= 4) {
+			return;
+		}
 
 		if (projectile.inGround) {
 			Vec3d vel = new Vec3d(comp.getDouble("LastMotX"), comp.getDouble("LastMotY"), comp.getDouble("LastMotZ"));
@@ -46,12 +49,12 @@ public class Reflecting extends AbstractTrait implements IProjectileTrait {
 				double closestLenSq = Double.POSITIVE_INFINITY;
 
 				double maxDist = 15;
-				
+
 				for (Entity ent : world.getEntitiesWithinAABBExcludingEntity(projectile.shootingEntity, projectile.getEntityBoundingBox().grow(maxDist))) {
 					if (ent instanceof EntityTameable && ((EntityTameable) ent).getOwner() == projectile.shootingEntity) {
 						continue;
 					}
-					if (ent instanceof EntityLivingBase && ((EntityLivingBase) ent).canEntityBeSeen(projectile) && ((EntityLivingBase) ent).getHealth() > 0) {
+					if (ent instanceof EntityLivingBase && ((EntityLivingBase) ent).canEntityBeSeen(projectile) && ((EntityLivingBase) ent).isEntityAlive() && ((EntityLivingBase) ent).getHealth() > 0) {
 						double dSq = ent.getDistanceSq(projectile);
 						if (dSq < maxDist * maxDist && dSq < closestLenSq) {
 							closest = (EntityLivingBase) ent;
@@ -77,24 +80,21 @@ public class Reflecting extends AbstractTrait implements IProjectileTrait {
 					}
 				}
 
-				if (comp.getInteger("Bounces") >= 4) {
-					return;
-				} else {
-					projectile.inGround = false;
-					projectile.defused = false; // we back to shootin
-					projectile.arrowShake = 0;
+				projectile.inGround = false; //EntityWaveShock
+				projectile.defused = false; // we back to shootin
+				projectile.arrowShake = 0;
 
-					projectile.motionX = vel.x;
-					projectile.motionY = vel.y + 0.25;
-					projectile.motionZ = vel.z;
+				projectile.motionX = vel.x;
+				projectile.motionY = vel.y + 0.25;
+				projectile.motionZ = vel.z;
 
-					comp.setDouble("LastMotX", projectile.motionX);
-					comp.setDouble("LastMotY", projectile.motionY);
-					comp.setDouble("LastMotZ", projectile.motionZ);
+				comp.setDouble("LastMotX", projectile.motionX);
+				comp.setDouble("LastMotY", projectile.motionY);
+				comp.setDouble("LastMotZ", projectile.motionZ);
 
-					comp.setInteger("Bounces", comp.getInteger("Bounces") + 1);
-					projectile.setIsCritical(comp.getBoolean("Crit"));
-				}
+				comp.setInteger("Bounces", comp.getInteger("Bounces") + 1);
+				projectile.setIsCritical(comp.getBoolean("Crit"));
+
 			}
 		} else {
 			comp.setDouble("LastMotX", projectile.motionX);
