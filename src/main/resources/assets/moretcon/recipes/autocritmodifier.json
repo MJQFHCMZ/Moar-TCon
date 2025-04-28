@@ -1,0 +1,27 @@
+{
+  "group": "moretcon",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "020",
+    "121",
+    "020"
+  ],
+  "key": {
+    "0": {
+       "type": "forge:ore_dict",
+       "ore": "gemPerimidum"
+    },
+    "1": {
+       "type": "forge:ore_dict",
+       "ore": "blockGravitonium"
+    },
+    "2": {
+       "type": "forge:ore_dict",
+       "ore": "gemEtherstone"
+    }
+  },
+  "result": {
+    "item": "moretcon:autocritmodifier",
+    "count": 1
+  }
+}

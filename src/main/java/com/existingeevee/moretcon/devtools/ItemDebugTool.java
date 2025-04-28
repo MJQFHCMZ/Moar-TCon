@@ -55,9 +55,7 @@ public class ItemDebugTool extends ItemBase {
 	}
 
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
-		if (worldIn.isRemote) {
-			System.out.println("aaa");
-			
+		if (worldIn.isRemote) { 			
 			Minecraft.getMinecraft().mcProfiler.getProfilingData("root.display_update").forEach(p -> System.out.println(p.profilerName));
 		}
 		return false;

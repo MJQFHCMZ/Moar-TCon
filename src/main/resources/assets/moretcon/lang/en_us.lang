@@ -41,8 +41,9 @@ fluid.moretcon.liquidslimesteel=Molten Slimesteel
 fluid.moretcon.liquidporksteel=Molten Porksteel
 fluid.moretcon.liquidgeodesium=Molten Geodesium
 
-item.moretcon.betweenifiedmodifier.desc=Adding this to any tool will allow for its full efficiency to be used in the Betweenlands.
-item.moretcon.crushingmodifier.desc=Adding this to any tool will convert 1% of its damage to true damage per level.
+item.moretcon.betweenifiedmodifier.desc=Betweenified Modifier
+item.moretcon.crushingmodifier.desc=Crushing Modifier
+item.moretcon.autocritmodifier.desc=Autocrit Modifier
 item.moretcon.matterreconstructiongel.desc=Adding this to any tool will repair 256 damage or 10% of the durability on it, whichever is greater.
 item.moretcon.repitem.desc=This material is a composite. Craft the base toolparts, and then pour the catalyst on using a casting table.
 item.reforgestone.desc=When applied to a tool:
@@ -51,8 +52,9 @@ item.moretcon.repitem.name=-{-name-}- Composite
 item.reforgestone.name=Reforge Stone
 
 item.moretcon.betweeniccore.name=Betweenic Core
-item.moretcon.crushingmodifier.name=Crushing Modifier
-item.moretcon.betweenifiedmodifier.name=Betweenified Modifier
+item.moretcon.crushingmodifier.name=Crushing Sigil
+item.moretcon.autocritmodifier.name=Autocriting Sigil
+item.moretcon.betweenifiedmodifier.name=Betweenification Sigil
 item.moretcon.bomb.desc=A Bomb is a throwable projectile weapon that deals significant AOE damage.
 item.moretcon.bomb.name=Bomb
 item.moretcon.blaxe.desc=A Between Axe is an equivalent of a hatchet for the betweenlands.
