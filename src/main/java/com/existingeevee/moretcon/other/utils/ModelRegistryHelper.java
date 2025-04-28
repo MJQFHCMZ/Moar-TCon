@@ -98,20 +98,20 @@ public class ModelRegistryHelper {
 			CustomFireEffect effect = ((BlockCustomFire) block).getFireEffect();
 			String fireName = effect.getId();
 
-			map.put("modelFloor0", ModInfo.MODID + ":" + fireName + "/fire_floor0");
-			map.put("modelFloor1", ModInfo.MODID + ":" + fireName + "/fire_floor1");
+			map.put("modelFloor0", ModInfo.MODID + ":fires/" + fireName + "/fire_floor0");
+			map.put("modelFloor1", ModInfo.MODID + ":fires/" + fireName + "/fire_floor1");
 
-			map.put("modelSide0", ModInfo.MODID + ":" + fireName + "/fire_side0");
-			map.put("modelSide1", ModInfo.MODID + ":" + fireName + "/fire_side1");
+			map.put("modelSide0", ModInfo.MODID + ":fires/" + fireName + "/fire_side0");
+			map.put("modelSide1", ModInfo.MODID + ":fires/" + fireName + "/fire_side1");
 
-			map.put("modelAltSide0", ModInfo.MODID + ":" + fireName + "/fire_side_alt0");
-			map.put("modelAltSide1", ModInfo.MODID + ":" + fireName + "/fire_side_alt1");
+			map.put("modelAltSide0", ModInfo.MODID + ":fires/" + fireName + "/fire_side_alt0");
+			map.put("modelAltSide1", ModInfo.MODID + ":fires/" + fireName + "/fire_side_alt1");
 
-			map.put("modelUp0", ModInfo.MODID + ":" + fireName + "/fire_up0");
-			map.put("modelUp1", ModInfo.MODID + ":" + fireName + "/fire_up1");
+			map.put("modelUp0", ModInfo.MODID + ":fires/" + fireName + "/fire_up0");
+			map.put("modelUp1", ModInfo.MODID + ":fires/" + fireName + "/fire_up1");
 
-			map.put("modelAltUp0", ModInfo.MODID + ":" + fireName + "/fire_up_alt0");
-			map.put("modelAltUp1", ModInfo.MODID + ":" + fireName + "/fire_up_alt1");
+			map.put("modelAltUp0", ModInfo.MODID + ":fires/" + fireName + "/fire_up_alt0");
+			map.put("modelAltUp1", ModInfo.MODID + ":fires/" + fireName + "/fire_up_alt1");
 
 			template = "fire_state";
 		} else {

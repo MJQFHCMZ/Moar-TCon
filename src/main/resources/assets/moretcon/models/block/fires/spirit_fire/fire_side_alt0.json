@@ -1,0 +1,7 @@
+{
+    "parent": "block/fire_side_alt",
+    "textures": {
+        "particle": "moretcon:other/fire/spirit_0",
+        "fire": "moretcon:other/fire/spirit_0"
+    }
+}

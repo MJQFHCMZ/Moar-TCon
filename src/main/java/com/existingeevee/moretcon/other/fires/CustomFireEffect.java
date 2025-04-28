@@ -45,7 +45,7 @@ public class CustomFireEffect {
 				e.motionY *= e.isSneaking() ? 0.75D : 0.5D;
 				e.motionZ *= 0.25D;
 
-				if (!e.world.isRemote && t % 10 == 0) {
+				if (!e.world.isRemote && t % 20 == 0) {
 					e.attackEntityFrom(new DamageSource("coldfire").setFireDamage(), 4);
 				}
 				return true;
@@ -54,15 +54,12 @@ public class CustomFireEffect {
 	public static final CustomFireEffect SPIRIT_FIRE = new CustomFireEffect("spirit_fire",
 			new ResourceLocation(ModInfo.MODID, "other/fire/spirit_0"),
 			new ResourceLocation(ModInfo.MODID, "other/fire/spirit_1"), (e, t) -> {
-				if (e.isImmuneToFire()) {
-					return false;
-				}
 				if (e.isInWater()) {
 					e.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 1, 1);
 					return false;
 				}
 
-				if (!e.world.isRemote && t % 20 == 0) {
+				if (!e.world.isRemote && t % (e.isImmuneToFire() ? 40 : 20) == 0) {
 					int hurt = e.hurtResistantTime;
 					e.hurtResistantTime = 0;
 					e.attackEntityFrom(new DamageSource("haunted").setFireDamage(), e.isImmuneToFire() ? 1 : 4);

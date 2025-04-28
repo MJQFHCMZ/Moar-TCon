@@ -1,6 +1,7 @@
 package com.existingeevee.moretcon.block.blocktypes;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
@@ -17,16 +18,21 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedrockMineable {
 
-	private boolean canBeBeacon = false;
-	private boolean canBurn = true;
+	protected boolean canBeBeacon = false;
+	protected boolean canBurn = true;
+	protected boolean canSustainFire = false;	
+	
+	protected Supplier<Block> fireTransformer;
 
 	public BlockBase(String itemName, Material material, int harvestLevel) {
 		super(material);
@@ -34,6 +40,11 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 		if (harvestLevel > 0) {
 			setHarvestLevel("pickaxe", harvestLevel);
 		}
+	}
+	
+	@Override
+	public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
+		return side == EnumFacing.UP && canSustainFire || super.isFireSource(world, pos, side);
 	}
 
 	@Override
@@ -98,7 +109,7 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 			return new ItemBlock(this) {
 				@Override
 				public boolean onEntityItemUpdate(EntityItem entityItem) {
-			        entityItem.motionY += 0.039f;
+					entityItem.motionY += 0.039f;
 					return false;
 				}
 			};
@@ -113,6 +124,13 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 				return true;
 			}
 		};
+	}
+	
+	@Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (fireTransformer != null && fromPos.equals(pos.up()) &&world.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
+			world.setBlockState(pos.up(), fireTransformer.get().getDefaultState());
+		}
 	}
 
 	public BlockBase setHarvestLevelC(String string, int i) {
@@ -133,5 +151,19 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 	@Override
 	public boolean isSoftBedrock(IBlockState blockState, World worldIn, BlockPos pos) {
 		return this == ModBlocks.blockBrinkstone || this == ModBlocks.blockDarkBrinkstone || this == ModBlocks.orePerimidum;
+	}
+
+	public Supplier<Block> getFireTransformer() {
+		return fireTransformer;
+	}
+
+	public BlockBase setFireTransformer(Supplier<Block> fireTransformer) {
+		this.fireTransformer = fireTransformer;
+		return this;
+	}
+
+	public BlockBase setCanSustainFire(boolean canSustainFire) {
+		this.canSustainFire = canSustainFire;
+		return this;
 	}
 }

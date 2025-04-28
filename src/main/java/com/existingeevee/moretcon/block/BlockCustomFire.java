@@ -1,6 +1,7 @@
 package com.existingeevee.moretcon.block;
 
 import java.util.Random;
+import java.util.function.Consumer;
 
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
 import com.existingeevee.moretcon.other.fires.CustomFireHelper;
@@ -21,23 +22,31 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+//TODO custom burning properties
+//IE if i want it to burn special blocks or custom burning sustained blocks
+//Example would be having spirit fire being able to burn bone blocks
 public class BlockCustomFire extends BlockFire {
 
 	DamageSource source = DamageSource.IN_FIRE;
 	float damage = 1;
 	boolean bypassFireImmunity = false;
 
+	Consumer<EntityLivingBase> customEffect = null;
+
 	final CustomFireEffect eff;
-	
+
 	public BlockCustomFire(String itemName, CustomFireEffect eff) {
 		setUnlocalizedName(MiscUtils.createNonConflictiveName(itemName.toLowerCase()));
 		this.eff = eff;
+		if (eff.isFullbright()) {
+			this.setLightLevel(1f);
+		}
 	}
-
+	
 	public DamageSource getDamageSource() {
 		return source;
 	}
-
+ //Minecraft
 	public BlockCustomFire setSource(DamageSource ds) {
 		this.source = ds;
 		return this;
@@ -56,6 +65,11 @@ public class BlockCustomFire extends BlockFire {
 		return bypassFireImmunity;
 	}
 
+	public BlockCustomFire setCustomEffect(Consumer<EntityLivingBase> customEffect) {
+		this.customEffect = customEffect;
+		return this;
+	}
+
 	public BlockCustomFire setBypassFireImmunity(boolean bypassFireImmunity) {
 		this.bypassFireImmunity = bypassFireImmunity;
 		return this;
@@ -66,15 +80,19 @@ public class BlockCustomFire extends BlockFire {
 		if (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode) {
 			return;
 		}
-		
+
 		if (!entity.isImmuneToFire() || bypassFireImmunity) {
 			if (!(entity instanceof EntityLivingBase)) {
 				entity.attackEntityFrom(DamageSource.IN_FIRE, damage);
 				entity.setFire(8);
 				return;
 			}
-			
-			entity.attackEntityFrom(source, damage);
+
+			if (customEffect == null) {
+				entity.attackEntityFrom(source, damage);
+			} else {
+				customEffect.accept((EntityLivingBase) entity);
+			}
 			CustomFireHelper.setAblaze((EntityLivingBase) entity, eff, 8 * 20);
 		}
 	}

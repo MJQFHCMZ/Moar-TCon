@@ -9,7 +9,9 @@
    	"early.common.MixinItemStack",
    	"early.common.MixinEntity",
   	"early.common.MixinForgeHooks",
-  	"early.common.MixinForgeHooksClient"
+  	"early.common.MixinForgeHooksClient",
+  	"early.common.MixinBlockFalling",
+  	"early.common.MixinWorld"
   ],
 
   "client": [
