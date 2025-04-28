@@ -68,7 +68,7 @@ public class ModFluidBlocks {
 		}
 		
 		if (CompatManager.loadMain) {
-			blockLiquidFusionite = new CustomFireBlockFluid("liquidfusionite", ModFluids.liquidFusionite, CustomFireEffect.COLD_FIRE, Material.LAVA).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
+			blockLiquidFusionite = new CustomFireBlockFluid("liquidfusionite", ModFluids.liquidFusionite, CustomFireEffect.COLD_FIRE, Material.LAVA).setBypassFireImmunity(true).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
 			blockLiquidIrradium = new RadioactiveBlockFluid("liquidirradium", ModFluids.liquidIrradium, Material.LAVA).setResistance(Float.MAX_VALUE);
 			blockLiquidSolarSteel = new BlockFluid("liquidsolarsteel", ModFluids.liquidSolsteel, Material.LAVA).setResistance(Float.MAX_VALUE);
 			blockLiquidHydrogen = new BlockFluid("liquidhydrogen", ModFluids.liquidHydrogen, BlockMaterials.GAS).setResistance(Float.MAX_VALUE);
@@ -86,7 +86,7 @@ public class ModFluidBlocks {
 			blockLiquidPorksteel = new BlockFluid("liquidporksteel", ModFluids.liquidPorksteel, Material.LAVA).setResistance(Float.MAX_VALUE);
 			blockLiquidGeodesium = new BlockFluid("liquidgeodesium", ModFluids.liquidGeodesium, Material.LAVA).setResistance(Float.MAX_VALUE);
 
-			blockLiquidFusionLava = new CustomFireBlockFluid("liquidfusionlava", ModFluids.liquidFusionLava, CustomFireEffect.COLD_FIRE, Material.LAVA).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
+			blockLiquidFusionLava = new CustomFireBlockFluid("liquidfusionlava", ModFluids.liquidFusionLava, CustomFireEffect.COLD_FIRE, Material.LAVA).setBypassFireImmunity(true).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
 			blockLiquifiedSouls = new BlockFluid("liquifiedsouls", ModFluids.liquidLiquifiedSouls, Material.WATER).setResistance(Float.MAX_VALUE);
 
 		    ModFluidBlocks.registerBlocks(

@@ -59,4 +59,13 @@ public class CustomFireBlockFluid extends BlockFluidClassic implements ISimpleBl
 		this.damage = damage;
 		return this;
 	}
+
+	public boolean bypassesFireImmunity() {
+		return bypassFireImmunity;
+	}
+
+	public CustomFireBlockFluid setBypassFireImmunity(boolean bypassFireImmunity) {
+		this.bypassFireImmunity = bypassFireImmunity;
+		return this;
+	}
 }
