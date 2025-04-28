@@ -52,8 +52,8 @@ item.moretcon.repitem.name=-{-name-}- Composite
 item.reforgestone.name=Reforge Stone
 
 item.moretcon.betweeniccore.name=Betweenic Core
-item.moretcon.crushingmodifier.name=Crushing Sigil
-item.moretcon.autocritmodifier.name=Autocriting Sigil
+item.moretcon.crushingmodifier.name=Crushing Weights
+item.moretcon.autocritmodifier.name=Autocriting Slate
 item.moretcon.betweenifiedmodifier.name=Betweenification Sigil
 item.moretcon.bomb.desc=A Bomb is a throwable projectile weapon that deals significant AOE damage.
 item.moretcon.bomb.name=Bomb
