@@ -93,15 +93,15 @@ public class ModBlocks {
 	public static final Block blockGeodesium = ((BlockBase) new BlockBase("blockGeodesium", Material.IRON, 6).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
 	
-	public static final Block blockOtherstone = (new BlockEtheralBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockCobbledBetweenBedrock = (new BlockBase("blockCobbledBetweenBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockBrokenSand = (new BlockFallingBase("blockBrokenSand", Material.SAND, 0).setHarvestLevelC("shovel", 0).setSoundType(SoundType.SAND).setHardness(10).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockBrinkstone = (new BlockBase("blockBrinkstone", Material.ROCK, 3).setHardness(15).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockMossyBrinkstone = (new BlockMossyBrinkstone("blockMossyBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockPerimigrowth = (new BlockBrinkstonePlant("blockPerimigrowth").setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockPerimishroom = (new BlockBrinkstonePlant("blockPerimishroom").setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
-	public static final Block blockDarkBrinkstone = (new BlockBase("blockDarkBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockOtherstone = (new BlockEtheralBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockCobbledBetweenBedrock = (new BlockBase("blockCobbledBetweenBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockBrokenSand = (new BlockFallingBase("blockBrokenSand", Material.SAND, 0).setHarvestLevelC("shovel", 0).setSoundType(SoundType.SAND).setHardness(10).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockBrinkstone = (new BlockBase("blockBrinkstone", Material.ROCK, 3).setHardness(15).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockMossyBrinkstone = (new BlockMossyBrinkstone("blockMossyBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockPerimigrowth = (new BlockBrinkstonePlant("blockPerimigrowth").setLightLevel(1).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockPerimishroom = (new BlockBrinkstonePlant("blockPerimishroom").setLightLevel(1).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockDarkBrinkstone = (new BlockBase("blockDarkBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConWorld));
 
 	
 	//Block

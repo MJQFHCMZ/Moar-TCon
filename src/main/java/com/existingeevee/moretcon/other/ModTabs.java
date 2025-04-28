@@ -71,7 +71,7 @@ public class ModTabs {
 			}
 		});
 
-		moarTConMisc = (new CreativeTabs("moarTConMisc") {
+		moarTConWorld = (new CreativeTabs("moarTConWorld") {
 			@Override
 			public ItemStack getTabIconItem() {
 				return new ItemStack(ModBlocks.blockMossyBrinkstone, 1);

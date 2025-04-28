@@ -131,7 +131,7 @@ public class ModItems {
 
 	public static final Item dustSyrmorite = new ItemBase("dustSyrmorite");
 
-	public static final Item perimimoss = new ItemBase("perimimoss");
+	public static final Item perimimoss = new ItemBase("perimimoss").setTab(ModTabs.moarTConWorld);
 
 	//Gems
 	public static final Item gemVoidSpar = new ItemBase("gemVoidSpar", 0x7e15ff);

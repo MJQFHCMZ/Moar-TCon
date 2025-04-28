@@ -257,6 +257,13 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 
 		char[][] layer = CRYSTAL_LAYOUTS[r][y];
 
+		return getCrystalBlock(x, layer, z);
+	}
+	
+	public static char getCrystalBlock(int x, char[][] layer, int z) {
+		if (x < -1 || x > 1 || z < -1 || z > 1)
+			return '-';
+
 		return layer[x + 1][z + 1];
 	}
 

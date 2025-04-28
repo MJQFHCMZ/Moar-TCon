@@ -172,7 +172,7 @@ public class SpongeRegistry {
 			this.recipe.result = this;
 			this.setHasSubtypes(true);
 			this.setMaxDamage(0);
-			this.setTab(ModTabs.moarTConMisc);
+			this.setTab(ModTabs.moarTConMaterials);
 			RECIPES.put(recipe.recipeName, recipe);
 		}
 
