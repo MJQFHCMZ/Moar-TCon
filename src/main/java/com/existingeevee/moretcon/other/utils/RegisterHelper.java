@@ -58,14 +58,15 @@ public class RegisterHelper {
 
 		if (itemBlock != null) {
 			ForgeRegistries.ITEMS.register(itemBlock.apply(block).setRegistryName(block.getRegistryName()));
-			if (MiscUtils.isClient()) {
-				ModelRegistryHelper.registerBlockModel(block);
-				if (block instanceof IFluidBlock) {
-					ModelRegistryHelper.registerFluidCustomMeshesAndStates(block);
-				}
-			}
 		}
 
+		if (MiscUtils.isClient()) {
+			ModelRegistryHelper.registerBlockModel(block);
+			if (block instanceof IFluidBlock) {
+				ModelRegistryHelper.registerFluidCustomMeshesAndStates(block);
+			}
+		}
+		
 		if (block instanceof BlockOre) {
 			oreDrops.add(new BiValue<>(block, ((BlockOre) block).getOreDrop()));
 		} else if (block instanceof BlockOreMetal) {

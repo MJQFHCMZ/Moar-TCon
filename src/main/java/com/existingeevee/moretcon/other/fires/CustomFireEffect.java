@@ -177,4 +177,20 @@ public class CustomFireEffect {
 	public static interface FireEffect {
 		boolean run(EntityLivingBase entity, int fireTime);
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public ResourceLocation getOneRL() {
+		return one;
+	}
+
+	public ResourceLocation getTwoRL() {
+		return two;
+	}
+
+	public FireEffect getEffect() {
+		return effect;
+	}
 }

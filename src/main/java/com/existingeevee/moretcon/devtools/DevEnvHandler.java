@@ -44,6 +44,7 @@ public class DevEnvHandler {
 				return false;
 			} else {	
 				MoreTConLogger.log("Missing resource for \"" + destination + "\". Since this is in dev mode this file will be automatically created.");
+				destination.getParentFile().mkdirs();
 				destination.createNewFile();
 				String text = MiscUtils.readTextFile(new File(templateFolder, template + ".json"));
 				for (Entry<String, String> ent : values.entrySet()) {

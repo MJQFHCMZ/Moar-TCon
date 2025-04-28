@@ -37,7 +37,7 @@ public class CustomFireBlockFluid extends BlockFluidClassic implements ISimpleBl
 			return;
 		}
 		if (!entity.isImmuneToFire() || bypassFireImmunity) {
-			entity.attackEntityFrom(source, 4.0F);
+			entity.attackEntityFrom(source, damage);
 			CustomFireHelper.setAblaze(entity, eff, 15 * 20);
 		}
 	}

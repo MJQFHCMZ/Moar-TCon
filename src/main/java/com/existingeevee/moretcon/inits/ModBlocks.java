@@ -1,5 +1,6 @@
 package com.existingeevee.moretcon.inits;
 
+import com.existingeevee.moretcon.block.BlockCustomFire;
 import com.existingeevee.moretcon.block.blocktypes.BlockBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockBrinkstonePlant;
 import com.existingeevee.moretcon.block.blocktypes.BlockElectarite;
@@ -23,6 +24,7 @@ import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.block.ore.BlockOreMetal;
 import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.MoreTConLogger;
+import com.existingeevee.moretcon.other.fires.CustomFireEffect;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 
@@ -104,7 +106,6 @@ public class ModBlocks {
 	public static final Block blockDarkBrinkstone = (new BlockBase("blockDarkBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConWorld));
 
 	
-	//Block
 	public static final Block blockGravitoniumFaucet = new BlockGravitoniumFaucet();
 	public static final Block blockCragravel = ((BlockBase) new BlockFallingBase("blockCragravel", Material.GROUND, 0).setHarvestLevelC("shovel", 0).setHardness(0.6f).setResistance(0.6f)).canBeBeacon(false).setCreativeTab(ModTabs.moarTConMisc);
 	public static final Block blockSiltClay = ((BlockBase) new BlockBase("blockSiltClay", Material.CLAY, 0).setHarvestLevelC("shovel", 0).setHardness(0.6f).setResistance(0.6f)).canBeBeacon(false).setCreativeTab(ModTabs.moarTConMisc);
@@ -114,6 +115,7 @@ public class ModBlocks {
 	public static final Block blockVoidColumn = new BlockVoidColumn().setHardness(10).setResistance(20);
 	public static final Block blockVoidCore = new BlockVoidCore();
 
+	public static final Block fireFusionite = new BlockCustomFire("fireFusionite", CustomFireEffect.COLD_FIRE);
 	/*---------------------------------------*/
 
 	public static void registerBlocks(Block... block) {
@@ -199,7 +201,9 @@ public class ModBlocks {
 					blockMossyBrinkstone,
 					blockPerimishroom,
 					blockPerimigrowth,
-					blockDarkBrinkstone
+					blockDarkBrinkstone,
+					/**-------------------------------------**/
+					fireFusionite
 					);
 		}
 		if (CompatManager.twilightforest) {
