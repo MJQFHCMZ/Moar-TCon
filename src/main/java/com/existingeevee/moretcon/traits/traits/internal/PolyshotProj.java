@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.capability.projectile.TinkerProjectileHandler;
@@ -75,6 +76,24 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 		// Reshoot
 		projectileBase.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0, velo, 25f); // MASSIVE inaccuracy, low speed
+	}
+
+	@Override
+	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
+		if (projectile.pickupStatus == PickupStatus.CREATIVE_ONLY) {
+			NBTTagCompound comp = projectile.getEntityData().getCompoundTag(this.getModifierIdentifier());
+			if (projectile.inGround || projectile.onGround) {
+				int tick = comp.getInteger("TickOnGround");
+				if (tick > 60)
+					projectile.setDead();
+				
+				comp.setInteger("TickOnGround", tick + 1);
+			} else {
+				comp.setInteger("TickOnGround", 0);
+			}
+			
+			projectile.getEntityData().setTag(this.getModifierIdentifier(), comp);
+		}
 	}
 
 	@Override

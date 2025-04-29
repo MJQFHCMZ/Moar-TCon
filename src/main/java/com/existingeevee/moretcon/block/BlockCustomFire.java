@@ -46,7 +46,7 @@ public class BlockCustomFire extends BlockFire {
 	public DamageSource getDamageSource() {
 		return source;
 	}
- //Minecraft
+
 	public BlockCustomFire setSource(DamageSource ds) {
 		this.source = ds;
 		return this;

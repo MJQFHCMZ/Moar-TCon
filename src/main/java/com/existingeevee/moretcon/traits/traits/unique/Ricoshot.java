@@ -1,5 +1,8 @@
 package com.existingeevee.moretcon.traits.traits.unique;
 
+import java.util.List;
+
+import com.existingeevee.moretcon.client.actions.RicoshotEffectAction;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.entity.Entity;
@@ -12,16 +15,20 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
 import slimeknights.tconstruct.library.events.TinkerProjectileImpactEvent;
+import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.traits.IProjectileTrait;
+import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 
-public class Reflecting extends AbstractTrait implements IProjectileTrait {
+public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 
-	public Reflecting() {
-		super(MiscUtils.createNonConflictiveName("reflecting"), 0xffffff);
+	public Ricoshot() {
+		super(MiscUtils.createNonConflictiveName("ricoshot"), 0xffffff);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -32,7 +39,28 @@ public class Reflecting extends AbstractTrait implements IProjectileTrait {
 
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
+		projectile.setIsCritical(false);
+
 		NBTTagCompound comp = projectile.getEntityData().getCompoundTag(this.getIdentifier());
+
+		if (!world.isRemote && (comp.getInteger("Bounces") < 4 || !projectile.onGround)) {
+
+			int color = getToolMaterials(projectile.tinkerProjectile.getItemStack()).get(0).materialTextColor;
+
+			if (comp.hasKey("prevX", NBT.TAG_DOUBLE)) {
+
+				double pX = comp.getDouble("prevX");
+				double pY = comp.getDouble("prevY");
+				double pZ = comp.getDouble("prevZ");
+
+				RicoshotEffectAction.INSTANCE.run(world, pX, pY, pZ, RicoshotEffectAction.encode(projectile.posX, projectile.posY, projectile.posZ, color));
+			}
+
+			comp.setDouble("prevX", projectile.posX);
+			comp.setDouble("prevY", projectile.posY);
+			comp.setDouble("prevZ", projectile.posZ);
+		}
+
 		if (comp.getInteger("Bounces") >= 4) {
 			return;
 		}
@@ -80,30 +108,34 @@ public class Reflecting extends AbstractTrait implements IProjectileTrait {
 					}
 				}
 
-				projectile.inGround = false; //EntityWaveShock
+				projectile.inGround = false; // EntityWaveShock
 				projectile.defused = false; // we back to shootin
 				projectile.arrowShake = 0;
 
-				projectile.motionX = vel.x;
-				projectile.motionY = vel.y + 0.25;
-				projectile.motionZ = vel.z;
-
+				if (!world.isRemote) {
+					projectile.motionX = vel.x;
+					projectile.motionY = vel.y + 0.25;
+					projectile.motionZ = vel.z;
+				}
+				
 				comp.setDouble("LastMotX", projectile.motionX);
 				comp.setDouble("LastMotY", projectile.motionY);
 				comp.setDouble("LastMotZ", projectile.motionZ);
 
 				comp.setInteger("Bounces", comp.getInteger("Bounces") + 1);
-				projectile.setIsCritical(comp.getBoolean("Crit"));
-
 			}
 		} else {
+
 			comp.setDouble("LastMotX", projectile.motionX);
 			comp.setDouble("LastMotY", projectile.motionY);
 			comp.setDouble("LastMotZ", projectile.motionZ);
-			comp.setBoolean("Crit", projectile.getIsCritical());
 		}
 
 		projectile.getEntityData().setTag(this.getIdentifier(), comp);
+	}
+
+	public static List<Material> getToolMaterials(ItemStack stack) {
+		return TinkerUtil.getMaterialsFromTagList(TagUtil.getBaseMaterialsTagList(stack));
 	}
 
 	@Override
@@ -114,6 +146,15 @@ public class Reflecting extends AbstractTrait implements IProjectileTrait {
 	@Override
 	public void afterHit(EntityProjectileBase projectile, World world, ItemStack ammoStack, EntityLivingBase attacker, Entity target, double impactSpeed) {
 		NBTTagCompound comp = projectile.getEntityData().getCompoundTag(this.getIdentifier());
+
+		if (!world.isRemote) {
+			int color = getToolMaterials(projectile.tinkerProjectile.getItemStack()).get(0).materialTextColor;
+
+			Vec3d box = MiscUtils.getCenter(target.getEntityBoundingBox());
+
+			RicoshotEffectAction.INSTANCE.run(world, projectile.posX, projectile.posY, projectile.posZ, RicoshotEffectAction.encode(box.x, box.y, box.z, color));
+		}
+
 		int bounces = comp.getInteger("Bounces");
 		if (bounces > 0)
 			attackEntitySecondary(DamageSource.causeIndirectDamage(projectile, attacker), (float) Math.pow(1.5, bounces), target, true, false);

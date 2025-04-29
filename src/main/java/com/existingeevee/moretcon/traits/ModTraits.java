@@ -89,7 +89,7 @@ import com.existingeevee.moretcon.traits.traits.unique.Mirroring;
 import com.existingeevee.moretcon.traits.traits.unique.Offense;
 import com.existingeevee.moretcon.traits.traits.unique.Plasmatic;
 import com.existingeevee.moretcon.traits.traits.unique.Polyshot;
-import com.existingeevee.moretcon.traits.traits.unique.Reflecting;
+import com.existingeevee.moretcon.traits.traits.unique.Ricoshot;
 import com.existingeevee.moretcon.traits.traits.unique.Seismishock;
 import com.existingeevee.moretcon.traits.traits.unique.Shockwaving;
 import com.existingeevee.moretcon.traits.traits.unique.TripleShot;
@@ -187,7 +187,7 @@ public class ModTraits {
 	public static Flashbang flashbang = new Flashbang();
 	public static DummyTrait saturpigting = new DummyTrait("saturpigting", 0xffffff);
 	public static Burning burning = new Burning(); 
-	public static Reflecting reflecting = new Reflecting();
+	public static Ricoshot ricoshot = new Ricoshot();
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 

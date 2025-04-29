@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class LightningEffectAction extends ClientAction {
 
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void runAsClient(World world, double x, double y, double z, NBTBase data) {
@@ -39,7 +38,7 @@ public class LightningEffectAction extends ClientAction {
 			}
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	private static class ClientFields {
 		private static final Constructor<Overlay> __init__$Overlay = ObfuscationReflectionHelper.findConstructor(Overlay.class, World.class, double.class, double.class, double.class);

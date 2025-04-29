@@ -898,9 +898,9 @@ public class ModMaterials implements MaterialTypes {
 			materialGeodesium.addTrait(TinkerTraits.aridiculous, HEAD);
 			materialGeodesium.addTrait(ModTraits.pyrophoric, HEAD);
 			materialGeodesium.addTrait(ModTraits.liquid, HEAD);
+			materialGeodesium.addTrait(ModTraits.burning, HEAD);
+			materialGeodesium.addTrait(TinkerTraits.aridiculous);
 			materialGeodesium.addTrait(ModTraits.liquid);
-			materialGeodesium.addTrait(ModTraits.pyrophoric);
-			materialGeodesium.addTrait(ModTraits.burning);
 			materialGeodesium.addTrait(ModTraits.luminescent, HEAD);
 			materialGeodesium.addTrait(ModTraits.luminescent);
 			TinkerRegistry.addMaterialStats(materialGeodesium, new HeadMaterialStats(1350, 7f, 13.5f, 7));
@@ -909,7 +909,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialGeodesium, new ArrowShaftMaterialStats(1.3f, 125));
 			TinkerRegistry.addMaterialStats(materialGeodesium, new BowMaterialStats(1.6f, 1.3f, 0.4f));
 			
-			materialInertialRedirector.addTrait(ModTraits.reflecting);
+			materialInertialRedirector.addTrait(ModTraits.ricoshot);
 			TinkerRegistry.addMaterialStats(materialInertialRedirector, new HeadMaterialStats(2048, 6f, 16f, 5));
 		}	
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
