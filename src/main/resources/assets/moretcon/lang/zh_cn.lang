@@ -42,7 +42,7 @@ fluid.moretcon.liquidporksteel=熔融熟铁
 fluid.moretcon.liquidgeodesium=熔融地铱
 
 item.moretcon.betweenifiedmodifier.desc=为工具添加特性：交错强化，使工具能在交错次元使用
-item.moretcon.crushingmodifier.desc=为工具添加特性：摧毁者，使工具的部分伤害转化为真实伤害
+item.moretcon.crushingmodifier.desc=为工具添加特性：粉碎，使工具的部分伤害转化为真实伤害
 item.moretcon.autocritmodifier.desc=为工具添加特性：暴击，使工具攻击时有几率暴击
 item.moretcon.matterreconstructiongel.desc=将其添加到任何工具中都将修复工具 256 耐久或是相当于其总耐久的 10% 。以两者修复较多者为准。
 item.moretcon.repitem.desc=这种材料是一种复合材料。先制作基础工具部件，然后在浇铸台将合金添加物倒在上面。
