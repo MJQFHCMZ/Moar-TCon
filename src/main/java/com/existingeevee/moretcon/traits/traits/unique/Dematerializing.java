@@ -63,7 +63,7 @@ public class Dematerializing extends AbstractTrait {
 		}
 
 		BowCore bow = (BowCore) event.launcher.getItem();
-		float progress = ((BowCore) event.launcher.getItem()).getDrawbackProgress(event.launcher, event.shooter);
+		float progress = bow.getDrawbackProgress(event.launcher, event.shooter);
 
 		boolean fullyDrawn = progress >= 1;
 
@@ -75,11 +75,35 @@ public class Dematerializing extends AbstractTrait {
 			ToolHelper.damageTool(event.launcher, 1, shooter);
 		}
 		event.setCanceled(true);
-
-		Vec3d heading = new Vec3d(arrow.motionX, arrow.motionY, arrow.motionZ).normalize();
+		
 		ProjectileLauncherNBT launcherData = new ProjectileLauncherNBT(TagUtil.getToolTag(event.launcher));
 		double dist = launcherData.range * 20;
+		
+		double posX = arrow.posX;
+		double posY = arrow.posY;
+		double posZ = arrow.posZ;
+		
+		arrow.onUpdate();
+		Vec3d heading = new Vec3d(arrow.motionX, arrow.motionY, arrow.motionZ).normalize();
+		arrow.motionX = heading.x * dist;
+		arrow.motionY = heading.y * dist;
+		arrow.motionZ = heading.z * dist;
+		
+		arrow.posX = posX;
+		arrow.posY = posY;
+		arrow.posZ = posZ;
+		
+		this.shoot(world, shooter, arrow, dist, event.launcher);
+	}
 
+	public void shoot(World world, EntityLivingBase shooter, EntityArrow arrow, double dist, ItemStack bow) {
+		if (dist < 5)
+			return;
+		Vec3d heading = new Vec3d(arrow.motionX, arrow.motionY, arrow.motionZ).normalize();
+		ProjectileLauncherNBT launcherData = new ProjectileLauncherNBT(TagUtil.getToolTag(bow));
+
+		float progress = ((BowCore) bow.getItem()).getDrawbackProgress(bow, shooter);
+		
 		Vec3d start = arrow.getPositionVector();
 		Vec3d end = start.add(heading.scale(dist));
 		RayTraceResult firstTrace = world.rayTraceBlocks(start, end, false, true, true);
@@ -94,14 +118,14 @@ public class Dematerializing extends AbstractTrait {
 
 		AxisAlignedBB area = new AxisAlignedBB(start, end);
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(shooter, area);
-
+		
 		float baseSpeed = 3;
 		try {
 			baseSpeed = (Float) baseProjectileSpeed$BowCore.invoke(bow);
 		} catch (Exception e) {
 
 		}
-
+		
 		float power = ItemBow.getArrowVelocity(20) * baseSpeed;
 		power *= launcherData.range;
 
@@ -115,7 +139,7 @@ public class Dematerializing extends AbstractTrait {
 			RayTraceResult intercept = e.getEntityBoundingBox().grow(aimAssist.apply(e.getDistance(start.x, start.y, start.z))).calculateIntercept(start, end);
 
 			if (intercept != null) {
-				EntityArrow arrowToHit = bow.getProjectileEntity(StaticVars.lastArrowFired.get().copy(), event.launcher, world, (EntityPlayer) event.shooter, power, 0, progress, false);
+				EntityArrow arrowToHit = ((BowCore) bow.getItem()).getProjectileEntity(StaticVars.lastArrowFired.get().copy(), bow, world, (EntityPlayer) shooter, power, 0, progress, false);
 				arrowToHit.setPosition(intercept.hitVec.x, intercept.hitVec.y, intercept.hitVec.z);
 				arrowToHit.setSilent(true);
 				arrow.getTags().forEach(arrowToHit::addTag);
@@ -134,13 +158,32 @@ public class Dematerializing extends AbstractTrait {
 
 		if (!arrow.world.isRemote) {
 			if (hitBlock) {
-				world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);
 				arrow.setPosition(end.x, end.y, end.z);
+				arrow.xTile = firstTrace.getBlockPos().getX();
+				arrow.yTile = firstTrace.getBlockPos().getY();
+				arrow.zTile = firstTrace.getBlockPos().getZ();
 				arrow.inGround = true;
+				arrow.motionX = heading.x * dist;
+				arrow.motionY = heading.y * dist;
+				arrow.motionZ = heading.z * dist;
+				
+				double posX = arrow.posX;
+				double posY = arrow.posY;
+				double posZ = arrow.posZ;
 				arrow.onUpdate();
-
+				arrow.posX = posX;
+				arrow.posY = posY;
+				arrow.posZ = posZ;
+				
 				if (arrow instanceof EntityProjectileBase)
 					ProjectileEvent.OnHitBlock.fireEvent((EntityProjectileBase) arrow, launcherData.range * 20, firstTrace.getBlockPos(), world.getBlockState(firstTrace.getBlockPos()));
+								
+				if (!arrow.inGround) {
+					System.out.println("bbb");
+					this.shoot(world, shooter, arrow, Math.max(0, dist - start.distanceTo(end)), bow);
+				} else {
+					world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);	
+				}
 			}
 
 			int arrowColor = 0xffffff;
@@ -164,7 +207,7 @@ public class Dematerializing extends AbstractTrait {
 			}
 		}
 	}
-
+	
 	public static List<Material> getToolMaterials(ItemStack stack) {
 		return TinkerUtil.getMaterialsFromTagList(TagUtil.getBaseMaterialsTagList(stack));
 	}

@@ -2,9 +2,11 @@ package com.existingeevee.moretcon.devtools;
 
 import java.util.List;
 
+import com.existingeevee.moretcon.inits.ModMaterials;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.ModTabs;
+import com.existingeevee.moretcon.traits.ModTraits;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +16,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.library.materials.MaterialTypes;
 
 public class ItemDebugTool extends ItemBase {
 
@@ -54,6 +57,13 @@ public class ItemDebugTool extends ItemBase {
 	}
 
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
-		return false;
+		if (!worldIn.isRemote) {
+			try {
+				ModMaterials.materialIoximite.addTrait(ModTraits.ricoshot);
+				ModMaterials.materialIoximite.addTrait(ModTraits.ricoshot, MaterialTypes.HEAD);
+			} catch (Exception e) {
+			}
+		}
+		return true;
 	}
 }
