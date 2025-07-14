@@ -46,8 +46,7 @@ public class MaterialClient {
 		setCustomRender(ModMaterials.materialShadowglass);
 		setCustomRender(ModMaterials.materialEmberlight);
 		setCustomRender(ModMaterials.materialBlightsteel);
-
-
+				
 		ModMaterials.materialTrichromadentium.setRenderInfo(new WhiteShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialTrichromadentium.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
 		ModMaterials.materialNahuatl.setRenderInfo(new MaterialRenderInfo.MultiColor(0x100c1c, 0x271e3d, 0x49332e));
 		ModMaterials.materialAmberwood.setRenderInfo(new LightShadingTextureColoredTexture.RenderInfo(new ResourceLocation(ModInfo.MODID + ":other/material" + ModMaterials.materialAmberwood.getIdentifier().replaceFirst(ModInfo.MODID + ".", ""))));
