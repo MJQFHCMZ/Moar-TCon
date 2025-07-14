@@ -1,7 +1,7 @@
 [
 {
   "modid": "moretcon",
-  "name": "More TCon",
+  "name": "Moar TCon",
   "description": "New materials and tools. That simple",
   "version": "${version}",
   "mcversion": "${mcversion}",
