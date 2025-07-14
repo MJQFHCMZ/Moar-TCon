@@ -32,7 +32,7 @@ public class ParticleIgniglomerateFlame extends ParticleFlame {
 		this.prevPosZ = this.posZ;
 
 		BlockPos pos = new BlockPos(this.posX, this.posY, this.posZ);
-		
+
 		IBlockState state = Blocks.AIR.getDefaultState();
 		if (world.isBlockLoaded(pos)) {
 			state = this.world.getBlockState(pos);
@@ -50,6 +50,16 @@ public class ParticleIgniglomerateFlame extends ParticleFlame {
 		}
 
 		this.move(this.motionX, this.motionY, this.motionZ);
+	}
+
+	@Override
+	public int getBrightnessForRender(float p_189214_1_) {
+		try {
+			return super.getBrightnessForRender(p_189214_1_);
+		} catch (NullPointerException e) {
+			//fuck you dsurroundings
+			return 0xff >> 16 & 0xff;
+		}
 	}
 
 	public void addMotion(double x, double y, double z) {
