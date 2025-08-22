@@ -612,6 +612,7 @@ uniquetoolpart.moretcon.skybolt.name=Skybolt
 uniquetoolpart.moretcon.dematerializer.name=Dematerializer
 uniquetoolpart.moretcon.shotgun.name=Shotgun
 uniquetoolpart.moretcon.impact.name=Impact
+uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
 
 booltracker.active.name=Active
 booltracker.inactive.name=Inactive

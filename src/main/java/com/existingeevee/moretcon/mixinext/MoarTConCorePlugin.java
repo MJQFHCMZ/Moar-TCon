@@ -1,5 +1,7 @@
 package com.existingeevee.moretcon.mixinext;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.spongepowered.asm.launch.MixinBootstrap;
@@ -21,17 +23,19 @@ public class MoarTConCorePlugin implements IFMLLoadingPlugin {
 		System.out.println("Go my mixin...");
 
 		try {
-			fermiumbooter.FermiumRegistryAPI.getRejectMixins(); //empty call to see if its there. we dont care about the return value
+			Class<?> clazz = Class.forName("fermiumbooter.FermiumRegistryAPI");
+			Method method = clazz.getDeclaredMethod("enqueueMixin", boolean.class, String.class);
 
 			System.out.println("Take its hand, and achieve greatness...");
 
 			MixinBootstrap.init();
 			MixinExtrasBootstrap.init();
-
-			fermiumbooter.FermiumRegistryAPI.enqueueMixin(true, nonvanillaMixins);
-			fermiumbooter.FermiumRegistryAPI.enqueueMixin(false, vanillaMixins);
+			
+			method.invoke(null, true, nonvanillaMixins);
+			method.invoke(null, false, vanillaMixins);
 			return;
-		} catch (NoClassDefFoundError e) {
+		} catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+
 		}
 
 		System.out.println("With no one left to guide you, cause havoc as you see fit...");

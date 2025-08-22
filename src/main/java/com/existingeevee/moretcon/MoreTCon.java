@@ -40,7 +40,6 @@ import com.existingeevee.moretcon.proxy.CommonProxy;
 import com.existingeevee.moretcon.reforges.ReforgeHandler;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.world.MoreTConWorldGen;
-//import net.minecraftforge.fml.common.event.;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.crafting.IRecipe;

@@ -196,7 +196,7 @@ public class ModMaterials implements MaterialTypes {
 			"moretcon:bomb");
 
 	public static final UniqueMaterial materialInertialRedirector = new UniqueMaterial(
-			MiscUtils.createNonConflictiveName("intertial_redirector"), 0xffffff, "tconstruct:bolt_core",
+			MiscUtils.createNonConflictiveName("inertial_redirector"), 0xffffff, "tconstruct:bolt_core",
 			"tconstruct:bolt");
 	
 
