@@ -31,7 +31,7 @@ public class MoarTConCorePlugin implements IFMLLoadingPlugin {
 			fermiumbooter.FermiumRegistryAPI.enqueueMixin(true, nonvanillaMixins);
 			fermiumbooter.FermiumRegistryAPI.enqueueMixin(false, vanillaMixins);
 			return;
-		} catch (NoClassDefFoundError  e) {
+		} catch (NoClassDefFoundError e) {
 		}
 
 		System.out.println("With no one left to guide you, cause havoc as you see fit...");

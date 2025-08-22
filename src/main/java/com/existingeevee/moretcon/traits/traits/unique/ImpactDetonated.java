@@ -1,7 +1,7 @@
 package com.existingeevee.moretcon.traits.traits.unique;
 
+import com.existingeevee.moretcon.item.tooltypes.Bomb.BombNBT;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
-import com.existingeevee.moretcon.tools.tooltypes.Bomb.BombNBT;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

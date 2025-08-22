@@ -68,8 +68,6 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 		if (projectile.inGround) {
 
 			Vec3d vel = new Vec3d(comp.getDouble("LastMotX"), comp.getDouble("LastMotY"), comp.getDouble("LastMotZ"));
-
-			System.out.println(vel);
 			
 			RayTraceResult result = world.rayTraceBlocks(projectile.getPositionVector(), projectile.getPositionVector().add(vel));
 			

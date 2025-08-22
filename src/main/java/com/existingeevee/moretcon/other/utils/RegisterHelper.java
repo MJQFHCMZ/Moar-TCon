@@ -83,7 +83,7 @@ public class RegisterHelper {
 	}
 
 	public static void registerItem(Item item) {
-		String name = item.getUnlocalizedName().replaceFirst(("item." + ModInfo.MODID + "."), "");
+		String name = item.getUnlocalizedName().replaceFirst("item." + ModInfo.MODID + ".", "");
 		if (item instanceof ItemBase) {
 			item.setCreativeTab(((ItemBase) item).getTab());
 		}
