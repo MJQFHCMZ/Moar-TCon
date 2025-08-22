@@ -181,7 +181,7 @@ public class ModTools {
 	}
 
 	private static ToolCore tryMakeToolInstance(String toolName) {
-		return (ToolCore) tryMakeInstance("com.existingeevee.moretcon.tools.tooltypes." + toolName);
+		return (ToolCore) tryMakeInstance("com.existingeevee.moretcon.item.tooltypes." + toolName);
 	}
 
 	// we have to do this bc bl/other addons may not always be here

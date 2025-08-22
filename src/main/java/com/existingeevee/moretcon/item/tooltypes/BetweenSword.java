@@ -1,7 +1,6 @@
-package com.existingeevee.moretcon.tools.tooltypes;
+package com.existingeevee.moretcon.item.tooltypes;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -9,70 +8,59 @@ import com.existingeevee.moretcon.compat.betweenlands.IBetweenTinkerTool;
 import com.existingeevee.moretcon.inits.ModTools;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.traits.ModTraits;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
-import slimeknights.tconstruct.library.client.particle.Particles;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tinkering.Category;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
-import slimeknights.tconstruct.library.tools.AoeToolCore;
+import slimeknights.tconstruct.library.tools.SwordCore;
 import slimeknights.tconstruct.library.tools.ToolNBT;
-import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 import slimeknights.tconstruct.tools.TinkerTools;
 import thebetweenlands.api.item.CorrosionHelper;
 import thebetweenlands.api.item.IAnimatorRepairable;
 import thebetweenlands.api.item.ICorrodible;
 
-public class BetweenAxe extends AoeToolCore implements ICorrodible, IAnimatorRepairable, IBetweenTinkerTool {
+public class BetweenSword extends SwordCore implements ICorrodible, IAnimatorRepairable, IBetweenTinkerTool {
 
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG,
-			Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER,
-			Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE);
+	public static final float DURABILITY_MODIFIER = 1.1f;
 
-	public static final ImmutableSet<net.minecraft.block.material.Material> effective_materials = ImmutableSet.of(
-			net.minecraft.block.material.Material.WOOD, net.minecraft.block.material.Material.VINE,
-			net.minecraft.block.material.Material.PLANTS, net.minecraft.block.material.Material.GOURD,
-			net.minecraft.block.material.Material.CACTUS);
-
-	public BetweenAxe() {
-		this(
-				PartMaterialType.handle(TinkerTools.toolRod),
-				PartMaterialType.head(ModTools.betweenAxeHead),
-				PartMaterialType.extra(TinkerTools.binding));
-		this.setUnlocalizedName(MiscUtils.createNonConflictiveName("blaxe"));
+	public BetweenSword() {
+		super(PartMaterialType.handle(
+				TinkerTools.toolRod), PartMaterialType.head(ModTools.betweenSwordBlade),
+				PartMaterialType.extra(TinkerTools.wideGuard));
+		this.setUnlocalizedName(MiscUtils.createNonConflictiveName("blsword"));
 		TinkerRegistry.registerToolCrafting(this);
 		CorrosionHelper.addCorrosionPropertyOverrides(this);
-		// this.setRegistryName("blaxe");
 
+		addCategory(Category.WEAPON);
 	}
 
-	protected BetweenAxe(PartMaterialType... requiredComponents) {
-		super(requiredComponents);
+	@Override
+	public float damagePotential() {
+		return 1.0f;
+	}
 
-		addCategory(Category.HARVEST);
-		addCategory(Category.WEAPON);
-
-		this.setHarvestLevel("axe", 0);
+	@Override
+	public double attackSpeed() {
+		return 1.6d; // default vanilla sword speed
 	}
 
 	@Override
@@ -89,68 +77,68 @@ public class BetweenAxe extends AoeToolCore implements ICorrodible, IAnimatorRep
 		ICorrodible.super.setCorrosion(stack, corrosion);
 	}
 
-	@Override
-	public boolean isEffective(IBlockState state) {
-		return effective_materials.contains(state.getMaterial()) || EFFECTIVE_ON.contains(state.getBlock());
-	}
-
-	@Override
-	public float damagePotential() {
-		return 1.1f;
-	}
-
-	@Override
-	public boolean isRepairableByAnimator(ItemStack stack) {
-		return true;
-	}
-
-	@Override
-	public double attackSpeed() {
-		return 1.1f; // a bit faster than vanilla axes
-	}
-
-	@Override
-	public float knockback() {
-		return 1.3f;
-	}
-
-	@Override
-	public void afterBlockBreak(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase player, int damage, boolean wasEffective) {
-		// breaking leaves does not reduce durability
-		if (state.getBlock().isLeaves(state, world, pos)) {
-			damage = 0;
-		}
-		super.afterBlockBreak(stack, world, state, pos, player, damage, wasEffective);
-	}
-
+	// sword sweep attack
 	@Override
 	public boolean dealDamage(ItemStack stack, EntityLivingBase player, Entity entity, float damage) {
+		// deal damage first
 		boolean hit = super.dealDamage(stack, player, entity, damage);
+		// and then sweep
+		if (hit && !ToolHelper.isBroken(stack)) {
+			// sweep code from EntityPlayer#attackTargetEntityWithCurrentItem()
+			// basically: no crit, no sprinting and has to stand on the ground for sweep.
+			// Also has to move regularly slowly
+			double d0 = player.distanceWalkedModified - player.prevDistanceWalkedModified;
+			boolean flag = true;
+			if (player instanceof EntityPlayer) {
+				flag = ((EntityPlayer) player).getCooledAttackStrength(0.5F) > 0.9f;
+			}
+			boolean flag2 = player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder()
+					&& !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding();
+			if (flag && !player.isSprinting() && !flag2 && player.onGround && d0 < player.getAIMoveSpeed()) {
+				for (EntityLivingBase entitylivingbase : player.getEntityWorld().getEntitiesWithinAABB(
+						EntityLivingBase.class, entity.getEntityBoundingBox().expand(1.0D, 0.25D, 1.0D))) {
+					if (entitylivingbase != player && entitylivingbase != entity
+							&& !player.isOnSameTeam(entitylivingbase)
+							&& player.getDistanceSq(entitylivingbase) < 9.0D) {
+						entitylivingbase.knockBack(player, 0.4F,
+								MathHelper.sin(player.rotationYaw * 0.017453292F),
+								(-MathHelper.cos(player.rotationYaw * 0.017453292F)));
+						super.dealDamage(stack, player, entitylivingbase, 1f);
+					}
+				}
 
-		if (hit && readyForSpecialAttack(player)) {
-			TinkerTools.proxy.spawnAttackParticle(Particles.HATCHET_ATTACK, player, 0.8d);
+				player.getEntityWorld().playSound(null, player.posX, player.posY, player.posZ,
+						SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.getSoundCategory(), 1.0F, 1.0F);
+				if (player instanceof EntityPlayer) {
+					((EntityPlayer) player).spawnSweepParticles();
+				}
+			}
 		}
 
 		return hit;
 	}
 
 	@Override
-	public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity,
-			EntityLivingBase attacker) {
-		return true;
+	public float getRepairModifierForPart(int index) {
+		return DURABILITY_MODIFIER;
 	}
 
 	@Override
-	protected ToolNBT buildTagData(List<Material> materials) {
+	public ToolNBT buildTagData(List<Material> materials) {
 		ToolNBT data = buildDefaultTag(materials);
-		data.attack += 0.5f;
+		// 2 base damage, like vanilla swords
+		data.attack += 1f;
+		data.durability *= DURABILITY_MODIFIER;
 		return data;
 	}
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 		net.minecraft.block.material.Material material = state.getMaterial();
-		float str = material != net.minecraft.block.material.Material.WOOD && material != net.minecraft.block.material.Material.PLANTS && material != net.minecraft.block.material.Material.VINE ? super.getDestroySpeed(stack, state) : ToolHelper.calcDigSpeed(stack, state);
+		float str = material != net.minecraft.block.material.Material.WOOD
+				&& material != net.minecraft.block.material.Material.PLANTS
+				&& material != net.minecraft.block.material.Material.VINE ? super.getDestroySpeed(stack, state)
+						: ToolHelper.calcDigSpeed(stack, state);
 		str = CorrosionHelper.getDestroySpeed(str, stack, state);
 		return str;
 	}
@@ -173,17 +161,8 @@ public class BetweenAxe extends AoeToolCore implements ICorrodible, IAnimatorRep
 
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
-		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
-
-		if (slot == EntityEquipmentSlot.MAINHAND && !ToolHelper.isBroken(stack)) {
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", ToolHelper.getActualAttack(stack), 0));
-			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", ToolHelper.getActualAttackSpeed(stack) - 4d, 0));
-		}
-
-		TinkerUtil.getTraitsOrdered(stack).forEach(trait -> trait.getAttributeModifiers(slot, stack, multimap));
-
-		return CorrosionHelper.getAttributeModifiers(multimap, slot, stack, ATTACK_DAMAGE_MODIFIER, ToolHelper.getActualAttack(stack));
-
+		return CorrosionHelper.getAttributeModifiers(super.getAttributeModifiers(slot, stack), slot, stack,
+				ATTACK_DAMAGE_MODIFIER, ToolHelper.getActualAttack(stack));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -196,6 +175,11 @@ public class BetweenAxe extends AoeToolCore implements ICorrodible, IAnimatorRep
 			tooltip.add("");
 		}
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
+
+	@Override
+	public boolean isRepairableByAnimator(ItemStack stack) {
+		return true;
 	}
 
 	@Override
