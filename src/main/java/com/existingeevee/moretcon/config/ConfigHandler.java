@@ -33,6 +33,7 @@ public class ConfigHandler {
 	public static boolean shouldLoadDustForCompatability = true;
 
 	public static boolean disableOreGen = false;
+	public static boolean disableLuminescent = false;
 
 	public static boolean weakenToolsInBetweenLands = true;
 	public static boolean registerBetweenTinkerTools = true;
@@ -109,7 +110,7 @@ public class ConfigHandler {
 		
 		unfracturedBedrockObtainable = config.getBoolean("unfracturedbedrockobtainable", category, unfracturedBedrockObtainable, "Whether or not regular (typically unbreakable) bedrock should be obtainable.");
 		ConfigHandler.inertiaOnlyWorksOnAdvancedTools = config.getBoolean("inertiaOnlyWorksOnAdvancedTools".toLowerCase(), category, false, "Set to \"true\" if you do not want inertia (betweenlands greataxe/greatsword trait) to function on basic tools.");
-
+		disableLuminescent = config.getBoolean("disableluminescent", category, disableLuminescent, "Whether or not the trait \"Luminescent\" should be enable. If diabled, Luminescent will not be added to materials.");
 		try {
 			ConfigHandler.trichromicRed = new ResourceLocation(triRed.split(";")[0]);
 			ConfigHandler.trichromicRedLvl = Integer.parseInt(triRed.split(";")[1]);
