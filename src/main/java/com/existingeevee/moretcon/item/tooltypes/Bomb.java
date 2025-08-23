@@ -60,7 +60,7 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 
 		TinkerRegistry.registerToolForgeCrafting(this);
 		
-		this.durabilityPerAmmo = 25;
+		this.durabilityPerAmmo = 15;
 	}
 
 	@Override
