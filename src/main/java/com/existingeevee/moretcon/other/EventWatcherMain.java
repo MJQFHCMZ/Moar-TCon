@@ -21,6 +21,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.tinkering.IModifyable;
+import slimeknights.tconstruct.library.tinkering.ITinkerable;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.library.traits.ITrait;
@@ -68,8 +70,10 @@ public class EventWatcherMain {
 
 	@SubscribeEvent
 	public void onTinkerCraftingEvent(TinkerCraftingEvent event) {
-		NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
-		comp.setString("UniqueToolID", UUID.randomUUID().toString());
+		if (event.getItemStack().getItem() instanceof ITinkerable || event.getItemStack().getItem() instanceof IModifyable) { 
+			NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
+			comp.setString("UniqueToolID", UUID.randomUUID().toString());
+		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
