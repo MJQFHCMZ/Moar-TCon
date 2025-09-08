@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.tools.tooltypes;
+package com.existingeevee.moretcon.item.tooltypes;
 
 import java.util.List;
 
@@ -136,8 +136,12 @@ public class Gauntlet extends TinkerToolCore {
 					}
 					for (ITrait t : ToolHelper.getTraits(itemstack)) {
 						t.onHit(itemstack, player, e.getEntityLiving(), lastDMG, crit);
+					}
+
+					for (ITrait t : ToolHelper.getTraits(itemstack)) {
 						t.afterHit(itemstack, player, e.getEntityLiving(), lastDMG, crit, true);
 					}
+
 					if (Math.random() < 0.75 && !player.capabilities.isCreativeMode) {
 						ToolHelper.damageTool(itemstack, 1, player);
 					}

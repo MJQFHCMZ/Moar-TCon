@@ -50,7 +50,7 @@ public class JeiInit {
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreHallowsite, 1), "Found more or less commonly in all netherrack-bearing dimensions from y = 45 <-> 90. ", () -> CompatManager.loadMain));
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreZracohlium, 1), "Found rare-ish-ly in all endstone-bearing dimensions from y = 24 <-> 72. \n\nDoes not spawn exposed to air.", () -> CompatManager.loadMain));
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreMonolite, 1), "Found astronomically rarely in the end inside of floating shards. Shards are generated approx. one in 250 chunks.", () -> CompatManager.loadMain));
-
+			
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModItems.solidLightning, 1), "Created by placing an Electarite Block above y = 245 during a thunderstorm", () -> CompatManager.loadMain));
 		}
 		if (CompatManager.aether_legacy) {

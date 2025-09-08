@@ -15,6 +15,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -50,16 +51,16 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 				setActive(ammoStackOrig, true);
 			}
 		}
-
+		
 		if (isEmpowered(projectile)) {
 			if (!world.isRemote)
-				GlacialParticleAction.INSTANCE.run(world, projectile.posX, projectile.posY, projectile.posZ, null);
+				GlacialParticleAction.INSTANCE.run(world, target.posX, target.posY, target.posZ, null);
 			this.setEmpowered(projectile, false);
-			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
+			world.playSound(null, target.posX, target.posY, target.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
 
 			float origPower = projectile.tinkerProjectile.getPower();
 
-			for (Entity e : world.getEntitiesInAABBexcluding(target, projectile.getEntityBoundingBox().grow(2), e -> e != attacker && e != projectile && e != target)) {
+			for (Entity e : world.getEntitiesInAABBexcluding(target, new AxisAlignedBB(target.posX, target.posY, target.posZ, target.posX, target.posY, target.posZ).grow(2), e -> e != attacker && e != projectile && e != target)) {
 				if (!(e instanceof EntityLivingBase)) {
 					continue;
 				}

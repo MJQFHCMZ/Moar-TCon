@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.tools.tooltypes;
+package com.existingeevee.moretcon.item.tooltypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 
 		TinkerRegistry.registerToolForgeCrafting(this);
 		
-		this.durabilityPerAmmo = 25;
+		this.durabilityPerAmmo = 15;
 	}
 
 	@Override

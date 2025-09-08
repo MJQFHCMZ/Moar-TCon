@@ -2,6 +2,8 @@
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.config.ConfigHandler;
+import com.existingeevee.moretcon.item.tooltypes.Bomb;
+import com.existingeevee.moretcon.item.tooltypes.Bomb.ExplosiveMaterialStats;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.CompositeRegistry.CompositeData;
 import com.existingeevee.moretcon.materials.DelagateFluidMaterial;
@@ -12,8 +14,6 @@ import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.MaterialUtils;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
-import com.existingeevee.moretcon.tools.tooltypes.Bomb;
-import com.existingeevee.moretcon.tools.tooltypes.Bomb.ExplosiveMaterialStats;
 import com.existingeevee.moretcon.traits.ModTraits;
 
 import landmaster.plustic.tools.stats.BatteryCellMaterialStats;
@@ -196,7 +196,7 @@ public class ModMaterials implements MaterialTypes {
 			"moretcon:bomb");
 
 	public static final UniqueMaterial materialInertialRedirector = new UniqueMaterial(
-			MiscUtils.createNonConflictiveName("intertial_redirector"), 0xffffff, "tconstruct:bolt_core",
+			MiscUtils.createNonConflictiveName("inertial_redirector"), 0xffffff, "tconstruct:bolt_core",
 			"tconstruct:bolt");
 	
 

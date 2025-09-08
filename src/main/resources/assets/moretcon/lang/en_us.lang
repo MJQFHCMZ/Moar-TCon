@@ -193,6 +193,7 @@ item.moretcon.nuggetgeodesium.name=Geodesium Nugget
 
 itemGroup.moarTConMaterials=Moar TCon: Materials
 itemGroup.moarTConMisc=Moar TCon: Misc
+itemGroup.moarTConWorld=Moar TCon: World
 itemGroup.uniqueToolParts=Unique Toolparts
 itemGroup.reforgeStones=Reforge Stones
 
@@ -611,6 +612,7 @@ uniquetoolpart.moretcon.skybolt.name=Skybolt
 uniquetoolpart.moretcon.dematerializer.name=Dematerializer
 uniquetoolpart.moretcon.shotgun.name=Shotgun
 uniquetoolpart.moretcon.impact.name=Impact
+uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
 
 booltracker.active.name=Active
 booltracker.inactive.name=Inactive

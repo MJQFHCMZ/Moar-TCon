@@ -272,12 +272,12 @@ public class UniqueToolpartRecipes {
 					event.getRegistry().register( //ModMaterials.materialInertialRedirector.getUniqueToolPart()
 							RecipeHelper.createRecipe("inertial_redirector_recipe_" + mat.identifier, BoltCore.getItemstackWithMaterials(mat, ModMaterials.materialInertialRedirector),
 									new String[] {
-											"KST",
-											"VmS",
-											" VK"
+											"KVT",
+											"SmV",
+											" SK"
 									},
 									Pair.of('m', new TinkerPartIngredient(mat, "tconstruct:arrow_shaft")),
-									Pair.of('V', new OreIngredient("ingotValasium")),
+									Pair.of('V', new OreIngredient("blockValasium")),
 									Pair.of('K', new TinkerPartIngredient(TinkerMaterials.knightslime, "moretcon:smallplate")),
 									Pair.of('S', new TinkerPartIngredient(ModMaterials.materialValasium, "moretcon:shrapnel")),
 									Pair.of('T', new TinkerPartIngredient(ModMaterials.materialSlimesteel, "tconstruct:large_plate"))));

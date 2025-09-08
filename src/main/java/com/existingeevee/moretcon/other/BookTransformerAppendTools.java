@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.tools;
+package com.existingeevee.moretcon.other;
 
 import java.util.List;
 
