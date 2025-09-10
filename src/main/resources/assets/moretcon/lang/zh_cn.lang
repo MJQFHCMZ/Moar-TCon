@@ -193,6 +193,7 @@ item.moretcon.nuggetgeodesium.name=地铱粒
 
 itemGroup.moarTConMaterials=更多匠魂材料丨材料
 itemGroup.moarTConMisc=更多匠魂材料丨杂项
+itemGroup.moarTConWorld=更多匠魂材料丨世界
 itemGroup.uniqueToolParts=独特的工具零件
 itemGroup.reforgeStones=重铸石
 
@@ -611,6 +612,7 @@ uniquetoolpart.moretcon.skybolt.name=天弩
 uniquetoolpart.moretcon.dematerializer.name=去物质化
 uniquetoolpart.moretcon.shotgun.name=霰弹枪
 uniquetoolpart.moretcon.impact.name=冲击
+uniquetoolpart.moretcon.inertial_redirector.name=惯性重定器
 
 booltracker.active.name=激活
 booltracker.inactive.name=未激活
