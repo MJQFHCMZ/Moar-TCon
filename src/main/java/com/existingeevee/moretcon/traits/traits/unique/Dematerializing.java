@@ -77,7 +77,7 @@ public class Dematerializing extends AbstractTrait {
 		event.setCanceled(true);
 
 		ProjectileLauncherNBT launcherData = new ProjectileLauncherNBT(TagUtil.getToolTag(event.launcher));
-		double dist = launcherData.range * 20;
+		double dist = launcherData.range * 40;
 
 		double posX = arrow.posX;
 		double posY = arrow.posY;
