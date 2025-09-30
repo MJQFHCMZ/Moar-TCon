@@ -1,5 +1,7 @@
 package com.existingeevee.moretcon.traits.traits.internal;
 
+import java.util.UUID;
+
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.entity.Entity;
@@ -8,9 +10,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.capability.projectile.TinkerProjectileHandler;
@@ -45,9 +50,11 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 				int toShoot = random.nextInt(3) + 4;
 
-				modifyProjectile(projectileBase, shooter, speed);
+				UUID volleyId = UUID.randomUUID();
+
+				modifyProjectile(projectileBase, shooter, speed, volleyId);
 				for (int i = 0; i < toShoot - 1; i++) {
-					spawnProjectile(projectileBase, shooter, speed);
+					spawnProjectile(projectileBase, shooter, speed, volleyId);
 				}
 				IS_ALREADY_PROCING.set(false);
 			}
@@ -56,10 +63,12 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 	@Override
 	public void afterHit(EntityProjectileBase projectile, World world, ItemStack ammoStack, EntityLivingBase attacker, Entity target, double impactSpeed) {
-		target.hurtResistantTime = 0;
+		if (LAST_PROJ.get() != null) {
+			LAST_PROJ.set(null);
+		}
 	}
 
-	public static void spawnProjectile(EntityProjectileBase projectileBase, EntityLivingBase shooter, float power) {
+	public void spawnProjectile(EntityProjectileBase projectileBase, EntityLivingBase shooter, float power, UUID volleyId) {
 		ItemStack stack = projectileBase.tinkerProjectile.getItemStack();
 		ItemStack launcher = projectileBase.tinkerProjectile.getLaunchingStack();
 
@@ -68,19 +77,22 @@ public class PolyshotProj extends AbstractProjectileTrait {
 		proj.setIsCritical(power >= 1);
 		shooter.world.spawnEntity(proj);
 		proj.pickupStatus = PickupStatus.CREATIVE_ONLY;
-		modifyProjectile(proj, shooter, power);
+		modifyProjectile(proj, shooter, power, volleyId);
 	}
 
-	public static void modifyProjectile(EntityProjectileBase projectileBase, EntityLivingBase shooter, float power) {
+	public void modifyProjectile(EntityProjectileBase projectileBase, EntityLivingBase shooter, float power, UUID volleyId) {
 		// Reset projectile motion
 		projectileBase.motionX = 0;
 		projectileBase.motionY = 0;
 		projectileBase.motionZ = 0;
 
-		float velo = power;
+		float velo = power * 3;
 
 		// Reshoot
-		projectileBase.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0, velo, 25f); // MASSIVE inaccuracy, low speed
+		projectileBase.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0, velo, 25f);
+
+		NBTTagCompound comp = projectileBase.getEntityData().getCompoundTag(this.getModifierIdentifier());
+		comp.setUniqueId(this.getIdentifier() + ".Volley", volleyId);
 	}
 
 	@Override
@@ -114,30 +126,58 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 	@SubscribeEvent
 	public void onTinkerProjectileImpactEvent(TinkerProjectileImpactEvent event) {
-		if (event.getEntity() instanceof EntityProjectileBase)
+		if (event.getEntity() instanceof EntityProjectileBase) {
+			ItemStack stack = ((EntityProjectileBase) event.getEntity()).tinkerProjectile.getItemStack();
+			
+			if (!this.isToolWithTrait(stack)) {
+				return;
+			}
+			
 			LAST_PROJ.set((EntityProjectileBase) event.getEntity());
+
+			RayTraceResult result = event.getRayTraceResult();
+			if (result != null && result.entityHit != null) {
+				NBTTagCompound comp = result.entityHit.getEntityData().getCompoundTag(this.getModifierIdentifier());
+
+				UUID uuid = comp.getUniqueId(this.getIdentifier() + ".LastVolley");
+				UUID volleyID = event.getEntity().getEntityData().getUniqueId(this.getIdentifier() + ".Volley");
+
+				if (uuid == volleyID) {
+					result.entityHit.hurtResistantTime = 0;
+				}
+			}
+		}
 	}
 
-	private static final double DSQ_SCALAR = 0.35 / Math.sqrt(-Math.log(0.5));
+	private static final double DSQ_SCALAR = 0.125 / Math.sqrt(-Math.log(0.5));
 
-	@Override
-	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
-		// no arrow? we use 1/4 damage
-		float mult = 0.25f;
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onLivingDamage(LivingHurtEvent event) {
+				
 		if (LAST_PROJ.get() != null) {
+			ItemStack stack = ((EntityProjectileBase) event.getEntity()).tinkerProjectile.getItemStack();
+			
+			if (!this.isToolWithTrait(stack)) {
+				return;
+			}
+			
 			EntityProjectileBase proj = LAST_PROJ.get();
-			LAST_PROJ.set(null);
 			NBTTagCompound comp = proj.getEntityData().getCompoundTag(this.getModifierIdentifier());
 			double distTraveled = comp.getDouble("DistTraveled");
 
-			mult = (float) (2 * Math.exp(-(DSQ_SCALAR * distTraveled) * (DSQ_SCALAR * distTraveled)));
+			float mult = (float) (2 * Math.exp(-(DSQ_SCALAR * distTraveled) * (DSQ_SCALAR * distTraveled)));
+			
+			event.setAmount(event.getAmount() * mult);
 		}
+	}
 
-		return newDamage * 0.5f * mult;
+	@Override
+	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
+		return newDamage;
 	}
 
 	@Override
 	public int getPriority() {
-		return -6942069; //we want this to run asap
+		return -6942069; // we want this to run asap
 	}
 }
