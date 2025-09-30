@@ -28,7 +28,7 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 
 	public Ricoshot() {
-		super(MiscUtils.createNonConflictiveName("ricoshot"), 0xffffff);
+		super(MiscUtils.createNonConflictiveName("ricoshot"), 0xb2a1ff);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -159,7 +159,7 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 
 		int bounces = comp.getInteger("Bounces");
 		if (bounces > 0)
-			attackEntitySecondary(DamageSource.causeIndirectDamage(projectile, attacker), (float) Math.pow(1.5, bounces), target, true, false);
+			attackEntitySecondary(DamageSource.causeIndirectDamage(projectile, attacker), (float) Math.pow(1.65, bounces), target, true, false);
 	}
 
 	@SubscribeEvent

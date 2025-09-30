@@ -444,6 +444,11 @@ modifier.moretcon.shock_aura.name=Shock Aura
 modifier.moretcon.shock_aura.desc=§oToaster bath!!!§r\nYour bomb will leave behind a damaging aura.
 modifier.moretcon.approximate.name=Approximate
 modifier.moretcon.approximate.desc=§oEh, close enough ¯\_(ツ)_/¯§r\nYour tool will gain a bit of aim-assist when fighting melee targets.
+modifier.moretcon.polyshot_projectile.name=Polyshotted 
+modifier.moretcon.polyshot_projectile.desc=§obrooo what are you doing with this?!?!?§r\nYour projectile will behave as described in polyshot. 
+modifier.moretcon.ricoshot.name=Ricoshot
+modifier.moretcon.ricoshot.desc=§oChlorophyte go boing boing§r\nYour projectile will bounce off of surfaces and home onto nearby targets. Deals additional damage depending on number of bounces.
+
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??
