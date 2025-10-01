@@ -179,7 +179,6 @@ public class Dematerializing extends AbstractTrait {
 					ProjectileEvent.OnHitBlock.fireEvent((EntityProjectileBase) arrow, launcherData.range * 20, firstTrace.getBlockPos(), world.getBlockState(firstTrace.getBlockPos()));
 
 				if (!arrow.inGround) {
-					System.out.println("bbb");
 					this.shoot(world, shooter, arrow, Math.max(0, dist - start.distanceTo(end)), bow);
 				} else {
 					world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);

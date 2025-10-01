@@ -133,10 +133,10 @@ public class PolyshotProj extends AbstractProjectileTrait {
 				return;
 			}
 			
-			LAST_PROJ.set((EntityProjectileBase) event.getEntity());
-
 			RayTraceResult result = event.getRayTraceResult();
 			if (result != null && result.entityHit != null) {
+				LAST_PROJ.set((EntityProjectileBase) event.getEntity());
+				
 				NBTTagCompound comp = result.entityHit.getEntityData().getCompoundTag(this.getModifierIdentifier());
 
 				UUID uuid = comp.getUniqueId(this.getIdentifier() + ".LastVolley");
@@ -155,18 +155,18 @@ public class PolyshotProj extends AbstractProjectileTrait {
 	public void onLivingDamage(LivingHurtEvent event) {
 				
 		if (LAST_PROJ.get() != null) {
-			ItemStack stack = ((EntityProjectileBase) event.getEntity()).tinkerProjectile.getItemStack();
+			EntityProjectileBase proj = LAST_PROJ.get();
+			ItemStack stack = proj.tinkerProjectile.getItemStack();
 			
 			if (!this.isToolWithTrait(stack)) {
 				return;
 			}
 			
-			EntityProjectileBase proj = LAST_PROJ.get();
 			NBTTagCompound comp = proj.getEntityData().getCompoundTag(this.getModifierIdentifier());
 			double distTraveled = comp.getDouble("DistTraveled");
 
 			float mult = (float) (2 * Math.exp(-(DSQ_SCALAR * distTraveled) * (DSQ_SCALAR * distTraveled)));
-			
+						
 			event.setAmount(event.getAmount() * mult);
 		}
 	}

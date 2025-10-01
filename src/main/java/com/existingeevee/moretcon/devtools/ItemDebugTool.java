@@ -62,6 +62,6 @@ public class ItemDebugTool extends ItemBase {
 				e.printStackTrace();
 			}
 		}
-		return true;
+		return false;
 	}
 }
