@@ -23,6 +23,7 @@ import com.existingeevee.moretcon.inits.recipes.UniqueToolpartRecipes;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MTMaterialIntegration;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.other.ClusterTickingHandler;
 import com.existingeevee.moretcon.other.EventWatcherMain;
 import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
@@ -99,6 +100,8 @@ public class MoreTCon {
 		MinecraftForge.EVENT_BUS.register(CustomFireHelper.class);
 		MinecraftForge.EVENT_BUS.register(ArrowReferenceHelper.class);
 		MinecraftForge.EVENT_BUS.register(ReforgeHandler.class);
+		MinecraftForge.EVENT_BUS.register(ClusterTickingHandler.class);
+		
 		ModTraits.init();
 		ModReforges.init();
 
