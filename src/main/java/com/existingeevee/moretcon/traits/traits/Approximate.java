@@ -3,11 +3,10 @@ package com.existingeevee.moretcon.traits.traits;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.existingeevee.moretcon.NetworkHandler;
-import com.existingeevee.moretcon.other.ExtendedAttackMessage;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.google.common.collect.Lists;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +33,8 @@ public class Approximate extends AbstractTraitLeveled {
 
 	public Approximate(int level) {
 		super(MiscUtils.createNonConflictiveName("approximate"), 0, 3, level);
-		MinecraftForge.EVENT_BUS.register(this);
+		if (this.levels == 1)
+			MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	public boolean shouldHaveApprox(ItemStack stack) {
@@ -43,23 +43,22 @@ public class Approximate extends AbstractTraitLeveled {
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onMouseClick(PlayerInteractEvent.LeftClickBlock event) {
+	public void onMouseClick(PlayerInteractEvent.LeftClickBlock event) {		
 		if (!event.getWorld().isRemote)
 			return;
+		
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stack = player.getHeldItemMainhand();
 		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
 		int index = TinkerUtil.getIndexInCompoundList(tagList, getModifierIdentifier());
 
-		if (index > -1 && shouldHaveApprox(stack)) {
+		if (index > -1 && shouldHaveApprox(stack)) {			
 			ModifierNBT modifier = ModifierNBT.readTag(tagList.getCompoundTagAt(index));
 			List<Entity> exclude = player.getRidingEntity() == null ? null : Lists.newArrayList(player.getRidingEntity());
 			RayTraceResult result = rayTraceWithExp(player, 4.5, exclude, modifier.level * 0.25);
+
 			if (result != null && result.entityHit != null) {
-				if (!player.isCreative()) {
-					ToolHelper.damageTool(stack, 1, player);
-				}
-				NetworkHandler.HANDLER.sendToServer(new ExtendedAttackMessage(result.entityHit));
+				Minecraft.getMinecraft().playerController.attackEntity(player, result.entityHit);
 			}
 		}
 	}
@@ -69,6 +68,7 @@ public class Approximate extends AbstractTraitLeveled {
 	public void onMouseClick(PlayerInteractEvent.LeftClickEmpty event) {
 		if (!event.getWorld().isRemote)
 			return;
+
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stack = player.getHeldItemMainhand();
 		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
@@ -79,10 +79,7 @@ public class Approximate extends AbstractTraitLeveled {
 			List<Entity> exclude = player.getRidingEntity() == null ? null : Lists.newArrayList(player.getRidingEntity());
 			RayTraceResult result = rayTraceWithExp(player, 4.5, exclude, modifier.level * 0.25);
 			if (result != null && result.entityHit != null) {
-				if (!player.isCreative()) {
-					ToolHelper.damageTool(stack, 1, player);
-				}
-				NetworkHandler.HANDLER.sendToServer(new ExtendedAttackMessage(result.entityHit));
+				Minecraft.getMinecraft().playerController.attackEntity(player, result.entityHit);
 			}
 		}
 	}
@@ -104,20 +101,20 @@ public class Approximate extends AbstractTraitLeveled {
 	public static RayTraceResult rayTraceWithExp(Vec3d start, Vec3d direction, World world, double maxRange, List<Entity> exclude, boolean affectedByBlocks, boolean ignoreNoBounding, double exp) {
 		Vec3d end = start.add(direction.scale(maxRange));
 		RayTraceResult firstTrace = affectedByBlocks ? world.rayTraceBlocks(start, end, false, ignoreNoBounding, true) : null;
-		AxisAlignedBB area = new AxisAlignedBB(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2)));
+		AxisAlignedBB area = new AxisAlignedBB(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2))).grow(exp * 1.1);
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, area);
 
 		Entity closestValid = null;
 		double closestDistSq = Double.MAX_VALUE;
 
-		for (Entity e : entities) {
+		for (Entity e : entities) {			
 			if (!(e instanceof EntityLivingBase) || (exclude != null && exclude.contains(e))) {
 				continue;
 			}
-
+			
 			RayTraceResult intercept = e.getEntityBoundingBox().grow(exp).calculateIntercept(start, end);
-
-			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= intercept.hitVec.squareDistanceTo(end)) {
+			
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= end.squareDistanceTo(start)) {
 				double distSq = intercept.hitVec.squareDistanceTo(start);
 				if (closestDistSq > distSq) {
 					closestValid = e;

@@ -399,7 +399,7 @@ public class MiscUtils {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().calculateIntercept(start, end);
 
-			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= intercept.hitVec.squareDistanceTo(end)) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= start.squareDistanceTo(end)) {
 				double distSq = intercept.hitVec.squareDistanceTo(start);
 				if (closestDistSq > distSq) {
 					closestValid = e;
