@@ -29,7 +29,7 @@ public class Seismishock extends AbstractTrait {
 	public void onHit(ItemStack stack, EntityLivingBase playerIn, EntityLivingBase target, float damage, boolean isCritical) {
 		if (isCritical) {
 			if (!target.world.isRemote && target.world instanceof WorldServer) {
-				float multiplier = Math.min(3, 1 + playerIn.fallDistance * 0.1f);
+				float multiplier = Math.min(2.5f, playerIn.fallDistance * 0.25f + (float) Math.log10(damage) + 0.5f);
 				if (multiplier >= 3) {
 					((WorldServer) target.world).spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, target.posX, target.posY, target.posZ, 1, 0, 0, 0, 0, new int[0]);
 				}
