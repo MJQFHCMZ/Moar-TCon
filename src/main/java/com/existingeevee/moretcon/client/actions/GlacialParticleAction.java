@@ -8,16 +8,20 @@ import net.minecraft.client.particle.ParticleFallingDust;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class GlacialParticleAction extends ClientAction {
 
 	public static final GlacialParticleAction INSTANCE = new GlacialParticleAction();
 
+	@SideOnly(Side.CLIENT)
 	private static class ClientStuff {
 		private static final ParticleExplosionLarge.Factory EXPL_FACTORY = new ParticleExplosionLarge.Factory();
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void runAsClient(World world, double x, double y, double z, NBTBase data) {
 		for (int i = 0; i < 50; i++) {
 			float randMotX = (float) (2 * (Math.random() - 0.5));
