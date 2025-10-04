@@ -71,6 +71,7 @@ import com.existingeevee.moretcon.traits.traits.Supercritical;
 import com.existingeevee.moretcon.traits.traits.Treetap;
 import com.existingeevee.moretcon.traits.traits.Tricromatic;
 import com.existingeevee.moretcon.traits.traits.Voidic;
+import com.existingeevee.moretcon.traits.traits.Weightless;
 import com.existingeevee.moretcon.traits.traits.Withered;
 import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
 import com.existingeevee.moretcon.traits.traits.abst.DummyTrait;
@@ -147,7 +148,7 @@ public class ModTraits {
 	public static Darkened darkened = new Darkened();
 	public static DummyTrait etheralHarvest = new DummyTrait("etheralharvest", 0);
 	public static Luminescent luminescent = new Luminescent("luminescent", 0);
-	public static AttributeTrait weightless = new AttributeTrait("weightless", 0, new AttributeModifier(UUID.fromString("aed073df-79af-4de9-b62c-44b5fcc4df1d"), "weightless", 1.00, 2), SharedMonsterAttributes.ATTACK_SPEED);
+	public static Weightless weightless = new Weightless();
 	public static AttributeTrait shielding = new AttributeTrait("shielding", 0, new AttributeModifier(UUID.fromString("aed073df-79af-4de9-b62c-44b5fcc44fef"), "shielding", 4, 0), SharedMonsterAttributes.ARMOR).setWorksInOffhand(true);
 	public static Overdrive overdrive = new Overdrive();
 	public static Overslime overslime = new Overslime();
