@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "moretcon:blocks/fluids/liquidgeodesium_still"
+    "layer0": "moretcon:blocks/bloom/liquidgeodesium_item",
+    "layer1": "moretcon:blocks/fluids/liquidgeodesium_still"
   }
 }

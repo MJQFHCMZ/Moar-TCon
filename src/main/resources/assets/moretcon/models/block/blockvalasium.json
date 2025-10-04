@@ -1,12 +1,18 @@
 {
-  "parent": "block/cube",
+  "parent": "moretcon:block/template/layered_cube_2",
   "textures": {
-    "down": "moretcon:blocks/blockvalasiumtop",
-    "up": "moretcon:blocks/blockvalasiumtop",
-    "north": "moretcon:blocks/blockvalasiumside",
-    "east": "moretcon:blocks/blockvalasiumside",
-    "south": "moretcon:blocks/blockvalasiumside",
-    "west": "moretcon:blocks/blockvalasiumside",
-    "particle": "moretcon:blocks/blockvalasiumside"
+    "particle": "moretcon:blocks/blockvalasiumside",
+    "bot_down": "moretcon:blocks/blockvalasiumtop",
+    "bot_up": "moretcon:blocks/blockvalasiumtop",
+    "bot_north": "moretcon:blocks/blockvalasiumside",
+    "bot_east": "moretcon:blocks/blockvalasiumside",
+    "bot_south": "moretcon:blocks/blockvalasiumside",
+    "bot_west": "moretcon:blocks/blockvalasiumside",
+    "top_down": "moretcon:blocks/bloom/blockvalasiumtop_bloom",
+    "top_up": "moretcon:blocks/bloom/blockvalasiumtop_bloom",
+    "top_north": "moretcon:blocks/bloom/blockvalasiumside_bloom",
+    "top_east": "moretcon:blocks/bloom/blockvalasiumside_bloom",
+    "top_south": "moretcon:blocks/bloom/blockvalasiumside_bloom",
+    "top_west": "moretcon:blocks/bloom/blockvalasiumside_bloom"
   }
 }

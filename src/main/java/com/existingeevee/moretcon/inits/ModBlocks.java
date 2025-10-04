@@ -95,8 +95,8 @@ public class ModBlocks {
 	public static final Block blockPorksteel = ((BlockBase) new BlockBase("blockPorksteel", Material.IRON, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block orePerimidum = ((BlockBase) new BlockPerimidumOre().setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false).setLightLevel(1);
 	public static final Block blockPerimidum = ((BlockBase) new BlockBase("blockPerimidum", Material.IRON, 5).setClusterDate(() -> (IClusterType) orePerimidum, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
-	public static final Block blockGeodesium = ((BlockBase) new BlockBase("blockGeodesium", Material.IRON, 6).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
-	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
+	public static final Block blockGeodesium = ((BlockBase) new BlockBase("blockGeodesium", Material.IRON, 6).setLightLevel(1).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
+	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setLightLevel(8).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
 	
 	public static final Block blockOtherstone = (new BlockEtheralBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));

@@ -41,12 +41,5 @@
             2,
             1
         ]
-    },
-    "ctm": {
-    "ctm_version": 1,
-    "layer": "BLOOM",
-    "extra": {
-      "light": 15
     }
-  }
 }
