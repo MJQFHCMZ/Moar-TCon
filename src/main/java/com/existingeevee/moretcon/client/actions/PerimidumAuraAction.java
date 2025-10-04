@@ -21,11 +21,11 @@ public class PerimidumAuraAction extends ClientAction {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void runAsClient(World world, double x, double y, double z, NBTBase data) {
-		int amount = 7;
+		double amount = 7;
 		double height = 4;
 		if (data instanceof NBTTagCompound) {
 			if (((NBTTagCompound) data).hasKey("Amount", NBT.TAG_ANY_NUMERIC))
-				amount = ((NBTTagCompound) data).getInteger("Amount");
+				amount = ((NBTTagCompound) data).getDouble("Amount");
 			if (((NBTTagCompound) data).hasKey("Height", NBT.TAG_ANY_NUMERIC))
 				height = ((NBTTagCompound) data).getDouble("Height");
 		}

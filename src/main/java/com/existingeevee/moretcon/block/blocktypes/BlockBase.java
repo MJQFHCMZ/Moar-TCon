@@ -9,6 +9,10 @@ import com.existingeevee.moretcon.block.ISimpleBlockItemProvider;
 import com.existingeevee.moretcon.block.ore.IBedrockMineable;
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.inits.ModItems;
+import com.existingeevee.moretcon.other.ClusterTickingHandler;
+import com.existingeevee.moretcon.other.ClusterTickingHandler.IClusterType;
+import com.existingeevee.moretcon.other.ClusterTickingHandler.IClusterable;
+import com.existingeevee.moretcon.other.ClusterTickingHandler.ISimpleClusterable;
 import com.existingeevee.moretcon.other.utils.FireproofItemUtil;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
@@ -26,12 +30,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedrockMineable {
+public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedrockMineable, IClusterable {
 
 	protected boolean canBeBeacon = false;
 	protected boolean canBurn = true;
-	protected boolean canSustainFire = false;	
-	
+	protected boolean canSustainFire = false;
+
+	protected double mass = 1;
+	protected Supplier<IClusterType> cluster = () -> null;
+
 	protected Supplier<Block> fireTransformer;
 
 	public BlockBase(String itemName, Material material, int harvestLevel) {
@@ -41,7 +48,7 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 			setHarvestLevel("pickaxe", harvestLevel);
 		}
 	}
-	
+
 	@Override
 	public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
 		return side == EnumFacing.UP && canSustainFire || super.isFireSource(world, pos, side);
@@ -55,6 +62,21 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 	public BlockBase canBeBeacon(boolean bool) {
 		this.canBeBeacon = bool;
 		return this;
+	}
+
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		if (this.getType() != null) {
+			worldIn.scheduleUpdate(pos, this, 1);
+		}
+	}
+
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		if (this.getType() != null) {
+			ClusterTickingHandler.addTick(worldIn, pos);
+			worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+		}
 	}
 
 	@Override
@@ -125,10 +147,10 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 			}
 		};
 	}
-	
+
 	@Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (fireTransformer != null && fromPos.equals(pos.up()) &&world.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (fireTransformer != null && fromPos.equals(pos.up()) && world.getBlockState(pos.up()).getBlock() == Blocks.FIRE) {
 			world.setBlockState(pos.up(), fireTransformer.get().getDefaultState());
 		}
 	}
@@ -164,6 +186,24 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	public BlockBase setCanSustainFire(boolean canSustainFire) {
 		this.canSustainFire = canSustainFire;
+		return this;
+	}
+
+	@Override
+	public IClusterType getType() {
+		if (this instanceof ISimpleClusterable) return (IClusterType) this;
+		return cluster.get();
+	}
+
+	@Override
+	public double getBlockMass(IBlockState state, World world, BlockPos pos) {
+		return mass;
+	}
+
+	public BlockBase setClusterDate(Supplier<IClusterType> cluster, double mass) {
+		this.cluster = cluster;
+		this.mass = mass;
+
 		return this;
 	}
 }

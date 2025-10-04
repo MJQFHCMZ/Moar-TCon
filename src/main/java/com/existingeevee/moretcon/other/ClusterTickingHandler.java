@@ -39,7 +39,8 @@ public class ClusterTickingHandler {
 
 				if (!CLUSTERABLE_POSITIONS.containsKey(event.world))
 					return;
-								
+							
+				
 				for (BlockPos pos : CLUSTERABLE_POSITIONS.get(event.world)) {
 					if (!event.world.isBlockLoaded(pos))
 						continue;
@@ -47,13 +48,17 @@ public class ClusterTickingHandler {
 					IBlockState state = event.world.getBlockState(pos);
 					if (state.getBlock() instanceof IClusterable) {
 						IClusterable cluster = (IClusterable) state.getBlock();
+						IClusterType type = cluster.getType();
+
+						if (type == null)
+							 continue;
 						
-						if (!cluster.isClusterable(state, event.world, pos))
-							continue;
+						double mass = cluster.getBlockMass(state, event.world, pos);
 						
+						//see above
 						if (lastCluster != null) {
-							if (lastCluster.getClusterType() == cluster && lastCluster.isInRange(pos)) {
-								lastCluster.addToCluster(pos);
+							if (lastCluster.getClusterType() == cluster.getType() && lastCluster.isInRange(pos, mass)) {
+								lastCluster.addToCluster(pos, mass);
 								continue;
 							}
 						}
@@ -63,8 +68,8 @@ public class ClusterTickingHandler {
 							if (c == lastCluster)
 								continue;
 
-							if (c.getClusterType() == cluster && c.isInRange(pos)) {
-								c.addToCluster(pos);
+							if (c.getClusterType() == cluster.getType() && c.isInRange(pos, mass)) {
+								c.addToCluster(pos, mass);
 								found = true;
 								break;
 							}
@@ -72,13 +77,13 @@ public class ClusterTickingHandler {
 						if (found)
 							continue;
 
-						clusters.add(new Cluster(cluster, pos));
+						clusters.add(new Cluster(cluster, pos, event.world));
 					}
 				}
 
 				for (Cluster c : clusters) {
-					if (c.getCount() >= c.getClusterType().minClusterSize())
-					c.getClusterType().onClusterTick(c.getLocation(), event.world, c.getCount(), c.getBounds());
+					if (c.getMass() >= c.getClusterType().minClusterSize())
+					c.getClusterType().onClusterTick(c.getLocation(), event.world, c.getMass(), c.getBounds());
 				}
 				
 				CLUSTERABLE_POSITIONS.remove(event.world);
@@ -87,50 +92,63 @@ public class ClusterTickingHandler {
 			t.printStackTrace();
 		}
 	}
-
-	public static interface IClusterable {
-		default boolean isClusterable(IBlockState state, World world, BlockPos pos) {			
-			return state.getBlock() == this;
-		}
-
+	
+	public static interface IClusterType { 
+		
 		int minClusterSize();
 
-		int maxClusterRadius();
+		void onClusterTick(Vec3d clusterAvgCenter, World world, double mass, AxisAlignedBB bounds);
 
-		void onClusterTick(Vec3d clusterCenter, World world, int clusterCount, AxisAlignedBB axisAlignedBB);
+		int maxClusterRadius();
+		
+	}
+
+	public static interface ISimpleClusterable extends IClusterable, IClusterType {
+		default IClusterType getType() {
+			return this;
+		}
+	}
+
+	public static interface IClusterable {
+		default double getBlockMass(IBlockState state, World world, BlockPos pos) {		
+			return 1;
+		}
+
+		IClusterType getType();
 	}
 
 	public static class Cluster {
-		int count = 0;
+		double mass = 0;
 		Vec3d location = Vec3d.ZERO;
 
 		final Vec3d origin;
-		final IClusterable clusterType;
+		final IClusterType clusterType;
 		
 		AxisAlignedBB bounds;
 		
-		public Cluster(IClusterable cluster, BlockPos origin) {
-			this.clusterType = cluster;
+		public Cluster(IClusterable cluster, BlockPos origin, World world) {
+			this.clusterType = cluster.getType();
 			this.origin = new Vec3d(origin).addVector(0.5, 0.5, 0.5);
 			bounds = new AxisAlignedBB(origin, origin);
-			addToCluster(origin);
+			addToCluster(origin, cluster.getBlockMass(world.getBlockState(origin), world, origin));
 		}
 
-		public void addToCluster(BlockPos pos) {
-			int total = count + 1;
+		public void addToCluster(BlockPos pos, double additionalMass) {
+			double total = mass + additionalMass;
 
-			location = location.scale(count).add(new Vec3d(pos).addVector(0.5, 0.5, 0.5)).scale(1d / total);
-			count = total;
+			location = location.scale(mass).add(new Vec3d(pos).addVector(0.5, 0.5, 0.5).scale(additionalMass)).scale(1d / total);
+			mass = total;
 			
 			bounds = new AxisAlignedBB(
 					Math.min(bounds.minX, pos.getX()), Math.min(bounds.minY, pos.getY()), Math.min(bounds.minZ, pos.getZ()),
 					Math.max(bounds.maxX, pos.getX() + 1), Math.max(bounds.maxY, pos.getY() + 1), Math.max(bounds.maxZ, pos.getZ() + 1)
 					);
 		}
-
-		public boolean isInRange(BlockPos pos) {
+													  
+		public boolean isInRange(BlockPos pos, double additionalMass) {
 			Vec3d center = new Vec3d(pos).addVector(0.5, 0.5, 0.5);
-			Vec3d newVec = location.scale(count).add(center).scale(1d / (count + 1));
+			//location = location.scale(mass).add(center.scale(additionalMass)).scale(1d / (mass + additionalMass));
+			Vec3d newVec = location.scale(mass).add(center.scale(additionalMass)).scale(1d / (mass + additionalMass));
 			double maxDist = getClusterType().maxClusterRadius();
 			if (newVec.squareDistanceTo(origin) > maxDist * maxDist || center.squareDistanceTo(location) > maxDist * maxDist) {
 				return false;
@@ -139,7 +157,7 @@ public class ClusterTickingHandler {
 			return true;
 		}
 
-		public IClusterable getClusterType() {
+		public IClusterType getClusterType() {
 			return clusterType;
 		}
 
@@ -151,8 +169,8 @@ public class ClusterTickingHandler {
 			return location;
 		}
 
-		public int getCount() {
-			return count;
+		public double getMass() {
+			return mass;
 		}
 
 		public AxisAlignedBB getBounds() {

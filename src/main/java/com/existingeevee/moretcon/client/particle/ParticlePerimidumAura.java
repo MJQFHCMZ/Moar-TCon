@@ -22,9 +22,9 @@ public class ParticlePerimidumAura extends Particle {
 	double radius = 5;
 	
 	double height = 3;
-	int amount = 7;
+	double amount = 7;
 	
-	public ParticlePerimidumAura(World worldIn, double x, double y, double z, double radiusBonus, double height, int amount) {
+	public ParticlePerimidumAura(World worldIn, double x, double y, double z, double radiusBonus, double height, double mass) {
 		super(worldIn, x, y, z, 0, 0, 0);
 		this.particleMaxAge = 20 + (int) (Math.random() * 20);
 
@@ -37,7 +37,7 @@ public class ParticlePerimidumAura extends Particle {
 		this.radius = radiusBonus;
 		
 		this.height = height;
-		this.amount = amount;
+		this.amount = mass;
 	}
 
 	@Override
@@ -102,18 +102,18 @@ public class ParticlePerimidumAura extends Particle {
 
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferbuilder = tessellator.getBuffer();
-
-		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		GlStateManager.alphaFunc(516, 0.003921569F);
 		GlStateManager.disableFog();
-		
+        GlStateManager.enableBlend();
+//        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+//        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        GlStateManager.alphaFunc(516, 0.1F);
+
 		float f5 = (float) -((age + partial + rOffset) * 0.01F * speedMult);
 		float f6 = (float) (length / 32.0F / 6 - (age + partial + rOffset) * 0.01F * speedMult);
 
 		bufferbuilder.begin(5, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 
-		final float i = 100; 
+		final float i = (float) (500 * Math.PI / 4); //EntityRenderer
 		
 		for (int j = 0; j <= i; ++j) {
 			float cirX = MathHelper.sin(j % i * ((float) Math.PI * 2F) / i) * 0.75F;
@@ -123,13 +123,13 @@ public class ParticlePerimidumAura extends Particle {
 			bufferbuilder.pos(dx + cirX * radMult, dy - 2, dz + cirZ * radMult).tex(f9, f5).color(1f, 1f, 1f, alpha).lightmap(lj, lk).endVertex();
 			bufferbuilder.pos(dx + cirX * radMult, dy - 2 + (2 + height) * (this.particleAge + partial) / this.particleMaxAge, dz + cirZ * radMult).tex(f9, f6).color(1f, 1f, 1f, alpha).lightmap(lj, lk).endVertex();
 		}
-
+		
 		tessellator.draw();
 
-		GlStateManager.enableFog();
-		GlStateManager.depthMask(true);
-		GlStateManager.disableBlend();
-		GlStateManager.alphaFunc(516, 0.1F);
+        GlStateManager.depthMask(true);
+        GlStateManager.disableBlend();
+        GlStateManager.alphaFunc(516, 0.1F);
+        GlStateManager.enableFog();
 
 	}
 }

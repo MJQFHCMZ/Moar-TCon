@@ -2,8 +2,11 @@ package com.existingeevee.moretcon.devtools;
 
 import java.util.List;
 
+import com.existingeevee.moretcon.block.blocktypes.BlockBase;
+import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.other.BiValue;
+import com.existingeevee.moretcon.other.ClusterTickingHandler.IClusterType;
 import com.existingeevee.moretcon.other.ModTabs;
 
 import net.minecraft.entity.Entity;
@@ -56,6 +59,7 @@ public class ItemDebugTool extends ItemBase {
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (!worldIn.isRemote) {
 			try {
+				((BlockBase) ModBlocks.blockPerimidum).setClusterDate(() -> (IClusterType) ModBlocks.orePerimidum, 2);
 				//MinecraftForge.EVENT_BUS.register(TinkerRegistry.getTrait(MiscUtils.createNonConflictiveName("polyshot_projectile")));
 				//System.out.println("balls");
 			} catch (Exception e) {
