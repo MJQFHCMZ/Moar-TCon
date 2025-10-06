@@ -25,6 +25,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -93,6 +94,11 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 			return 4;
 		}
 		return 1;
+	}
+
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
@@ -189,9 +195,11 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 		return this;
 	}
 
+//CUTOUT_MIPPED 
 	@Override
 	public IClusterType getType() {
-		if (this instanceof ISimpleClusterable) return (IClusterType) this;
+		if (this instanceof ISimpleClusterable)
+			return (IClusterType) this;
 		return cluster.get();
 	}
 
