@@ -65,7 +65,7 @@ public class FurnaceInit {
 			GameRegistry.addSmelting(new ItemStack(ModItems.dustBlightsteel, 1), new ItemStack(ModItems.ingotBlightsteel, 1), 0F);
 			GameRegistry.addSmelting(new ItemStack(ModItems.dustZracohlium, 1), new ItemStack(ModItems.ingotZracohlium, 1), 0F);
 			GameRegistry.addSmelting(new ItemStack(ModItems.dustPorksteel, 1), new ItemStack(ModItems.ingotPorksteel, 1), 0F);
-			GameRegistry.addSmelting(new ItemStack(ModItems.dustGeodesium), new ItemStack(ModItems.dustGeodesium, 1), 0F);
+			GameRegistry.addSmelting(new ItemStack(ModItems.dustGeodesium), new ItemStack(ModItems.ingotGeodesium, 1), 0F);
 		}
 		if (ConfigHandler.unfracturedBedrockObtainable) {
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.blockCobbledBedrock, 1), new ItemStack(Blocks.BEDROCK, 1), 0F);
