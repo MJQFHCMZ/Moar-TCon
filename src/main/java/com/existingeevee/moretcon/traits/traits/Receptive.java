@@ -79,7 +79,7 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	public static final int POINT_CAP = 8000;
 
 	public static final float MAX_DMG_MULT = 2.5f;
-	public static final float MAX_MINING_MULT = 2.0f;
+	public static final float MAX_MINING_MULT = 3.5f;
 
 	public static final float MAX_DRAWSPEED_MULT = 2f;
 	public static final float MAX_RANGE_MULT = 2f;
