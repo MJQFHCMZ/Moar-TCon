@@ -59,10 +59,10 @@ public class CustomFireEffect {
 					return false;
 				}
 
-				if (!e.world.isRemote && t % (e.isImmuneToFire() ? 40 : 20) == 0) {
+				if (!e.world.isRemote && (t + 5) % 10 == 0) {
 					int hurt = e.hurtResistantTime;
 					e.hurtResistantTime = 0;
-					e.attackEntityFrom(new DamageSource("haunted").setFireDamage(), e.isImmuneToFire() ? 1 : 4);
+					e.attackEntityFrom(new DamageSource("haunted").setFireDamage(), 4);
 					e.hurtResistantTime = hurt;
 				}
 				return true;
