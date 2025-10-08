@@ -117,8 +117,8 @@ public class ModBlocks {
 	public static final Block blockVoidColumn = new BlockVoidColumn().setHardness(10).setResistance(20);
 	public static final Block blockVoidCore = new BlockVoidCore();
 
-	public static final Block fireCold = new BlockCustomFire("fireCold", CustomFireEffect.COLD_FIRE).setBypassFireImmunity(true).setDamage(4).setSource(new DamageSource("coldfire").setFireDamage());
-	public static final Block fireSpirit = new BlockCustomFire("fireSpirit", CustomFireEffect.SPIRIT_FIRE).setDamage(4).setCustomEffect(e -> e.attackEntityFrom(new DamageSource("haunted").setFireDamage(), e.isImmuneToFire() ? 1 : 4)).setSource(new DamageSource("haunted").setFireDamage());
+	public static final Block fireCold = new BlockCustomFire("fireCold", CustomFireEffect.COLD_FIRE).setBypassFireImmunity(true).setDamage(4).setCustomEffect(e -> e.attackEntityFrom(new DamageSource("coldfire").setFireDamage(), Math.max(4, e.getHealth() / 10))).setSource(new DamageSource("coldfire").setFireDamage());
+	public static final Block fireSpirit = new BlockCustomFire("fireSpirit", CustomFireEffect.SPIRIT_FIRE).setDamage(4).setSource(new DamageSource("haunted").setFireDamage());
 	/*---------------------------------------*/
 
 	public static void registerBlocks(Block... block) {

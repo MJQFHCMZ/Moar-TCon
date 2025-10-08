@@ -46,7 +46,7 @@ public class CustomFireEffect {
 				e.motionZ *= 0.25D;
 
 				if (!e.world.isRemote && t % 20 == 0) {
-					e.attackEntityFrom(new DamageSource("coldfire").setFireDamage(), 4);
+					e.attackEntityFrom(new DamageSource("coldfire").setFireDamage(), Math.max(4, e.getHealth() / 10));
 				}
 				return true;
 			});
