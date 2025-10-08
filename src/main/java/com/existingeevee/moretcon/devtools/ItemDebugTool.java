@@ -6,7 +6,6 @@ import com.existingeevee.moretcon.block.blocktypes.BlockBase;
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.other.BiValue;
-import com.existingeevee.moretcon.other.ClusterTickingHandler.IClusterType;
 import com.existingeevee.moretcon.other.ModTabs;
 
 import net.minecraft.entity.Entity;

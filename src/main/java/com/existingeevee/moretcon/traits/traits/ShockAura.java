@@ -43,8 +43,19 @@ public class ShockAura extends AbstractTrait implements IBombTrait {
 		try {
 			@SuppressWarnings("unchecked")
 			Map<Entity, Integer> reapplicationDelayMap = (Map<Entity, Integer>) reapplicationDelayMap$EntityAreaEffectCloud.get(cloud);
-			reapplicationDelayMap.put(attacker, Integer.MAX_VALUE); // doesnt attack the thrower
+			
+			if (attacker.getTeam() != null && !attacker.getTeam().getAllowFriendlyFire()) {
+				for (Entity e : world.loadedEntityList) {
+					if (e.getTeam() == attacker.getTeam()) {
+						reapplicationDelayMap.put(e, Integer.MAX_VALUE); // doesnt attack the thrower or team
+					}
+				}
+			} else {
+				reapplicationDelayMap.put(attacker, Integer.MAX_VALUE); // doesnt attack the thrower
+			}
+
 			durationOnUse$EntityAreaEffectCloud.set(cloud, 0);
+
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 		}
 		world.spawnEntity(cloud);

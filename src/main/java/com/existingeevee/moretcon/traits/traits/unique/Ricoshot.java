@@ -79,11 +79,18 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 				double closestLenSq = Double.POSITIVE_INFINITY;
 
 				double maxDist = 15;
-
+				
 				for (Entity ent : world.getEntitiesWithinAABBExcludingEntity(projectile.shootingEntity, projectile.getEntityBoundingBox().grow(maxDist))) {
 					if (ent instanceof EntityTameable && ((EntityTameable) ent).getOwner() == projectile.shootingEntity) {
 						continue;
 					}
+					
+					if (!projectile.shootingEntity.getTeam().getAllowFriendlyFire()) {
+						if (ent.getTeam() == projectile.shootingEntity.getTeam()) {
+							continue;
+						}
+					}
+
 					if (ent instanceof EntityLivingBase && ((EntityLivingBase) ent).canEntityBeSeen(projectile) && ((EntityLivingBase) ent).isEntityAlive() && ((EntityLivingBase) ent).getHealth() > 0) {
 						double dSq = ent.getDistanceSq(projectile);
 						if (dSq < maxDist * maxDist && dSq < closestLenSq) {
