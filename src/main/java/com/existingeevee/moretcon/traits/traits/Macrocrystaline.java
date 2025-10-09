@@ -1,10 +1,15 @@
 package com.existingeevee.moretcon.traits.traits;
 
+import java.util.List;
+
 import com.existingeevee.moretcon.other.utils.MiscUtils;
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
@@ -24,9 +29,17 @@ public class Macrocrystaline extends AbstractTrait {
 		event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * getPerfection(tool));
 	} 
 	
+
+    @Override
+    public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
+        String loc = String.format(LOC_Extra, getModifierIdentifier());
+        int perfection = getPerfection(tool);
+        return ImmutableList.of(Util.translateFormatted(loc, perfection <= 8 ? new String(new char[perfection]).replace("\0", "|") : "->" + perfection + "<-"));
+    }
+	
 	private int getPerfection(ItemStack tool) {
 		int i = 0;				
-		while (ToolHelper.getCurrentDurability(tool) % ((int) (Math.pow(2, i) + 0.5)) == 0) { // the + 0.5 is just used for rounding lul
+		while (((int) (Math.pow(2, i) + 0.5)) <= ToolHelper.getCurrentDurability(tool)) { // the + 0.5 is just used for rounding lul
 			i++;
 		}
 
