@@ -42,7 +42,7 @@ public class ItemReforgeStone extends ItemBase {
 		this.setTab(null);
 	}
 
-	public AbstractReforge getReforge() {
+	public AbstractReforge getReforge(ItemStack stack) {
 		return reforge.get();
 	}
 
@@ -55,17 +55,17 @@ public class ItemReforgeStone extends ItemBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack stack) {
-		return I18n.translateToLocal("item.reforgestone.name") + " (" + CustomFontColor.encodeColor(getReforge().getColor()) + getReforge().getLocalizedPrefix() + ChatFormatting.RESET + ")";
+		return I18n.translateToLocal("item.reforgestone.name") + " (" + CustomFontColor.encodeColor(getReforge(stack).getColor()) + getReforge(stack).getLocalizedPrefix() + ChatFormatting.RESET + ")";
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		String encodedColor = CustomFontColor.encodeColor(getReforge().getColor());
+		String encodedColor = CustomFontColor.encodeColor(getReforge(stack).getColor());
 
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add("");
 		tooltip.add(I18n.translateToLocal("item.reforgestone.desc"));
-		TextHelper.smartSplitString(I18n.translateToLocal(getReforge().getLocalizedDescWithoutFlavor()), 45).forEach(s -> tooltip.add("  " + ChatFormatting.ITALIC + encodedColor + s));
+		TextHelper.smartSplitString(I18n.translateToLocal(getReforge(stack).getLocalizedDescWithoutFlavor()), 45).forEach(s -> tooltip.add("  " + ChatFormatting.ITALIC + encodedColor + s));
 	}
 }

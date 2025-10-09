@@ -619,6 +619,10 @@ uniquetoolpart.moretcon.shotgun.name=Shotgun
 uniquetoolpart.moretcon.impact.name=Impact
 uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
 
+gui.moretcon.reforgestation.name=Reforge Station
+gui.moretcon.reforgestation.info=GAMBLING WOOO Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+gui.error.invalid_reforge_material=This tool cannot be reforged using %s!
+
 booltracker.active.name=Active
 booltracker.inactive.name=Inactive
 booltracker.empowered.name=Empowered

@@ -9,6 +9,7 @@ import com.existingeevee.moretcon.block.blocktypes.BlockFallingBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockHot;
 import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
 import com.existingeevee.moretcon.block.blocktypes.BlockRadioactive;
+import com.existingeevee.moretcon.block.blocktypes.BlockReforgeStation;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockGravitoniumFaucet;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockIgniglomerateCluster;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockOreGravitonium;
@@ -28,6 +29,7 @@ import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.MoreTConLogger;
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
 import com.existingeevee.moretcon.other.utils.CompatManager;
+import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 
 import net.minecraft.block.Block;
@@ -117,6 +119,8 @@ public class ModBlocks {
 	public static final Block blockVoidColumn = new BlockVoidColumn().setHardness(10).setResistance(20);
 	public static final Block blockVoidCore = new BlockVoidCore();
 
+	public static final Block blockReforgeStation = new BlockReforgeStation().setUnlocalizedName(MiscUtils.createNonConflictiveName("blockreforgestation"));
+	
 	public static final Block fireCold = new BlockCustomFire("fireCold", CustomFireEffect.COLD_FIRE).setBypassFireImmunity(true).setDamage(4).setCustomEffect(e -> e.attackEntityFrom(new DamageSource("coldfire").setFireDamage(), Math.max(4, e.getHealth() / 10))).setSource(new DamageSource("coldfire").setFireDamage());
 	public static final Block fireSpirit = new BlockCustomFire("fireSpirit", CustomFireEffect.SPIRIT_FIRE).setDamage(4).setSource(new DamageSource("haunted").setFireDamage());
 	/*---------------------------------------*/
@@ -127,9 +131,10 @@ public class ModBlocks {
 		}
 	}
 
-	public static void init() {
+	public static void init() {		
 		ModBlocks.registerBlocks(
-				blockGravitoniumFaucet
+				blockGravitoniumFaucet,
+				blockReforgeStation
 		//FYI these will be back in the future. just not now.
 		//blockVoidPrismTop,
 		//blockVoidPrismBottom,

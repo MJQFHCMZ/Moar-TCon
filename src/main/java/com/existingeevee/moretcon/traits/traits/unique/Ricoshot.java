@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -84,9 +85,9 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 					if (ent instanceof EntityTameable && ((EntityTameable) ent).getOwner() == projectile.shootingEntity) {
 						continue;
 					}
-					
-					if (projectile.shootingEntity.getTeam() != null && !projectile.shootingEntity.getTeam().getAllowFriendlyFire()) {
-						if (ent.getTeam() == projectile.shootingEntity.getTeam()) {
+					Team team = projectile.shootingEntity.getTeam();
+					if (team != null && !team.getAllowFriendlyFire()) {
+						if (ent.getTeam() == team) {
 							continue;
 						}
 					}

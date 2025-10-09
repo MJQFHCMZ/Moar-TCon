@@ -58,13 +58,11 @@ public class ItemDebugTool extends ItemBase {
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (!worldIn.isRemote) {
 			try {
-				((BlockBase) ModBlocks.blockGeodesium).setLightLevel(1);
-				//MinecraftForge.EVENT_BUS.register(TinkerRegistry.getTrait(MiscUtils.createNonConflictiveName("polyshot_projectile")));
-				//System.out.println("balls");
+				System.out.println(ModBlocks.blockReforgeStation);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		return true;
 	}
 }
