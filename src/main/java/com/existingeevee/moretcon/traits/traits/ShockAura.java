@@ -45,7 +45,7 @@ public class ShockAura extends AbstractTrait implements IBombTrait {
 			@SuppressWarnings("unchecked")
 			Map<Entity, Integer> reapplicationDelayMap = (Map<Entity, Integer>) reapplicationDelayMap$EntityAreaEffectCloud.get(cloud);
 			
-			Team team = attacker.getTeam();
+			Team team = attacker == null ? null : attacker.getTeam();
 
 			if (team != null && !team.getAllowFriendlyFire()) {
 				for (Entity e : world.loadedEntityList) {

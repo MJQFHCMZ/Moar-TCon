@@ -85,7 +85,7 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 					if (ent instanceof EntityTameable && ((EntityTameable) ent).getOwner() == projectile.shootingEntity) {
 						continue;
 					}
-					Team team = projectile.shootingEntity.getTeam();
+					Team team = projectile.shootingEntity == null ? null : projectile.shootingEntity.getTeam();
 					if (team != null && !team.getAllowFriendlyFire()) {
 						if (ent.getTeam() == team) {
 							continue;
