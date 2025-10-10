@@ -49,15 +49,15 @@ public class Tricromatic extends AbstractTrait {
 
 			if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource() == LAST_PROC.get() && col == 0) {
 				event.setAmount(event.getAmount() * 1.5f);
-			} else {
-				Entity trueSrc = event.getSource().getTrueSource();
-				if (trueSrc instanceof EntityLivingBase) {
-					EntityLivingBase trueLivingSrc = (EntityLivingBase) trueSrc;
+			} 
+		} else {
+			Entity trueSrc = event.getSource().getTrueSource();
+			if (trueSrc instanceof EntityLivingBase) {
+				EntityLivingBase trueLivingSrc = (EntityLivingBase) trueSrc;
 
-					if (this.isToolWithTrait(trueLivingSrc.getHeldItemMainhand()) || this.isToolWithTrait(trueLivingSrc.getHeldItemOffhand())) {
-						col = calculateChunkColor(trueSrc);
-						if (col == 0) event.setAmount(event.getAmount() * 1.5f);
-					}
+				if (this.isToolWithTrait(trueLivingSrc.getHeldItemMainhand()) || this.isToolWithTrait(trueLivingSrc.getHeldItemOffhand())) {
+					int col = calculateChunkColor(trueSrc);
+					if (col == 0) event.setAmount(event.getAmount() * 1.5f);
 				}
 			}
 		}
@@ -118,7 +118,6 @@ public class Tricromatic extends AbstractTrait {
 		Potion effect = Potion.REGISTRY.getObject(ConfigHandler.trichromicGreen);
 
 		if (effect != null && !entity.isPotionActive(effect)) {
-			System.out.println(ConfigHandler.trichromicGreenLvl);
 			entity.addPotionEffect(new PotionEffect(effect, 100, ConfigHandler.trichromicGreenLvl - 1, true, true));
 		}
 	}
