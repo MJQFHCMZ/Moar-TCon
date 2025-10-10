@@ -187,7 +187,7 @@ public class ContainerReforgeStation extends ContainerTinkerStation<TileReforgeS
 					}
 				}
 
-				if (!validHead && (input1.getHasStack() || input2.getHasStack())) {
+				if (!validHead && (input1.getHasStack() || input2.getHasStack()) && material != null) {
 					throw new TinkerGuiException(I18n.translateToLocalFormatted("gui.error.invalid_reforge_material", material.getLocalizedName()));
 				}
 			} catch (TinkerGuiException e) {
