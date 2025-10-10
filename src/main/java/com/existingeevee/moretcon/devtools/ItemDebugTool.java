@@ -2,7 +2,6 @@ package com.existingeevee.moretcon.devtools;
 
 import java.util.List;
 
-import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.ModTabs;

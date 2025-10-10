@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
