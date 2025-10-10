@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,8 +26,6 @@ public class EventWatcherBL {
 	public void onWorldStarted(WorldEvent.Load e) {
 		lightningInstances = new ArrayList<>();
 	}
-
-
 
 	@SubscribeEvent
 	public void onWorldTick(WorldTickEvent w) {
@@ -47,10 +44,9 @@ public class EventWatcherBL {
 		}
 		try {
 			for (EntityBLLightningBolt e : new ArrayList<>(EventWatcherBL.lightningInstances)) {
-				if (!e.isEntityAlive() && e.getEntityWorld().equals(w.world)) {
-					BlockPos pos = e.getPosition();
+				if (!e.isEntityAlive() && e.getEntityWorld() == w.world) {
 					double range = 5.0D;
-					List<Entity> nearbyEntities = e.getEntityWorld().getEntitiesWithinAABBExcludingEntity(e, new AxisAlignedBB(pos.getX() - range, pos.getY() - range, pos.getZ() - range, pos.getX() + range, pos.getY() + range, pos.getZ() + range));
+					List<Entity> nearbyEntities = e.getEntityWorld().getEntitiesWithinAABBExcludingEntity(e, new AxisAlignedBB(e.getPositionVector(), e.getPositionVector()).grow(range));
 					for (Entity entity : nearbyEntities) {
 						if (entity instanceof EntityItem) {
 							ItemStack stack = ((EntityItem) entity).getItem();
