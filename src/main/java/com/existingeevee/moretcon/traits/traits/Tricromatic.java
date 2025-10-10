@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -92,9 +91,6 @@ public class Tricromatic extends AbstractTrait {
 	}
 
 	private void red(EntityPlayer entity) {
-		if (entity.isSneaking()) {
-			entity.sendStatusMessage(new TextComponentString(ChatFormatting.RED + "Red"), true);
-		}
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, 0, 0, 0);
 		}
@@ -107,9 +103,6 @@ public class Tricromatic extends AbstractTrait {
 	}
 
 	private void green(EntityPlayer entity) {
-		if (entity.isSneaking()) {
-			entity.sendStatusMessage(new TextComponentString(ChatFormatting.GREEN + "Green"), true);
-		}
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, -1, 1, 0);
 		}
@@ -122,9 +115,6 @@ public class Tricromatic extends AbstractTrait {
 	}
 
 	private void blue(EntityPlayer entity) {
-		if (entity.isSneaking()) {
-			entity.sendStatusMessage(new TextComponentString(ChatFormatting.BLUE + "Blue"), true);
-		}
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, -1, 0, 1);
 		}
