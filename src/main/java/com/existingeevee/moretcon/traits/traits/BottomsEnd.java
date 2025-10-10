@@ -18,7 +18,7 @@ import slimeknights.tconstruct.library.utils.ToolHelper;
 
 public class BottomsEnd extends AbstractTrait {
 	public BottomsEnd() {
-		super(MiscUtils.createNonConflictiveName("bottomsend".toLowerCase()), 0);
+		super(MiscUtils.createNonConflictiveName("bottomsend"), 0xffffff);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -37,16 +37,15 @@ public class BottomsEnd extends AbstractTrait {
 			}
 
 			if (state.getBlock() == Blocks.BEDROCK) {
-				if (harvestLevel >= 4) {
-					if (silkTouch && ConfigHandler.unfracturedBedrockObtainable) {
-						event.getDrops().add(new ItemStack(Blocks.BEDROCK));
-					} else {
-						event.getDrops().add(new ItemStack(ModBlocks.blockCobbledBedrock));
-					}
+				if (harvestLevel < 4) {
+					event.getDrops().clear();
 				}
-			}
 
-			if (state.getBlock().getRegistryName().toString().equals("thebetweenlands:betweenlands_bedrock")) {
+				if (!silkTouch || !ConfigHandler.unfracturedBedrockObtainable) {
+					event.getDrops().clear();
+					event.getDrops().add(new ItemStack(ModBlocks.blockCobbledBedrock));
+				}
+			} else if (state.getBlock().getRegistryName().toString().equals("thebetweenlands:betweenlands_bedrock")) {
 				if (harvestLevel < 4) {
 					event.getDrops().clear();
 				}
