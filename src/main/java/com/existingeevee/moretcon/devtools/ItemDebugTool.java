@@ -2,8 +2,7 @@ package com.existingeevee.moretcon.devtools;
 
 import java.util.List;
 
-import com.existingeevee.moretcon.block.blocktypes.BlockBase;
-import com.existingeevee.moretcon.inits.ModBlocks;
+import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.ModTabs;
@@ -58,11 +57,12 @@ public class ItemDebugTool extends ItemBase {
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (!worldIn.isRemote) {
 			try {
-				System.out.println(ModBlocks.blockReforgeStation);
+
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return true;
+		return false;
 	}
 }
