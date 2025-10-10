@@ -12,14 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import com.existingeevee.moretcon.other.StaticVars;
-import com.existingeevee.moretcon.traits.ModTraits;
+import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import slimeknights.mantle.util.TagHelper;
 import slimeknights.tconstruct.library.capability.projectile.TinkerProjectileHandler;
-import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.tools.ranged.IAmmo;
 import slimeknights.tconstruct.library.traits.IProjectileTrait;
 import slimeknights.tconstruct.library.traits.ITrait;
@@ -66,18 +65,17 @@ public abstract class MixinTinkerProjectileHandler {
 		boolean modified = false;
 		this.parent = parentOrig.copy();
 
-		if (ModTraits.polyshot.isToolWithTrait(launchingStack)) {
-			ModTraits.polyshotProj.apply(parent);
-			modified = true;
+		for (ITrait t : ToolHelper.getTraits(parent)) {
+			if (t instanceof IAdditionalTraitMethods) {
+				IAdditionalTraitMethods trait = (IAdditionalTraitMethods) t;
+				modified = trait.modifyProjectileParent(launchingStack, parent, parentOrig.copy(), (TinkerProjectileHandler) (Object) this) | modified;
+			}
 		}
 
-		if (ModTraits.mirroring.isToolWithTrait(parent)) {
-			for (ITrait t : ToolHelper.getTraits(launchingStack)) {
-				if (t instanceof IModifier) {
-					IModifier mod = (IModifier) t;
-					mod.apply(parent);
-					modified = true;
-				}
+		for (ITrait t : ToolHelper.getTraits(launchingStack)) {
+			if (t instanceof IAdditionalTraitMethods) {
+				IAdditionalTraitMethods trait = (IAdditionalTraitMethods) t;
+				modified = trait.modifyLauncherProjectile(launchingStack, parent, parentOrig.copy(), (TinkerProjectileHandler) (Object) this) | modified;
 			}
 		}
 		

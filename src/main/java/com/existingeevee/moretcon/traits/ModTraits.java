@@ -76,6 +76,7 @@ import com.existingeevee.moretcon.traits.traits.Withered;
 import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
 import com.existingeevee.moretcon.traits.traits.abst.DummyTrait;
 import com.existingeevee.moretcon.traits.traits.internal.PolyshotProj;
+import com.existingeevee.moretcon.traits.traits.internal.ReforgeProj;
 import com.existingeevee.moretcon.traits.traits.unique.AerialFlame;
 import com.existingeevee.moretcon.traits.traits.unique.Autoloading;
 import com.existingeevee.moretcon.traits.traits.unique.Blinkdrawn;
@@ -191,6 +192,7 @@ public class ModTraits {
 	public static Ricoshot ricoshot = new Ricoshot();
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
+	public static ReforgeProj reforgeProj = new ReforgeProj();
 
 	public static AntiGravity antigravity;
 

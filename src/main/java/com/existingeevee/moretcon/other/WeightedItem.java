@@ -1,7 +1,9 @@
 package com.existingeevee.moretcon.other;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class WeightedItem<T> {
     private T item;
@@ -24,8 +26,24 @@ public class WeightedItem<T> {
     	return weightedList.stream().mapToDouble(WeightedItem::getWeight).sum();
     }
     
-    public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList, Random rand, boolean remove) {
-        double totalWeight = getTotalWeight(weightedList);
+    public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList, boolean remove, Random rand) {
+        return getWeightedRandomItem(weightedList, remove, rand, t -> true);
+    }
+
+    public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList) {
+        return getWeightedRandomItem(weightedList, false, new Random());
+    }
+
+    public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList, boolean remove) {
+        return getWeightedRandomItem(weightedList, remove, new Random());
+    }
+
+	public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList, boolean remove, Random rand, Predicate<T> filter) {
+		
+		Collection<WeightedItem<T>> filtered = new ArrayList<>(weightedList);
+		filtered.removeIf(w -> !filter.test(w.getItem()));
+		
+		double totalWeight = getTotalWeight(filtered);
         double randomWeight = rand.nextDouble() * totalWeight;
 
     	if (totalWeight <= 0) {
@@ -34,7 +52,7 @@ public class WeightedItem<T> {
         
         WeightedItem<T> ret = null;
         
-        for (WeightedItem<T> item : weightedList) {
+        for (WeightedItem<T> item : filtered) {
             randomWeight -= item.getWeight();
             if (randomWeight <= 0) {
             	ret = item;
@@ -46,13 +64,5 @@ public class WeightedItem<T> {
         	weightedList.remove(ret);
         }
         return ret.getItem();
-    }
-
-    public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList) {
-        return getWeightedRandomItem(weightedList, new Random(), false);
-    }
-
-    public static <T> T getWeightedRandomItem(Collection<WeightedItem<T>> weightedList, boolean remove) {
-        return getWeightedRandomItem(weightedList, new Random(), remove);
-    }
+	}
 }

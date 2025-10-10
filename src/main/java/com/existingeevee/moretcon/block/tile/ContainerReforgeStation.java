@@ -161,7 +161,8 @@ public class ContainerReforgeStation extends ContainerTinkerStation<TileReforgeS
 			ItemStack remains = ItemStack.EMPTY;
 
 			try {
-				AbstractReforge reforge = this.world.isRemote ? ModReforges.reforgePlaceholder : AbstractReforge.getRandomReforge();
+				//we use the placeholder on client as we want it to be obfuscated. (not that itd matter the random isnt synced)
+				AbstractReforge reforge = this.world.isRemote ? ModReforges.reforgePlaceholder : ReforgeHelper.getRandomReforge(stack);
 
 				ItemStack stone = stoneSlot.getStack();
 

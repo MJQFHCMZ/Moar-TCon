@@ -1,10 +1,5 @@
 package com.existingeevee.moretcon.reforges;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.existingeevee.moretcon.other.WeightedItem;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
@@ -28,6 +23,7 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
+import slimeknights.tconstruct.library.modifiers.TinkerGuiException;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
@@ -40,9 +36,6 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 	public static final String LOC_Desc = Modifier.LOC_Desc;
 	protected final int color;
 
-	protected static final Set<AbstractReforge> RANDOM_REFORGES = new HashSet<>();
-	protected static final List<WeightedItem<AbstractReforge>> REFORGE_WEIGHTS = new ArrayList<>();
-		
 	public AbstractReforge(String identifier, TextFormatting color) {
 		this(identifier, Util.enumChatFormattingToColor(color));
 	}
@@ -56,11 +49,11 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 	}
 
 	public AbstractReforge setRandomReforge(double weight) {
-		if (RANDOM_REFORGES.contains(this))
+		if (ReforgeHelper.RANDOM_REFORGES.contains(this.getIdentifier()))
 			return this;
 		
-		RANDOM_REFORGES.add(this);
-		REFORGE_WEIGHTS.add(new WeightedItem<>(this, weight));
+		ReforgeHelper.RANDOM_REFORGES.add(this.getIdentifier());
+		ReforgeHelper.REFORGE_WEIGHTS.add(new WeightedItem<>(this, weight));
 		
 		return this;
 	}
@@ -182,7 +175,7 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 	}
 
 	@Override
-	public boolean canApplyCustom(ItemStack stack) {
+	public boolean canApplyCustom(ItemStack stack) throws TinkerGuiException {
 		// can only apply if the trait isn't present already
 		NBTTagList tagList = TagUtil.getTraitsTagList(stack);
 		int index = TinkerUtil.getIndexInList(tagList, this.getIdentifier());
@@ -240,9 +233,5 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 	public int getColor() {
 		return color;
-	}
-
-	public static AbstractReforge getRandomReforge() {
-		return WeightedItem.getWeightedRandomItem(REFORGE_WEIGHTS);
 	}
 }

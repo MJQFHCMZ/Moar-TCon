@@ -1,9 +1,14 @@
 package com.existingeevee.moretcon.reforges;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.annotation.Nullable;
+
+import com.existingeevee.moretcon.other.WeightedItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -14,10 +19,14 @@ import slimeknights.mantle.util.TagHelper;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
+import slimeknights.tconstruct.library.modifiers.TinkerGuiException;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
 
 public class ReforgeHelper {
+
+	protected static final Set<String> RANDOM_REFORGES = new HashSet<>();
+	protected static final List<WeightedItem<AbstractReforge>> REFORGE_WEIGHTS = new ArrayList<>();
 
 	public static final String REFORGE_KEY = "moretcon.reforge";
 
@@ -97,5 +106,19 @@ public class ReforgeHelper {
 		for (AbstractReforge r : reforges) {
 			r.cleanUp(rootCompound);
 		}
+	}
+
+	public static AbstractReforge getRandomReforge(ItemStack stack) {
+		return WeightedItem.getWeightedRandomItem(REFORGE_WEIGHTS, false, new Random(), r -> {
+			try {
+				return r.canApplyCustom(stack);
+			} catch (TinkerGuiException e) {
+				return false;
+			}
+		});
+	}
+
+	public static AbstractReforge getRandomReforge() {
+		return WeightedItem.getWeightedRandomItem(REFORGE_WEIGHTS);
 	}
 }
