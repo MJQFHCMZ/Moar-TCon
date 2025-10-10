@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.MoreTCon;
+import com.existingeevee.moretcon.block.ISimpleBlockItemProvider;
 import com.existingeevee.moretcon.block.tile.TileReforgeStation;
 
 import net.minecraft.block.SoundType;
@@ -22,27 +23,23 @@ import slimeknights.mantle.inventory.BaseContainer;
 import slimeknights.tconstruct.shared.block.BlockTable;
 import slimeknights.tconstruct.tools.common.block.ITinkerStationBlock;
 
-public class BlockReforgeStation extends BlockTable implements ITinkerStationBlock {
+public class BlockReforgeStation extends BlockTable implements ITinkerStationBlock, ISimpleBlockItemProvider {
 
 	public BlockReforgeStation() {
-	    super(Material.WOOD);
+		super(Material.ROCK);
 
-	    this.setSoundType(SoundType.WOOD);
-	    this.setResistance(5f);
-	    this.setHardness(1f);
+		this.setSoundType(SoundType.STONE);
+		this.setResistance(10f);
+		this.setHardness(2f);
 
-	    this.setHarvestLevel("axe", 0);
+		this.setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override
 	public boolean openGui(EntityPlayer player, World world, BlockPos pos) {
-		try {
-			player.openGui(MoreTCon.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
-			if (player.openContainer instanceof BaseContainer) {
-				((BaseContainer<?>) player.openContainer).syncOnOpen((EntityPlayerMP) player);
-			}
-		} catch (Throwable t) {
-			
+		player.openGui(MoreTCon.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+		if (player.openContainer instanceof BaseContainer<?>) {
+			((BaseContainer<?>) player.openContainer).syncOnOpen((EntityPlayerMP) player);
 		}
 		return true;
 	}

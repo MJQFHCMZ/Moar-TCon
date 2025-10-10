@@ -686,7 +686,7 @@ tile.moretcon.blockmonolite.name=Block of Monolite
 tile.moretcon.blockporksteel.name=Block of Porksteel
 tile.moretcon.blockperimidum.name=Block of Perimidum
 tile.moretcon.blockgeodesium.name=Block of Geodesium
-
+tile.moretcon.blockreforgestation.name=Reforge Station
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
 tile.moretcon.blockotherstone.name=Otherstone
