@@ -17,7 +17,7 @@ public class Hyperheat extends AbstractTrait {
 	@Override
 	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
 		if (wasHit) {
-			target.addPotionEffect(new PotionEffect(ModPotions.hyperflames, 200, (int) Math.min(damageDealt / 3, ConfigHandler.hyperheatMaximumStack)));
+			target.addPotionEffect(new PotionEffect(ModPotions.hyperflames, 200, (int) Math.min(damageDealt / 10, ConfigHandler.hyperheatMaximumStack)));
 		}
 	}
 }

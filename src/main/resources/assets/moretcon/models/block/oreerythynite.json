@@ -1,12 +1,7 @@
 {
-  "parent": "block/cube",
+  "parent": "moretcon:block/template/layered_cube_all_2",
   "textures": {
-    "down": "moretcon:blocks/oreerythynite",
-    "up": "moretcon:blocks/oreerythynite",
-    "north": "moretcon:blocks/oreerythynite",
-    "east": "moretcon:blocks/oreerythynite",
-    "south": "moretcon:blocks/oreerythynite",
-    "west": "moretcon:blocks/oreerythynite",
-    "particle": "moretcon:blocks/oreerythynite"
+    "bot_all": "moretcon:blocks/oreerythynite",
+    "top_all": "moretcon:blocks/bloom/oreerythynite_bloom"    
   }
 }

@@ -1,12 +1,7 @@
 {
-  "parent": "block/cube",
+  "parent": "moretcon:block/template/layered_cube_all_2",
   "textures": {
-    "down": "moretcon:blocks/blocktrichromadentium",
-    "up": "moretcon:blocks/blocktrichromadentium",
-    "north": "moretcon:blocks/blocktrichromadentium",
-    "east": "moretcon:blocks/blocktrichromadentium",
-    "south": "moretcon:blocks/blocktrichromadentium",
-    "west": "moretcon:blocks/blocktrichromadentium",
-    "particle": "moretcon:blocks/blocktrichromadentium"
+    "bot_all": "moretcon:blocks/blocktrichromadentium",
+    "top_all": "moretcon:blocks/bloom/blocktrichromadentium_bloom"    
   }
 }

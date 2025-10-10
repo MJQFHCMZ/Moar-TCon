@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -28,7 +29,7 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 
 	public Ricoshot() {
-		super(MiscUtils.createNonConflictiveName("ricoshot"), 0xffffff);
+		super(MiscUtils.createNonConflictiveName("ricoshot"), 0xb2a1ff);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -79,11 +80,18 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 				double closestLenSq = Double.POSITIVE_INFINITY;
 
 				double maxDist = 15;
-
+				
 				for (Entity ent : world.getEntitiesWithinAABBExcludingEntity(projectile.shootingEntity, projectile.getEntityBoundingBox().grow(maxDist))) {
 					if (ent instanceof EntityTameable && ((EntityTameable) ent).getOwner() == projectile.shootingEntity) {
 						continue;
 					}
+					Team team = projectile.shootingEntity == null ? null : projectile.shootingEntity.getTeam();
+					if (team != null && !team.getAllowFriendlyFire()) {
+						if (ent.getTeam() == team) {
+							continue;
+						}
+					}
+
 					if (ent instanceof EntityLivingBase && ((EntityLivingBase) ent).canEntityBeSeen(projectile) && ((EntityLivingBase) ent).isEntityAlive() && ((EntityLivingBase) ent).getHealth() > 0) {
 						double dSq = ent.getDistanceSq(projectile);
 						if (dSq < maxDist * maxDist && dSq < closestLenSq) {
@@ -159,7 +167,7 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 
 		int bounces = comp.getInteger("Bounces");
 		if (bounces > 0)
-			attackEntitySecondary(DamageSource.causeIndirectDamage(projectile, attacker), (float) Math.pow(1.5, bounces), target, true, false);
+			attackEntitySecondary(DamageSource.causeIndirectDamage(projectile, attacker), (float) Math.pow(1.65, bounces), target, true, false);
 	}
 
 	@SubscribeEvent

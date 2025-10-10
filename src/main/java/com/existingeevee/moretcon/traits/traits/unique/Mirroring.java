@@ -1,15 +1,20 @@
 package com.existingeevee.moretcon.traits.traits.unique;
 
 import com.existingeevee.moretcon.other.utils.MiscUtils;
+import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.library.capability.projectile.TinkerProjectileHandler;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
+import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.traits.AbstractProjectileTrait;
+import slimeknights.tconstruct.library.traits.ITrait;
+import slimeknights.tconstruct.library.utils.ToolHelper;
 
-public class Mirroring extends AbstractProjectileTrait {
+public class Mirroring extends AbstractProjectileTrait implements IAdditionalTraitMethods {
 
 	public Mirroring() {
 		super(MiscUtils.createNonConflictiveName("mirroring"), 0);
@@ -32,4 +37,17 @@ public class Mirroring extends AbstractProjectileTrait {
 		return super.isToolWithTrait(itemStack);
 	}
 
+	@Override
+	public boolean modifyProjectileParent(ItemStack launchingStack, ItemStack parent, ItemStack copy, TinkerProjectileHandler tinkerProjectileHandler) {
+		boolean modified = false;
+		for (ITrait t : ToolHelper.getTraits(launchingStack)) {
+			if (t instanceof IModifier) {
+				IModifier mod = (IModifier) t;
+				mod.apply(parent);
+				modified = true;
+			}
+		}
+		
+		return modified;
+	}
 }

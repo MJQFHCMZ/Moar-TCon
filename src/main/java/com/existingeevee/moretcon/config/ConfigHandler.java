@@ -105,8 +105,8 @@ public class ConfigHandler {
 		ConfigHandler.registerBetweenTinkerTools = config.getBoolean("registerBetweenTinkerTools".toLowerCase(), category, true, "Set to \"false\" if you do not want to  BetweenTinker tinker items to be loaded.");
 		ConfigHandler.middleGemsRequireModifierSlots = config.getBoolean("middleGemsRequireModifierSlots".toLowerCase(), category, true, "Set to \"false\" if you do not want to Betweenlands middle gems to cost modifier slots.");
 		String triRed = config.getString("trichromic_red", category, "minecraft:strength;1", "Set to a potion effect to affect trichromic color effect.");
-		String triGreen = config.getString("trichromic_green", category, "none;0", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
-		String triBlue = config.getString("trichromic_blue", category, "none;0", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
+		String triGreen = config.getString("trichromic_green", category, "minecraft:regeneration;1", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
+		String triBlue = config.getString("trichromic_blue", category, "minecraft:absorption;1", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
 		
 		unfracturedBedrockObtainable = config.getBoolean("unfracturedbedrockobtainable", category, unfracturedBedrockObtainable, "Whether or not regular (typically unbreakable) bedrock should be obtainable.");
 		ConfigHandler.inertiaOnlyWorksOnAdvancedTools = config.getBoolean("inertiaOnlyWorksOnAdvancedTools".toLowerCase(), category, false, "Set to \"true\" if you do not want inertia (betweenlands greataxe/greatsword trait) to function on basic tools.");

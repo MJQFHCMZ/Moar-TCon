@@ -29,7 +29,7 @@ public class AttributeTrait extends AbstractTrait {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void handleWeightless(LivingUpdateEvent event) {
+	public void handleAttr(LivingUpdateEvent event) {
 		IAttributeInstance attr = event.getEntityLiving().getAttributeMap().getAttributeInstance(type);
 		if (attr == null) {
 			return;

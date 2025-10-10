@@ -12,6 +12,7 @@
   	"late.common.MixinTinkerProjectileHandler",
   	"late.common.MixinEntityProjectileBase",
   	"late.common.MixinBowCore",
+  	"late.common.MixinToolCore",
   	"late.common.MixinTraitTasty",
   	"late.common.MixinBoltHeadPartMaterialType",
   	

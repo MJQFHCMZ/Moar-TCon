@@ -1,7 +1,5 @@
 package com.existingeevee.moretcon.other;
 
-import java.util.UUID;
-
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.devtools.DevEnvHandler;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
@@ -72,7 +70,8 @@ public class EventWatcherMain {
 	public void onTinkerCraftingEvent(TinkerCraftingEvent event) {
 		if (event.getItemStack().getItem() instanceof ITinkerable || event.getItemStack().getItem() instanceof IModifyable) { 
 			NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
-			comp.setString("UniqueToolID", UUID.randomUUID().toString());
+			if (comp.hasKey("UniqueToolID"))
+				comp.removeTag("UniqueToolID");
 		}
 	}
 

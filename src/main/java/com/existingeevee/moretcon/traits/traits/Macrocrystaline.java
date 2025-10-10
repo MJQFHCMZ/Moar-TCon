@@ -1,10 +1,15 @@
 package com.existingeevee.moretcon.traits.traits;
 
+import java.util.List;
+
 import com.existingeevee.moretcon.other.utils.MiscUtils;
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
@@ -16,17 +21,25 @@ public class Macrocrystaline extends AbstractTrait {
 
 	@Override
 	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
-		return newDamage + damage * getPerfection(tool) * 0.2f;
+		return newDamage + damage * getPerfection(tool) * 0.05f;
 	}
 
 	@Override
 	public void miningSpeed(ItemStack tool, PlayerEvent.BreakSpeed event) {
-		event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * getPerfection(tool));
+		event.setNewSpeed(event.getNewSpeed() + event.getOriginalSpeed() * getPerfection(tool) * 0.2f);
 	} 
+	
+
+    @Override
+    public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
+        String loc = String.format(LOC_Extra, getModifierIdentifier());
+        int perfection = getPerfection(tool);
+        return ImmutableList.of(Util.translateFormatted(loc, "2^" + perfection));
+    }
 	
 	private int getPerfection(ItemStack tool) {
 		int i = 0;				
-		while (ToolHelper.getCurrentDurability(tool) % ((int) (Math.pow(2, i) + 0.5)) == 0) { // the + 0.5 is just used for rounding lul
+		while (Math.pow(2, i) <= ToolHelper.getCurrentDurability(tool)) { // the + 0.5 is just used for rounding lul
 			i++;
 		}
 

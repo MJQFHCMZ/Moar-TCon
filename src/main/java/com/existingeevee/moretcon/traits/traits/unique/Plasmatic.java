@@ -62,7 +62,7 @@ public class Plasmatic extends AbstractTrait {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().calculateIntercept(start, end);
 
-			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= intercept.hitVec.squareDistanceTo(end)) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= start.squareDistanceTo(end)) {
 				try {
 					IS_ALREADY_PROCING.set(true);
 					int orig = ticksSinceLastAtt.getInt(player);

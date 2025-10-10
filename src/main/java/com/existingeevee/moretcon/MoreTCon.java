@@ -23,7 +23,9 @@ import com.existingeevee.moretcon.inits.recipes.UniqueToolpartRecipes;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MTMaterialIntegration;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.other.ClusterTickingHandler;
 import com.existingeevee.moretcon.other.EventWatcherMain;
+import com.existingeevee.moretcon.other.MTGuiHandler;
 import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
 import com.existingeevee.moretcon.other.fires.CustomFireHelper;
@@ -55,6 +57,7 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.tconstruct.library.MaterialIntegration;
@@ -99,6 +102,8 @@ public class MoreTCon {
 		MinecraftForge.EVENT_BUS.register(CustomFireHelper.class);
 		MinecraftForge.EVENT_BUS.register(ArrowReferenceHelper.class);
 		MinecraftForge.EVENT_BUS.register(ReforgeHandler.class);
+		MinecraftForge.EVENT_BUS.register(ClusterTickingHandler.class);
+		
 		ModTraits.init();
 		ModReforges.init();
 
@@ -152,6 +157,8 @@ public class MoreTCon {
 			}
 		}
 
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new MTGuiHandler());
+		
 		proxy.init();
 	}
 

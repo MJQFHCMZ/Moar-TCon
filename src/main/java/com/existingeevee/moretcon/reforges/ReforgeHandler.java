@@ -23,7 +23,14 @@ public class ReforgeHandler {
 				return;
 			}
 
-			String name = CustomFontColor.encodeColor(reforge.getColor()) + reforge.getLocalizedPrefix() + ChatFormatting.RESET;
+			String name;
+
+			if (reforge.getColor() < 0) {
+				name = reforge.getLocalizedPrefix();
+			} else {
+				name = CustomFontColor.encodeColor(reforge.getColor()) + reforge.getLocalizedPrefix() + ChatFormatting.RESET;
+			}
+			
 
 			List<String> tooltip = event.getToolTip();
 			tooltip.set(0, name + " " + tooltip.get(0));
