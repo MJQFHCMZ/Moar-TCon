@@ -24,7 +24,7 @@ public class MonoliteGenerator extends WorldGenModifier {
 		World world = ctx.world;
 		Random random = ctx.rand;
 
-		if (world.provider.getDimensionType().getId() != DimensionType.THE_END.getId() || peekNextInt(random, 250) != 0) {
+		if ((world.provider.getDimensionType().getId() != DimensionType.THE_END.getId()) || (random.nextInt(750) != 0)) {
 			return;
 		}
 
@@ -33,7 +33,7 @@ public class MonoliteGenerator extends WorldGenModifier {
 		int size = random.nextInt(20) + 45;
 		int widthCoefficient = random.nextInt(5) + 5;
 		double rot = random.nextDouble() * TWO_PI_OVER_THREE;
-
+		//TextureManager
 		double cosRot1 = Math.cos(rot), sinRot1 = Math.sin(rot);
 		double cosRot2 = Math.cos(rot + TWO_PI_OVER_THREE), sinRot2 = Math.sin(rot + TWO_PI_OVER_THREE);
 		double cosRot3 = Math.cos(rot - TWO_PI_OVER_THREE), sinRot3 = Math.sin(rot - TWO_PI_OVER_THREE);

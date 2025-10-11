@@ -38,7 +38,10 @@ public class Approximate extends AbstractTraitLeveled {
 	}
 
 	public boolean shouldHaveApprox(ItemStack stack) {
-		return this.isToolWithTrait(stack) && !ToolHelper.isBroken(stack);
+		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
+		int index = TinkerUtil.getIndexInCompoundList(tagList, getModifierIdentifier());
+		
+		return index > -1 && !ToolHelper.isBroken(stack);
 	}
 
 	@SubscribeEvent

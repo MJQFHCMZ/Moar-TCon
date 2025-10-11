@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -49,15 +47,15 @@ public class Tricromatic extends AbstractTrait {
 
 			if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource() == LAST_PROC.get() && col == 0) {
 				event.setAmount(event.getAmount() * 1.5f);
-			} else {
-				Entity trueSrc = event.getSource().getTrueSource();
-				if (trueSrc instanceof EntityLivingBase) {
-					EntityLivingBase trueLivingSrc = (EntityLivingBase) trueSrc;
+			} 
+		} else {
+			Entity trueSrc = event.getSource().getTrueSource();
+			if (trueSrc instanceof EntityLivingBase) {
+				EntityLivingBase trueLivingSrc = (EntityLivingBase) trueSrc;
 
-					if (this.isToolWithTrait(trueLivingSrc.getHeldItemMainhand()) || this.isToolWithTrait(trueLivingSrc.getHeldItemOffhand())) {
-						col = calculateChunkColor(trueSrc);
-						if (col == 0) event.setAmount(event.getAmount() * 1.5f);
-					}
+				if (this.isToolWithTrait(trueLivingSrc.getHeldItemMainhand()) || this.isToolWithTrait(trueLivingSrc.getHeldItemOffhand())) {
+					int col = calculateChunkColor(trueSrc);
+					if (col == 0) event.setAmount(event.getAmount() * 1.5f);
 				}
 			}
 		}
@@ -93,9 +91,6 @@ public class Tricromatic extends AbstractTrait {
 	}
 
 	private void red(EntityPlayer entity) {
-		if (entity.isSneaking()) {
-			entity.sendStatusMessage(new TextComponentString(ChatFormatting.RED + "Red"), true);
-		}
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, 0, 0, 0);
 		}
@@ -108,9 +103,6 @@ public class Tricromatic extends AbstractTrait {
 	}
 
 	private void green(EntityPlayer entity) {
-		if (entity.isSneaking()) {
-			entity.sendStatusMessage(new TextComponentString(ChatFormatting.GREEN + "Green"), true);
-		}
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, -1, 1, 0);
 		}
@@ -118,15 +110,11 @@ public class Tricromatic extends AbstractTrait {
 		Potion effect = Potion.REGISTRY.getObject(ConfigHandler.trichromicGreen);
 
 		if (effect != null && !entity.isPotionActive(effect)) {
-			System.out.println(ConfigHandler.trichromicGreenLvl);
 			entity.addPotionEffect(new PotionEffect(effect, 100, ConfigHandler.trichromicGreenLvl - 1, true, true));
 		}
 	}
 
 	private void blue(EntityPlayer entity) {
-		if (entity.isSneaking()) {
-			entity.sendStatusMessage(new TextComponentString(ChatFormatting.BLUE + "Blue"), true);
-		}
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, -1, 0, 1);
 		}

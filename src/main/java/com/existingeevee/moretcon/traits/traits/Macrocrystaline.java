@@ -43,6 +43,6 @@ public class Macrocrystaline extends AbstractTrait {
 			i++;
 		}
 
-		return i;
+		return i - 1;
 	}
 }

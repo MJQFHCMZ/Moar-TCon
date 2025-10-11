@@ -4,6 +4,7 @@ import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.client.actions.PerimidumAuraAction;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.other.ClusterTickingHandler.ISimpleClusterable;
+import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
@@ -53,10 +54,12 @@ public class BlockPerimidumOre extends BlockOre implements ISimpleClusterable {
 
 	@Override
 	public void onClusterTick(Vec3d clusterCenter, World worldIn, double mass, AxisAlignedBB bound) {
-		
 		NBTTagCompound payload = new NBTTagCompound();
 		payload.setDouble("Mass", mass);
 		payload.setDouble("Height", bound.maxY - bound.minY);
-		PerimidumAuraAction.INSTANCE.run(worldIn, bound.getCenter().x, bound.minY, bound.getCenter().z, payload);
+		
+		
+		
+		PerimidumAuraAction.INSTANCE.run(worldIn, MiscUtils.getCenter(bound).x, bound.minY, MiscUtils.getCenter(bound).z, payload);
 	}
 }

@@ -52,7 +52,10 @@ public class Reaching extends AbstractTraitLeveled {
 	}
 
 	public boolean shouldHaveReach(ItemStack stack) {
-		return this.isToolWithTrait(stack) && !ToolHelper.isBroken(stack);
+		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
+		int index = TinkerUtil.getIndexInCompoundList(tagList, getModifierIdentifier());
+		
+		return index > -1 && !ToolHelper.isBroken(stack);
 	}
 
 	@SubscribeEvent
