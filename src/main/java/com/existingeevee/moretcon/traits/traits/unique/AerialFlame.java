@@ -71,12 +71,10 @@ public class AerialFlame extends AbstractProjectileTrait {
 		AxisAlignedBB hitbox = new AxisAlignedBB(entity.posX - 0.75, entity.posY, entity.posZ - 0.75, entity.lastTickPosX + 0.75, lowY - 1, entity.lastTickPosZ + 0.75);
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(entity.shootingEntity, hitbox);
 
-		entities.removeIf(e -> !(e instanceof EntityLivingBase));
-
 		DamageSource source = new EntityDamageSource("pillar_of_fire", entity.shootingEntity).setFireDamage();
 
 		for (Entity e : entities) {
-			if (e == entity) {
+			if (e == entity || !(e instanceof EntityLivingBase)) {
 				continue;
 			}
 
@@ -93,28 +91,21 @@ public class AerialFlame extends AbstractProjectileTrait {
 
 				float dmgOrig = dmg;
 
-				if (e instanceof EntityLivingBase) {
-					for (ITrait t : traits) {
-						dmg = t.damage(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, dmgOrig, dmg, false);
-					}
+				for (ITrait t : traits) {
+					dmg = t.damage(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, dmgOrig, dmg, false);
 				}
 
 				e.hurtResistantTime = 0;
-				if (e instanceof EntityLivingBase) {					
-					for (ITrait t : traits) {
-						t.onHit(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, dmg, false);
-						e.hurtResistantTime = 0;
-					}
+				for (ITrait t : traits) {
+					t.onHit(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, dmg, false);
+					e.hurtResistantTime = 0;
 				}
-
 
 				float hpBefore = ((EntityLivingBase) e).getHealth();
 				boolean wasHit = e.attackEntityFrom(source, dmg);
 
 				for (ITrait t : traits) {
-					if (e instanceof EntityLivingBase) {
-						t.afterHit(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, hpBefore - ((EntityLivingBase) e).getHealth(), false, wasHit);
-					}
+					t.afterHit(toolStack, (EntityLivingBase) entity.shootingEntity, (EntityLivingBase) e, hpBefore - ((EntityLivingBase) e).getHealth(), false, wasHit);
 				}
 			}
 		}

@@ -132,7 +132,7 @@ public class Dematerializing extends AbstractTrait {
 		Function<Double, Double> aimAssist = d -> Math.max(0, d < 36.3636 ? 0.0125 * d : -0.125 * (d - 40));
 
 		for (Entity e : entities) {
-			if (!(e instanceof EntityLivingBase) || e == shooter || e == shooter.getRidingEntity()) {
+			if (!MiscUtils.canArrowHit(e) || e == shooter || e == shooter.getRidingEntity()) {
 				continue;
 			}
 
