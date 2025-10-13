@@ -36,6 +36,12 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 	@Override
 	public void onLaunch(EntityProjectileBase projectile, World world, EntityLivingBase shooter) {
 		projectile.bounceOnNoDamage = false;
+		
+		NBTTagCompound tag = projectile.getEntityData().getCompoundTag(this.getModifierIdentifier());
+		tag.setDouble("LaunchX", projectile.posX);
+		tag.setDouble("LaunchY", projectile.posY);
+		tag.setDouble("LaunchZ", projectile.posZ);
+		projectile.getEntityData().setTag(this.getModifierIdentifier(), tag);
 	}
 
 	@Override
@@ -44,7 +50,10 @@ public class Ricoshot extends AbstractTrait implements IProjectileTrait {
 
 		NBTTagCompound comp = projectile.getEntityData().getCompoundTag(this.getIdentifier());
 		
-		if (!world.isRemote && (comp.getInteger("Bounces") < 4 || !projectile.inGround)) {
+		double x = comp.getDouble("LaunchX"), y = comp.getDouble("LaunchY"), z = comp.getDouble("LaunchZ");
+		double distSq = projectile.getDistanceSq(x, y, z);
+		
+		if (!world.isRemote && (comp.getInteger("Bounces") < 4 || !projectile.inGround) && distSq < 96 * 96) {
 
 			int color = getToolMaterials(projectile.tinkerProjectile.getItemStack()).get(0).materialTextColor;
 
