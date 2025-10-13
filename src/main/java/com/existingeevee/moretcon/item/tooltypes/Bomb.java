@@ -14,11 +14,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -59,8 +63,15 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 		this.setUnlocalizedName(MiscUtils.createNonConflictiveName("bomb"));
 
 		TinkerRegistry.registerToolForgeCrafting(this);
-		
+
 		this.durabilityPerAmmo = 15;
+	}
+
+	@Override
+	public boolean dealDamageRanged(ItemStack stack, Entity projectile, EntityLivingBase player, Entity entity, float damage) {
+		DamageSource damageSource = new EntityDamageSourceIndirect("bomb", projectile, player);
+
+		return entity.attackEntityFrom(damageSource, damage);
 	}
 
 	@Override
@@ -87,7 +98,7 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 		if (4 < materials.size()) {
 			nameMaterials.add(materials.get(4)); // charge
 		}
-		
+
 		return Material.getCombinedItemName(I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name").trim(), nameMaterials);
 	}
 
@@ -109,7 +120,7 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 		}
 
 		playerIn.swingArm(hand);
-		
+
 		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
 	}
 
@@ -118,8 +129,8 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 		BombNBT data = new BombNBT();
 
 		if (materials.size() < 5)
-			return data; //prevent dum
-		
+			return data; // prevent dum
+
 		data.head(materials.get(0).getStatsOrUnknown(HEAD));
 		data.extra(materials.get(1).getStatsOrUnknown(EXTRA));
 		data.handle(materials.get(2).getStatsOrUnknown(HANDLE), materials.get(3).getStatsOrUnknown(HANDLE));
@@ -172,7 +183,7 @@ public class Bomb extends ProjectileCore implements MaterialTypes {
 
 		public BombNBT() {
 		}
-		
+
 		public BombNBT(NBTTagCompound toolTag) {
 			super(toolTag);
 		}

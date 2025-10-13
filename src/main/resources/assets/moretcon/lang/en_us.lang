@@ -2,6 +2,8 @@ death.attack.bleeding=%1$s bled out
 death.attack.coldfire=%1$s's thermal kinetic energy level had two solutions
 death.attack.haunted=%1$s's soul burned away
 death.attack.pillar_of_fire=%1$s was swept away in a pillar of fire
+death.attack.bomb=%1$s was blown apart by %2$s
+death.attack.bomb.item=%1$s was blown apart by %2$s using %3$s
 
 entity.decaying_effect_moretcon.name=Effect
 

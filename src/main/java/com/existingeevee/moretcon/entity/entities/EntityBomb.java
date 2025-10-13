@@ -3,10 +3,12 @@ package com.existingeevee.moretcon.entity.entities;
 import java.util.List;
 
 import com.existingeevee.moretcon.client.actions.BombAction;
+import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.traits.traits.abst.IBombTrait;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -206,9 +208,9 @@ public class EntityBomb extends EntityProjectileBase {
 			}
 			
 			AxisAlignedBB box = new AxisAlignedBB(posX, posY, posZ, posX, posY, posZ).grow(radius);
-			List<EntityLivingBase> entities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, box, e -> e != attacker);
+			List<Entity> entities = this.world.getEntitiesWithinAABB(Entity.class, box, e -> e != attacker && MiscUtils.canArrowHit(e));
 
-			for (EntityLivingBase e : entities) {
+			for (Entity e : entities) {
 				ItemStack launcher = tinkerProjectile.getLaunchingStack();
 				boolean hit = false;
 
