@@ -288,6 +288,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialSearedStone, new HandleMaterialStats(0.85f, -25));
 			TinkerRegistry.addMaterialStats(materialSearedStone, new ExtraMaterialStats(-15));
 			TinkerRegistry.addMaterialStats(materialSearedStone, whyWouldYouMakeABowOutOfThis);
+			TinkerRegistry.addMaterialStats(materialSearedStone, new ArrowShaftMaterialStats(0.8f, 15));
 
 			materialSlimesteel.addCommonItems("Slimesteel");
 			materialSlimesteel.setFluid(ModFluids.liquidSlimesteel);
@@ -301,6 +302,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new HandleMaterialStats(0.6f, 120));
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new ExtraMaterialStats(45));
 			TinkerRegistry.addMaterialStats(materialSlimesteel, new BowMaterialStats(0.9f, 1.0f, 3f));
+			TinkerRegistry.addMaterialStats(materialSlimesteel, new ArrowShaftMaterialStats(1.2f, 15));
 		}
 
 		if (CompatManager.plustic) {
@@ -380,6 +382,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialPorksteel, new HandleMaterialStats(1.30f, 20));
 			TinkerRegistry.addMaterialStats(materialPorksteel, new ExtraMaterialStats(190));
 		    TinkerRegistry.addMaterialStats(materialPorksteel, new BowMaterialStats(0.55f, 1.5f, 7.3f));
+			TinkerRegistry.addMaterialStats(materialPorksteel, new ArrowShaftMaterialStats(1.2f, 15));
 
 
 			materialIrradium.addItem("oreIrradium", 1, Material.VALUE_Ore());
@@ -704,6 +707,8 @@ public class ModMaterials implements MaterialTypes {
 			materialIgniglomerate.addTrait(ModTraits.luminescent, HANDLE);
 			materialIgniglomerate.addTrait(TinkerTraits.autosmelt, EXTRA);
 			materialIgniglomerate.addTrait(ModTraits.luminescent, EXTRA);
+			materialIgniglomerate.addTrait(ModTraits.hyperheat, SHAFT);
+			materialIgniglomerate.addTrait(ModTraits.luminescent, SHAFT);
 			materialIgniglomerate.addTrait(ModTraits.luminescent);
 			TinkerRegistry.addMaterialStats(materialIgniglomerate, new HeadMaterialStats(700, 6f, 7f, 7));
 			TinkerRegistry.addMaterialStats(materialIgniglomerate, new HandleMaterialStats(1.25f, -10));
@@ -731,6 +736,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialEtherstone, new HeadMaterialStats(1450, 17.5f, 18f, 8));
 			TinkerRegistry.addMaterialStats(materialEtherstone, new HandleMaterialStats(4f, -50));
 			TinkerRegistry.addMaterialStats(materialEtherstone, new ExtraMaterialStats(500));
+			TinkerRegistry.addMaterialStats(materialEtherstone, new ArrowShaftMaterialStats(1f, 10));
 			TinkerRegistry.addMaterialStats(materialEtherstone, whyWouldYouMakeABowOutOfThis);
 
 			TinkerRegistry.addMaterialStats(materialEssencore, new HeadMaterialStats(4096, 10f, 12f, 7));
@@ -926,6 +932,7 @@ public class ModMaterials implements MaterialTypes {
 			materialZanite.addTrait(ModTraits.hardcore, HEAD);
 			TinkerRegistry.addMaterialStats(materialZanite, new HeadMaterialStats(210, 2.00f, 4.00f, 2));
 			TinkerRegistry.addMaterialStats(materialZanite, new HandleMaterialStats(0.9f, 65));
+			TinkerRegistry.addMaterialStats(materialZanite, new ArrowShaftMaterialStats(1f, 10));
 			TinkerRegistry.addMaterialStats(materialZanite, new ExtraMaterialStats(50));
 			TinkerRegistry.addMaterialStats(materialZanite, whyWouldYouMakeABowOutOfThis);
 
@@ -1004,6 +1011,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialHolystone, new HeadMaterialStats(130, 3f, 3f, 1));
 			TinkerRegistry.addMaterialStats(materialHolystone, new HandleMaterialStats(0.25f, -50));
 			TinkerRegistry.addMaterialStats(materialHolystone, new ExtraMaterialStats(30));
+			TinkerRegistry.addMaterialStats(materialHolystone, new ArrowShaftMaterialStats(1f, 5));
 
 			materialGravitite.addItem("blockGravitite", 1, Material.VALUE_Block);
 			materialGravitite.addItem("gemGravitite", 1, Material.VALUE_Ingot);
@@ -1019,6 +1027,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialGravitite, new HandleMaterialStats(0.9f, 90));
 			TinkerRegistry.addMaterialStats(materialGravitite, new ExtraMaterialStats(90));
 			TinkerRegistry.addMaterialStats(materialGravitite, whyWouldYouMakeABowOutOfThis);
+			TinkerRegistry.addMaterialStats(materialHolystone, new ArrowShaftMaterialStats(1.2f, 15));
 
 			TinkerRegistry.addMaterialStats(materialSkybolt, new HeadMaterialStats(1070, 7.50f, 5.00f, 3));
 			materialSkybolt.addTrait(ModTraits.boltforged);
