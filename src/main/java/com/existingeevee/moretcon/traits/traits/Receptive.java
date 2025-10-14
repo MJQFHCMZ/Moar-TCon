@@ -93,7 +93,8 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	public int setMining(ItemStack stack, int amount) {
 		NBTTagCompound comp = stack.getOrCreateSubCompound(this.getModifierIdentifier());
 		comp.setInteger("mining", amount);
-		recalculateStats(TagUtil.getTagSafe(stack), this.getAttack(stack), amount);
+		if (this.isToolWithTrait(stack))
+			recalculateStats(TagUtil.getTagSafe(stack), this.getAttack(stack), amount);
 		return amount;
 	}
 
@@ -105,7 +106,8 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	public int setAttack(ItemStack stack, int amount) {
 		NBTTagCompound comp = stack.getOrCreateSubCompound(this.getModifierIdentifier());
 		comp.setInteger("attack", amount);
-		recalculateStats(TagUtil.getTagSafe(stack), amount, this.getMining(stack));
+		if (this.isToolWithTrait(stack))
+			recalculateStats(TagUtil.getTagSafe(stack), amount, this.getMining(stack));
 		return amount;
 	}
 
