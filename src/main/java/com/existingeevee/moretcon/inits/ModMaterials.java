@@ -709,6 +709,7 @@ public class ModMaterials implements MaterialTypes {
 			materialIgniglomerate.addTrait(ModTraits.luminescent, EXTRA);
 			materialIgniglomerate.addTrait(ModTraits.hyperheat, SHAFT);
 			materialIgniglomerate.addTrait(ModTraits.luminescent, SHAFT);
+			materialIgniglomerate.addTrait(ModTraits.burning);
 			materialIgniglomerate.addTrait(ModTraits.luminescent);
 			TinkerRegistry.addMaterialStats(materialIgniglomerate, new HeadMaterialStats(700, 6f, 7f, 7));
 			TinkerRegistry.addMaterialStats(materialIgniglomerate, new HandleMaterialStats(1.25f, -10));
