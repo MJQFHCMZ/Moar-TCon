@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
-import scala.actors.threadpool.Arrays;
 
 @Mixin(ItemStack.class)
 public class MixinItemStack {
