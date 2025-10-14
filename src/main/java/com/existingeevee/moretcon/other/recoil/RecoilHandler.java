@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Adapted from MrCrayfish's Gun Mod
@@ -24,20 +26,18 @@ public class RecoilHandler {
 
 	public void recoil(EntityPlayer player, float angle) {
 		if (player == null) {
-			player = Minecraft.getMinecraft().player;
-		}
-		if (player == null) {
 			return;
 		}
 		if (player.world.isRemote) {
 			this.cameraRecoil = angle;
 			this.progressCameraRecoil = 0F;
-		} else {
+		} else if (player instanceof EntityPlayerMP) {
 			NetworkHandler.HANDLER.sendTo(new MessageSendRecoil(angle), (EntityPlayerMP) player);
 		}
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void onRenderTick(TickEvent.RenderTickEvent event) {
 		if (event.phase != TickEvent.Phase.END || this.cameraRecoil <= 0)
 			return;

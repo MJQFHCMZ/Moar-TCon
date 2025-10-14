@@ -31,7 +31,7 @@ public class MessageSendRecoil implements IMessage, IMessageHandler<MessageSendR
 	@Override
 	public IMessage onMessage(MessageSendRecoil message, MessageContext ctx) {
 		Minecraft.getMinecraft().addScheduledTask(() -> {
-			RecoilHandler.INSTANCE.recoil(null, message.recoilAngle);
+			RecoilHandler.INSTANCE.recoil(Minecraft.getMinecraft().player, message.recoilAngle);
 		});
 		return null;
 	}
