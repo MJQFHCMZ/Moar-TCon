@@ -11,11 +11,13 @@ public class SoundHandler {
 	public static SoundEvent BLOODY_SLASH;
 	public static SoundEvent SWOOSH_EXPLOSION;
 	public static SoundEvent ICY_EXPLOSION;
-
+	public static SoundEvent DEMATERIALIZED_SHOT;
+	
 	public static void registerInit() {
 		BLOODY_SLASH = registerSound("traits.bloody_arc.slash");
 		SWOOSH_EXPLOSION = registerSound("traits.kinetic_battery.swoosh_explosion");
 		ICY_EXPLOSION = registerSound("traits.hailshot.icy_explosion");
+		DEMATERIALIZED_SHOT = registerSound("traits.dematerializing.dematerialized_shot");
 	}
 
 	private static SoundEvent registerSound(String name) {

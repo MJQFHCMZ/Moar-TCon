@@ -2,14 +2,17 @@ package com.existingeevee.moretcon.traits.traits.internal;
 
 import java.util.UUID;
 
+import com.existingeevee.moretcon.other.recoil.RecoilHandler;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -41,6 +44,11 @@ public class PolyshotProj extends AbstractProjectileTrait {
 		}
 
 		if (projectileBase != null && shooter != null) {
+
+			if (shooter instanceof EntityPlayer && !world.isRemote)
+				RecoilHandler.INSTANCE.recoil((EntityPlayer) shooter, 7);
+			world.playSound(null, projectileBase.getPosition(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 2, 2);
+
 			TinkerProjectileHandler ticProjectile = projectileBase.tinkerProjectile;
 
 			float speed = ticProjectile.getPower();
@@ -128,15 +136,15 @@ public class PolyshotProj extends AbstractProjectileTrait {
 	public void onTinkerProjectileImpactEvent(TinkerProjectileImpactEvent event) {
 		if (event.getEntity() instanceof EntityProjectileBase) {
 			ItemStack stack = ((EntityProjectileBase) event.getEntity()).tinkerProjectile.getItemStack();
-			
+
 			if (!this.isToolWithTrait(stack)) {
 				return;
 			}
-			
+
 			RayTraceResult result = event.getRayTraceResult();
 			if (result != null && result.entityHit != null) {
 				LAST_PROJ.set((EntityProjectileBase) event.getEntity());
-				
+
 				NBTTagCompound comp = result.entityHit.getEntityData().getCompoundTag(this.getModifierIdentifier());
 
 				UUID uuid = comp.getUniqueId(this.getIdentifier() + ".LastVolley");
@@ -153,20 +161,20 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onLivingDamage(LivingHurtEvent event) {
-				
+
 		if (LAST_PROJ.get() != null) {
 			EntityProjectileBase proj = LAST_PROJ.get();
 			ItemStack stack = proj.tinkerProjectile.getItemStack();
-			
+
 			if (!this.isToolWithTrait(stack)) {
 				return;
 			}
-			
+
 			NBTTagCompound comp = proj.getEntityData().getCompoundTag(this.getModifierIdentifier());
 			double distTraveled = comp.getDouble("DistTraveled");
 
 			float mult = (float) (2 * Math.exp(-(DSQ_SCALAR * distTraveled) * (DSQ_SCALAR * distTraveled)));
-						
+
 			event.setAmount(event.getAmount() * mult);
 		}
 	}

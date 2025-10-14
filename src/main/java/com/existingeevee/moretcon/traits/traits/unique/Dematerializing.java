@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import com.existingeevee.moretcon.client.actions.ColoredDustAction;
+import com.existingeevee.moretcon.other.DamageScalar;
 import com.existingeevee.moretcon.other.StaticVars;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
@@ -17,9 +18,11 @@ import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -78,7 +81,7 @@ public class Dematerializing extends AbstractTrait {
 
 		ProjectileLauncherNBT launcherData = new ProjectileLauncherNBT(TagUtil.getToolTag(event.launcher));
 		double dist = launcherData.range * 40;
-
+		
 		double posX = arrow.posX;
 		double posY = arrow.posY;
 		double posZ = arrow.posZ;
@@ -89,31 +92,93 @@ public class Dematerializing extends AbstractTrait {
 		arrow.motionY = heading.y * dist;
 		arrow.motionZ = heading.z * dist;
 
+		double motionX = arrow.motionX;
+		double motionY = arrow.motionY;
+		double motionZ = arrow.motionZ;
+		
 		arrow.posX = posX;
 		arrow.posY = posY;
 		arrow.posZ = posZ;
+		
+		long volleyID = random.nextLong();
+		
+		Vec3d posStart = arrow.getPositionVector();
+		
+		float baseSpeed = 3;
+		try {
+			baseSpeed = (Float) baseProjectileSpeed$BowCore.invoke(bow);
+		} catch (Exception e) {
+		}
+		float power = ItemBow.getArrowVelocity(20) * baseSpeed;
+		
+		EntityArrow arrowToShoot = bow.getProjectileEntity(StaticVars.lastArrowFired.get().copy(), event.launcher, world, (EntityPlayer) shooter, power, 0, progress, false);
+		arrowToShoot.setPosition(posStart.x, posStart.y, posStart.z);
+		arrowToShoot.setSilent(true);
+		
+		arrowToShoot.motionX = motionX;
+		arrowToShoot.motionY = motionY;
+		arrowToShoot.motionZ = motionZ;
+		
+		DamageScalar.set(0.275f);
+		this.shoot(world, posStart, shooter, arrowToShoot, dist, progress, event.launcher, volleyID, true, false);
+		DamageScalar.reset();
 
-		this.shoot(world, shooter, arrow, dist, event.launcher);
+		for (int i = 1; i < 4; i++) {
+			EntityArrow arrowToShoot2 = bow.getProjectileEntity(StaticVars.lastArrowFired.get().copy(), event.launcher, world, (EntityPlayer) shooter, power, 0, progress, false);
+			arrowToShoot2.setPosition(posStart.x, posStart.y, posStart.z);
+			arrowToShoot2.setSilent(true);
+			
+			arrowToShoot2.motionX = motionX;
+			arrowToShoot2.motionY = motionY;
+			arrowToShoot2.motionZ = motionZ;
+			
+			MiscUtils.executeInNTicks(() -> {
+				DamageScalar.set(0.275f);
+				this.shoot(world, posStart, shooter, arrowToShoot2, dist, progress, event.launcher, volleyID, false, false);
+				DamageScalar.reset();
+			}, 3 * i);
+		}
 	}
 
-	public void shoot(World world, EntityLivingBase shooter, EntityArrow arrow, double dist, ItemStack bow) {
+	public void shoot(World world, Vec3d posStart, EntityLivingBase shooter, EntityArrow arrow, double dist, float progress, ItemStack bow, long volleyId, boolean firstVolley, boolean silent) {
 		if (dist < 5)
 			return;
 		Vec3d heading = new Vec3d(arrow.motionX, arrow.motionY, arrow.motionZ).normalize();
 		ProjectileLauncherNBT launcherData = new ProjectileLauncherNBT(TagUtil.getToolTag(bow));
 
-		float progress = ((BowCore) bow.getItem()).getDrawbackProgress(bow, shooter);
-
 		Vec3d start = arrow.getPositionVector();
 		Vec3d end = start.add(heading.scale(dist));
 		RayTraceResult firstTrace = world.rayTraceBlocks(start, end, false, true, true);
-		world.playSound(null, shooter.getPosition(), SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS, 1, 2);
+		if (!silent)
+			world.playSound(null, new BlockPos(posStart), SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS, 1, 2);
 
 		boolean hitBlock = false;
 
 		if (firstTrace != null) {
 			end = firstTrace.hitVec;
 			hitBlock = true;
+		}
+
+		if (!arrow.world.isRemote) {
+			int arrowColor = 0xffffff;
+			if (arrow instanceof EntityProjectileBase) {
+				arrowColor = getToolMaterials(((EntityProjectileBase) arrow).tinkerProjectile.getItemStack()).get(1).materialTextColor;
+			} else if (arrow instanceof EntityTippedArrow) {
+				arrowColor = ((EntityTippedArrow) arrow).getColor();
+			} else if (arrow instanceof EntitySpectralArrow) {
+				arrowColor = 0xffcc40;
+			}
+
+			NBTTagInt data = new NBTTagInt(arrowColor);
+
+			Vec3d pos = start.add(heading.scale(0.5));
+
+			double actualDist = start.distanceTo(end);
+
+			for (double i = 0.5; i < actualDist; i += 0.1) {
+				ColoredDustAction.INSTANCE.run(pos.x, pos.y, pos.z, data);
+				pos = pos.add(heading.scale(0.1));
+			}
 		}
 
 		AxisAlignedBB area = new AxisAlignedBB(start.x, start.y, start.z, end.x, end.y, end.z);
@@ -129,7 +194,7 @@ public class Dematerializing extends AbstractTrait {
 		float power = ItemBow.getArrowVelocity(20) * baseSpeed;
 		power *= launcherData.range;
 
-		Function<Double, Double> aimAssist = d -> Math.max(0, d < 36.3636 ? 0.0125 * d : -0.125 * (d - 40));
+		Function<Double, Double> aimAssist = d -> Math.max(0, -Math.pow(2, -0.05 * d) + 1.125);
 
 		for (Entity e : entities) {
 			if (!MiscUtils.canArrowHit(e) || e == shooter || e == shooter.getRidingEntity()) {
@@ -143,16 +208,23 @@ public class Dematerializing extends AbstractTrait {
 				arrowToHit.setPosition(intercept.hitVec.x, intercept.hitVec.y, intercept.hitVec.z);
 				arrowToHit.setSilent(true);
 				arrow.getTags().forEach(arrowToHit::addTag);
-
+				
+				NBTTagCompound data = e.getEntityData();
+				if (data.getLong("LastVolley") == volleyId) {
+					e.hurtResistantTime = 0;
+				}
+				
 				if (arrowToHit instanceof EntityProjectileBase) {
 					((EntityProjectileBase) arrowToHit).onHitEntity(new RayTraceResult(e));
 				} else {
 					try {
 						onHit$EntityArrow.invoke(arrowToHit, new RayTraceResult(e));
 					} catch (Exception er) {
-
 					}
 				}
+				
+				if (e.hurtResistantTime > 0) 
+					data.setLong("LastVolley", volleyId);
 			}
 		}
 
@@ -178,31 +250,7 @@ public class Dematerializing extends AbstractTrait {
 				if (arrow instanceof EntityProjectileBase)
 					ProjectileEvent.OnHitBlock.fireEvent((EntityProjectileBase) arrow, launcherData.range * 20, firstTrace.getBlockPos(), world.getBlockState(firstTrace.getBlockPos()));
 
-				if (!arrow.inGround) {
-					this.shoot(world, shooter, arrow, Math.max(0, dist - start.distanceTo(end)), bow);
-				} else {
-					world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);
-				}
-			}
-
-			int arrowColor = 0xffffff;
-			if (arrow instanceof EntityProjectileBase) {
-				arrowColor = getToolMaterials(((EntityProjectileBase) arrow).tinkerProjectile.getItemStack()).get(1).materialTextColor;
-			} else if (arrow instanceof EntityTippedArrow) {
-				arrowColor = ((EntityTippedArrow) arrow).getColor();
-			} else if (arrow instanceof EntitySpectralArrow) {
-				arrowColor = 0xffcc40;
-			}
-
-			NBTTagInt data = new NBTTagInt(arrowColor);
-
-			Vec3d pos = start.add(heading.scale(0.5));
-
-			double actualDist = start.distanceTo(end);
-
-			for (double i = 0.5; i < actualDist; i += 0.1) {
-				ColoredDustAction.INSTANCE.run(pos.x, pos.y, pos.z, data);
-				pos = pos.add(heading.scale(0.1));
+				world.createExplosion(shooter, end.x, end.y, end.z, 0.5f, false);
 			}
 		}
 	}

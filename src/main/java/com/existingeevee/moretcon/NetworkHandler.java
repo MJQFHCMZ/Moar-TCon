@@ -4,6 +4,7 @@ import com.existingeevee.moretcon.client.actions.ClientAction.SentClientActionMe
 import com.existingeevee.moretcon.effects.PotionBleeding.BleedingEffectMessage;
 import com.existingeevee.moretcon.other.ExtendedAttackMessage;
 import com.existingeevee.moretcon.other.fires.CustomFireHelper.SyncCustomFiresMessage;
+import com.existingeevee.moretcon.other.recoil.MessageSendRecoil;
 import com.existingeevee.moretcon.traits.traits.Afterimage.AfterimageMessage;
 import com.existingeevee.moretcon.world.generators.HelltopIslandsGenerator.HelltopStatusMessage;
 
@@ -23,6 +24,7 @@ public class NetworkHandler {
 		HANDLER.registerMessage(SentClientActionMessage.class, SentClientActionMessage.class, i++, Side.CLIENT);
 		HANDLER.registerMessage(ExtendedAttackMessage.class, ExtendedAttackMessage.class, i++, Side.SERVER);
 		HANDLER.registerMessage(HelltopStatusMessage.class, HelltopStatusMessage.class, i++, Side.CLIENT);
+		HANDLER.registerMessage(MessageSendRecoil.class, MessageSendRecoil.class, i++, Side.CLIENT);
 	}
 
 }
