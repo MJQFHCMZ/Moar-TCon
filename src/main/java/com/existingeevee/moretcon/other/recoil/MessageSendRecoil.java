@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageSendRecoil implements IMessage, IMessageHandler<MessageSendRecoil, IMessage> {
 	
@@ -31,8 +33,13 @@ public class MessageSendRecoil implements IMessage, IMessageHandler<MessageSendR
 	@Override
 	public IMessage onMessage(MessageSendRecoil message, MessageContext ctx) {
 		Minecraft.getMinecraft().addScheduledTask(() -> {
-			RecoilHandler.INSTANCE.recoil(Minecraft.getMinecraft().player, message.recoilAngle);
+			recoil(message.recoilAngle);
 		});
 		return null;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private static void recoil(float angle) {
+		RecoilHandler.INSTANCE.recoil(Minecraft.getMinecraft().player, angle);
 	}
 }
