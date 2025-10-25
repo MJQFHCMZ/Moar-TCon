@@ -17,7 +17,8 @@
   "client": [
     "early.client.MixinRenderItem",
     "early.client.MixinItemRenderer",
-    "early.client.MixinGuiIngame"
+    "early.client.MixinGuiIngame",
+    "early.client.MixinDynSurroundPleaseStopThisNonesense"
   ],
 
   "server": [

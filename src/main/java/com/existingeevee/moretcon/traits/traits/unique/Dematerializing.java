@@ -169,7 +169,7 @@ public class Dematerializing extends AbstractTrait {
 			double actualDist = start.distanceTo(end);
 
 			for (double i = 0.5; i < actualDist; i += 0.1) {
-				ColoredDustAction.INSTANCE.run(pos.x, pos.y, pos.z, data);
+				ColoredDustAction.INSTANCE.run(arrow.world, pos.x, pos.y, pos.z, data);
 				pos = pos.add(heading.scale(0.1));
 			}
 		}

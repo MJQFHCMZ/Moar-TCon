@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.traits.traits.internal;
 
 import java.util.UUID;
 
+import com.existingeevee.moretcon.client.actions.BlastClientAction;
 import com.existingeevee.moretcon.other.recoil.RecoilHandler;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
@@ -45,10 +46,14 @@ public class PolyshotProj extends AbstractProjectileTrait {
 
 		if (projectileBase != null && shooter != null) {
 
-			if (shooter instanceof EntityPlayer && !world.isRemote)
+			if (shooter instanceof EntityPlayer && !world.isRemote) {
 				RecoilHandler.INSTANCE.recoil((EntityPlayer) shooter, 7);
+				BlastClientAction.INSTANCE.run(world, projectileBase.posX, projectileBase.posY, projectileBase.posZ, BlastClientAction.fromVec3d(new Vec3d(projectileBase.motionX, projectileBase.motionY, projectileBase.motionZ).normalize()));
+			}
 			world.playSound(null, projectileBase.getPosition(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 2, 2);
-
+			
+			
+			
 			TinkerProjectileHandler ticProjectile = projectileBase.tinkerProjectile;
 
 			float speed = ticProjectile.getPower();

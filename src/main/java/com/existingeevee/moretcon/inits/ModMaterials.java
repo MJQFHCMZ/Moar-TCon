@@ -361,7 +361,7 @@ public class ModMaterials implements MaterialTypes {
 			materialValasium.addTrait(TinkerTraits.dense);
 			if (CompatManager.plustic) {
 				TinkerRegistry.addMaterialStats(materialValasium, new LaserMediumMaterialStats(15, 20));
-				TinkerRegistry.addMaterialStats(materialValasium, new BatteryCellMaterialStats(2000));
+				TinkerRegistry.addMaterialStats(materialValasium, new BatteryCellMaterialStats(950000));
 			}
 			TinkerRegistry.addMaterialStats(materialValasium, new HeadMaterialStats(1600, 20f, 16f, 8));
 			TinkerRegistry.addMaterialStats(materialValasium, new HandleMaterialStats(4f, 60));
