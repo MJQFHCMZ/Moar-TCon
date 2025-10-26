@@ -24,7 +24,7 @@ public class Galvanized extends AbstractArmorTrait {
     @Override
     public void getAttributeModifiers(@Nonnull EntityEquipmentSlot slot, ItemStack stack, Multimap<String, AttributeModifier> attributeMap) {
     	if (EntityLiving.getSlotForItemStack(stack) == slot) {
-    		attributeMap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(new UUID(slot.getIndex(), this.getIdentifier().hashCode()), "atk modifier galvanized", 0.05, 1));
+    		attributeMap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(new UUID(slot.getIndex(), this.getIdentifier().hashCode()), "atk modifier galvanized, " + slot, 0.05, 1));
     	}
     }
 }
