@@ -199,7 +199,6 @@ public class ModMaterials implements MaterialTypes {
 	public static final UniqueMaterial materialInertialRedirector = new UniqueMaterial(
 			MiscUtils.createNonConflictiveName("inertial_redirector"), 0xb2a1ff, "tconstruct:bolt_core",
 			"tconstruct:bolt");
-	
 
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);

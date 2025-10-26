@@ -17,7 +17,7 @@ public class Polyshot extends DummyTrait implements IAdditionalTraitMethods {
 
 	public Polyshot() {
 		super("polyshot", 0x545454);
-		MinecraftForge.EVENT_BUS.register(this); //ToolHelper. // Arrow
+		MinecraftForge.EVENT_BUS.register(this); 
 	}
 
 	@Override

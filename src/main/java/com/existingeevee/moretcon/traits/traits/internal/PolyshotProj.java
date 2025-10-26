@@ -44,8 +44,7 @@ public class PolyshotProj extends AbstractProjectileTrait {
 			return;
 		}
 
-		if (projectileBase != null && shooter != null) {
-
+		if (projectileBase != null && shooter != null) {			
 			if (shooter instanceof EntityPlayer && !world.isRemote) {
 				RecoilHandler.INSTANCE.recoil((EntityPlayer) shooter, 7);
 				BlastClientAction.INSTANCE.run(world, projectileBase.posX, projectileBase.posY, projectileBase.posZ, BlastClientAction.fromVec3d(new Vec3d(projectileBase.motionX, projectileBase.motionY, projectileBase.motionZ).normalize()));
