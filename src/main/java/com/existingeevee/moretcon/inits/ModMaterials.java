@@ -93,6 +93,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xf6e6ce); //0xbbd190
 	public static final Material materialPorksteel = new Material(MiscUtils.createNonConflictiveName("porksteel"), 0xc3af7d);
 	public static final Material materialPerimidum = new Material(MiscUtils.createNonConflictiveName("perimidum"), 0xdfd3ff);
+	public static final Material materialBrinkstone = new Material(MiscUtils.createNonConflictiveName("brinkstone"), 0x606059);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -276,6 +277,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerMaterials.magmaslime.addTrait(ModTraits.overslime);
 
 			materialSearedStone.addItem("blockSeared", 1, Material.VALUE_Ingot);
+			materialSearedStone.addItem("ingotSeared", 1, Material.VALUE_Ingot / 4);
 			materialSearedStone.setFluid(() -> TinkerFluids.searedStone);
 			materialSearedStone.setCastable(true);
 			materialSearedStone.setCraftable(true);
@@ -290,6 +292,20 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialSearedStone, whyWouldYouMakeABowOutOfThis);
 			TinkerRegistry.addMaterialStats(materialSearedStone, new ArrowShaftMaterialStats(0.8f, 15));
 
+			materialBrinkstone.addItem("brinkstone", 1, Material.VALUE_Ingot);
+			materialBrinkstone.setCastable(false);
+			materialBrinkstone.setCraftable(true);
+			materialBrinkstone.setRepresentativeItem("brinkstone");
+			materialBrinkstone.addTrait(TinkerTraits.stonebound);
+			materialBrinkstone.addTrait(TinkerTraits.hellish);
+			materialBrinkstone.addTrait(ModTraits.bottomsEnd, HEAD);
+			materialBrinkstone.addTrait(TinkerTraits.hellish, HEAD);
+			TinkerRegistry.addMaterialStats(materialBrinkstone, new HeadMaterialStats(600, 4f, 9f, 3));
+			TinkerRegistry.addMaterialStats(materialBrinkstone, new HandleMaterialStats(1.2f, -20));
+			TinkerRegistry.addMaterialStats(materialBrinkstone, new ExtraMaterialStats(50));
+			TinkerRegistry.addMaterialStats(materialBrinkstone, whyWouldYouMakeABowOutOfThis);
+			TinkerRegistry.addMaterialStats(materialBrinkstone, new ArrowShaftMaterialStats(1.2f, 30));
+			
 			materialSlimesteel.addCommonItems("Slimesteel");
 			materialSlimesteel.setFluid(ModFluids.liquidSlimesteel);
 			materialSlimesteel.setCastable(true);
@@ -1298,6 +1314,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialPerimidum).toolforge();
 			ModMaterials.registerMaterial(materialGeodesium).toolforge();
 			ModMaterials.registerMaterial(materialInertialRedirector, null);
+			ModMaterials.registerMaterial(materialBrinkstone, null);
 			
 			
 		}
