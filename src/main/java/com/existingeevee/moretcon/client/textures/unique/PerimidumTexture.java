@@ -29,7 +29,7 @@ public class PerimidumTexture extends AbstractColoredTexture {
 		@Override
 		public TextureAtlasSprite getTexture(ResourceLocation baseTexture, String location) {
 
-			String base = new ResourceLocation(ModInfo.MODID + ":other/materialperimidum").toString();
+			String base = new ResourceLocation(ModInfo.MODID + ":other/material/materialperimidum").toString();
 
 			TextureAtlasSprite blockTexture1 = Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry(base + "1");
 			TextureAtlasSprite blockTexture2 = Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry(base + "2");
