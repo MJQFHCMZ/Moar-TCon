@@ -1,8 +1,11 @@
 package com.existingeevee.moretcon.client.actions;
 
+import java.lang.reflect.Constructor;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleRedstone;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,6 +31,14 @@ public class ColoredDustAction extends ClientAction {
 		float g = RenderUtil.green(color) / 255f;
 		float b = RenderUtil.blue(color) / 255f;
 
-		world.spawnParticle(EnumParticleTypes.REDSTONE, true, x, y, z, r == 0 ? 0.0001f : r, g, b);
+		try {
+			Constructor<ParticleRedstone> constructor = ParticleRedstone.class.getDeclaredConstructor(World.class, double.class, double.class, double.class, float.class, float.class, float.class, float.class);
+			constructor.setAccessible(true);
+			
+			ParticleRedstone particle = constructor.newInstance(world, x, y, z, (float) (0.5 + 0.25 * Math.random()), r + 0.00001f, g, b);
+			Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

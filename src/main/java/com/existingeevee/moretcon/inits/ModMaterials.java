@@ -238,7 +238,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialNahuatl, new BowMaterialStats(0.7f, 0.85f, 4f));
 			TinkerRegistry.addMaterialStats(materialNahuatl, new ArrowShaftMaterialStats(1.2f, 32));
 			CompositeRegistry.registerComposite(new CompositeData(() -> TinkerMaterials.wood, () -> materialNahuatl, () -> TinkerFluids.obsidian, false).setMultiplier(2));
-
+			
 			materialSlimewood.setCastable(false);
 			materialSlimewood.setCraftable(false);
 			materialSlimewood.addTrait(ModTraits.overgrowth, HEAD);
