@@ -496,7 +496,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialSolsteel, new BowMaterialStats(0.8f, 5.0f, 15f));
 			if (CompatManager.conarm) {
 				TinkerRegistry.addMaterialStats(materialSolsteel, new CoreMaterialStats(47.4f, 40.0f));
-				TinkerRegistry.addMaterialStats(materialSolsteel, new PlatesMaterialStats(4.0f, 39f, 4.75f));
+				TinkerRegistry.addMaterialStats(materialSolsteel, new PlatesMaterialStats(4.0f, 39f, 5.25f));
 				TinkerRegistry.addMaterialStats(materialSolsteel, new TrimMaterialStats(30.0f));
 			}
 			
