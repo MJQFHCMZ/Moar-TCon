@@ -169,7 +169,7 @@ public class OreDictionaryManager {
 				registerOre("dustSolsteel", ModItems.dustSolarSteel);
 				registerOre("dustFusionite", ModItems.dustFusionite);
 				registerOre("dustGallium", ModItems.dustGallium);
-				registerOre("dustRuneSteel", ModItems.dustRuneSteel);
+				registerOre("dustRunesteel", ModItems.dustRuneSteel);
 				registerOre("dustTrichromadentium", ModItems.dustTrichromadentium);
 				registerOre("dustGravitonium", ModItems.dustGravitonium);
 				registerOre("dustAtronium", ModItems.dustAtronium);
