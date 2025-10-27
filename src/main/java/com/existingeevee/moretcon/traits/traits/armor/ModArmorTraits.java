@@ -3,5 +3,9 @@ package com.existingeevee.moretcon.traits.traits.armor;
 public class ModArmorTraits {
 	public static Galvanized galvanized = new Galvanized();
 	public static ColdFire coldFire = new ColdFire();
+	public static Overload overload = new Overload();
+	public static Mutant mutant = new Mutant();
+	public static Liquid liquid = new Liquid();
+	
 	
 }

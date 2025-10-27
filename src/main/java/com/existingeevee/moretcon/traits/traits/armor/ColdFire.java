@@ -20,7 +20,7 @@ public class ColdFire extends AbstractArmorTrait {
 
 	@Override
 	public float onDamaged(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingDamageEvent evt) {
-		if (source.getTrueSource() instanceof EntityLivingBase)
+		if (source.getTrueSource() instanceof EntityLivingBase && random.nextInt(8) == 0)
 			CustomFireHelper.setAblaze((EntityLivingBase) source.getTrueSource(), CustomFireEffect.COLD_FIRE, 120);
 		return newDamage;
 	}

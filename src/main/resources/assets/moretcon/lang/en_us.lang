@@ -455,11 +455,17 @@ modifier.moretcon.ricoshot.name=Ricoshot
 modifier.moretcon.ricoshot.desc=§oChlorophyte go boing boing§r\nYour projectile will bounce off of surfaces and home onto nearby targets. Deals additional damage depending on number of bounces.
 modifier.moretcon.reforged_projectile.name=Reforged 
 modifier.moretcon.reforged_projectile.desc=§oWHAT??! WHY??§r\nYour projectile will gain stat bonuses of any ranged reforges on your launcher. 
+
 modifier.moretcon.galvanized_armor.name=Galvanized 
 modifier.moretcon.galvanized_armor.desc=§oMORE DAMAGEEEEE§r\nYour armor will grant you additional attack damage.
 modifier.moretcon.cold_fire_armor.name=Cold Fire 
 modifier.moretcon.cold_fire_armor.desc=§ooo cold§r\nYour armor will set attackers on cold fire.
-
+modifier.moretcon.mutant_armor.name=Mutant 
+modifier.moretcon.mutant_armor.desc=§oHULK WANT MORE negative status effect NOW!§r\nYour armor will allow you to benefit from select negative status effects.
+modifier.moretcon.overload_armor.name=Overload 
+modifier.moretcon.overload_armor.desc=§okaboom :3§r\nYour armor will detonate after taking enough damage, dealing massive damage to nearby targets.
+modifier.moretcon.liquid_armor.name=Liquid 
+modifier.moretcon.liquid_armor.desc=§oaw man.. my shirt melted :c§r\nYour armor get stronger in cold biomes, but rapidly melt in hotter ones.
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??

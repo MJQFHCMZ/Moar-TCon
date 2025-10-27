@@ -23,6 +23,7 @@ import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 
 import c4.conarm.common.armor.traits.ArmorTraits;
+import c4.conarm.lib.materials.ArmorMaterialType;
 import c4.conarm.lib.materials.ArmorMaterials;
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
@@ -460,7 +461,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialValasium, new PlatesMaterialStats(4.0f, 3.9f, 4.0f));
 				TinkerRegistry.addMaterialStats(materialValasium, new TrimMaterialStats(25.0f));
 				
-				ArmorMaterials.addArmorTrait(materialValasium, ArmorTraits.alien);
+				ArmorMaterials.addArmorTrait(materialValasium, ModArmorTraits.overload, ArmorTraits.dense);
+				ArmorMaterials.addArmorTrait(materialValasium, ArmorTraits.alien, ArmorTraits.alien);
+				ArmorMaterials.addArmorTrait(materialValasium, ArmorTraits.indomitable);
 			}
 			
 			materialPorksteel.setFluid(ModFluids.liquidPorksteel); 
@@ -511,7 +514,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIrradium, new PlatesMaterialStats(3.0f, 2.6f, 0));
 				TinkerRegistry.addMaterialStats(materialIrradium, new TrimMaterialStats(2.0f));
 				
-				ArmorMaterials.addArmorTrait(materialIrradium, ArmorTraits.heavy);
+				ArmorMaterials.addArmorTrait(materialIrradium, ModArmorTraits.mutant, ModArmorTraits.mutant);
 				
 				addArmorLum(materialIrradium);
 			}
@@ -573,7 +576,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialTrichromadentium, new TrimMaterialStats(25.0f));
 				
 				ArmorMaterials.addArmorTrait(materialTrichromadentium, ArmorTraits.invigorating);
-				
+				materialTrichromadentium.addTrait(ModTraits.trichromic, CORE);
+				materialTrichromadentium.addTrait(ModTraits.trichromic, TRIM);
+				materialTrichromadentium.addTrait(ModTraits.trichromic, PLATES);
+
 				addArmorLum(materialTrichromadentium);
 			}
 			materialAtronium.addItem("oreAtronium", 1, Material.VALUE_Ore());
@@ -813,6 +819,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGallium, new CoreMaterialStats(7.1f, 14.9f));
 				TinkerRegistry.addMaterialStats(materialGallium, new PlatesMaterialStats(2.0f, -3.2f, 0));
 				TinkerRegistry.addMaterialStats(materialGallium, new TrimMaterialStats(0.1f));
+				
+				ArmorMaterials.addArmorTrait(materialGallium, ModArmorTraits.liquid, ModArmorTraits.liquid);
+				ArmorMaterials.addArmorTrait(materialGallium, ArmorTraits.aquaspeed, ArmorTraits.aquaspeed);
 			}
 
 			
