@@ -23,7 +23,6 @@ import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 
 import c4.conarm.common.armor.traits.ArmorTraits;
-import c4.conarm.lib.materials.ArmorMaterialType;
 import c4.conarm.lib.materials.ArmorMaterials;
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
