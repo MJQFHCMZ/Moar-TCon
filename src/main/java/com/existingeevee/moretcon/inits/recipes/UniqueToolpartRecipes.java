@@ -182,13 +182,13 @@ public class UniqueToolpartRecipes {
 				event.getRegistry().register(
 						RecipeHelper.createRecipe("quakestruck_recipe", ModMaterials.materialQuakestruck.getUniqueToolPart(),
 								new String[] {
-										"OFO",
-										"EIE",
-										"OFO"
+										"EFE",
+										"OIO",
+										"EFE"
 								},
-								Pair.of('E', new OreIngredient("gemElectarite")),
-								Pair.of('I', new TinkerPartIngredient(ModMaterials.materialIgniglomerate, "tconstruct:large_plate")),
-								Pair.of('O', new TinkerPartIngredient(TinkerMaterials.obsidian, "tconstruct:large_plate")),
+								Pair.of('E', Ingredient.fromStacks(new ItemStack(ModItems.solidLightning, 1, 0))),
+								Pair.of('I', new TinkerPartIngredient(ModMaterials.materialElectarite, "tconstruct:large_plate")),
+								Pair.of('O', new TinkerPartIngredient(ModMaterials.materialGallium, "tconstruct:large_plate")),
 								Pair.of('F', new OreIngredient("ingotFusionite"))));
 			}
 
