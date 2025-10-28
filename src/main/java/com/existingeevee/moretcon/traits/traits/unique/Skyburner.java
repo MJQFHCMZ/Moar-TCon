@@ -23,9 +23,9 @@ import slimeknights.tconstruct.library.traits.AbstractProjectileTrait;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
-public class AerialFlame extends AbstractProjectileTrait {
+public class Skyburner extends AbstractProjectileTrait {
 
-	public AerialFlame() {
+	public Skyburner() {
 		super(MiscUtils.createNonConflictiveName("AerialFlame".toLowerCase()), 0);
 	}
 

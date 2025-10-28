@@ -12,9 +12,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
-public class ColdFire extends AbstractArmorTrait {
+public class Burning extends AbstractArmorTrait {
 
-	public ColdFire() {
+	public Burning() {
 		super(MiscUtils.createNonConflictiveName("cold_fire"), TextFormatting.WHITE);
 	}
 

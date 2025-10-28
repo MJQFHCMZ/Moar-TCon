@@ -4,7 +4,7 @@ import com.existingeevee.moretcon.block.BlockCustomFire;
 import com.existingeevee.moretcon.block.blocktypes.BlockBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockBrinkstonePlant;
 import com.existingeevee.moretcon.block.blocktypes.BlockElectarite;
-import com.existingeevee.moretcon.block.blocktypes.BlockEtheralBase;
+import com.existingeevee.moretcon.block.blocktypes.BlockEtherealBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockFallingBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockHot;
 import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
@@ -21,7 +21,7 @@ import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidPrismBottom;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidPrismTop;
 import com.existingeevee.moretcon.block.ore.BlockBedrockOre;
 import com.existingeevee.moretcon.block.ore.BlockBedrockOreMetal;
-import com.existingeevee.moretcon.block.ore.BlockEtheralOre;
+import com.existingeevee.moretcon.block.ore.BlockEtherealOre;
 import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.block.ore.BlockOreMetal;
 import com.existingeevee.moretcon.other.ClusterTickingHandler.IClusterType;
@@ -79,7 +79,7 @@ public class ModBlocks {
 	public static final Block blockEbonite = ((BlockBase) new BlockBase("blockEbonite", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreErythynite = ((BlockBase) new BlockOre("oreErythynite", 5, ModItems.gemErythynite, 1).setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false).setLightLevel(1);
 	public static final Block blockErythynite = ((BlockBase) new BlockBase("blockErythynite", Material.IRON, 6).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true).setLightLevel(3);
-	public static final Block oreEtherstone = (new BlockEtheralOre("oreEtherstone", 8, ModItems.gemEtherstone).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block oreEtherstone = (new BlockEtherealOre("oreEtherstone", 8, ModItems.gemEtherstone).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockEtherstone = ((BlockBase) new BlockBase("blockEtherstone", Material.IRON, 8).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true).setLightLevel(0.5f);
 	public static final Block oreElectarite = (new BlockOre("oreElectarite", 4, ModItems.gemElectarite).setHardness(12).setResistance(0).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockElectarite = ((BlockBase) new BlockElectarite("blockElectarite", Material.IRON, 4).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
@@ -100,7 +100,7 @@ public class ModBlocks {
 	public static final Block blockGeodesium = ((BlockBase) new BlockBase("blockGeodesium", Material.IRON, 6).setLightLevel(1).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setLightLevel(8).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
 	
-	public static final Block blockOtherstone = (new BlockEtheralBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConWorld));
+	public static final Block blockOtherstone = (new BlockEtherealBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockCobbledBetweenBedrock = (new BlockBase("blockCobbledBetweenBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockBrokenSand = (new BlockFallingBase("blockBrokenSand", Material.SAND, 0).setHarvestLevelC("shovel", 0).setSoundType(SoundType.SAND).setHardness(10).setCreativeTab(ModTabs.moarTConWorld));

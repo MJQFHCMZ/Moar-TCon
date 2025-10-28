@@ -275,7 +275,7 @@ modifier.moretcon.overcast.name=Overcast
 modifier.moretcon.overslime.desc=§oSlimy!\n§rYour tool consumes overslime instead of durability, until it runs out! Not friendly towards tools lacking slime.
 modifier.moretcon.overslime.name=Overslime
 modifier.moretcon.etheralharvest.desc=§oTo the other side!!\n§rYour tool will be able able to mine non-tangible blocks typically found in the end.
-modifier.moretcon.etheralharvest.name=Etheral Harvest
+modifier.moretcon.etheralharvest.name=Ethereal Harvest
 modifier.moretcon.aerialflame.desc=§oDEATH FROM ABOVE!!!!!\n§rYour projectile will launch a pillar of flames down at your opponents.
 modifier.moretcon.aerialflame.name=Skyburner
 modifier.moretcon.aetheric.desc=§oIn da sky!\n§rYour tool is more damaging in the Aether.
@@ -458,7 +458,7 @@ modifier.moretcon.reforged_projectile.desc=§oWHAT??! WHY??§r\nYour projectile 
 
 modifier.moretcon.galvanized_armor.name=Galvanized 
 modifier.moretcon.galvanized_armor.desc=§oMORE DAMAGEEEEE§r\nYour armor will grant you additional attack damage.
-modifier.moretcon.cold_fire_armor.name=Cold Fire 
+modifier.moretcon.cold_fire_armor.name=Frostburn Thorns 
 modifier.moretcon.cold_fire_armor.desc=§ooo cold§r\nYour armor will set attackers on cold fire.
 modifier.moretcon.mutant_armor.name=Mutant 
 modifier.moretcon.mutant_armor.desc=§oHULK WANT MORE negative status effect NOW!§r\nYour armor will allow you to benefit from select negative status effects.
@@ -466,6 +466,8 @@ modifier.moretcon.overload_armor.name=Overload
 modifier.moretcon.overload_armor.desc=§okaboom :3§r\nYour armor will detonate after taking enough damage, dealing massive damage to nearby targets.
 modifier.moretcon.liquid_armor.name=Liquid 
 modifier.moretcon.liquid_armor.desc=§oaw man.. my shirt melted :c§r\nYour armor get stronger in cold biomes, but rapidly melt in hotter ones.
+modifier.moretcon.burning_thorns_armor.name=Burning Thorns 
+modifier.moretcon.burning_thorns_armor.desc=§oOuch that burns§r\nYour armor will set attackers on fire.
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??

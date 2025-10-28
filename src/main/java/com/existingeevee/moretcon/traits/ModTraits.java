@@ -77,7 +77,7 @@ import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
 import com.existingeevee.moretcon.traits.traits.abst.DummyTrait;
 import com.existingeevee.moretcon.traits.traits.internal.PolyshotProj;
 import com.existingeevee.moretcon.traits.traits.internal.ReforgeProj;
-import com.existingeevee.moretcon.traits.traits.unique.AerialFlame;
+import com.existingeevee.moretcon.traits.traits.unique.Skyburner;
 import com.existingeevee.moretcon.traits.traits.unique.Autoloading;
 import com.existingeevee.moretcon.traits.traits.unique.Blinkdrawn;
 import com.existingeevee.moretcon.traits.traits.unique.BloodGodsBlessing;
@@ -119,7 +119,7 @@ public class ModTraits {
 	public static Plasmatic plasmatic = new Plasmatic();
 	public static TripleShot tripleshot = new TripleShot();
 	public static BloodyArc bloodyArc = new BloodyArc();
-	public static AerialFlame aerialFlames = new AerialFlame();
+	public static Skyburner aerialFlames = new Skyburner();
 	public static Blinkdrawn blinkdrawn = new Blinkdrawn();
 	public static Mirroring mirroring = new Mirroring();
 	public static Seismishock seismishock = new Seismishock();

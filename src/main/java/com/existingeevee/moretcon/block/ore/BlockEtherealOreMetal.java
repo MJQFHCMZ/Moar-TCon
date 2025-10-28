@@ -1,6 +1,6 @@
 package com.existingeevee.moretcon.block.ore;
 
-import com.existingeevee.moretcon.block.blocktypes.BlockEtheralBase;
+import com.existingeevee.moretcon.block.blocktypes.BlockEtherealBase;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,17 +12,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockEtheralOreMetal extends BlockEtheralBase {
+public class BlockEtherealOreMetal extends BlockEtherealBase {
 
 	Item toDrop;
 	Item smeltResult;
 	int dropAmount;
 
-	public BlockEtheralOreMetal(String name, int harvest) {
+	public BlockEtherealOreMetal(String name, int harvest) {
 		this(name, 1, null);
 	}
 
-	public BlockEtheralOreMetal(String name, int harvest, Item toDrop) {
+	public BlockEtherealOreMetal(String name, int harvest, Item toDrop) {
 		super(name, Material.ROCK, harvest);
 		this.toDrop = toDrop;
 	}

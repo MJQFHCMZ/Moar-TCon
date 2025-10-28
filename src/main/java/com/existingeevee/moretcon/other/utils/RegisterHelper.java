@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.block.ISimpleBlockItemProvider;
-import com.existingeevee.moretcon.block.ore.BlockEtheralOre;
-import com.existingeevee.moretcon.block.ore.BlockEtheralOreMetal;
+import com.existingeevee.moretcon.block.ore.BlockEtherealOre;
+import com.existingeevee.moretcon.block.ore.BlockEtherealOreMetal;
 import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.block.ore.BlockOreMetal;
 import com.existingeevee.moretcon.config.ConfigHandler;
@@ -71,10 +71,10 @@ public class RegisterHelper {
 			oreDrops.add(new BiValue<>(block, ((BlockOre) block).getOreDrop()));
 		} else if (block instanceof BlockOreMetal) {
 			oreDrops.add(new BiValue<>(block, ((BlockOreMetal) block).getOreDrop()));
-		} else if (block instanceof BlockEtheralOre) {
-			oreDrops.add(new BiValue<>(block, ((BlockEtheralOre) block).getOreDrop()));
-		} else if (block instanceof BlockEtheralOreMetal) {
-			oreDrops.add(new BiValue<>(block, ((BlockEtheralOreMetal) block).getOreDrop()));
+		} else if (block instanceof BlockEtherealOre) {
+			oreDrops.add(new BiValue<>(block, ((BlockEtherealOre) block).getOreDrop()));
+		} else if (block instanceof BlockEtherealOreMetal) {
+			oreDrops.add(new BiValue<>(block, ((BlockEtherealOreMetal) block).getOreDrop()));
 		}
 	}
 

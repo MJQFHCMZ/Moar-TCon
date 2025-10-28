@@ -2,7 +2,7 @@ package com.existingeevee.moretcon.block.ore;
 
 import java.util.Random;
 
-import com.existingeevee.moretcon.block.blocktypes.BlockEtheralBase;
+import com.existingeevee.moretcon.block.blocktypes.BlockEtherealBase;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,26 +14,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockEtheralOre extends BlockEtheralBase {
+public class BlockEtherealOre extends BlockEtherealBase {
 
 	public Item toDrop;
 	int minDropAmount = 1;
 	int maxDropAmount = 0;
 	Item smeltResult;
 
-	public BlockEtheralOre(String name, int harvest) {
+	public BlockEtherealOre(String name, int harvest) {
 		this(name, 1, null, 1, 1);
 	}
 
-	public BlockEtheralOre(String name, int harvest, Item toDrop) {
+	public BlockEtherealOre(String name, int harvest, Item toDrop) {
 		this(name, 1, toDrop, 1, 1);
 	}
 
-	public BlockEtheralOre(String name, int harvest, Item toDrop, int dropAmount) {
+	public BlockEtherealOre(String name, int harvest, Item toDrop, int dropAmount) {
 		this(name, 1, toDrop, dropAmount, dropAmount);
 	}
 
-	public BlockEtheralOre(String name, int harvest, Item toDrop, int minDropAmount, int maxDropAmount) {
+	public BlockEtherealOre(String name, int harvest, Item toDrop, int minDropAmount, int maxDropAmount) {
 		super(name, Material.ROCK, harvest);
 		this.toDrop = toDrop;
 		this.minDropAmount = minDropAmount;
