@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.traits.traits.armor;
 
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
+import c4.conarm.common.armor.utils.ArmorHelper;
 import c4.conarm.lib.armor.ArmorModifications;
 import c4.conarm.lib.traits.AbstractArmorTrait;
 import net.minecraft.entity.Entity;
@@ -12,7 +13,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import slimeknights.tconstruct.library.utils.ToolHelper;
 
 public class Liquid extends AbstractArmorTrait {
 
@@ -45,7 +45,7 @@ public class Liquid extends AbstractArmorTrait {
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
 		double temp = getTemp(world, entity.getPosition());
 
-		if (entity instanceof EntityLivingBase) {
+		if (entity instanceof EntityPlayer) {
 			boolean worn = false;
 
 			if (itemSlot >= 4)
@@ -60,7 +60,7 @@ public class Liquid extends AbstractArmorTrait {
 			if (!world.isRemote && worn && temp > 0.8) {
 				double hotness = (temp - 0.8) / 1.2 / 40;
 				if (random.nextDouble() < hotness)
-					ToolHelper.damageTool(tool, 1, (EntityLivingBase) entity);
+					ArmorHelper.damageArmor(tool, DamageSource.IN_FIRE, 1, (EntityPlayer) entity);
 			}
 		}
 	}
