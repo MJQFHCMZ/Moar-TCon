@@ -20,5 +20,4 @@ public class MixinTraitTasty {
 			player.getFoodStats().addStats(4, 1f); // 4 because vanilla tinkers already adds 1. this totals to 5, which is 2 and a half bars
 		}
 	}
-
 }

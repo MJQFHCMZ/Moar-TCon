@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
@@ -61,13 +60,5 @@ public class BottomsEnd extends AbstractTrait {
 	@Override
 	public boolean isToolWithTrait(ItemStack is) {
 		return super.isToolWithTrait(is);
-	}
-
-	public boolean isStackBroken(ItemStack is) {
-		return ToolHelper.isBroken(is);
-	}
-
-	public Class<ToolCore> getToolCoreClass() {
-		return ToolCore.class;
 	}
 }

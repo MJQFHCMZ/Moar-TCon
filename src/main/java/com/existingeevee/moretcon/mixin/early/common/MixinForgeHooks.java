@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.existingeevee.moretcon.block.blocktypes.BlockEtherealBase;
 import com.existingeevee.moretcon.block.ore.IBedrockMineable;
+import com.existingeevee.moretcon.other.MixinEarlyAccessor;
 import com.existingeevee.moretcon.other.OverrideItemUseEvent;
 import com.existingeevee.moretcon.other.utils.ReequipHack;
 import com.existingeevee.moretcon.traits.ModTraits;
@@ -46,21 +48,23 @@ public abstract class MixinForgeHooks {
 
 	@Inject(method = "blockStrength", at = @At("HEAD"), cancellable = true, remap = false)
 	private static void moretcon$HEAD_Inject$blockStrength(@Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, CallbackInfoReturnable<Float> ci) {
-		if (ModTraits.bottomsEnd.getToolCoreClass().isInstance(player.getHeldItemMainhand().getItem())) {
-			float hardness = -1;
+		if (MixinEarlyAccessor.getToolCoreClass().isInstance(player.getHeldItemMainhand().getItem())) {
+
 			boolean isBedrock = state.getBlock() == Blocks.BEDROCK || state.getBlock().getRegistryName().toString().equals("thebetweenlands:betweenlands_bedrock") || state.getBlock() instanceof IBedrockMineable && ((IBedrockMineable) state.getBlock()).isBedrockLike(state, world, pos) && state.getBlock().canHarvestBlock(world, pos, player);
-
 			boolean isSoftBedrock = state.getBlock() instanceof IBedrockMineable && ((IBedrockMineable) state.getBlock()).isBedrockLike(state, world, pos) && ((IBedrockMineable) state.getBlock()).isSoftBedrock(state, world, pos);
+			boolean isEtheral = state.getBlock() instanceof BlockEtherealBase;
+			
+			boolean hasBottomsEnd = ModTraits.bottomsEnd.isToolWithTrait(player.getHeldItemMainhand()) && !MixinEarlyAccessor.isStackBroken(player.getHeldItemMainhand());
+			boolean hasEtheralHarvest = ModTraits.etheralHarvest.isToolWithTrait(player.getHeldItemMainhand()) && !MixinEarlyAccessor.isStackBroken(player.getHeldItemMainhand());
 
-			boolean hasTrait = ModTraits.bottomsEnd.isToolWithTrait(player.getHeldItemMainhand()) && !ModTraits.bottomsEnd.isStackBroken(player.getHeldItemMainhand());
-
-			if (isSoftBedrock) {
-				hardness = Math.min(20, state.getBlockHardness(world, pos) / 2);
-			} else if (isBedrock) {
-				hardness = 50;
-			} 
-
-			if (hardness >= 0 && hasTrait) {
+			if (isSoftBedrock && hasBottomsEnd) {
+				float hardness = Math.min(20, state.getBlockHardness(world, pos) / 2);
+				ci.setReturnValue(player.getDigSpeed(state, pos) / hardness / 30F);
+			} else if (isBedrock && hasBottomsEnd) {
+				float hardness = 50;
+				ci.setReturnValue(player.getDigSpeed(state, pos) / hardness / 30F);
+			} else if (isEtheral && hasEtheralHarvest) {
+				float hardness = ((BlockEtherealBase) state.getBlock()).getTrueHardness(state, world, pos);
 				ci.setReturnValue(player.getDigSpeed(state, pos) / hardness / 30F);
 			}
 		}
