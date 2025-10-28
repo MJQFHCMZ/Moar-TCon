@@ -7,7 +7,6 @@ import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -19,6 +18,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
+import slimeknights.tconstruct.library.utils.ToolHelper;
 
 public class Tricromatic extends AbstractTrait {
 
@@ -53,14 +53,14 @@ public class Tricromatic extends AbstractTrait {
 			if (trueSrc instanceof EntityLivingBase) {
 				EntityLivingBase trueLivingSrc = (EntityLivingBase) trueSrc;
 
-				if (this.isToolWithTrait(trueLivingSrc.getHeldItemMainhand()) || this.isToolWithTrait(trueLivingSrc.getHeldItemOffhand())) {
+				if (isActive(trueLivingSrc)) {
 					int col = calculateChunkColor(trueSrc);
 					if (col == 0) event.setAmount(event.getAmount() * 1.5f);
 				}
 			}
 		}
 
-		if (this.isToolWithTrait(event.getEntityLiving().getHeldItemMainhand()) || this.isToolWithTrait(event.getEntityLiving().getHeldItemOffhand())) {
+		if (isActive(event.getEntityLiving())) {
 			int col = calculateChunkColor(event.getEntityLiving());
 			if (col == 2)
 				event.setAmount(event.getAmount() * 0.5f);
@@ -69,28 +69,36 @@ public class Tricromatic extends AbstractTrait {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onLivingDamage(LivingHealEvent event) {
-		if (this.isToolWithTrait(event.getEntityLiving().getHeldItemMainhand()) || this.isToolWithTrait(event.getEntityLiving().getHeldItemOffhand())) {
+		if (isActive(event.getEntityLiving())) {
 			int col = calculateChunkColor(event.getEntityLiving());
 			if (col == 1)
 				event.setAmount(event.getAmount() * 3f);
 		}
 	}
-
+	
+	public boolean isActive(Entity entity) {
+		for (ItemStack stack : entity.getEquipmentAndArmor()) {
+			if (this.isToolWithTrait(stack) && !ToolHelper.isBroken(stack))
+				return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
-		if (entity instanceof EntityPlayer && isSelected) {
+		if (entity instanceof EntityLivingBase && isActive(entity)) {
 			int color = calculateChunkColor(entity);
 			if (color == 0) {
-				red((EntityPlayer) entity);
+				red((EntityLivingBase) entity);
 			} else if (color == 1) {
-				green((EntityPlayer) entity);
+				green((EntityLivingBase) entity);
 			} else if (color == 2) {
-				blue((EntityPlayer) entity);
+				blue((EntityLivingBase) entity);
 			}
 		}
 	}
 
-	private void red(EntityPlayer entity) {
+	private void red(EntityLivingBase entity) {
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, 0, 0, 0);
 		}
@@ -102,7 +110,7 @@ public class Tricromatic extends AbstractTrait {
 		}
 	}
 
-	private void green(EntityPlayer entity) {
+	private void green(EntityLivingBase entity) {
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, -1, 1, 0);
 		}
@@ -114,7 +122,7 @@ public class Tricromatic extends AbstractTrait {
 		}
 	}
 
-	private void blue(EntityPlayer entity) {
+	private void blue(EntityLivingBase entity) {
 		if (entity.world.isRemote) {
 			entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, entity.getPositionVector().x, entity.getPositionVector().y + 0.05, entity.getPositionVector().z, -1, 0, 1);
 		}
