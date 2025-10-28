@@ -22,7 +22,9 @@
   	"softdep.thebetweenlands.MixinToolCore",
   	"softdep.thebetweenlands.MixinItemGreataxe",
   	
-  	"softdep.tinkertoolleveling.MixinModToolLeveling"
+  	"softdep.tinkertoolleveling.MixinModToolLeveling",
+  	
+  	"softdep.conarm.MixinTraitTasty"
   ],
   
   "client": [
