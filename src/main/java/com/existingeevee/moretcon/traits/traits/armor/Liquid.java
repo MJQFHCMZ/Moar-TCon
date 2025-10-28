@@ -44,11 +44,24 @@ public class Liquid extends AbstractArmorTrait {
 	@Override
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
 		double temp = getTemp(world, entity.getPosition());
-		
-		if (temp > 0.8) {
-			double hotness = (temp - 0.8) / 1.2 / 40;
-			if (random.nextDouble() < hotness)
-				ToolHelper.damageTool(tool, itemSlot, entity instanceof EntityLivingBase ? (EntityLivingBase) entity : null);
+
+		if (entity instanceof EntityLivingBase) {
+			boolean worn = false;
+
+			if (itemSlot >= 4)
+				return; //it is not being worn
+			
+			for (ItemStack armor : ((EntityLivingBase) entity).getArmorInventoryList()) {
+				worn = tool == armor;
+				if (worn)
+					break;
+			}
+			
+			if (!world.isRemote && worn && temp > 0.8) {
+				double hotness = (temp - 0.8) / 1.2 / 40;
+				if (random.nextDouble() < hotness)
+					ToolHelper.damageTool(tool, 1, (EntityLivingBase) entity);
+			}
 		}
 	}
 }
