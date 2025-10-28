@@ -27,7 +27,7 @@ import com.existingeevee.moretcon.traits.traits.Approximate;
 import com.existingeevee.moretcon.traits.traits.Blighted;
 import com.existingeevee.moretcon.traits.traits.BottomsEnd;
 import com.existingeevee.moretcon.traits.traits.Burning;
-import com.existingeevee.moretcon.traits.traits.ColdFire;
+import com.existingeevee.moretcon.traits.traits.Frostburn;
 import com.existingeevee.moretcon.traits.traits.Corroding;
 import com.existingeevee.moretcon.traits.traits.Cryogenics;
 import com.existingeevee.moretcon.traits.traits.Darkened;
@@ -130,7 +130,7 @@ public class ModTraits {
 
 	public static KineticBattery kineticBattery = new KineticBattery();
 	public static Hyperheat hyperheat = new Hyperheat();
-	public static ColdFire coldFire = new ColdFire();
+	public static Frostburn frostburn = new Frostburn();
 	public static Tricromatic trichromic = new Tricromatic();
 	public static HelpfulRadiation radioactive = new HelpfulRadiation();
 	public static Voidic voidic = new Voidic();

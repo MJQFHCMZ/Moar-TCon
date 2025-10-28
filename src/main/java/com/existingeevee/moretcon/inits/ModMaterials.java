@@ -374,7 +374,7 @@ public class ModMaterials implements MaterialTypes {
 			materialFusionite.setCastable(true);
 			materialFusionite.setCraftable(false);
 			materialFusionite.setRepresentativeItem("ingotFusionite");
-			materialFusionite.addTrait(ModTraits.coldFire, HEAD);
+			materialFusionite.addTrait(ModTraits.frostburn, HEAD);
 			materialFusionite.addTrait(ModTraits.luminescent, HEAD);
 			materialFusionite.addTrait(TinkerTraits.enderference, HEAD);
 			materialFusionite.addTrait(TinkerTraits.alien);
@@ -391,7 +391,7 @@ public class ModMaterials implements MaterialTypes {
 			}
 			if (ConfigHandler.enableBomb) {
 				TinkerRegistry.addMaterialStats(materialFusionite, new ExplosiveMaterialStats(2f, 30));
-				materialFusionite.addTrait(ModTraits.coldFire, Bomb.EXPLOSIVE_CHARGE);
+				materialFusionite.addTrait(ModTraits.frostburn, Bomb.EXPLOSIVE_CHARGE);
 				materialFusionite.addTrait(ModTraits.luminescent, Bomb.EXPLOSIVE_CHARGE);
 			}
 			if (CompatManager.conarm) {
@@ -404,7 +404,7 @@ public class ModMaterials implements MaterialTypes {
 				materialFusionite.addTrait(ArmorTraits.dense, TRIM);
 				materialFusionite.addTrait(ArmorTraits.dense, PLATES);
 				
-				materialFusionite.addTrait(ModArmorTraits.coldFire, CORE);
+				materialFusionite.addTrait(ModArmorTraits.frostburnThorns, CORE);
 				materialFusionite.addTrait(ArmorTraits.enderport, CORE);
 
 				addArmorLum(materialFusionite);

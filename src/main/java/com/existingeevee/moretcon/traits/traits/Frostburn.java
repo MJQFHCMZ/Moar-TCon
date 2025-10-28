@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 
 
-public class ColdFire extends AbstractTrait {
+public class Frostburn extends AbstractTrait {
 
-	public ColdFire() {
+	public Frostburn() {
 		super(MiscUtils.createNonConflictiveName("cold_fire"), 0x0066ff);
 	}
 
