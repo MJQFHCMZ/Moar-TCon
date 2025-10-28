@@ -6,6 +6,7 @@ public class ModArmorTraits {
 	public static Overload overload = new Overload();
 	public static Mutant mutant = new Mutant();
 	public static Liquid liquid = new Liquid();
+	public static BurningThorns burningThorns = new BurningThorns();
 	
 	
 }
