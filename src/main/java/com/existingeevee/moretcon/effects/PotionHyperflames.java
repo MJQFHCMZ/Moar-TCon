@@ -31,7 +31,7 @@ public class PotionHyperflames extends Potion {
 	@SubscribeEvent
 	public void onDamage(LivingHurtEvent event) {
 		if (event.getSource().isFireDamage() && event.getEntityLiving().isPotionActive(this)) {
-			event.setAmount(event.getAmount() * (event.getEntityLiving().getActivePotionEffect(this).getAmplifier() + 1));
+			event.setAmount(event.getAmount() * (event.getEntityLiving().getActivePotionEffect(this).getAmplifier() + 2));
 		}
 	}
 
