@@ -469,7 +469,7 @@ public class ModMaterials implements MaterialTypes {
 			materialPorksteel.addCommonItems("Porksteel");
 			materialPorksteel.setCastable(true);
 			materialPorksteel.setCraftable(false);
-			materialPorksteel.setRepresentativeItem("ingotPorksteel"); //TinkerMaterials
+			materialPorksteel.setRepresentativeItem("ingotPorksteel"); 
 			materialPorksteel.addTrait(TinkerTraits.baconlicious, HEAD);
 			materialPorksteel.addTrait(ModTraits.burning, HEAD);
 			materialPorksteel.addTrait(ModTraits.saturpigting, HEAD);
@@ -483,8 +483,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialPorksteel, new CoreMaterialStats(14.7f, 15.9f));
 				TinkerRegistry.addMaterialStats(materialPorksteel, new PlatesMaterialStats(1.3f, 1.3f, 0));
 				TinkerRegistry.addMaterialStats(materialPorksteel, new TrimMaterialStats(9.5f));
+
+				materialPorksteel.addTrait(ArmorTraits.baconlicious, CORE);
+				materialPorksteel.addTrait(ArmorTraits.combustible, CORE);
 				
-				ArmorMaterials.addArmorTrait(materialPorksteel, ArmorTraits.combustible);
+				ArmorMaterials.addArmorTrait(materialPorksteel, ModTraits.saturpigting);
 			}
 
 			materialIrradium.addItem("oreIrradium", 1, Material.VALUE_Ore());
@@ -513,7 +516,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIrradium, new PlatesMaterialStats(3.0f, 2.6f, 0));
 				TinkerRegistry.addMaterialStats(materialIrradium, new TrimMaterialStats(2.0f));
 				
-				ArmorMaterials.addArmorTrait(materialIrradium, ModArmorTraits.mutant, ModArmorTraits.mutant);
+				ArmorMaterials.addArmorTrait(materialIrradium, ArmorTraits.steady, ModArmorTraits.mutant);
 				
 				addArmorLum(materialIrradium);
 			}
@@ -545,7 +548,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSolsteel, new PlatesMaterialStats(4.0f, 39f, 5.25f));
 				TinkerRegistry.addMaterialStats(materialSolsteel, new TrimMaterialStats(30.0f));
 				
-				ArmorMaterials.addArmorTrait(materialSolsteel, ArmorTraits.superhot);
+				ArmorMaterials.addArmorTrait(materialSolsteel, ArmorTraits.superhot, ArmorTraits.combustible);
+				ArmorMaterials.addArmorTrait(materialSolsteel, ModArmorTraits.burningThorns);
+				
+				materialSolsteel.addTrait(ArmorTraits.dense, TRIM);
+				materialSolsteel.addTrait(ArmorTraits.dense, PLATES);
 				
 				addArmorLum(materialSolsteel);
 			}
