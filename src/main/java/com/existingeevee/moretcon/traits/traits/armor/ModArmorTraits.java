@@ -7,6 +7,8 @@ public class ModArmorTraits {
 	public static Mutant mutant = new Mutant();
 	public static Liquid liquid = new Liquid();
 	public static BurningThorns burningThorns = new BurningThorns();
+	public static HauntedThorns hauntingThorns = new HauntedThorns();
+	public static Gravitating gravitating = new Gravitating();
 	
 	
 }

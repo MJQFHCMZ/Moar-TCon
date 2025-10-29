@@ -462,7 +462,7 @@ public class ModMaterials implements MaterialTypes {
 				
 				ArmorMaterials.addArmorTrait(materialValasium, ModArmorTraits.overload, ArmorTraits.dense);
 				ArmorMaterials.addArmorTrait(materialValasium, ArmorTraits.alien, ArmorTraits.alien);
-				ArmorMaterials.addArmorTrait(materialValasium, ArmorTraits.indomitable);
+				materialValasium.addTrait(ArmorTraits.indomitable, CORE);
 			}
 			
 			materialPorksteel.setFluid(ModFluids.liquidPorksteel); 
@@ -803,7 +803,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGravitonium, new PlatesMaterialStats(3.0f, 26f, 1.6969420f));
 				TinkerRegistry.addMaterialStats(materialGravitonium, new TrimMaterialStats(15.0f));
 				
-				ArmorMaterials.addArmorTrait(materialGravitite, ArmorTraits.magnetic2, ArmorTraits.magnetic);
+				ArmorMaterials.addArmorTrait(materialGravitonium, ArmorTraits.magnetic2, ArmorTraits.magnetic);
+				ArmorMaterials.addArmorTrait(materialGravitonium, ModArmorTraits.gravitating);
+
 				addArmorLum(materialGravitite);
 			}
 			
@@ -826,10 +828,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGallium, new PlatesMaterialStats(2.0f, -3.2f, 0));
 				TinkerRegistry.addMaterialStats(materialGallium, new TrimMaterialStats(0.1f));
 				
-				ArmorMaterials.addArmorTrait(materialGallium, ModArmorTraits.liquid, ModArmorTraits.liquid);
-				ArmorMaterials.addArmorTrait(materialGallium, ArmorTraits.aquaspeed, ArmorTraits.aquaspeed);
+				ArmorMaterials.addArmorTrait(materialGallium, ModArmorTraits.liquid);
+				ArmorMaterials.addArmorTrait(materialGallium, ArmorTraits.aquaspeed);
 			}
-
 			
 			materialRuneSteel.addCommonItems("Runesteel");
 			materialRuneSteel.setFluid(ModFluids.liquidRuneSteel);
@@ -1031,6 +1032,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialHallowsite, new CoreMaterialStats(17.6f, 18.8f));
 				TinkerRegistry.addMaterialStats(materialHallowsite, new PlatesMaterialStats(2.2f, 0.7f, 0));
 				TinkerRegistry.addMaterialStats(materialHallowsite, new TrimMaterialStats(3.5f));
+				
+				ArmorMaterials.addArmorTrait(materialHallowsite, ModArmorTraits.hauntingThorns);
+				ArmorMaterials.addArmorTrait(materialHallowsite, ArmorTraits.skeletal);
+
 			}
 			
 			materialBlightsteel.addCommonItems("Blightsteel");
