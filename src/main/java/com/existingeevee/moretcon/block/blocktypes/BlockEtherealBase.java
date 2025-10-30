@@ -1,6 +1,8 @@
 package com.existingeevee.moretcon.block.blocktypes;
 
+import com.existingeevee.moretcon.other.WorldGravityUtils;
 import com.existingeevee.moretcon.traits.ModTraits;
+import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -8,6 +10,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -22,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.tconstruct.library.utils.ToolHelper;
 
 public class BlockEtherealBase extends BlockBase {
 
@@ -34,6 +39,40 @@ public class BlockEtherealBase extends BlockBase {
 		MinecraftForge.EVENT_BUS.register(this);
 		this.translucent = true;
 		this.setResistance(Float.POSITIVE_INFINITY);
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+		if (entity instanceof EntityLivingBase) {
+			
+			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));//;.contains(entity.getPositionVector())
+			AxisAlignedBB foot = entity.getEntityBoundingBox().setMaxY(entity.getEntityBoundingBox().minY + 0.0001);
+			if (!foot.intersects(blockBB)) {
+				return;
+			}
+			
+			EntityLivingBase living = (EntityLivingBase) entity;
+			
+			boolean canWalkOn = false; //ScaffoldBlock
+			
+			for (ItemStack stack : living.getArmorInventoryList()) {
+				if (ModArmorTraits.etherealTangibility.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
+					canWalkOn = true;
+					break;
+				}
+			}
+			
+			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(worldIn, entity.getPositionVector());
+			
+			if (canWalkOn) {
+				entity.fallDistance = 0;
+				entity.onGround = true;
+				if (entity.motionY < 0.01) {
+					entity.motionY = entity.isSneaking() ? gravity / 8 : -gravity;
+				}
+			}
+		}
+	
 	}
 
 	@Override
@@ -60,7 +99,7 @@ public class BlockEtherealBase extends BlockBase {
 
 	@Override
 	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-		if (USED_ETHERAL_BLOCK.get()) //we want it so that ethereal blocks can be placed on ethereal blocks
+		if (USED_ETHERAL_BLOCK.get()) // we want it so that ethereal blocks can be placed on ethereal blocks
 			return false;
 		return canBeReplaced;
 	}

@@ -1,5 +1,7 @@
 package com.existingeevee.moretcon.traits.traits.armor;
 
+import com.existingeevee.moretcon.traits.traits.abst.DummyTrait;
+
 public class ModArmorTraits {
 	public static Galvanized galvanized = new Galvanized();
 	public static FrostburnThorns frostburnThorns = new FrostburnThorns();
@@ -9,6 +11,10 @@ public class ModArmorTraits {
 	public static BurningThorns burningThorns = new BurningThorns();
 	public static HauntedThorns hauntingThorns = new HauntedThorns();
 	public static Gravitating gravitating = new Gravitating();
+	public static AegisIncantamentum aegisIncantamentum = new AegisIncantamentum();
+	public static DummyTrait etherealTangibility = new DummyTrait("ethereal_tangibility_armor", 0xffffff);
+	public static WarpedEcho warpedEcho = new WarpedEcho();
+	public static Afterheal afterheal = new Afterheal();
 	
 	
 }

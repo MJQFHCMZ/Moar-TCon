@@ -1,7 +1,6 @@
 package com.existingeevee.moretcon;
 
 import com.existingeevee.moretcon.compat.betweenlands.BLRecipes;
-import com.existingeevee.moretcon.compat.betweenlands.EventWatcherBL;
 import com.existingeevee.moretcon.compat.betweenlands.IBetweenTinkerTool;
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.inits.ModBlocks;
@@ -174,9 +173,6 @@ public class MoreTCon {
 			BLRecipes.postInit();
 		}
 
-		if (CompatManager.thebetweenlands) {
-			MinecraftForge.EVENT_BUS.register(new EventWatcherBL());
-		}
 		MinecraftForge.EVENT_BUS.register(new EventWatcherMain());
 		for (MaterialIntegration integration : RegisterHelper.moreTConIntegrations) {
 			integration.integrate();

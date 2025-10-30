@@ -442,7 +442,7 @@ public class ModMaterials implements MaterialTypes {
 			materialValasium.setCraftable(false);
 			materialValasium.setRepresentativeItem("ingotValasium");
 			materialValasium.addTrait(ModTraits.kineticBattery, HEAD);
-			materialValasium.addTrait(ModTraits.shielding, HEAD);
+			materialValasium.addTrait(ModTraits.warding, HEAD);
 			materialValasium.addTrait(TinkerTraits.alien, HEAD);
 			materialValasium.addTrait(TinkerTraits.alien);
 			materialValasium.addTrait(TinkerTraits.dense);
@@ -611,7 +611,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialAtronium, new PlatesMaterialStats(3.0f, 11.7f, 3.7f));
 				TinkerRegistry.addMaterialStats(materialAtronium, new TrimMaterialStats(37.5f));
 				
+				materialAtronium.addTrait(ArmorTraits.dense, CORE);
+				
 				ArmorMaterials.addArmorTrait(materialAtronium, ArmorTraits.lightweight);
+				ArmorMaterials.addArmorTrait(materialAtronium, ModTraits.magicallyReactive);
+				ArmorMaterials.addArmorTrait(materialAtronium, ModArmorTraits.etherealTangibility);
 			}
 			
 			materialEbonite.addItem("oreEbonite", 1, Material.VALUE_Ore());
@@ -642,7 +646,8 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEbonite, new PlatesMaterialStats(2.5f, 3.9f, 1));
 				TinkerRegistry.addMaterialStats(materialEbonite, new TrimMaterialStats(1.25f));
 				
-				ArmorMaterials.addArmorTrait(materialEbonite, ArmorTraits.dense);
+				ArmorMaterials.addArmorTrait(materialEbonite, ArmorTraits.vengeful, ArmorTraits.dense);
+				ArmorMaterials.addArmorTrait(materialEbonite, ModTraits.darkened, ArmorTraits.rough);
 
 				addArmorLum(materialEbonite);
 			}
@@ -674,8 +679,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialVoidSpar, new PlatesMaterialStats(2.0f, -3.2f, 1.5f));
 				TinkerRegistry.addMaterialStats(materialVoidSpar, new TrimMaterialStats(0.1f));
 				
-				ArmorMaterials.addArmorTrait(materialVoidSpar, ModTraits.voidic);
-				
+				ArmorMaterials.addArmorTrait(materialVoidSpar, ModTraits.voidic, ArmorTraits.dense);
+				materialAtronium.addTrait(ArmorTraits.ecological, TRIM);
+				materialAtronium.addTrait(ArmorTraits.ecological, PLATES);
+
 				addArmorLum(materialVoidSpar);
 			}
 			
@@ -700,6 +707,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGarstone, new TrimMaterialStats(0.1f));
 				
 				ArmorMaterials.addArmorTrait(materialGarstone, ArmorTraits.vengeful);
+				ArmorMaterials.addArmorTrait(materialGarstone, ArmorTraits.rough);
 				
 				addArmorLum(materialGarstone);
 			}
@@ -724,7 +732,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEchostone, new PlatesMaterialStats(2.0f, -3.2f, 0.2f));
 				TinkerRegistry.addMaterialStats(materialEchostone, new TrimMaterialStats(0.1f));
 				
-				ArmorMaterials.addArmorTrait(materialEchostone, ArmorTraits.enderport);
+				ArmorMaterials.addArmorTrait(materialEchostone, ModArmorTraits.warpedEcho, ArmorTraits.lightweight);
 				
 				addArmorLum(materialEchostone);
 			}
@@ -747,6 +755,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialBloodstone, new CoreMaterialStats(19.4f, 27.5f));
 				TinkerRegistry.addMaterialStats(materialBloodstone, new PlatesMaterialStats(1.125f, -2.3f, 2));
 				TinkerRegistry.addMaterialStats(materialBloodstone, new TrimMaterialStats(3.75f));
+
+				ArmorMaterials.addArmorTrait(materialBloodstone, ModArmorTraits.afterheal, ArmorTraits.rough);
+
 			}
 
 			
@@ -837,7 +848,7 @@ public class ModMaterials implements MaterialTypes {
 			materialRuneSteel.setCastable(true);
 			materialRuneSteel.setCraftable(false);
 			materialRuneSteel.addTrait(ModTraits.magical);
-			materialRuneSteel.addTrait(ModTraits.shielding);
+			materialRuneSteel.addTrait(ModTraits.warding);
 			materialRuneSteel.setRepresentativeItem("ingotRunesteel");
 			TinkerRegistry.addMaterialStats(materialRuneSteel, new HeadMaterialStats(900, 18f, 14f, 7));
 			TinkerRegistry.addMaterialStats(materialRuneSteel, new HandleMaterialStats(4f, 60));
@@ -848,6 +859,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialRuneSteel, new CoreMaterialStats(21.2f, 30.7f));
 				TinkerRegistry.addMaterialStats(materialRuneSteel, new PlatesMaterialStats(4.0f, 3.9f, 2.6f));
 				TinkerRegistry.addMaterialStats(materialRuneSteel, new TrimMaterialStats(3.0f));
+
+				ArmorMaterials.addArmorTrait(materialRuneSteel, ModArmorTraits.aegisIncantamentum);
+				ArmorMaterials.addArmorTrait(materialRuneSteel, ModTraits.warding);
+
 			}
 			
 			materialEnderal.addItem("gemEnderal", 1, Material.VALUE_Ingot);
@@ -879,7 +894,7 @@ public class ModMaterials implements MaterialTypes {
 			materialEnderexamite.setCraftable(false);
 			materialEnderexamite.addTrait(TinkerTraits.slimeyBlue, HEAD);
 			materialEnderexamite.addTrait(ModTraits.pulsating, HEAD);
-			materialEnderexamite.addTrait(ModTraits.shielding, HEAD);
+			materialEnderexamite.addTrait(ModTraits.warding, HEAD);
 			materialEnderexamite.addTrait(TinkerTraits.crumbling);
 			materialEnderexamite.addTrait(TinkerTraits.endspeed, PROJECTILE);
 			materialEnderexamite.addTrait(ModTraits.resilient);
@@ -1381,7 +1396,7 @@ public class ModMaterials implements MaterialTypes {
 			materialIronwood.setCraftable(false);
 			materialIronwood.setRepresentativeItem("ingotIronwood");
 			materialIronwood.addTrait(TConstruct.twilit);
-			materialIronwood.addTrait(ModTraits.shielding);
+			materialIronwood.addTrait(ModTraits.warding);
 			materialIronwood.addTrait(TinkerTraits.ecological);
 			TinkerRegistry.addMaterialStats(materialIronwood, new HeadMaterialStats(100, 10f, 5f, 4));
 			TinkerRegistry.addMaterialStats(materialIronwood, new HandleMaterialStats(1f, 25));
@@ -1517,7 +1532,7 @@ public class ModMaterials implements MaterialTypes {
 			materialValonite.setCraftable(true);
 			materialValonite.setRepresentativeItem("gemValonite");
 			materialValonite.addTrait(TinkerTraits.dense);
-			materialValonite.addTrait(ModTraits.shielding);
+			materialValonite.addTrait(ModTraits.warding);
 			materialValonite.addTrait(TinkerTraits.sharp);
 			TinkerRegistry.addMaterialStats(materialValonite, new HeadMaterialStats(975, 6f, 6.125f, 3));
 			TinkerRegistry.addMaterialStats(materialValonite, new HandleMaterialStats(1f, -75));

@@ -5,6 +5,7 @@ death.attack.pillar_of_fire=%1$s was swept away in %2$s's pillar of fire
 death.attack.pillar_of_fire.item=%1$s was swept away in the fiery pillar of %2$s's %3$s
 death.attack.bomb=%1$s was blown apart by %2$s
 death.attack.bomb.item=%1$s was blown apart by %2$s using %3$s
+death.attack.echo=%1$s was killed by their past
 
 entity.decaying_effect_moretcon.name=Effect
 
@@ -379,8 +380,8 @@ modifier.moretcon.overdrive.desc=§o299,792,458 m/s§r\nYour tool does apply sig
 modifier.moretcon.overdrive.name=Overdrive
 modifier.moretcon.weightless.desc=§oas light as a feather§r\nYour tool can be swung extremely fast. 
 modifier.moretcon.weightless.name=Weightless
-modifier.moretcon.shielding.desc=§oArmor on tools? Lets gooooo!!!§r\nYour tool provides +4 armor when held.
-modifier.moretcon.shielding.name=Shielding
+modifier.moretcon.shielding.desc=§omoar Armor? Lets gooooo!!!§r\nYour tool provides +4 armor when held or worn on an armor slot.
+modifier.moretcon.shielding.name=Warding
 modifier.moretcon.extratrait2.name=Embossment II
 modifier.moretcon.extratrait2.desc=§oIf embossment is so good why isn't there an embossment 2§r\nEmbossed with the power of %s, obtaining some of its traits.
 modifier.moretcon.electrified.name=Electrified
@@ -469,7 +470,17 @@ modifier.moretcon.liquid_armor.desc=§oaw man.. my shirt melted :c§r\nYour armo
 modifier.moretcon.burning_thorns_armor.name=Burning Thorns 
 modifier.moretcon.burning_thorns_armor.desc=§oOuch that burns§r\nYour armor will set attackers ablaze.
 modifier.moretcon.haunted_armor.name=Haunting Thorns 
-modifier.moretcon.haunted_armor.desc=§orip.. you arent getting revived§r\nYour armor will set attackers ablaze with haunted flames.
+modifier.moretcon.haunted_armor.desc=§ooo... spooooookeyyy§r\nYour armor will set attackers ablaze with haunted flames.
+modifier.moretcon.gravitating_armor.name=Gravitatings
+modifier.moretcon.gravitating_armor.desc=§oE_p = m * g * h§r\nWhile wearing this armor, you are resistant to fall damage and will fall faster, leaving a devastating impact when falling from a great height. 
+modifier.moretcon.aegis_incantamentum_armor.name=Aegis Incantamentum
+modifier.moretcon.aegis_incantamentum_armor.desc=§oI cast shield!§r\nWhile wearing this armor, you will gain 10 seconds of resistance every 20 seconds.
+modifier.moretcon.warped_echo_armor.name=Aegis Incantamentum
+modifier.moretcon.warped_echo_armor.desc=§oDue tmrw -> Do tmrw...§r\nWhile wearing this armor, incoming damage will be split into multiple sources.
+modifier.moretcon.afterheal_armor.name=Afterheal
+modifier.moretcon.afterheal_armor.desc=§onot sponsored by big pharma§r\nWhile wearing this armor, you will heal 0.5 hearts 1.5 seconds after taking damage.
+modifier.moretcon.ethereal_tangibility_armor.name=Ethereal Tangibility
+modifier.moretcon.ethereal_tangibility_armor.desc=§oStandin' from outta this world!§r\nWhile wearing this armor, you can stand on (but not sneak on) ethereal blocks.
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??

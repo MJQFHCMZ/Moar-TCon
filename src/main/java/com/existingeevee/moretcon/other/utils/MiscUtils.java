@@ -22,6 +22,7 @@ import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.modifiers.ModExtraTrait2;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -344,30 +345,47 @@ public class MiscUtils {
 				.setRegistryName("od_" + odLarge + "_to_" + odSmall));
 	}
 
-	public static void executeInNTicks(Runnable runnable, int executeIn) {
-		new Object() {
-			private int ticks = 0;
-			private float waitTicks;
-
-			public void start(int waitTicks) {
-				this.waitTicks = waitTicks;
-				MinecraftForge.EVENT_BUS.register(this);
-			}
-
-			@SubscribeEvent
-			public void tick(TickEvent.ServerTickEvent event) {
-				if (event.phase == TickEvent.Phase.END) {
-					if (this.ticks++ >= this.waitTicks) {
-						run();
-						MinecraftForge.EVENT_BUS.unregister(this);
+	public static class NTickTracker {
+		protected static boolean hasStarted = false;
+		
+		protected static final List<NTickTracker> LIST = Lists.newArrayList();
+		
+		public NTickTracker(Runnable runnable, int executeIn) {
+			this.runnable = runnable;
+			this.waitTicks = executeIn;
+		}
+		
+		protected boolean start() {
+			if (LIST.contains(this))
+				return false;
+			LIST.add(this);
+			if (!hasStarted)
+				MinecraftForge.EVENT_BUS.register(NTickTracker.class);
+			return true;
+		}
+		
+		private int ticks = 0;
+		private float waitTicks;
+		private Runnable runnable;
+		
+		@SubscribeEvent
+		public static void tick(TickEvent.ServerTickEvent event) {
+			if (event.phase == TickEvent.Phase.END) {
+				for (int i = 0; i < LIST.size(); i++) {
+					NTickTracker tracker = LIST.get(i);
+					
+					if (tracker.ticks++ > tracker.waitTicks) {
+						tracker.runnable.run();
+						LIST.remove(i--);
 					}
 				}
 			}
-
-			private void run() {
-				runnable.run();
-			}
-		}.start(executeIn);
+		}
+		
+	}
+	
+	public static void executeInNTicks(Runnable runnable, int executeIn) {
+		new NTickTracker(runnable, executeIn).start();
 	}
 
 	public static double randomN1T1() {

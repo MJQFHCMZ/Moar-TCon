@@ -3,6 +3,7 @@ package com.existingeevee.moretcon.traits.traits.armor;
 import java.util.IdentityHashMap;
 
 import com.existingeevee.moretcon.inits.ModBlocks;
+import com.existingeevee.moretcon.other.WorldGravityUtils;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import c4.conarm.common.armor.utils.ArmorHelper;
@@ -21,7 +22,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -39,11 +39,6 @@ public class Gravitating extends AbstractArmorTrait {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	@Override
-	public void onAbilityTick(int level, World world, EntityPlayer player) {
-
-	}
-
 	@SubscribeEvent
 	public void onLivingUpdateEvent(LivingUpdateEvent e) {
 		EntityLivingBase entity = e.getEntityLiving();
@@ -59,10 +54,12 @@ public class Gravitating extends AbstractArmorTrait {
 
 		}
 
+		double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(e.getEntityLiving().world, entity.getPositionVector());
+		
 		if (entity.motionY < 0) {
 			for (ItemStack s : e.getEntityLiving().getArmorInventoryList()) {
 				if (this.isToolWithTrait(s) && !ToolHelper.isBroken(s)) {
-					entity.motionY -= 0.20;
+					entity.motionY += gravity * 2.5; //~3.5x gravity
 					entity.motionY *= 0.98;
 					return;
 				}

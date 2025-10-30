@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
@@ -46,7 +47,6 @@ public class ItemDebugTool extends ItemBase {
 			} else {
 				playerIn.sendMessage(new TextComponentString(playerIn.getHeldItem(handIn.equals(EnumHand.MAIN_HAND) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND).serializeNBT().toString()));
 			}
-
 		}
 
 		playerIn.getCooldownTracker().setCooldown(this, 5);
@@ -56,12 +56,13 @@ public class ItemDebugTool extends ItemBase {
 	protected boolean debugFunction(World worldIn, EntityPlayer playerIn) { // this is used by me to test stuff.
 		if (!worldIn.isRemote) {
 			try {
-
-				
+				//playerIn.sendStatusMessage(new TextComponentString("" + Integer.toHexString(System.identityHashCode(worldIn))), false);
+				playerIn.attackEntityFrom(DamageSource.GENERIC, 10); 
+				//System.out.println();   
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		return true;
 	}
 }
