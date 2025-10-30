@@ -14,12 +14,16 @@ public class Afterheal extends AbstractArmorTrait {
 	public Afterheal() {
 		super(MiscUtils.createNonConflictiveName("afterheal"), TextFormatting.WHITE);
 	}
-	
+
 	@Override
-	public float onHurt(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingHurtEvent evt) {				
+	public float onHurt(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingHurtEvent evt) {
+		if (source != DamageSource.OUT_OF_WORLD)
 			MiscUtils.executeInNTicks(() -> {
 				if (player.world.playerEntities.contains(player)) {
-					player.heal(1);
+					if (player.getFoodStats().getFoodLevel() >= 6) {
+						player.heal(1);
+						player.getFoodStats().addExhaustion(0.1f);
+					}
 				}
 			}, 30);
 		return newDamage;
