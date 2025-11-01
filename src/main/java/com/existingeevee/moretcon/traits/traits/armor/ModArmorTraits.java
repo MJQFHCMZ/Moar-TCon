@@ -15,6 +15,12 @@ public class ModArmorTraits {
 	public static DummyTrait etherealTangibility = new DummyTrait("ethereal_tangibility_armor", 0xffffff);
 	public static WarpedEcho warpedEcho = new WarpedEcho();
 	public static Afterheal afterheal = new Afterheal();
+	public static Overlasting overlasting = new Overlasting();
+	public static Pulsating pulsating = new Pulsating();
+	public static Blightshield blightshield = new Blightshield();
+	public static Woeful woeful = new Woeful();
+	public static Immolating immolating = new Immolating();
+	public static Unmeltable unmeltable = new Unmeltable();
 	
 	
 }

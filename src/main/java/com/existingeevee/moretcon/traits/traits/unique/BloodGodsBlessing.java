@@ -25,16 +25,14 @@ public class BloodGodsBlessing extends AbstractTrait implements IAdditionalTrait
 			return;
 		}
 
-		if (target.isDead || target.getHealth() >= 0) {
-			int lvl = -1;
+		int lvl = -1;
 
-			if (player.isPotionActive(ModPotions.bloodgodsblessing)) {
-				lvl = player.getActivePotionEffect(ModPotions.bloodgodsblessing).getAmplifier();
-				player.removeActivePotionEffect(ModPotions.bloodgodsblessing);
-			}
-
-			player.addPotionEffect(new PotionEffect(ModPotions.bloodgodsblessing, 5 * 20, lvl + 1, false, false));
+		if (player.isPotionActive(ModPotions.bloodgodsblessing)) {
+			lvl = player.getActivePotionEffect(ModPotions.bloodgodsblessing).getAmplifier();
+			player.removeActivePotionEffect(ModPotions.bloodgodsblessing);
 		}
+
+		player.addPotionEffect(new PotionEffect(ModPotions.bloodgodsblessing, 5 * 20, lvl + 1, false, false));
 	}
 
 	@Override

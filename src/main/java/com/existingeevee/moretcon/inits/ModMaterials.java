@@ -887,6 +887,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEnderal, new PlatesMaterialStats(2.0f, -3.2f, 1));
 				TinkerRegistry.addMaterialStats(materialEnderal, new TrimMaterialStats(0.1f));
 				
+				ArmorMaterials.addArmorTrait(materialEnderal, ModArmorTraits.pulsating, ArmorTraits.rough);
+				materialEnderal.addTrait(ArmorTraits.rough, CORE);
+				
 				addArmorLum(materialEnderal);
 			}
 			
@@ -973,6 +976,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIgniglomerate, new CoreMaterialStats(18.7f, 18.8f));
 				TinkerRegistry.addMaterialStats(materialIgniglomerate, new PlatesMaterialStats(1.25f, -0.7f, 0));
 				TinkerRegistry.addMaterialStats(materialIgniglomerate, new TrimMaterialStats(12.5f));
+								
+				ArmorMaterials.addArmorTrait(materialIgniglomerate, ModArmorTraits.unmeltable);
+				ArmorMaterials.addArmorTrait(materialIgniglomerate, ModArmorTraits.burningThorns);
+				
+				materialIgniglomerate.addTrait(ArmorTraits.autoforge, CORE);
+
+
 				
 				addArmorLum(materialIgniglomerate);
 			}
@@ -998,6 +1008,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEtherstone, new CoreMaterialStats(26.9f, 37f));
 				TinkerRegistry.addMaterialStats(materialEtherstone, new PlatesMaterialStats(4.0f, -3.2f, 3.8f));
 				TinkerRegistry.addMaterialStats(materialEtherstone, new TrimMaterialStats(25.0f));
+				
+				ArmorMaterials.addArmorTrait(materialEtherstone, ModArmorTraits.etherealTangibility);
+				ArmorMaterials.addArmorTrait(materialEtherstone, ModTraits.darkened, ModArmorTraits.overlasting);
+				
+				materialEtherstone.addTrait(ModTraits.voidic, TRIM);
+				materialEtherstone.addTrait(ModTraits.voidic, PLATES);
 				
 				addArmorLum(materialEtherstone);
 			}
@@ -1071,6 +1087,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialBlightsteel, new CoreMaterialStats(22.6f, 20.6f));
 				TinkerRegistry.addMaterialStats(materialBlightsteel, new PlatesMaterialStats(2.5f, 5.2f, 3.2f));
 				TinkerRegistry.addMaterialStats(materialBlightsteel, new TrimMaterialStats(5.0f));
+				
+				materialBlightsteel.addTrait(ModArmorTraits.blightshield, CORE);
+				materialBlightsteel.addTrait(ModArmorTraits.woeful, TRIM);
+				materialBlightsteel.addTrait(ModArmorTraits.woeful, PLATES);
+				
+				ArmorMaterials.addArmorTrait(materialBlightsteel, ArmorTraits.infernal);				
+				
 			}
 			
 			materialQuakestruck.addTrait(ModTraits.seismishock);
@@ -1231,6 +1254,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGeodesium, new CoreMaterialStats(26f, 29.9f));
 				TinkerRegistry.addMaterialStats(materialGeodesium, new PlatesMaterialStats(1.25f, 8.1f, 0));
 				TinkerRegistry.addMaterialStats(materialGeodesium, new TrimMaterialStats(8.05f));
+				
+				materialGeodesium.addTrait(ModTraits.pyrophoric, CORE);
+				materialGeodesium.addTrait(ModArmorTraits.burningThorns, CORE);
+				ArmorMaterials.addArmorTrait(materialGeodesium, ModArmorTraits.immolating);
+				ArmorMaterials.addArmorTrait(materialGeodesium, ArmorTraits.aridiculous);
 				
 				addArmorLum(materialGeodesium);
 			}

@@ -27,8 +27,6 @@ public class WarpedEcho extends AbstractArmorTrait {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-//	public static final DamageSource ECHO = new DamageSource("echo");
-
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLivingHurtEvent(LivingHurtEvent event) {
 		if (event.getSource().getDamageType().equals("echo") || event.getSource() == DamageSource.OUT_OF_WORLD || event.getSource().isDamageAbsolute() || !(event.getEntity() instanceof EntityPlayer))
@@ -43,7 +41,7 @@ public class WarpedEcho extends AbstractArmorTrait {
 
 		float damageSplit = (float) (event.getAmount() / splitAmount);
 
-		for (int i = 1; i <= level + 0.0001; i++) { // i hate doubles:tm:
+		for (int i = 1; i <= level; i++) { // i hate doubles:tm:
 			MiscUtils.executeInNTicks(() -> {
 				if (event.getEntity().world.playerEntities.contains(event.getEntity())) {
 					int hrt = event.getEntityLiving().hurtResistantTime;
@@ -111,6 +109,11 @@ public class WarpedEcho extends AbstractArmorTrait {
 		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn) {
 			ItemStack itemstack = this.getTrueSource() instanceof EntityLivingBase ? ((EntityLivingBase) this.getTrueSource()).getHeldItemMainhand() : ItemStack.EMPTY;
 			String s = "death.attack." + this.damageType;
+			
+			if (this.getTrueSource() == null) {
+				s += ".noentity";
+			}
+			
 			String s1 = s + ".item";
 			return !itemstack.isEmpty() && itemstack.hasDisplayName() && I18n.canTranslate(s1) ? 
 					new TextComponentTranslation(s1, new Object[] { entityLivingBaseIn.getDisplayName(), this.getTrueSource().getDisplayName(), itemstack.getTextComponent() }) : 
@@ -136,15 +139,5 @@ public class WarpedEcho extends AbstractArmorTrait {
 		public boolean isCreativePlayer() {
 			return delagate.isCreativePlayer();
 		}
-	}
-
-	@Override
-	public float onHurt(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingHurtEvent evt) {
-		return newDamage;
-	}
-
-	@Override
-	public int getPriority() {
-		return 99999;
 	}
 }

@@ -11,6 +11,10 @@ import java.util.Optional;
 
 import javax.annotation.Nullable;
 
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.relauncher.ReflectionHelper.UnableToFindFieldException;
+import net.minecraftforge.fml.relauncher.ReflectionHelper.UnableToFindMethodException;
+
 //adapted from libnine
 public class MirrorUtils {
 
@@ -43,6 +47,27 @@ public class MirrorUtils {
 		return result;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static <T> IMethod<T> reflectObfusMethod(Class<?> clazz, String srgName, Class<T> returnTypeClazz, Class<?>... args) {
+		try {
+			Method method = ObfuscationReflectionHelper.findMethod(clazz, srgName, returnTypeClazz, args);
+			return new IMethod.Impl(method);
+		} catch (UnableToFindMethodException e) {
+			throw new MirrorException(String.format("Could not reflect obfuscated method: %s/%s %s",
+					clazz.getName(), srgName, Arrays.toString(args)), e);
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static <T> IField<T> reflectObfusField(Class<?> clazz, String name) {
+		try {
+			Field field = ObfuscationReflectionHelper.findField(clazz, name);
+			return new IField.Impl(field);
+		} catch (UnableToFindFieldException e) {
+			throw new MirrorException(String.format("Could not reflect obfuscated field: %s/%s", clazz.getName(), name), e);
+		}
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <T> IMethod<T> reflectMethod(Class<?> clazz, String name, Class<?>... args) {
 		try {
