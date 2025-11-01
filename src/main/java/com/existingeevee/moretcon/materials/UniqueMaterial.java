@@ -252,7 +252,6 @@ public class UniqueMaterial extends Material {
 	}
 
 	private static final IField<Set<IToolPart>> field$neededPart = MirrorUtils.reflectField(PartMaterialType.class, "neededPart");
-	private static final Map<PartMaterialType, Material> PMT_LOOKUP_MAP = new HashMap<>();
 
 	private static final Material[] standardMats = { TinkerRegistry.getMaterial(TinkerMaterials.iron.identifier), TinkerRegistry.getMaterial(TinkerMaterials.wood.identifier), TinkerRegistry.getMaterial(TinkerMaterials.feather.identifier) };
 
@@ -264,18 +263,14 @@ public class UniqueMaterial extends Material {
 			ImmutableList.Builder<Material> builder = ImmutableList.builder();
 			for (PartMaterialType pmt : tool.getRequiredComponents()) {
 				Set<IToolPart> neededPart = field$neededPart.get(pmt);
+				
 				if (!added && pmt.isValidMaterial(this) && neededPart.contains(getUniqueToolPart().getItem())) {
 					builder.add(this);
 					added = true;
 				} else {
-					if (PMT_LOOKUP_MAP.containsKey(pmt)) {
-						builder.add(PMT_LOOKUP_MAP.get(pmt));
-					}
-
 					boolean found = false;
 					for (Material m : standardMats) {
 						if (pmt.isValidMaterial(m)) {
-							PMT_LOOKUP_MAP.put(pmt, m);
 							builder.add(m);
 							found = true;
 							break;
@@ -284,7 +279,6 @@ public class UniqueMaterial extends Material {
 					if (!found)
 						for (Material m : TinkerRegistry.getAllMaterials()) {
 							if (pmt.isValidMaterial(m)) {
-								PMT_LOOKUP_MAP.put(pmt, m);
 								builder.add(m);
 								found = true;
 								break;
@@ -292,7 +286,6 @@ public class UniqueMaterial extends Material {
 						}
 
 					if (!found) {
-						PMT_LOOKUP_MAP.put(pmt, Material.UNKNOWN);
 						builder.add(Material.UNKNOWN);
 					}
 				}
