@@ -65,7 +65,7 @@ public class Shockwaving extends NumberTrackerTrait {
 			return;
 		}
 
-		if (itemTag.getInteger("uses") < 3) {
+		if (itemTag.getInteger("uses") < this.getNumberMax(stack)) {
 			if (!event.getWorld().isRemote) {
 				stack.damageItem(2, event.getEntityPlayer());
 				event.getWorld().playSound(null, event.getEntityPlayer().posX, event.getEntityPlayer().posY,
@@ -125,8 +125,8 @@ public class Shockwaving extends NumberTrackerTrait {
 					}
 				}
 				itemTag.setInteger("uses", itemTag.getInteger("uses") + 1);
-				if (itemTag.getInteger("uses") >= 3) {
-					itemTag.setInteger("uses", 3);
+				if (itemTag.getInteger("uses") >= this.getNumberMax(stack)) {
+					itemTag.setInteger("uses", this.getNumberMax(stack));
 					itemTag.setInteger("cooldown", 0);
 				}
 			}
@@ -149,7 +149,7 @@ public class Shockwaving extends NumberTrackerTrait {
 			itemTag.setInteger("uses", 0);
 		}
 
-		if (itemTag.getInteger("uses") == 3) {
+		if (itemTag.getInteger("uses") >= this.getNumberMax(stack)) {
 			if (itemTag.getInteger("cooldown") < 60) {
 				itemTag.setInteger("cooldown", itemTag.getInteger("cooldown") + 1);
 			}
@@ -169,12 +169,12 @@ public class Shockwaving extends NumberTrackerTrait {
 
 	@Override
 	public int getNumber(ItemStack stack) {
-		return 3 - stack.getTagCompound().getInteger("uses");
+		return this.getNumberMax(stack) - stack.getTagCompound().getInteger("uses");
 	}
 
 	@Override
 	public int setNumber(ItemStack stack, int amount) {
-		stack.getTagCompound().setInteger("uses", 3 - amount);
+		stack.getTagCompound().setInteger("uses", this.getNumberMax(stack) - amount);
 		return getNumber(stack);
 	}
 
