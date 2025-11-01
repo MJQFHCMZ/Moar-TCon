@@ -19,7 +19,7 @@
   	"softdep.thebetweenlands.MixinBlockEnergyBarrier",
   	"softdep.thebetweenlands.MixinEntityFortressBossProjectile",
   	"softdep.thebetweenlands.MixinEntityBLLightningBolt",
-  	
+  	"softdep.thebetweenlands.MixinEntityShockwaveBlock",
   	"softdep.thebetweenlands.MixinToolCore",
   	"softdep.thebetweenlands.MixinItemGreataxe",
   	

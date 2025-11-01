@@ -2,33 +2,51 @@ package com.existingeevee.moretcon.traits.traits.unique;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.existingeevee.moretcon.other.OverrideItemUseEvent;
+import com.existingeevee.moretcon.other.utils.ArrowReferenceHelper;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
+import com.existingeevee.moretcon.other.utils.ReequipHack;
 import com.existingeevee.moretcon.traits.traits.abst.NumberTrackerTrait;
+import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import slimeknights.tconstruct.library.tools.ToolCore;
+import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 import thebetweenlands.common.entity.EntityShockwaveBlock;
 import thebetweenlands.common.registries.SoundRegistry;
 
 public class Shockwaving extends NumberTrackerTrait {
 
+	protected static Shockwaving instance;
+
 	public Shockwaving() {
 		super(MiscUtils.createNonConflictiveName("shockwaving"), 0x0066ff);
+		ReequipHack.registerIgnoredKey(this.getModifierIdentifier());
+
 		MinecraftForge.EVENT_BUS.register(this);
+		instance = this;
 	}
 
 	@SubscribeEvent
@@ -39,13 +57,15 @@ public class Shockwaving extends NumberTrackerTrait {
 			return;
 		}
 
+		NBTTagCompound itemTag = TagUtil.getTagSafe(stack);
+
 		if (stack.getItemDamage() == stack.getMaxDamage()) {
-			stack.getTagCompound().setInteger("cooldown", 0);
+			itemTag.setInteger("cooldown", 0);
 			event.setResult(Result.DENY);
 			return;
 		}
 
-		if (stack.getTagCompound().getInteger("uses") < 3) {
+		if (itemTag.getInteger("uses") < 3) {
 			if (!event.getWorld().isRemote) {
 				stack.damageItem(2, event.getEntityPlayer());
 				event.getWorld().playSound(null, event.getEntityPlayer().posX, event.getEntityPlayer().posY,
@@ -77,12 +97,12 @@ public class Shockwaving extends NumberTrackerTrait {
 									&& block.getBlockHardness(event.getWorld(), origin) <= 5.0F
 									&& block.getBlockHardness(event.getWorld(), origin) >= 0.0F
 									&& !event.getWorld().getBlockState(origin.up()).isOpaqueCube()) {
-								stack.getTagCompound().setInteger("blockID",
+								itemTag.setInteger("blockID",
 										Block.getIdFromBlock(event.getWorld().getBlockState(origin).getBlock()));
-								stack.getTagCompound().setInteger("blockMeta", event.getWorld().getBlockState(origin)
+								itemTag.setInteger("blockMeta", event.getWorld().getBlockState(origin)
 										.getBlock().getMetaFromState(event.getWorld().getBlockState(origin)));
 
-								EntityShockwaveBlock shockwaveBlock = new EntityShockwaveBlock(event.getWorld());
+								EntityShockwaveBlock shockwaveBlock = new EntityShockwaveBlock(event.getWorld()); // ToolHelper
 								shockwaveBlock.setOrigin(origin,
 										MathHelper.floor(Math.sqrt(distance * distance + distance2 * distance2)),
 										event.getPos().getX() + 0.5D, event.getPos().getZ() + 0.5D,
@@ -90,18 +110,24 @@ public class Shockwaving extends NumberTrackerTrait {
 								shockwaveBlock.setLocationAndAngles(originX + 0.5D, originY, originZ + 0.5D, 0.0F,
 										0.0F);
 								shockwaveBlock.setBlock(
-										Block.getBlockById(stack.getTagCompound().getInteger("blockID")),
-										stack.getTagCompound().getInteger("blockMeta"));
+										Block.getBlockById(itemTag.getInteger("blockID")),
+										itemTag.getInteger("blockMeta"));
+
+								// Custom bit of extra data to store in info about the code :3
+								NBTTagCompound data = shockwaveBlock.getEntityData().getCompoundTag(this.getModifierIdentifier());
+								data.setTag("Tool", stack.serializeNBT());
+								shockwaveBlock.getEntityData().setTag(this.getModifierIdentifier(), data);
+
 								event.getWorld().spawnEntity(shockwaveBlock);
 								break;
 							}
 						}
 					}
 				}
-				stack.getTagCompound().setInteger("uses", stack.getTagCompound().getInteger("uses") + 1);
-				if (stack.getTagCompound().getInteger("uses") >= 3) {
-					stack.getTagCompound().setInteger("uses", 3);
-					stack.getTagCompound().setInteger("cooldown", 0);
+				itemTag.setInteger("uses", itemTag.getInteger("uses") + 1);
+				if (itemTag.getInteger("uses") >= 3) {
+					itemTag.setInteger("uses", 3);
+					itemTag.setInteger("cooldown", 0);
 				}
 			}
 			event.getEntityPlayer().swingArm(event.getHand());
@@ -114,25 +140,26 @@ public class Shockwaving extends NumberTrackerTrait {
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
-		if (!stack.hasTagCompound()) {
-			stack.setTagCompound(new NBTTagCompound());
+		NBTTagCompound itemTag = TagUtil.getTagSafe(stack);
+
+		if (!itemTag.hasKey("cooldown")) {
+			itemTag.setInteger("cooldown", 0);
 		}
-		if (!stack.getTagCompound().hasKey("cooldown")) {
-			stack.getTagCompound().setInteger("cooldown", 0);
-		}
-		if (!stack.getTagCompound().hasKey("uses")) {
-			stack.getTagCompound().setInteger("uses", 0);
+		if (!itemTag.hasKey("uses")) {
+			itemTag.setInteger("uses", 0);
 		}
 
-		if (stack.getTagCompound().getInteger("uses") == 3) {
-			if (stack.getTagCompound().getInteger("cooldown") < 60) {
-				stack.getTagCompound().setInteger("cooldown", stack.getTagCompound().getInteger("cooldown") + 1);
+		if (itemTag.getInteger("uses") == 3) {
+			if (itemTag.getInteger("cooldown") < 60) {
+				itemTag.setInteger("cooldown", itemTag.getInteger("cooldown") + 1);
 			}
-			if (stack.getTagCompound().getInteger("cooldown") >= 60) {
-				stack.getTagCompound().setInteger("cooldown", 60);
-				stack.getTagCompound().setInteger("uses", 0);
+			if (itemTag.getInteger("cooldown") >= 60) {
+				itemTag.setInteger("cooldown", 60);
+				itemTag.setInteger("uses", 0);
 			}
 		}
+
+		stack.setTagCompound(itemTag);
 	}
 
 	@Override
@@ -149,5 +176,76 @@ public class Shockwaving extends NumberTrackerTrait {
 	public int setNumber(ItemStack stack, int amount) {
 		stack.getTagCompound().setInteger("uses", 3 - amount);
 		return getNumber(stack);
+	}
+
+	public static boolean shouldHandle(EntityShockwaveBlock shockwave) {
+		if (instance == null)
+			return false;
+
+		if (!shockwave.getEntityData().getCompoundTag(instance.getModifierIdentifier()).hasKey("Tool", NBT.TAG_COMPOUND))
+			return false;
+
+		ItemStack stack = new ItemStack(shockwave.getEntityData().getCompoundTag(instance.getModifierIdentifier()).getCompoundTag("Tool"));
+
+		return stack.getItem() instanceof ToolCore;
+	}
+
+	protected static final AttributeModifier MODIFIER = new AttributeModifier(UUID.fromString("aeee8ee7-f22f-0100-9389-005f97370738"), "atk dmg modifier", 4, 0);
+
+	public static boolean handle(EntityShockwaveBlock shockwave, EntityLivingBase target, DamageSource source, float damage) {
+		ItemStack stack = new ItemStack(shockwave.getEntityData().getCompoundTag(instance.getModifierIdentifier()).getCompoundTag("Tool"));
+		EntityLivingBase attacker = null;
+
+		if (shockwave.getOwner() instanceof EntityLivingBase) {
+			attacker = (EntityLivingBase) shockwave.getOwner();
+		}
+
+		if (attacker != null && !target.world.isRemote) {
+			unequip(attacker, EntityEquipmentSlot.OFFHAND);
+			unequip(attacker, EntityEquipmentSlot.MAINHAND);
+
+			Multimap<String, AttributeModifier> projectileAttributes = stack.getAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+			projectileAttributes.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), MODIFIER);
+
+			attacker.getAttributeMap().applyAttributeModifiers(projectileAttributes);
+
+			boolean onGround = attacker.onGround;
+			attacker.onGround = false; // no sweep attack grr
+
+			ItemStack linked = ArrowReferenceHelper.getLinkedItemstackFromInventory(stack, attacker);
+			if (!linked.isEmpty())
+				stack = linked;
+			int atk = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, attacker, "field_184617_aD");
+
+			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, attacker, Integer.MAX_VALUE, "field_184617_aD");
+			boolean ret = ToolHelper.attackEntity(stack, (ToolCore) stack.getItem(), attacker, target, shockwave, false);
+
+			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, attacker, atk, "field_184617_aD");
+
+			attacker.onGround = onGround;
+
+			attacker.getAttributeMap().removeAttributeModifiers(projectileAttributes);
+
+			equip(attacker, EntityEquipmentSlot.MAINHAND);
+			equip(attacker, EntityEquipmentSlot.OFFHAND);
+
+			return ret; // EntityBolt
+		}
+
+		return false;
+	}
+
+	private static void unequip(EntityLivingBase entity, EntityEquipmentSlot slot) {
+		ItemStack stack = entity.getItemStackFromSlot(slot);
+		if (!stack.isEmpty()) {
+			entity.getAttributeMap().removeAttributeModifiers(stack.getAttributeModifiers(slot));
+		}
+	}
+
+	private static void equip(EntityLivingBase entity, EntityEquipmentSlot slot) {
+		ItemStack stack = entity.getItemStackFromSlot(slot);
+		if (!stack.isEmpty()) {
+			entity.getAttributeMap().applyAttributeModifiers(stack.getAttributeModifiers(slot));
+		}
 	}
 }
