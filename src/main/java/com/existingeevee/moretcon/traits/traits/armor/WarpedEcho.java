@@ -112,6 +112,7 @@ public class WarpedEcho extends AbstractArmorTrait {
 			
 			if (this.getTrueSource() == null) {
 				s += ".noentity";
+				return new TextComponentTranslation(s, new Object[] { entityLivingBaseIn.getDisplayName() });
 			}
 			
 			String s1 = s + ".item";
