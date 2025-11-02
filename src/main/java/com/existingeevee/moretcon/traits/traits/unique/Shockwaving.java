@@ -21,6 +21,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -32,7 +33,6 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.tools.ToolCore;
-import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 import thebetweenlands.common.entity.EntityShockwaveBlock;
 import thebetweenlands.common.registries.SoundRegistry;
@@ -57,15 +57,15 @@ public class Shockwaving extends NumberTrackerTrait {
 			return;
 		}
 
-		NBTTagCompound itemTag = TagUtil.getTagSafe(stack);
+		NBTTagCompound itemTag = stack.getOrCreateSubCompound(this.getModifierIdentifier());
 
-		if (stack.getItemDamage() == stack.getMaxDamage()) {
+		if (ToolHelper.isBroken(stack)) {
 			itemTag.setInteger("cooldown", 0);
 			event.setResult(Result.DENY);
 			return;
 		}
 
-		if (itemTag.getInteger("uses") < this.getNumberMax(stack)) {
+		if (this.getNumber(stack) > 0) {
 			if (!event.getWorld().isRemote) {
 				stack.damageItem(2, event.getEntityPlayer());
 				event.getWorld().playSound(null, event.getEntityPlayer().posX, event.getEntityPlayer().posY,
@@ -113,7 +113,7 @@ public class Shockwaving extends NumberTrackerTrait {
 										Block.getBlockById(itemTag.getInteger("blockID")),
 										itemTag.getInteger("blockMeta"));
 
-								// Custom bit of extra data to store in info about the code :3
+								// Custom bit of extra data to store in info about the tool :3
 								NBTTagCompound data = shockwaveBlock.getEntityData().getCompoundTag(this.getModifierIdentifier());
 								data.setTag("Tool", stack.serializeNBT());
 								shockwaveBlock.getEntityData().setTag(this.getModifierIdentifier(), data);
@@ -124,9 +124,11 @@ public class Shockwaving extends NumberTrackerTrait {
 						}
 					}
 				}
-				itemTag.setInteger("uses", itemTag.getInteger("uses") + 1);
-				if (itemTag.getInteger("uses") >= this.getNumberMax(stack)) {
-					itemTag.setInteger("uses", this.getNumberMax(stack));
+
+				this.removeNumber(stack, 1);
+				
+				if (this.getNumber(stack) <= 0) {
+					this.setNumber(stack, 0);
 					itemTag.setInteger("cooldown", 0);
 				}
 			}
@@ -134,32 +136,32 @@ public class Shockwaving extends NumberTrackerTrait {
 			event.setResult(Result.ALLOW);
 			return;
 		}
+		
 		event.setResult(Result.DENY);
-		return;
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
-		NBTTagCompound itemTag = TagUtil.getTagSafe(stack);
+		NBTTagCompound itemTag = stack.getOrCreateSubCompound(this.getModifierIdentifier());
 
 		if (!itemTag.hasKey("cooldown")) {
 			itemTag.setInteger("cooldown", 0);
 		}
-		if (!itemTag.hasKey("uses")) {
-			itemTag.setInteger("uses", 0);
-		}
 
-		if (itemTag.getInteger("uses") >= this.getNumberMax(stack)) {
+		if (this.getNumber(stack) <= 0) {
 			if (itemTag.getInteger("cooldown") < 60) {
 				itemTag.setInteger("cooldown", itemTag.getInteger("cooldown") + 1);
+				if (isSelected) {
+					world.spawnParticle(EnumParticleTypes.REDSTONE, entity.posX + random.nextDouble() - 0.5, entity.posY + random.nextDouble() * 2, entity.posZ + random.nextDouble() - 0.5, 0.0001, 1, 1);
+				}
 			}
 			if (itemTag.getInteger("cooldown") >= 60) {
 				itemTag.setInteger("cooldown", 60);
-				itemTag.setInteger("uses", 0);
+				this.setNumber(stack, this.getNumberMax(stack));
+				for (int i = 0; i < 20; i++)
+					world.spawnParticle(EnumParticleTypes.END_ROD, entity.posX, entity.posY + 1, entity.posZ, 0.25 * MiscUtils.randomN1T1(), 0.25 * MiscUtils.randomN1T1(), 0.25 * MiscUtils.randomN1T1());
 			}
 		}
-
-		stack.setTagCompound(itemTag);
 	}
 
 	@Override
@@ -169,13 +171,12 @@ public class Shockwaving extends NumberTrackerTrait {
 
 	@Override
 	public int getNumber(ItemStack stack) {
-		return this.getNumberMax(stack) - stack.getTagCompound().getInteger("uses");
+		return super.getNumber(stack);
 	}
 
 	@Override
 	public int setNumber(ItemStack stack, int amount) {
-		stack.getTagCompound().setInteger("uses", this.getNumberMax(stack) - amount);
-		return getNumber(stack);
+		return super.setNumber(stack, amount);
 	}
 
 	public static boolean shouldHandle(EntityShockwaveBlock shockwave) {
