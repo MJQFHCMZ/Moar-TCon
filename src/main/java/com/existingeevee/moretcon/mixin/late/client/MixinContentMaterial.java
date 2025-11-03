@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.existingeevee.moretcon.materials.CompositeRegistry;
@@ -16,6 +15,8 @@ import com.existingeevee.moretcon.materials.CompositeRegistry.CompositeData;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
@@ -42,8 +43,8 @@ public abstract class MixinContentMaterial {
 	@Shadow(remap = false)
 	private transient Material material;
 
-	@Redirect(method = "addStatsDisplay", at = @At(value = "INVOKE", ordinal = 0, target = "Lslimeknights/tconstruct/library/tools/IToolPart;hasUseForStat(Ljava/lang/String;)Z"), remap = false)
-	private boolean moretcon$INVOKE_Redirect$addStatsDisplay(IToolPart tp, String string) {
+	@WrapOperation(method = "addStatsDisplay", at = @At(value = "INVOKE", ordinal = 0, target = "Lslimeknights/tconstruct/library/tools/IToolPart;hasUseForStat(Ljava/lang/String;)Z"), remap = false)
+	private boolean moretcon$INVOKE_Redirect$addStatsDisplay(IToolPart tp, String string, Operation<Boolean> original) {
 		if (material instanceof UniqueMaterial) {
 			UniqueMaterial unique = (UniqueMaterial) material;
 			if (((Item) tp).getRegistryName().toString().equals(unique.getPartResLoc())) {
@@ -52,7 +53,7 @@ public abstract class MixinContentMaterial {
 			return false;
 		}
 
-		return tp.hasUseForStat(string);
+		return original.call(tp, string);
 	}
 
 	@Inject(method = "addDisplayItems", at = @At("HEAD"), remap = false, cancellable = true)
