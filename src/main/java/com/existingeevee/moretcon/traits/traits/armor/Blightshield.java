@@ -38,7 +38,7 @@ public class Blightshield extends AbstractArmorTrait {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLivingHurtEvent(LivingAttackEvent event) {
-		if (!event.getSource().isProjectile() || event.getEntityLiving().getHealth() > event.getEntityLiving().getMaxHealth() * 0.5 && event.getEntityLiving() instanceof EntityPlayer)
+		if (!event.getSource().isProjectile() || event.getEntityLiving().getHealth() > event.getEntityLiving().getMaxHealth() * 0.5 && !(event.getEntityLiving() instanceof EntityPlayer))
 			return;
 
 		int level = (int) Math.round(ArmorHelper.getArmorAbilityLevel((EntityPlayer) event.getEntityLiving(), this.identifier));

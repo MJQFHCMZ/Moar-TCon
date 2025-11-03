@@ -27,9 +27,16 @@ public class WarpedEcho extends AbstractArmorTrait {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
+	@Override
+	public int onArmorDamage(ItemStack armor, DamageSource source, int damage, int newDamage, EntityPlayer player, int slot) {
+		if (source instanceof EchoedDamageSource)
+			return 0;
+		return newDamage;
+	}
+
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLivingHurtEvent(LivingHurtEvent event) {
-		if (event.getSource().getDamageType().equals("echo") || event.getSource() == DamageSource.OUT_OF_WORLD || event.getSource().isDamageAbsolute() || !(event.getEntity() instanceof EntityPlayer))
+		if (event.getSource() instanceof EchoedDamageSource || event.getSource() == DamageSource.OUT_OF_WORLD || event.getSource().isDamageAbsolute() || !(event.getEntity() instanceof EntityPlayer))
 			return;
 
 		int level = (int) Math.round(ArmorHelper.getArmorAbilityLevel((EntityPlayer) event.getEntityLiving(), this.identifier));
@@ -45,9 +52,17 @@ public class WarpedEcho extends AbstractArmorTrait {
 			MiscUtils.executeInNTicks(() -> {
 				if (event.getEntity().world.playerEntities.contains(event.getEntity())) {
 					int hrt = event.getEntityLiving().hurtResistantTime;
+					double motionX = event.getEntityLiving().motionX;
+					double motionY = event.getEntityLiving().motionY;
+					double motionZ = event.getEntityLiving().motionZ;
+
 					event.getEntityLiving().hurtResistantTime = 0;
 					event.getEntityLiving().attackEntityFrom(new EchoedDamageSource(event.getSource()), damageSplit);
 					event.getEntityLiving().hurtResistantTime = hrt;
+
+					event.getEntityLiving().motionX = motionX;
+					event.getEntityLiving().motionY = motionY;
+					event.getEntityLiving().motionZ = motionZ;
 				}
 			}, 20 + 10 * i);
 		}
@@ -109,16 +124,14 @@ public class WarpedEcho extends AbstractArmorTrait {
 		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn) {
 			ItemStack itemstack = this.getTrueSource() instanceof EntityLivingBase ? ((EntityLivingBase) this.getTrueSource()).getHeldItemMainhand() : ItemStack.EMPTY;
 			String s = "death.attack." + this.damageType;
-			
+
 			if (this.getTrueSource() == null) {
 				s += ".noentity";
 				return new TextComponentTranslation(s, new Object[] { entityLivingBaseIn.getDisplayName() });
 			}
-			
+
 			String s1 = s + ".item";
-			return !itemstack.isEmpty() && itemstack.hasDisplayName() && I18n.canTranslate(s1) ? 
-					new TextComponentTranslation(s1, new Object[] { entityLivingBaseIn.getDisplayName(), this.getTrueSource().getDisplayName(), itemstack.getTextComponent() }) : 
-					new TextComponentTranslation(s, new Object[] { entityLivingBaseIn.getDisplayName(), this.getTrueSource().getDisplayName() });
+			return !itemstack.isEmpty() && itemstack.hasDisplayName() && I18n.canTranslate(s1) ? new TextComponentTranslation(s1, new Object[] { entityLivingBaseIn.getDisplayName(), this.getTrueSource().getDisplayName(), itemstack.getTextComponent() }) : new TextComponentTranslation(s, new Object[] { entityLivingBaseIn.getDisplayName(), this.getTrueSource().getDisplayName() });
 		}
 
 		@Override

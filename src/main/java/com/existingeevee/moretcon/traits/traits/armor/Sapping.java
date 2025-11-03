@@ -25,7 +25,7 @@ public class Sapping extends AbstractArmorTrait {
 			EntityPlayer player = (EntityPlayer) e;
 			double level = ArmorHelper.getArmorAbilityLevel(player, identifier);
 			if (level > 0.01) {
-				float healAmnt = Math.max(Math.min(2, event.getAmount() * 0.25f), (float) (level * 0.125f * event.getAmount()));
+				float healAmnt = Math.min(8, Math.max(Math.min(2, event.getAmount() * 0.25f), (float) (level * 0.125f * event.getAmount())));
 				player.heal(healAmnt);
 			}
 		}
