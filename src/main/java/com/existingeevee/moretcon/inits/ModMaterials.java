@@ -1125,6 +1125,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new CoreMaterialStats(31.7f, 29.1f));
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new PlatesMaterialStats(2.5f, 5.2f, 3.7f));
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new TrimMaterialStats(5.0f));
+				
+				ArmorMaterials.addArmorTrait(materialSanguiseelium, ArmorTraits.invigorating);				
+				ArmorMaterials.addArmorTrait(materialSanguiseelium, ModArmorTraits.sapping);				
+
 			}
 
 			TinkerRegistry.addMaterialStats(materialVengeance, new HeadMaterialStats(1024, 6f, 10f, 7));
@@ -1135,7 +1139,7 @@ public class ModMaterials implements MaterialTypes {
 			materialZracohlium.setCastable(true);
 			materialZracohlium.setCraftable(false);
 			materialZracohlium.setRepresentativeItem("ingotZracohlium");
-			materialZracohlium.addTrait(ModTraits.supercritical1, HEAD);
+			materialZracohlium.addTrait(ModTraits.supercritical2, HEAD);
 			materialZracohlium.addTrait(TinkerTraits.coldblooded, HEAD);
 			materialZracohlium.addTrait(ModTraits.pyrophoric);
 			materialZracohlium.addTrait(ModTraits.supercritical1);
@@ -1153,6 +1157,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialZracohlium, new CoreMaterialStats(24.5f, 29.9f));
 				TinkerRegistry.addMaterialStats(materialZracohlium, new PlatesMaterialStats(1.25f, 8.1f, 0.6f));
 				TinkerRegistry.addMaterialStats(materialZracohlium, new TrimMaterialStats(4.5f));
+				
+				materialZracohlium.addTrait(ArmorTraits.dramatic, CORE);
+				ArmorMaterials.addArmorTrait(materialZracohlium, ModArmorTraits.fissile);	
+				
+				materialZracohlium.addTrait(ModTraits.pyrophoric, TRIM);
+				materialZracohlium.addTrait(ModTraits.pyrophoric, EXTRA);
 			}
 
 			TinkerRegistry.addMaterialStats(materialDematerializer, new BowMaterialStats(1f, 3.2f, 7f));
@@ -1164,6 +1174,7 @@ public class ModMaterials implements MaterialTypes {
 			materialIoximite.addTrait(ModTraits.voidic, HEAD);
 			materialIoximite.addTrait(ModTraits.bottomsEnd, HEAD);
 			materialIoximite.addTrait(ModTraits.plasmaMissiles, HEAD);
+			materialIoximite.addTrait(TinkerTraits.alien, HEAD);
 			materialIoximite.addTrait(ModTraits.plasmaMissiles);
 			materialIoximite.addTrait(TinkerTraits.unnatural);
 			materialIoximite.addTrait(TinkerTraits.alien);
@@ -1181,6 +1192,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIoximite, new CoreMaterialStats(26f, 25.8f));
 				TinkerRegistry.addMaterialStats(materialIoximite, new PlatesMaterialStats(2.5f, 5.5f, 1.8f));
 				TinkerRegistry.addMaterialStats(materialIoximite, new TrimMaterialStats(1.5f));
+				
+				ArmorMaterials.addArmorTrait(materialIoximite, ModArmorTraits.plasmaShield);				
+				ArmorMaterials.addArmorTrait(materialIoximite, ArmorTraits.alien);		
+				materialIoximite.addTrait(ModTraits.voidic, CORE);
 			}
 			
 			TinkerRegistry.addMaterialStats(materialShotgun, new ExtraMaterialStats(1024));

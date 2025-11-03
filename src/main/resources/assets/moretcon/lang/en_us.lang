@@ -492,8 +492,14 @@ modifier.moretcon.unmeltable_armor.name=Unmeltable
 modifier.moretcon.unmeltable_armor.desc=§oLike tungsten!§r\nYou will gain temporary fire resistance while wearing this armor.
 modifier.moretcon.pulsating_armor.desc=§oSine wavy davie\n§rYour armor will have some amount of damage reduction. This bonus fluctuates from high to low and then back to high.
 modifier.moretcon.pulsating_armor.name=Pulsating
-modifier.moretcon.blightshield_armor.desc=§oLike a boss!\n§rYou are immune to projectiles when below 50% hp.
+modifier.moretcon.blightshield_armor.desc=§oLike a boss!\n§rYou are immune to projectiles when below 50% hp while wearing this armor.
 modifier.moretcon.blightshield_armor.name=Blightshield
+modifier.moretcon.sapping_armor.desc=§oBLOOD IS FUEL!!!\n§rYou heal a small fraction of damage nearby entities take while wearing this armor.
+modifier.moretcon.sapping_armor.name=Sapping
+modifier.moretcon.plasma_shield_armor.desc=§oA step away from lunar Transcendence!\n§rYou gain some absorption while wearing this armor. Not taking damage for 15 seconds rapidly regenerates absorption. Your armor also more effective when absorption hearts are present.
+modifier.moretcon.plasma_shield_armor.name=Plasma Shield
+modifier.moretcon.fissile_armor.desc=§onow I am become Death...\n§rYour armor will detonate when your health is below 25%, dealing massive damage to nearby targets. 
+modifier.moretcon.fissile_armor.name=Fissile
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??

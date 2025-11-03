@@ -21,6 +21,9 @@ public class ModArmorTraits {
 	public static Woeful woeful = new Woeful();
 	public static Immolating immolating = new Immolating();
 	public static Unmeltable unmeltable = new Unmeltable();
+	public static Sapping sapping = new Sapping();
+	public static PlasmaShield plasmaShield = new PlasmaShield();
+	public static Fissile fissile = new Fissile();
 	
 	
 }
