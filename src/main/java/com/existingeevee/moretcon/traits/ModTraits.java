@@ -27,7 +27,6 @@ import com.existingeevee.moretcon.traits.traits.Approximate;
 import com.existingeevee.moretcon.traits.traits.Blighted;
 import com.existingeevee.moretcon.traits.traits.BottomsEnd;
 import com.existingeevee.moretcon.traits.traits.Burning;
-import com.existingeevee.moretcon.traits.traits.Frostburn;
 import com.existingeevee.moretcon.traits.traits.Corroding;
 import com.existingeevee.moretcon.traits.traits.Cryogenics;
 import com.existingeevee.moretcon.traits.traits.Darkened;
@@ -35,6 +34,7 @@ import com.existingeevee.moretcon.traits.traits.Electrified;
 import com.existingeevee.moretcon.traits.traits.EulersWrath;
 import com.existingeevee.moretcon.traits.traits.Fireslime;
 import com.existingeevee.moretcon.traits.traits.Flashbang;
+import com.existingeevee.moretcon.traits.traits.Frostburn;
 import com.existingeevee.moretcon.traits.traits.Hardcore;
 import com.existingeevee.moretcon.traits.traits.Haunted;
 import com.existingeevee.moretcon.traits.traits.HelpfulRadiation;
@@ -67,6 +67,7 @@ import com.existingeevee.moretcon.traits.traits.SkysBlessing;
 import com.existingeevee.moretcon.traits.traits.Slicing;
 import com.existingeevee.moretcon.traits.traits.Slimesharp;
 import com.existingeevee.moretcon.traits.traits.Soulforged;
+import com.existingeevee.moretcon.traits.traits.Stormcaller;
 import com.existingeevee.moretcon.traits.traits.Supercritical;
 import com.existingeevee.moretcon.traits.traits.Treetap;
 import com.existingeevee.moretcon.traits.traits.Tricromatic;
@@ -77,7 +78,6 @@ import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
 import com.existingeevee.moretcon.traits.traits.abst.DummyTrait;
 import com.existingeevee.moretcon.traits.traits.internal.PolyshotProj;
 import com.existingeevee.moretcon.traits.traits.internal.ReforgeProj;
-import com.existingeevee.moretcon.traits.traits.unique.Skyburner;
 import com.existingeevee.moretcon.traits.traits.unique.Autoloading;
 import com.existingeevee.moretcon.traits.traits.unique.Blinkdrawn;
 import com.existingeevee.moretcon.traits.traits.unique.BloodGodsBlessing;
@@ -94,6 +94,7 @@ import com.existingeevee.moretcon.traits.traits.unique.Polyshot;
 import com.existingeevee.moretcon.traits.traits.unique.Ricoshot;
 import com.existingeevee.moretcon.traits.traits.unique.Seismishock;
 import com.existingeevee.moretcon.traits.traits.unique.Shockwaving;
+import com.existingeevee.moretcon.traits.traits.unique.Skyburner;
 import com.existingeevee.moretcon.traits.traits.unique.TripleShot;
 import com.existingeevee.moretcon.traits.traits.unique.Wormed;
 import com.google.common.collect.ImmutableSet;
@@ -193,6 +194,7 @@ public class ModTraits {
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
+	public static Stormcaller stormcaller = new Stormcaller();
 
 	public static AntiGravity antigravity;
 

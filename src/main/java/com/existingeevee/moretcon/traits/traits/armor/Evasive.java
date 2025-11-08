@@ -1,0 +1,50 @@
+package com.existingeevee.moretcon.traits.traits.armor;
+
+import com.existingeevee.moretcon.other.utils.MiscUtils;
+
+import c4.conarm.lib.traits.AbstractArmorTrait;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketParticles;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+public class Evasive extends AbstractArmorTrait {
+
+	public Evasive() {
+		super(MiscUtils.createNonConflictiveName("evasive"), 0xffffff);
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onLivingAtkEvent(LivingAttackEvent event) {
+		if (event.getEntity().world.isRemote)
+			return;
+		
+		for (ItemStack s : event.getEntityLiving().getArmorInventoryList()) {
+			if (this.isToolWithTrait(s)) {
+				boolean shouldDodge = random.nextInt(100) == 0;
+				
+				if (shouldDodge) {
+					event.setCanceled(true);
+					event.getEntityLiving().world.playSound(null, event.getEntityLiving().getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 2, 0);
+					if (event.getEntityLiving().world instanceof WorldServer) {
+						SPacketParticles spacketparticles = new SPacketParticles(EnumParticleTypes.EXPLOSION_LARGE, true, (float) event.getEntityLiving().posX, (float) event.getEntityLiving().posY + 0.5f, (float) event.getEntityLiving().posZ, 0, 0, 0, 0, 1);
+						for (EntityPlayerMP p : event.getEntityLiving().world.getPlayers(EntityPlayerMP.class, p -> true)) {
+							if (p.getPositionVector().squareDistanceTo(event.getEntityLiving().getPositionVector()) < 100 * 100) {
+								p.connection.sendPacket(spacketparticles);
+							}
+						}
+					}
+					return;
+				}
+			}
+		}
+	}
+}

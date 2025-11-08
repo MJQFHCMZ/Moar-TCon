@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.existingeevee.moretcon.entity.entities.EntityDecayingEffect;
 import com.existingeevee.moretcon.entity.entities.EntityDecayingEffect.EnumDecayingEffectType;
+import com.existingeevee.moretcon.other.DamageScalar;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.entity.Entity;
@@ -36,6 +37,8 @@ public class Seismishock extends AbstractTrait {
 				EntityDecayingEffect decayingEffect = new EntityDecayingEffect(target.getEntityWorld(), EnumDecayingEffectType.SHOCKWAVE, 0, 2f * multiplier, playerIn.getUniqueID());
 				decayingEffect.setPosition(target.posX, target.posY, target.posZ);
 				target.getEntityWorld().spawnEntity(decayingEffect);
+
+				DamageScalar.push(0.6f);
 
 				for (Entity e : decayingEffect.getAffectedEntities()) {
 
@@ -80,12 +83,13 @@ public class Seismishock extends AbstractTrait {
 						t.afterHit(stack, playerIn, entity, hpBefore - entity.getHealth(), false, wasHit);
 					}
 				}
+				DamageScalar.pop();
 			}
 			target.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS, 1, 2);
-			if (target.getHealth() <= 0) {
-				playerIn.fallDistance = 3;
-				target.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1, 1);
-			}
+			// if (target.getHealth() <= 0) {
+			playerIn.fallDistance = 3;
+			target.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1, 1);
+			// }
 		}
 	}
 

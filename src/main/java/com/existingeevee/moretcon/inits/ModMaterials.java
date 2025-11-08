@@ -260,6 +260,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialNahuatl, new TrimMaterialStats(3.75f));
 				
 				ArmorMaterials.addArmorTrait(materialNahuatl, ArmorTraits.ecological);
+				ArmorMaterials.addArmorTrait(materialNahuatl, ArmorTraits.dense);
+				materialNahuatl.addTrait(ModTraits.darkened, CORE);
+				materialNahuatl.addTrait(ModArmorTraits.serrated, CORE);
+
 			}
 
 			
@@ -1029,8 +1033,7 @@ public class ModMaterials implements MaterialTypes {
 			materialElectarite.setRepresentativeItem("gemElectarite");
 			materialElectarite.addTrait(ModTraits.luminescent, HEAD);
 			materialElectarite.addTrait(ModTraits.electrified, HEAD);
-			materialElectarite.addTrait(TinkerTraits.enderference, HEAD);
-			materialElectarite.addTrait(TinkerTraits.enderference);
+			materialElectarite.addTrait(ModTraits.stormcaller, HEAD);
 			materialElectarite.addTrait(TinkerTraits.unnatural);
 			materialElectarite.addTrait(ModTraits.luminescent);
 			TinkerRegistry.addMaterialStats(materialElectarite, new HeadMaterialStats(620, 6f, 7f, 5));
@@ -1042,6 +1045,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialElectarite, new CoreMaterialStats(17.6f, 18.8f));
 				TinkerRegistry.addMaterialStats(materialElectarite, new PlatesMaterialStats(2.2f, 0.7f, 0.2f));
 				TinkerRegistry.addMaterialStats(materialElectarite, new TrimMaterialStats(3.5f));
+
+				ArmorMaterials.addArmorTrait(materialElectarite, ArmorTraits.dramatic);
+				materialElectarite.addTrait(ModTraits.stormcaller, CORE);
 				
 				addArmorLum(materialElectarite);
 			}
@@ -1220,6 +1226,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialMonolite, new PlatesMaterialStats(3.0f, -3.2f, 3f));
 				TinkerRegistry.addMaterialStats(materialMonolite, new TrimMaterialStats(25.0f));
 				
+				ArmorMaterials.addArmorTrait(materialMonolite, ModTraits.macrocrystaline);				
+				ArmorMaterials.addArmorTrait(materialMonolite, ArmorTraits.dense);				
+				
 				addArmorLum(materialMonolite);
 			}
 			
@@ -1244,6 +1253,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialPerimidum, new PlatesMaterialStats(2.6f, -3.2f, 3.2f));
 				TinkerRegistry.addMaterialStats(materialPerimidum, new TrimMaterialStats(30.5f));
 				
+				ArmorMaterials.addArmorTrait(materialPerimidum, ModArmorTraits.evasive, ArmorTraits.dense);				
 				addArmorLum(materialPerimidum);
 			}
 			

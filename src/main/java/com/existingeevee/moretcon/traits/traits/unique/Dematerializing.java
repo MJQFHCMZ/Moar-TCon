@@ -112,9 +112,9 @@ public class Dematerializing extends AbstractTrait {
 		arrowToShoot.motionY = motionY;
 		arrowToShoot.motionZ = motionZ;
 						
-		DamageScalar.set(0.275f);
+		DamageScalar.push(0.275f);
 		this.shoot(world, posStart, arrowLastFired, shooter, arrowToShoot, dist, progress, event.launcher, volleyID, true, false);
-		DamageScalar.reset();
+		DamageScalar.pop();
 
 		for (int i = 1; i < 4; i++) {
 			EntityArrow arrowToShoot2 = bow.getProjectileEntity(arrowLastFired, event.launcher, world, (EntityPlayer) shooter, power, 0, progress, false);
@@ -126,9 +126,9 @@ public class Dematerializing extends AbstractTrait {
 			arrowToShoot2.motionZ = motionZ;
 			
 			MiscUtils.executeInNTicks(() -> {
-				DamageScalar.set(0.275f);
+				DamageScalar.push(0.275f);
 				this.shoot(world, posStart, arrowLastFired.copy(), shooter, arrowToShoot2, dist, progress, event.launcher, volleyID, false, false);
-				DamageScalar.reset();
+				DamageScalar.pop();
 			}, 3 * i);
 		}
 	}

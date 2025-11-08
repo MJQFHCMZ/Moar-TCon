@@ -24,6 +24,8 @@ public class ModArmorTraits {
 	public static Sapping sapping = new Sapping();
 	public static PlasmaShield plasmaShield = new PlasmaShield();
 	public static Fissile fissile = new Fissile();
+	public static Serrated serrated = new Serrated();
+	public static Evasive evasive = new Evasive();
 	
 	
 }
