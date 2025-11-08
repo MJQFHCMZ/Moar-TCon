@@ -52,6 +52,11 @@ public class EssentialObliteration extends NumberTrackerTrait {
 			if (player instanceof EntityPlayer && ((EntityPlayer) player).getCooldownTracker().hasCooldown(tool.getItem()))
 				return;
 			
+			double hardness = state.getBlockHardness(world, pos);
+			
+			if (hardness < 0.2)
+				return;
+			
 			if (!world.isRemote) {
 				float str = (float) Math.sqrt(2 * ToolHelper.getActualMiningSpeed(tool));
 				ExplosionEFLN explosion = new ExplosionEFLN(world, player, pos.getX(), pos.getY(), pos.getZ(), str, false, false);
@@ -68,7 +73,7 @@ public class EssentialObliteration extends NumberTrackerTrait {
 
 	@Override
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
-		if (!world.isRemote && world.getWorldTime() % 100 == 0) {
+		if (!world.isRemote && (entity.getUniqueID().getLeastSignificantBits() + world.getWorldTime()) % 100 == 0) {
 			this.addNumber(tool, 1);
 		}
 	}
@@ -79,7 +84,8 @@ public class EssentialObliteration extends NumberTrackerTrait {
 	public void onLivingUpdate(LivingUpdateEvent e) {
 		if ((e.getEntityLiving() instanceof EntityPlayer)) {
 			ItemStack stack = e.getEntityLiving().getHeldItemMainhand();
-			if (this.isToolWithTrait(stack) && e.getEntityLiving().isSneaking() && this.getNumber(stack) >= 10 && !ToolHelper.isBroken(stack)) {
+			boolean cooldown = ((EntityPlayer) e.getEntityLiving()).getCooldownTracker().hasCooldown(stack.getItem());
+			if (this.isToolWithTrait(stack) && e.getEntityLiving().isSneaking() && this.getNumber(stack) >= 10 && !ToolHelper.isBroken(stack) && !cooldown) {
 				if (!e.getEntityLiving().getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).hasModifier(ESSENCORE_MINING_REACH)) {
 					e.getEntityLiving().getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).applyModifier(ESSENCORE_MINING_REACH);
 				}
