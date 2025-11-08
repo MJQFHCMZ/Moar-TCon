@@ -30,10 +30,8 @@ public class Crushing extends ModifierTrait {
 		if (player instanceof EntityPlayer) {
 			actualDMG *= ((EntityPlayer) player).getCooledAttackStrength(0.5f);
 		}
-
 		target.getEntityData().setFloat(getModifierIdentifier(), actualDMG);
-
-		return newDamage * (1 - getPercentage(TinkerUtil.getModifierTag(tool, getModifierIdentifier())));
+		return newDamage;
 	}
 
 	@Override
