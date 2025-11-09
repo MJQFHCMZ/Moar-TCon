@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
@@ -32,6 +33,13 @@ public class Immolating extends AbstractArmorTrait {
         super.applyEffect(rootCompound, modifierTag);
     }
 
+	@Override
+	public float onDamaged(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingDamageEvent evt) {
+		if (source == DamageSource.LAVA)
+			return newDamage;
+		return newDamage - damage / 12f;
+	}
+    
     @Override
     public void onAbilityTick(int level, World world, EntityPlayer player) {
     	long tick = player.getUniqueID().getLeastSignificantBits() + world.getTotalWorldTime();

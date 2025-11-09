@@ -47,7 +47,9 @@ public class ModArmorTraits {
 	public static PlasmaShield plasmaShield = new PlasmaShield();
 	public static Fissile fissile = new Fissile();
 	public static Serrated serrated = new Serrated();
-	public static Evasive evasive = new Evasive();
+	public static Evasive evasive = new Evasive(1);
+	public static Evasive evasive2 = new Evasive(2);
+	public static Evasive evasive3 = new Evasive(3);
 	
 	public static List<Modifier> collector = new ArrayList<>(); //TODO modifiers? adding this for now for extraTrait2
 	

@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Optional;
 import slimeknights.tconstruct.library.Util;
@@ -38,10 +39,19 @@ public class Macrocrystaline extends AbstractTrait implements ISimpleArmorTrait 
 	@Override
 	@Optional.Method(modid = "conarm")
 	public ArmorModifications getModifications(EntityPlayer player, ArmorModifications mods, ItemStack armor, DamageSource source, double damage, int slot) {
-		mods.addEffectiveness(getPerfection(armor) * 0.05f);
+		mods.addEffectiveness(getPerfection(armor) * 0.075f);
 		return mods;
 	}
 
+	@Override
+	@Optional.Method(modid = "conarm")
+	public float onDamaged(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingDamageEvent evt) {
+		float halfDamage = damage * 0.5f;
+		float perfection = getPerfection(armor) * 0.015f;
+		
+		return newDamage - Math.min(halfDamage, halfDamage * perfection);
+	}
+	
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
         String loc = String.format(LOC_Extra, getModifierIdentifier());

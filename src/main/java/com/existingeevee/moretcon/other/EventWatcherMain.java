@@ -6,6 +6,8 @@ import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -14,18 +16,16 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
-import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tinkering.IModifyable;
 import slimeknights.tconstruct.library.tinkering.ITinkerable;
 import slimeknights.tconstruct.library.tools.ToolCore;
-import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
-import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
 public class EventWatcherMain {
@@ -67,6 +67,20 @@ public class EventWatcherMain {
 	}
 
 	@SubscribeEvent
+	public void updateItemStackEntities(WorldTickEvent e) {
+		if (e.phase != Phase.START)
+			return;
+		for (EntityItem entity : e.world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ToolCore)) {
+			ItemStack tool = entity.getItem();
+			for (ITrait t : ToolHelper.getTraits(tool)) {
+				if (t instanceof IAdditionalTraitMethods) {
+					((IAdditionalTraitMethods) t).onEntityItemTick(tool, entity);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public void onTinkerCraftingEvent(TinkerCraftingEvent event) {
 		if (event.getItemStack().getItem() instanceof ITinkerable || event.getItemStack().getItem() instanceof IModifyable) { 
 			NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
@@ -78,20 +92,10 @@ public class EventWatcherMain {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	@SideOnly(value = Side.CLIENT)
 	public void handleToolTips(ItemTooltipEvent event) {
-		if (event.getItemStack().getItem() instanceof ToolPart) {
-			Material mat = TinkerUtil.getMaterialFromStack(event.getItemStack());
-			if (mat != null) {
-				for (ITrait t : mat.getAllTraits()) {
-					if (t instanceof IAdditionalTraitMethods) {
-						event.getToolTip().addAll(((IAdditionalTraitMethods) t).getAdditionalInfo(event.getItemStack()));
-					}
-				}
-			}
-
-		} else if (event.getItemStack().getItem() instanceof ToolCore) {
+		if (event.getItemStack().getItem() instanceof ToolCore) {
 			for (ITrait t : ToolHelper.getTraits(event.getItemStack())) {
 				if (t instanceof IAdditionalTraitMethods) {
-					event.getToolTip().addAll(((IAdditionalTraitMethods) t).getAdditionalInfo(event.getItemStack()));
+					((IAdditionalTraitMethods) t).modifyTooltip(event.getItemStack(), event);
 				}
 			}
 		}

@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Optional;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
@@ -48,5 +49,17 @@ public class Darkened extends AbstractTrait implements ISimpleArmorTrait {
 		}
 
 		return mods;
+	}
+	
+	@Override
+	public float onDamaged(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingDamageEvent evt) {
+		float light = player.world.getLight(player.getPosition()) / 16f;
+
+		if (light <= 6. / 16) {
+			float lightScaled = light / (6.f / 16);
+			return newDamage - (3 - 0.3333f * lightScaled);
+		}
+		
+		return newDamage;
 	}
 }

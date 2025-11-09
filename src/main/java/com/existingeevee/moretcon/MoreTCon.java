@@ -186,7 +186,7 @@ public class MoreTCon {
 
 		ModTraits.postInit();
 		if (CompatManager.conarm)
-			ModArmorTraits.postInit();
+			ModArmorTraits.postInit(); //EntityPlayer
 			
 		//You're welcome!
 		ReequipHack.registerIgnoredKey(Tags.TOOL_DATA); 

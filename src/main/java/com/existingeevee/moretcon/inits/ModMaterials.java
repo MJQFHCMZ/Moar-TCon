@@ -1260,7 +1260,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialPerimidum, new PlatesMaterialStats(2.6f, -3.2f, 3.2f));
 				TinkerRegistry.addMaterialStats(materialPerimidum, new TrimMaterialStats(30.5f));
 				
-				ArmorMaterials.addArmorTrait(materialPerimidum, ModArmorTraits.evasive, ArmorTraits.dense);				
+				ArmorMaterials.addArmorTrait(materialPerimidum, ModArmorTraits.evasive2, ModArmorTraits.evasive);	
+				materialPerimidum.addTrait(ArmorTraits.dense, TRIM);
+				materialPerimidum.addTrait(ArmorTraits.dense, PLATES);
+
 				addArmorLum(materialPerimidum);
 			}
 			

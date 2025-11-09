@@ -504,7 +504,7 @@ modifier.moretcon.fissile_armor.desc=§onow I am become Death...\n§rYour armor 
 modifier.moretcon.fissile_armor.name=Fissile
 modifier.moretcon.serrated_armor.desc=§oSlice and dice!n§rYour armor will cause attackers to bleed when worn.
 modifier.moretcon.serrated_armor.name=Serrated
-modifier.moretcon.evasive_armor.desc=§olmao imagine missing!n§rYour armor will occasionally fully nullify damage.
+modifier.moretcon.evasive_armor.desc=§olmao imagine missing!\n§rYour armor will occasionally fully nullify damage.
 modifier.moretcon.evasive_armor.name=Evasive
 
 modifier.moretcon.reforgeheavy.name=Heavy

@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
 import net.minecraftforge.fml.common.Optional;
@@ -48,6 +49,14 @@ public class Pyrophoric extends AttributeTrait implements ISimpleArmorTrait {
 		return mods;
 	}
 
+	@Override
+	public float onDamaged(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingDamageEvent evt) {
+		if (this.isBurning(armor)) {
+			return newDamage - damage / 8f;
+		} 
+		return newDamage;
+	}
+	
 	@Override
 	@Optional.Method(modid = "conarm")
 	public void onAbilityTick(int level, World world, EntityPlayer player) {

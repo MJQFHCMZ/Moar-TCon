@@ -79,13 +79,16 @@ public class Afterimage extends AbstractTrait {
 			target.getEntityData().removeTag("afterimaged");
 		}
 
-		if (rand.nextInt(5) == 0 && !player.world.isRemote) {
+		if (rand.nextInt(5) == 0 && !player.world.isRemote && player instanceof EntityPlayerMP) {
 			target.hurtResistantTime = 0;
 			try {
 				ticksSinceLastSwing.set(player, Integer.MAX_VALUE);
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
-			}
+			} 
+			
+			((EntityPlayerMP) player).getCooldownTracker().removeCooldown(tool.getItem());
+			
 			target.getEntityData().setLong("afterimaged", player.world.getTotalWorldTime() + 40);
 			player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 2);
 			NetworkHandler.HANDLER.sendTo(new AfterimageMessage(), ((EntityPlayerMP) player));
