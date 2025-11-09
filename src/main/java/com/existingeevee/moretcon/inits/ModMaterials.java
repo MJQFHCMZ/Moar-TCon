@@ -332,7 +332,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSearedStone, new PlatesMaterialStats(0.85f, -1.6f, 0));
 				TinkerRegistry.addMaterialStats(materialSearedStone, new TrimMaterialStats(-0.75f));
 				
-				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.combustible);
+				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.mundane2, ArmorTraits.mundane);				
+				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.combustible, CORE);				
+
 			}
 			
 			materialSlimesteel.addCommonItems("Slimesteel");
@@ -684,8 +686,8 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialVoidSpar, new TrimMaterialStats(0.1f));
 				
 				ArmorMaterials.addArmorTrait(materialVoidSpar, ModTraits.voidic, ArmorTraits.dense);
-				materialAtronium.addTrait(ArmorTraits.ecological, TRIM);
-				materialAtronium.addTrait(ArmorTraits.ecological, PLATES);
+				materialVoidSpar.addTrait(ArmorTraits.ecological, TRIM);
+				materialVoidSpar.addTrait(ArmorTraits.ecological, PLATES);
 
 				addArmorLum(materialVoidSpar);
 			}
@@ -915,6 +917,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEnderexamite, new CoreMaterialStats(25.5f, 25.8f));
 				TinkerRegistry.addMaterialStats(materialEnderexamite, new PlatesMaterialStats(2.25f, 1.3f, 2));
 				TinkerRegistry.addMaterialStats(materialEnderexamite, new TrimMaterialStats(0.60f));
+				
+				materialEnderexamite.addTrait(ArmorTraits.slimeyBlue, CORE);
+				materialEnderexamite.addTrait(ModTraits.warding, CORE);
+				materialEnderexamite.addTrait(ModArmorTraits.pulsating);
+				ArmorMaterials.addArmorTrait(materialEnderexamite, ModTraits.voidic, ArmorTraits.dense);
 			}
 			
 			materialShadowglass.setCastable(false);

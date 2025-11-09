@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
@@ -57,12 +56,16 @@ public class ItemDebugTool extends ItemBase {
 		if (!worldIn.isRemote) {
 			try {
 				//playerIn.sendStatusMessage(new TextComponentString("" + Integer.toHexString(System.identityHashCode(worldIn))), false);
-				playerIn.attackEntityFrom(DamageSource.GENERIC, 10); 
+				//playerIn.attackEntityFrom(DamageSource.GENERIC, 10); 
 				//System.out.println();   
+				
+				//System.out.println(TinkerRegistry.getModifier("moretcon.extratrait2_armor"));
+				
+				ObfuscationReflectionHelper.setPrivateValue(BookData.class, ArmoryBook.INSTANCE, false, "initialized");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return true;
+		return false;
 	}
 }

@@ -16,7 +16,9 @@ import com.existingeevee.moretcon.other.utils.RegisterHelper;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.TraitClient;
 import com.existingeevee.moretcon.traits.book.BookTransformerAppendModifiers;
+import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 
+import c4.conarm.lib.book.ArmoryBook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.item.Item;
@@ -81,10 +83,13 @@ public class ClientProxy extends CommonProxy {
 		BookLoader.registerPageType(ContentLigntningModifier.ID, ContentLigntningModifier.class);
 
 		TinkerBook.INSTANCE.addTransformer(new BookTransformerAppendTools(
-				new FileRepository("tconstruct:book"), RegisterHelper.moreTConTools));
+				new FileRepository(ModInfo.MODID + ":book"), RegisterHelper.moreTConTools));
 
 		TinkerBook.INSTANCE.addTransformer(new BookTransformerAppendModifiers(
-				new FileRepository("tconstruct:book"), RegisterHelper.moreTConModifiers));
+				new FileRepository(ModInfo.MODID + ":book"), RegisterHelper.moreTConModifiers));
+		
+		ArmoryBook.INSTANCE.addTransformer(new BookTransformerAppendModifiers(
+				new FileRepository(ModInfo.MODID + ":book"), true, ModArmorTraits.collector));
 	}
 
 	@Override

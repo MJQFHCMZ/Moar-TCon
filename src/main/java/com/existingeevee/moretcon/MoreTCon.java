@@ -40,6 +40,7 @@ import com.existingeevee.moretcon.other.utils.SoundHandler;
 import com.existingeevee.moretcon.proxy.CommonProxy;
 import com.existingeevee.moretcon.reforges.ReforgeHandler;
 import com.existingeevee.moretcon.traits.ModTraits;
+import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 import com.existingeevee.moretcon.world.MoreTConWorldGen;
 
 import net.minecraft.block.Block;
@@ -184,7 +185,9 @@ public class MoreTCon {
 		CompositeRegistry.onPostInit();
 
 		ModTraits.postInit();
-		
+		if (CompatManager.conarm)
+			ModArmorTraits.postInit();
+			
 		//You're welcome!
 		ReequipHack.registerIgnoredKey(Tags.TOOL_DATA); 
 		ReequipHack.registerIgnoredKey(Tags.TINKER_EXTRA); 

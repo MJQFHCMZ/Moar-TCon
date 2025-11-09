@@ -15,6 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
 import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 import slimeknights.tconstruct.library.modifiers.ProjectileModifierTrait;
+import slimeknights.tconstruct.library.utils.ToolHelper;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import thebetweenlands.client.render.particle.BLParticles;
 import thebetweenlands.client.render.particle.BatchedParticleRenderer;
 import thebetweenlands.client.render.particle.DefaultParticleBatches;
@@ -29,12 +31,19 @@ public class Shocked extends ProjectileModifierTrait {
 	}
 
 	@Override
+	@SuppressWarnings("unlikely-arg-type")
 	public void afterHit(EntityProjectileBase projectile, World world, ItemStack ammoStack, EntityLivingBase attacker, Entity target, double impactSpeed) {
 		if (!world.isRemote) {
 			if (target instanceof EntityLivingBase) {
 				float damage = MathHelper.ceil(MathHelper.sqrt(projectile.motionX * projectile.motionX + projectile.motionY * projectile.motionY + projectile.motionZ * projectile.motionZ) * projectile.getDamage());
 				damage += (projectile.getIsCritical() ? random.nextInt((int) damage / 2 + 2) : 0);
-				world.spawnEntity(new EntityShock(world, projectile, (EntityLivingBase) target, damage, projectile.isWet() || projectile.isInWater() || world.isRainingAt(projectile.getPosition().up())));
+				boolean wet = projectile.isWet() || projectile.isInWater() || world.isRainingAt(projectile.getPosition().up());
+				
+				if (ToolHelper.getTraits(ammoStack).contains(TinkerModifiers.modFins)) {
+					wet = wet || random.nextBoolean();
+				}
+				
+				world.spawnEntity(new EntityShock(world, projectile, (EntityLivingBase) target, damage, wet));
 			}
 		}
 		super.afterHit(projectile, world, ammoStack, attacker, target, impactSpeed);
