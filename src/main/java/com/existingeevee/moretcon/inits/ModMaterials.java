@@ -943,6 +943,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialShadowglass, new CoreMaterialStats(28.5f, 35.5f));
 				TinkerRegistry.addMaterialStats(materialShadowglass, new PlatesMaterialStats(2.2f, 7.8f, 3.3f));
 				TinkerRegistry.addMaterialStats(materialShadowglass, new TrimMaterialStats(32.5f));
+
+				ArmorMaterials.addArmorTrait(materialShadowglass, ArmorTraits.rough, ArmorTraits.subterranean);
+				materialShadowglass.addTrait(ModTraits.darkened, CORE);
 			}
 			
 			TinkerRegistry.addMaterialStats(materialPlasma, new HeadMaterialStats(4096, 6f, 12f, 5));
