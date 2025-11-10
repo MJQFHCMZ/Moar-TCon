@@ -21,7 +21,7 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class Evasive extends AbstractTraitLeveled implements ISimpleArmorTrait {
 
 	public Evasive(int level) {
-		super(MiscUtils.createNonConflictiveName("evasive"), 0xffffff, 3, level);
+		super(MiscUtils.createNonConflictiveName("evasive_armor"), 0xffffff, 3, level);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
