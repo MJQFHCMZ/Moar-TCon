@@ -16,6 +16,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -71,6 +72,21 @@ public class EventWatcherMain {
 		if (e.phase != Phase.START)
 			return;
 		for (EntityItem entity : e.world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ToolCore)) {
+			ItemStack tool = entity.getItem();
+			for (ITrait t : ToolHelper.getTraits(tool)) {
+				if (t instanceof IAdditionalTraitMethods) {
+					((IAdditionalTraitMethods) t).onEntityItemTick(tool, entity);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	@SideOnly(value = Side.CLIENT)
+	public void updateItemStackEntities(ClientTickEvent e) {
+		if (e.phase != Phase.START || Minecraft.getMinecraft().world == null)
+			return;
+		for (EntityItem entity : Minecraft.getMinecraft().world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ToolCore)) {
 			ItemStack tool = entity.getItem();
 			for (ITrait t : ToolHelper.getTraits(tool)) {
 				if (t instanceof IAdditionalTraitMethods) {

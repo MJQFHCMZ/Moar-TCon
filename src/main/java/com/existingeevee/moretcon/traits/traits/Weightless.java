@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.traits.traits;
 
 import java.util.UUID;
 
+import com.existingeevee.moretcon.other.WorldGravityUtils;
 import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 
@@ -18,6 +19,7 @@ public class Weightless extends AttributeTrait implements IAdditionalTraitMethod
 	
 	@Override
 	public void onEntityItemTick(ItemStack tool, EntityItem entity) {
-		entity.motionY += 0.039f;
+		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entity.world, entity.getPositionVector()) == -0.08)
+			entity.motionY += 0.039f;
 	}
 }

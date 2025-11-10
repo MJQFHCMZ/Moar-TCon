@@ -65,12 +65,14 @@ public class Mirroring extends AbstractProjectileTrait implements IAdditionalTra
 			boolean isNew = toWrite.getKeySet().isEmpty();
 
 			for (String key : tag.getKeySet()) {
-				if (key.equals("level"))
+				if (key.equals("level")) {
 					toWrite.setInteger(key, toWrite.getInteger(key) + tag.getInteger(key));
-
-				if (key.equals("current"))
+					continue;
+				}
+				if (key.equals("current")) {
 					toWrite.setInteger(key, toWrite.getInteger(key) + tag.getInteger(key));
-
+					continue;
+				}
 				if (!toWrite.hasKey(key))
 					toWrite.setTag(key, tag.getTag(key));
 			}
@@ -80,10 +82,8 @@ public class Mirroring extends AbstractProjectileTrait implements IAdditionalTra
 			}
 
 			modifier.apply(parent);
-			modified = true;
-			
+			modified = true;			
 		}
-
 
 		return modified;
 	}

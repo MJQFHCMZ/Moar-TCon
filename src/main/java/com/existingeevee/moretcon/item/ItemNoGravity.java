@@ -1,5 +1,7 @@
 package com.existingeevee.moretcon.item;
 
+import com.existingeevee.moretcon.other.WorldGravityUtils;
+
 import net.minecraft.entity.item.EntityItem;
 
 public class ItemNoGravity extends ItemBase {
@@ -14,7 +16,8 @@ public class ItemNoGravity extends ItemBase {
 
 	@Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        entityItem.motionY += 0.039f;
+		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entityItem.world, entityItem.getPositionVector()) == -0.08)
+			entityItem.motionY += 0.039f;
         return false;
     }
 
