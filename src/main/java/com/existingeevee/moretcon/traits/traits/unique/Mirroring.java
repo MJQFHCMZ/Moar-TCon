@@ -4,15 +4,19 @@ import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.capability.projectile.TinkerProjectileHandler;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
 import slimeknights.tconstruct.library.modifiers.IModifier;
+import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.traits.AbstractProjectileTrait;
-import slimeknights.tconstruct.library.traits.ITrait;
-import slimeknights.tconstruct.library.utils.ToolHelper;
+import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class Mirroring extends AbstractProjectileTrait implements IAdditionalTraitMethods {
 
@@ -39,15 +43,48 @@ public class Mirroring extends AbstractProjectileTrait implements IAdditionalTra
 
 	@Override
 	public boolean modifyProjectileParent(ItemStack launchingStack, ItemStack parent, ItemStack copy, TinkerProjectileHandler tinkerProjectileHandler) {
-		boolean modified = false;
-		for (ITrait t : ToolHelper.getTraits(launchingStack)) {
-			if (t instanceof IModifier) {
-				IModifier mod = (IModifier) t;
-				mod.apply(parent);
-				modified = true;
+		boolean modified = false; // ToolCore
+
+		NBTTagList tagList = TagUtil.getModifiersTagList(parent);
+
+		NBTTagList launcherModifiers = TagUtil.getModifiersTagList(launchingStack);
+		for (int i = 0; i < launcherModifiers.tagCount(); i++) {
+			NBTTagCompound tag = launcherModifiers.getCompoundTagAt(i);
+
+			ModifierNBT data = new ModifierNBT(tag);
+			String identifier = data.identifier;
+
+			// get matching modifier
+			IModifier modifier = TinkerRegistry.getModifier(identifier);
+			if (modifier == null) {
+				continue;
 			}
+
+			NBTTagCompound toWrite = TinkerUtil.getModifierTag(parent, identifier);
+
+			boolean isNew = toWrite.getKeySet().isEmpty();
+
+			for (String key : tag.getKeySet()) {
+				if (key.equals("level"))
+					toWrite.setInteger(key, toWrite.getInteger(key) + tag.getInteger(key));
+
+				if (key.equals("current"))
+					toWrite.setInteger(key, toWrite.getInteger(key) + tag.getInteger(key));
+
+				if (!toWrite.hasKey(key))
+					toWrite.setTag(key, tag.getTag(key));
+			}
+
+			if (isNew) {
+				tagList.appendTag(toWrite);
+			}
+
+			modifier.apply(parent);
+			modified = true;
+			
 		}
-		
+
+
 		return modified;
 	}
 }
