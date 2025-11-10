@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
 import slimeknights.tconstruct.library.tinkering.IModifyable;
 import slimeknights.tconstruct.library.tinkering.ITinkerable;
-import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
@@ -71,7 +70,7 @@ public class EventWatcherMain {
 	public void updateItemStackEntities(WorldTickEvent e) {
 		if (e.phase != Phase.START)
 			return;
-		for (EntityItem entity : e.world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ToolCore)) {
+		for (EntityItem entity : e.world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ITinkerable)) {
 			ItemStack tool = entity.getItem();
 			for (ITrait t : ToolHelper.getTraits(tool)) {
 				if (t instanceof IAdditionalTraitMethods) {
@@ -86,7 +85,7 @@ public class EventWatcherMain {
 	public void updateItemStackEntities(ClientTickEvent e) {
 		if (e.phase != Phase.START || Minecraft.getMinecraft().world == null)
 			return;
-		for (EntityItem entity : Minecraft.getMinecraft().world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ToolCore)) {
+		for (EntityItem entity : Minecraft.getMinecraft().world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ITinkerable)) {
 			ItemStack tool = entity.getItem();
 			for (ITrait t : ToolHelper.getTraits(tool)) {
 				if (t instanceof IAdditionalTraitMethods) {
@@ -98,7 +97,7 @@ public class EventWatcherMain {
 	
 	@SubscribeEvent
 	public void onTinkerCraftingEvent(TinkerCraftingEvent event) {
-		if (event.getItemStack().getItem() instanceof ITinkerable || event.getItemStack().getItem() instanceof IModifyable) { 
+		if (event.getItemStack().getItem() instanceof ITinkerable) { 
 			NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
 			if (comp.hasKey("UniqueToolID"))
 				comp.removeTag("UniqueToolID");
@@ -108,7 +107,7 @@ public class EventWatcherMain {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	@SideOnly(value = Side.CLIENT)
 	public void handleToolTips(ItemTooltipEvent event) {
-		if (event.getItemStack().getItem() instanceof ToolCore) {
+		if (event.getItemStack().getItem() instanceof ITinkerable) {
 			for (ITrait t : ToolHelper.getTraits(event.getItemStack())) {
 				if (t instanceof IAdditionalTraitMethods) {
 					((IAdditionalTraitMethods) t).modifyTooltip(event.getItemStack(), event);
