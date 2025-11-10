@@ -1,5 +1,6 @@
 package com.existingeevee.moretcon.traits.traits.armor;
 
+import com.existingeevee.moretcon.MoreTCon;
 import com.existingeevee.moretcon.client.MTRenderLayerHelper;
 import com.existingeevee.moretcon.client.MTRenderLayerHelper.MTRenderer;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
@@ -52,15 +53,15 @@ public class Blightshield extends AbstractArmorTrait {
 	public static class BlightshieldRenderer extends MTRenderer {
 
 		@SideOnly(Side.CLIENT)
-		private static final ModelPlayer playerModelThick = new ModelPlayer(1.25F, false);
+		private static ModelPlayer playerModelThick;
 		@SideOnly(Side.CLIENT)
-		private static final ResourceLocation WITHER_ARMOR = new ResourceLocation("textures/entity/wither/wither_armor.png");
+		private static ResourceLocation witherArmor;
 
 		@Override
 		@SideOnly(Side.CLIENT)
 		public void doRenderLayer(RenderPlayer render, double state, AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 			GlStateManager.depthMask(!entitylivingbaseIn.isInvisible());
-			render.bindTexture(WITHER_ARMOR);
+			render.bindTexture(witherArmor);
 			GlStateManager.matrixMode(5890);
 			GlStateManager.loadIdentity();
 			float f = (float) entitylivingbaseIn.ticksExisted + partialTicks;
@@ -107,6 +108,13 @@ public class Blightshield extends AbstractArmorTrait {
 			}
 			
 			return worn ? 1 : -1;
+		}
+		
+		static {
+			if (MoreTCon.proxy.isClient()) {
+				playerModelThick = new ModelPlayer(1.25F, false);
+				witherArmor = new ResourceLocation("textures/entity/wither/wither_armor.png");
+			}
 		}
 		
 	}

@@ -38,7 +38,6 @@ public class MTRenderLayerHelper {
 		
 	}
 	
-	@SideOnly(Side.CLIENT)
 	@EventBusSubscriber(modid = ModInfo.MODID)
 	protected static class MTRenderLayerHelperImpl extends MTRenderLayerHelper {
 		protected static final Map<EntityPlayer, Map<MTRenderer, Double>> RENDER_STATE_TRACKER = new WeakHashMap<>();

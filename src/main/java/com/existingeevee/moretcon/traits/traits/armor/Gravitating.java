@@ -20,7 +20,6 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -77,7 +76,7 @@ public class Gravitating extends AbstractArmorTrait {
 
 			Team team = e.getEntityLiving().getTeam();
 
-			for (Entity ent : e.getEntityLiving().world.getEntitiesInAABBexcluding(e.getEntityLiving(), new AxisAlignedBB(e.getEntityLiving().getPositionVector().subtract(level * 2, 0, level * 2), e.getEntityLiving().getPositionVector().addVector(level * 2, 1, level * 2)), en -> en instanceof EntityLivingBase)) {
+			for (Entity ent : e.getEntityLiving().world.getEntitiesInAABBexcluding(e.getEntityLiving(), MiscUtils.vectorBound(e.getEntityLiving().getPositionVector().subtract(level * 2, 0, level * 2), e.getEntityLiving().getPositionVector().addVector(level * 2, 1, level * 2)), en -> en instanceof EntityLivingBase)) {
 				if (team == null || team.getAllowFriendlyFire() || ent.getTeam() != team) {
 					ent.attackEntityFrom(
 							DamageSource.causePlayerDamage((EntityPlayer) e.getEntityLiving()),

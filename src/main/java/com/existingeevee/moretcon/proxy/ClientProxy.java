@@ -88,7 +88,8 @@ public class ClientProxy extends CommonProxy {
 		TinkerBook.INSTANCE.addTransformer(new BookTransformerAppendModifiers(
 				new FileRepository(ModInfo.MODID + ":book"), RegisterHelper.moreTConModifiers));
 		
-		ArmoryBook.INSTANCE.addTransformer(new BookTransformerAppendModifiers(
+		if (CompatManager.conarm)	
+			ArmoryBook.INSTANCE.addTransformer(new BookTransformerAppendModifiers(
 				new FileRepository(ModInfo.MODID + ":book"), true, ModArmorTraits.collector));
 	}
 

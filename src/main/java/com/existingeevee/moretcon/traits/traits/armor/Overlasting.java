@@ -28,7 +28,8 @@ public class Overlasting extends AbstractArmorTrait {
 
 		if (level <= 0)
 			return;
-		
-		event.getEntityLiving().hurtResistantTime += Math.round(5 * level);
+				
+		if (event.getEntityLiving().hurtResistantTime < event.getEntityLiving().maxHurtResistantTime + Math.round(5 * level))
+			event.getEntityLiving().hurtResistantTime = Math.min(event.getEntityLiving().hurtResistantTime + Math.round(5 * level), event.getEntityLiving().maxHurtResistantTime + Math.round(5 * level));
 	}
 }

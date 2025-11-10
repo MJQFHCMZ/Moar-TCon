@@ -104,7 +104,7 @@ public class Approximate extends AbstractTraitLeveled {
 	public static RayTraceResult rayTraceWithExp(Vec3d start, Vec3d direction, World world, double maxRange, List<Entity> exclude, boolean affectedByBlocks, boolean ignoreNoBounding, double exp) {
 		Vec3d end = start.add(direction.scale(maxRange));
 		RayTraceResult firstTrace = affectedByBlocks ? world.rayTraceBlocks(start, end, false, ignoreNoBounding, true) : null;
-		AxisAlignedBB area = new AxisAlignedBB(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2))).grow(exp * 1.1);
+		AxisAlignedBB area = MiscUtils.vectorBound(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2))).grow(exp * 1.1);
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, area);
 
 		Entity closestValid = null;

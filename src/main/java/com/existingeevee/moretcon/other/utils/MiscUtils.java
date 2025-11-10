@@ -415,7 +415,8 @@ public class MiscUtils {
 	public static RayTraceResult rayTrace(Vec3d start, Vec3d direction, World world, double maxRange, List<Entity> exclude, boolean affectedByBlocks, boolean ignoreNoBounding) {
 		Vec3d end = start.add(direction.scale(maxRange));
 		RayTraceResult firstTrace = affectedByBlocks ? world.rayTraceBlocks(start, end, false, ignoreNoBounding, true) : null;
-		AxisAlignedBB area = new AxisAlignedBB(start, (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2)));
+		Vec3d path = (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2));
+		AxisAlignedBB area = new AxisAlignedBB(start.x, start.y, start.z, path.x, path.y, path.z);
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, area);
 
 		Entity closestValid = null;
@@ -473,5 +474,13 @@ public class MiscUtils {
 	public static Vec3d rotateVec3d(Vec3d original, Vec3d axis, float theta) {
 		Quaternion quaternion = new Quaternion(axis.normalize(), theta, false);
 		return quaternion.transformVector(original);
+	}
+
+	public static AxisAlignedBB pointBound(Vec3d point) {
+		return vectorBound(point, point);
+	}
+	
+	public static AxisAlignedBB vectorBound(Vec3d a, Vec3d b) {
+		return new AxisAlignedBB(a.x, a.y, a.z, b.x, b.y, b.z);
 	}
 }

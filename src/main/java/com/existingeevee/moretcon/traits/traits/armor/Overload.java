@@ -18,7 +18,6 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -70,7 +69,7 @@ public class Overload extends NumberTrackerTrait implements IArmorTrait {
 				}
 			}
 			
-			for (Entity e : event.getEntityLiving().world.getEntitiesInAABBexcluding(event.getEntityLiving(), new AxisAlignedBB(event.getEntityLiving().getPositionVector(), event.getEntityLiving().getPositionVector()).grow(totalMax / 10.), e -> e instanceof EntityLivingBase)) {
+			for (Entity e : event.getEntityLiving().world.getEntitiesInAABBexcluding(event.getEntityLiving(), MiscUtils.vectorBound(event.getEntityLiving().getPositionVector(), event.getEntityLiving().getPositionVector()).grow(totalMax / 10.), e -> e instanceof EntityLivingBase)) {
 				if (team == null || team.getAllowFriendlyFire() || e.getTeam() != team) {
 					e.attackEntityFrom(event.getEntityLiving() instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer) event.getEntityLiving()) : DamageSource.causeMobDamage(event.getEntityLiving()), (float) (totalMax / 4 * Math.exp(1 / (totalMax / 10. * totalMax / 10.) * -player.getPositionVector().squareDistanceTo(e.getPositionVector()))));
 				}

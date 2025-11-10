@@ -52,7 +52,7 @@ public class Plasmatic extends AbstractTrait {
 		Vec3d start = player.getPositionEyes(0.5f);
 		Vec3d lookVec = player.getLook(0.5f);
 		Vec3d end = start.add(lookVec.scale(maxRange));
-		AxisAlignedBB area = new AxisAlignedBB(start, end.add(lookVec.scale(2)));
+		AxisAlignedBB area = MiscUtils.vectorBound(start, end.add(lookVec.scale(2)));
 		List<Entity> entities = player.world.getEntitiesWithinAABBExcludingEntity(player, area);
 
 		for (Entity e : entities) {

@@ -1,6 +1,7 @@
 package com.existingeevee.moretcon.traits.traits.armor;
 
 import com.existingeevee.moretcon.ModInfo;
+import com.existingeevee.moretcon.MoreTCon;
 import com.existingeevee.moretcon.client.MTRenderLayerHelper;
 import com.existingeevee.moretcon.client.MTRenderLayerHelper.MTRenderer;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
@@ -66,15 +67,15 @@ public class PlasmaShield extends AbstractArmorTrait {
 	public static class PlasmaShieldRenderer extends MTRenderer {
 
 		@SideOnly(Side.CLIENT)
-		private static final ModelPlayer playerModelThick = new ModelPlayer(1.2F, false);
+		private static ModelPlayer playerModelThick;
 		@SideOnly(Side.CLIENT)
-		private static final ResourceLocation SHIELD = new ResourceLocation(ModInfo.MODID, "textures/other/plasma_armor.png");
+		private static ResourceLocation shield;
 
 		@Override
 		@SideOnly(Side.CLIENT)
 		public void doRenderLayer(RenderPlayer render, double state, AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 			GlStateManager.depthMask(!entitylivingbaseIn.isInvisible());
-			render.bindTexture(SHIELD);
+			render.bindTexture(shield);
 			GlStateManager.matrixMode(5890);
 			GlStateManager.loadIdentity();
 			float f = (float) entitylivingbaseIn.ticksExisted + partialTicks;
@@ -127,5 +128,12 @@ public class PlasmaShield extends AbstractArmorTrait {
 			return worn ? entitylivingbaseIn.getAbsorptionAmount() : -1;
 		}
 
+		static {
+			if (MoreTCon.proxy.isClient()) {
+				playerModelThick = new ModelPlayer(1.2F, false);
+				shield = new ResourceLocation(ModInfo.MODID, "textures/other/plasma_armor.png");
+			}
+		}
+		
 	}
 }

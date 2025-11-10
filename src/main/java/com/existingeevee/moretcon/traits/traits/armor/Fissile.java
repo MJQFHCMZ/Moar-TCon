@@ -14,7 +14,6 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -71,8 +70,8 @@ public class Fissile extends AbstractArmorTrait {
 		}
 
 		Team team = player.getTeam();
-
-		for (Entity e : player.world.getEntitiesInAABBexcluding(player, new AxisAlignedBB(player.getPositionVector(), player.getPositionVector()).grow(level * 5), e -> e instanceof EntityLivingBase)) {
+		
+		for (Entity e : player.world.getEntitiesInAABBexcluding(player, MiscUtils.pointBound(player.getPositionVector()).grow(level * 5), e -> e instanceof EntityLivingBase)) {
 			if (team == null || team.getAllowFriendlyFire() || e.getTeam() != team) {
 				e.attackEntityFrom(DamageSource.causePlayerDamage(player), (float) ((level * 5 + 7.5f) * Math.exp(1 / (level * 5 * level * 5) * -player.getDistanceSq(e))));
 			}
