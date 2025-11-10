@@ -506,6 +506,8 @@ modifier.moretcon.serrated_armor.desc=§oSlice and dice!n§rYour armor will caus
 modifier.moretcon.serrated_armor.name=Serrated
 modifier.moretcon.evasive_armor.desc=§olmao imagine missing!\n§rYour armor will occasionally fully nullify damage.
 modifier.moretcon.evasive_armor.name=Evasive
+modifier.moretcon.weightless_armor.desc=§oLight as a feather...\n§r...as if you could walk on a cloud...
+modifier.moretcon.weightless_armor.name=Weightless
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??
@@ -672,7 +674,6 @@ modifier.moretcon.reforgefrenzying.desc=Your ranged tools will gain the followin
 modifier.moretcon.reforgeunreal.name=Unreal
 modifier.moretcon.reforgeunreal.flavor=§oA perfect blend of power, speed, and precision.
 modifier.moretcon.reforgeunreal.desc=Your ranged tools will gain the following bonuses: +15% damage, +10% speed, +5% critical chance, +10% velocity, and +15% knockback.
-
 
 modifier.moretcon.reforgeplaceholder.flavor=...You aren't supposed to see this...
 modifier.moretcon.reforgeplaceholder.desc=Your tool will do absolutely nothing in addition. All this reforge does is to obfuscate for clients in the reforge station.

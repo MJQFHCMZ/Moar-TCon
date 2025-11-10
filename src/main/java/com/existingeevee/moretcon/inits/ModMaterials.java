@@ -794,6 +794,9 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialErythynite, new PlatesMaterialStats(2.2f, 3.9f, 1.3f));
 				TinkerRegistry.addMaterialStats(materialErythynite, new TrimMaterialStats(1.5f));
 				
+				ArmorMaterials.addArmorTrait(materialErythynite, ModArmorTraits.weightless);
+				ArmorMaterials.addArmorTrait(materialErythynite, ArmorTraits.dense, ArmorTraits.lightweight);
+				
 				addArmorLum(materialErythynite);
 			}
 			
