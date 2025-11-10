@@ -42,6 +42,9 @@ public class Gravitating extends AbstractArmorTrait {
 	public void onLivingUpdateEvent(LivingUpdateEvent e) {
 		EntityLivingBase entity = e.getEntityLiving();
 
+		if (entity.isElytraFlying() || (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying))
+			return;
+		
 		IdentityHashMap<Entity, SlimeBounceHandler> bouncingEntities = ObfuscationReflectionHelper.getPrivateValue(SlimeBounceHandler.class, null, "bouncingEntities");
 		SlimeBounceHandler handler = bouncingEntities.get(entity);
 
