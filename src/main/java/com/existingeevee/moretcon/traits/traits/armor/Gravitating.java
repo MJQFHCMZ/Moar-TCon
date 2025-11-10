@@ -99,13 +99,8 @@ public class Gravitating extends AbstractArmorTrait {
 
 				((WorldServer) e.getEntityLiving().world).playSound((float) e.getEntity().posX, (float) e.getEntity().posY + 0.5f, (float) e.getEntity().posZ, Sounds.frypan_boing, SoundCategory.PLAYERS, 3, 0, false);
 			}
-			
-			//CommandPlaySound
-			
-			e.setDamageMultiplier(0.2f);
-			
-			
-			//e.getEntityLiving().playSound(Sounds.frypan_boing, 10f, 0f);
+						
+			e.setDamageMultiplier(e.getDamageMultiplier() * 0.2f);			
 		}
 	}
 }
