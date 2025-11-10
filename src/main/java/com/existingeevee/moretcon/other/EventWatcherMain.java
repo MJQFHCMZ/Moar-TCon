@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
-import slimeknights.tconstruct.library.tinkering.IModifyable;
 import slimeknights.tconstruct.library.tinkering.ITinkerable;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
