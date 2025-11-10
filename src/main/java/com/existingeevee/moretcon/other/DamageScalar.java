@@ -39,6 +39,7 @@ public class DamageScalar {
 		if (!filled.isEmpty()) {
 			MoreTConLogger.log("Damage scalar stack was not cleared last tick!!!", Level.WARN);
 			stack = ThreadLocal.withInitial(() -> new Stack<>());
+			filled = new WeakHashMap<>();
 		}
 	}
 
