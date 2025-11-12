@@ -6,8 +6,6 @@ import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -16,8 +14,6 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,35 +56,6 @@ public class EventWatcherMain {
 				}
 				if (strings.length >= 1) {
 					Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(strings[strings.length - 1]).appendSibling(linkComponent), false);
-				}
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void updateItemStackEntities(WorldTickEvent e) {
-		if (e.phase != Phase.START)
-			return;
-		for (EntityItem entity : e.world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ITinkerable)) {
-			ItemStack tool = entity.getItem();
-			for (ITrait t : ToolHelper.getTraits(tool)) {
-				if (t instanceof IAdditionalTraitMethods) {
-					((IAdditionalTraitMethods) t).onEntityItemTick(tool, entity);
-				}
-			}
-		}
-	}
-	
-	@SubscribeEvent
-	@SideOnly(value = Side.CLIENT)
-	public void updateItemStackEntities(ClientTickEvent e) {
-		if (e.phase != Phase.START || Minecraft.getMinecraft().world == null)
-			return;
-		for (EntityItem entity : Minecraft.getMinecraft().world.getEntities(EntityItem.class, en -> en.getItem().getItem() instanceof ITinkerable)) {
-			ItemStack tool = entity.getItem();
-			for (ITrait t : ToolHelper.getTraits(tool)) {
-				if (t instanceof IAdditionalTraitMethods) {
-					((IAdditionalTraitMethods) t).onEntityItemTick(tool, entity);
 				}
 			}
 		}

@@ -36,6 +36,7 @@ public interface IAdditionalTraitMethods {
 		return false;
 	}
 	
+	//note this is called for broken items too. do your own check
 	default void onEntityItemTick(ItemStack tool, EntityItem entity) {
 	}
 }

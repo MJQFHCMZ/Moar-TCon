@@ -76,6 +76,8 @@ public class ModReforges {
 		reforgeHeavy = new HeavyReforge();
 		reforgeSharpened = new SharpenedReforge();
 		reforgeConsistant = new ConsistantReforge();
+		//bloodstained	
+		
 		
 		reforgeBroken = new BasicReforge("reforgebroken", 0x422727).withKnockback(-0.2f).withDamage(-0.3f).setRandomReforge(1);
 		reforgeShoddy = new BasicReforge("reforgeshoddy", 0x422727).withKnockback(-0.15f).withDamage(-0.1f).setRandomReforge(1);

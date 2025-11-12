@@ -11,7 +11,8 @@
   	"early.common.MixinForgeHooks",
   	"early.common.MixinForgeHooksClient",
   	"early.common.MixinBlockFalling",
-  	"early.common.MixinWorld"
+  	"early.common.MixinWorld",
+  	"early.common.MixinEntityItem"
   ],
 
   "client": [
