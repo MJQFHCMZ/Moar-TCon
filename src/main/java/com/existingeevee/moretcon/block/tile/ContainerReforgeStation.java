@@ -197,7 +197,7 @@ public class ContainerReforgeStation extends ContainerTinkerStation<TileReforgeS
 			}
 
 			ItemStack secondary = secondarySlot.getStack();
-
+			
 			// got output?
 			if (reforged != null &&
 			// got no secondary output or does it stack with the current one?
@@ -210,7 +210,7 @@ public class ContainerReforgeStation extends ContainerTinkerStation<TileReforgeS
 			if (throwable != null) {
 				error(throwable.getMessage());
 			} else {
-				updateGUI();
+				updateGUI(); //GuiToolForge
 			}
 		}
 	}

@@ -675,8 +675,11 @@ modifier.moretcon.reforgeunreal.name=Unreal
 modifier.moretcon.reforgeunreal.flavor=§oA perfect blend of power, speed, and precision.
 modifier.moretcon.reforgeunreal.desc=Your ranged tools will gain the following bonuses: +15% damage, +10% speed, +5% critical chance, +10% velocity, and +15% knockback.
 
-modifier.moretcon.reforgeplaceholder.flavor=...You aren't supposed to see this...
-modifier.moretcon.reforgeplaceholder.desc=Your tool will do absolutely nothing in addition. All this reforge does is to obfuscate for clients in the reforge station.
+modifier.reforgenone.name=None
+modifier.reforgenone.flavor=§oBooo... how boring...
+modifier.reforgenone.desc=Your tool is not reforged.
+modifier.reforgeplaceholder.flavor=§oIt's reforgin' time!
+modifier.reforgeplaceholder.desc=Your tool might be awesomely reforged, or it might not. Only time will tell...
 
 moretcon.bloodgodsblessing=Blood God's Blessing
 moretcon.hyperflames=Hyperflames
@@ -699,6 +702,7 @@ text.err.unique.only_make=This part can only be used to create a __s__
 text.err.middle_gem_only_once=Middle Gem modifiers can only be applied once.
 text.misc.one_of=a(n) 
 text.reforge_marker=Reforged
+text.new_reforge_marker=New Reforge
 
 tile.moretcon.betweensludge.name=Between Sludge
 tile.moretcon.blockarkenium.name=Block of Arkenium
@@ -838,7 +842,7 @@ uniquetoolpart.moretcon.impact.name=Impact
 uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
 
 gui.moretcon.reforgestation.name=Reforge Station
-gui.moretcon.reforgestation.info=GAMBLING WOOO Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+gui.moretcon.reforgestation.info=Here you can reforge your tools for a small additional boost in power!\n\nTo reforge a tool, simply place it into the left slot with some material it can be repaired with. You can optionally add a reforge stone to get unusual reforges too!  
 gui.error.invalid_reforge_material=This tool cannot be reforged using %s!
 
 booltracker.active.name=Active

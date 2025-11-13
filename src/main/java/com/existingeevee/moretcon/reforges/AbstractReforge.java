@@ -74,7 +74,7 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 	@Override
 	public String getLocalizedDesc() {
-		return Util.translate(LOC_Flav, getIdentifier()) + "\n" + ChatFormatting.RESET + Util.translate(LOC_Desc, getIdentifier());
+		return Util.translate(LOC_Flav, getIdentifier()) + "\n" + ChatFormatting.RESET + getLocalizedDescWithoutFlavor();
 	}
 
 	public String getLocalizedDescWithoutFlavor() {

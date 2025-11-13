@@ -5,7 +5,10 @@ import java.util.Optional;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.inits.ModItems;
+import com.existingeevee.moretcon.inits.ModReforges;
 import com.existingeevee.moretcon.other.MatterReconstructionGelRMR;
+import com.existingeevee.moretcon.reforges.AbstractReforge;
+import com.existingeevee.moretcon.reforges.ReforgeHelper;
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
@@ -115,7 +118,7 @@ public class GuiReforgeStation extends GuiTinkerStation {
 				}
 			}
 		}
-		
+
 		if (amount != null) {
 			int x = this.cornerX + this.realWidth / 2;
 			int y = this.cornerY + 63;
@@ -131,8 +134,44 @@ public class GuiReforgeStation extends GuiTinkerStation {
 
 	@Override
 	public void updateDisplay() {
-		info.setCaption(container.getInventoryDisplayName());
-		info.setText(I18n.translateToLocal("gui." + ModInfo.MODID + ".reforgestation.info"));
+
+		ContainerReforgeStation container = (ContainerReforgeStation) this.container;
+		
+		boolean toolPresent = container.getSlot(3).getHasStack();
+		if (toolPresent) {
+			AbstractReforge reforge = ReforgeHelper.getReforge(container.getSlot(3).getStack());
+			
+			String reforgeName = reforge == null ? (I18n.translateToLocal("text.reforge_marker") + ": " + I18n.translateToLocal("modifier.reforgenone.name")) : reforge.getLocalizedName();
+			if (reforge == ModReforges.reforgePlaceholder) {
+				reforgeName = I18n.translateToLocal("text.reforge_marker") + ": ?????";
+			}
+			String reforgeFlavor = Util.translate(AbstractReforge.LOC_Flav, reforge == null ? "reforgenone" : reforge.getIdentifier());
+			String reforgeDesc = Util.translate(AbstractReforge.LOC_Desc, reforge == null ? "reforgenone" : reforge.getIdentifier());
+			
+			info.setCaption(reforgeName);
+			
+			String infoDesc = reforgeFlavor + "\n\n" + TextFormatting.RESET + reforgeDesc;
+						
+			if (container.getSlot(0).getHasStack()) {
+				reforge = ReforgeHelper.getReforge(container.getSlot(0).getStack());
+				
+				reforgeName = reforge == null ? I18n.translateToLocal("modifier.reforgenone.prefix") : reforge.getLocalizedPrefix();
+				if (reforge == ModReforges.reforgePlaceholder) {
+					reforgeName = "?????";
+				}
+				reforgeFlavor = Util.translate(AbstractReforge.LOC_Flav, reforge == null ? "reforgenone" : reforge.getIdentifier());
+				reforgeDesc = Util.translate(AbstractReforge.LOC_Desc, reforge == null ? "reforgenone" : reforge.getIdentifier());
+				
+				infoDesc += "\n\n" + TextFormatting.UNDERLINE + I18n.translateToLocal("text.new_reforge_marker") + ": " + reforgeName + TextFormatting.RESET + "\n" + reforgeFlavor + "\n\n" + TextFormatting.RESET + reforgeDesc;
+			} 
+			
+			info.setText(infoDesc);
+//		currentRefoge = ReforgeHelper.getReforge(stack);
+//		currentRefoge = ReforgeHelper.getReforge(toolSlot.getStack());
+		} else {
+			info.setCaption(container.getInventoryDisplayName());
+			info.setText(I18n.translateToLocal("gui." + ModInfo.MODID + ".reforgestation.info"));
+		}
 	}
 
 	@Override
