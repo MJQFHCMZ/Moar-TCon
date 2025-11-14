@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 
-public class HyperGravity extends AbstractTrait {
+public class Hypergravity extends AbstractTrait {
 
-	public HyperGravity() {
+	public Hypergravity() {
 		super(MiscUtils.createNonConflictiveName("hypergravity"), 0);
 	}
 

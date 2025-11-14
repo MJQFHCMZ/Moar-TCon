@@ -38,7 +38,7 @@ import com.existingeevee.moretcon.traits.traits.Frostburn;
 import com.existingeevee.moretcon.traits.traits.Hardcore;
 import com.existingeevee.moretcon.traits.traits.Haunted;
 import com.existingeevee.moretcon.traits.traits.HelpfulRadiation;
-import com.existingeevee.moretcon.traits.traits.HyperGravity;
+import com.existingeevee.moretcon.traits.traits.Hypergravity;
 import com.existingeevee.moretcon.traits.traits.Hyperheat;
 import com.existingeevee.moretcon.traits.traits.Inertia;
 import com.existingeevee.moretcon.traits.traits.KineticBattery;
@@ -140,7 +140,7 @@ public class ModTraits {
 	public static Resilient resilient = new Resilient();
 	public static Magical magical = new Magical();
 	public static Hardcore hardcore = new Hardcore();
-	public static HyperGravity hypergravity = new HyperGravity();
+	public static Hypergravity hypergravity = new Hypergravity();
 	public static BottomsEnd bottomsEnd = new BottomsEnd();
 	public static Slicing slicing = new Slicing();
 	public static Leeching leeching = new Leeching();
