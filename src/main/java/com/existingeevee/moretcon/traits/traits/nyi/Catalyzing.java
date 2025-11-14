@@ -15,7 +15,7 @@ import slimeknights.tconstruct.library.traits.AbstractTrait;
 //for Alkinium? or maybe should gate it past to metallic hydrogen or ste'lantium
 public class Catalyzing extends AbstractTrait {
 
-	//Your tool will catalyze fires and cause burning enemies to instantly take all of the fire damage at once.
+	//Your tool will catalyze fires and cause burning enemies to instantly most of the fire damage all at once.
 	public Catalyzing() {
 		super(MiscUtils.createNonConflictiveName("catalyzing"), 0x00ed00);
 	}
@@ -30,7 +30,7 @@ public class Catalyzing extends AbstractTrait {
 		if (target.isBurning()) {
 			int burning = ObfuscationReflectionHelper.getPrivateValue(Entity.class, target, "field_190534_ay");
 			target.hurtResistantTime = hurtResist;
-			target.attackEntityFrom(DamageSource.ON_FIRE, burning / 17.5f);
+			target.attackEntityFrom(DamageSource.ON_FIRE, burning / 22.5f);
 			return;
 		} 
 		CustomFireInfo info = CustomFireHelper.getBurningInfo(target);
