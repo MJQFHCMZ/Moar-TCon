@@ -762,7 +762,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialBloodstone, new PlatesMaterialStats(1.125f, -2.3f, 2));
 				TinkerRegistry.addMaterialStats(materialBloodstone, new TrimMaterialStats(3.75f));
 
-				ArmorMaterials.addArmorTrait(materialBloodstone, ModArmorTraits.afterheal, ArmorTraits.rough);
+				ArmorMaterials.addArmorTrait(materialBloodstone, ModArmorTraits.sapping, ArmorTraits.rough);
 
 			}
 
@@ -1145,9 +1145,8 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new PlatesMaterialStats(2.5f, 5.2f, 3.7f));
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new TrimMaterialStats(5.0f));
 				
-				ArmorMaterials.addArmorTrait(materialSanguiseelium, ArmorTraits.invigorating);				
-				ArmorMaterials.addArmorTrait(materialSanguiseelium, ModArmorTraits.sapping);				
-
+				ArmorMaterials.addArmorTrait(materialSanguiseelium, ArmorTraits.invigorating);	
+				materialSanguiseelium.addTrait(ModArmorTraits.afterheal, CORE);
 			}
 
 			TinkerRegistry.addMaterialStats(materialVengeance, new HeadMaterialStats(1024, 6f, 10f, 7));

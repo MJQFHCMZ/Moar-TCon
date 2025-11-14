@@ -54,7 +54,6 @@ public class ModArmorTraits {
 	
 	public static List<Modifier> collector = new ArrayList<>(); //TODO modifiers? adding this for now for extraTrait2
 	
-	
     static List<Modifier> polishedMods;
     static List<Modifier> extraTraitMods;
 	
