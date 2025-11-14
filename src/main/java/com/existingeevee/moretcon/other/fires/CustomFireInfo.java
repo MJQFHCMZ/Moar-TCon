@@ -23,6 +23,10 @@ public class CustomFireInfo {
 		return this.effect;
 	}
 
+	public int getTimeRemaining() {
+		return time;
+	}
+	
 	public boolean isInvalid() {
 		return time <= 0 || effect == null || forcedInvalid;
 	}
