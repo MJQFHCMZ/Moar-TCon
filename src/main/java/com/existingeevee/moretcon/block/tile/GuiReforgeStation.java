@@ -25,6 +25,7 @@ import slimeknights.mantle.client.gui.GuiModule;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
+import slimeknights.tconstruct.library.client.CustomFontColor;
 import slimeknights.tconstruct.library.client.Icons;
 import slimeknights.tconstruct.library.materials.IMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
@@ -137,6 +138,8 @@ public class GuiReforgeStation extends GuiTinkerStation {
 
 		ContainerReforgeStation container = (ContainerReforgeStation) this.container;
 		
+		info.setCaption(container.getInventoryDisplayName());	
+		
 		boolean toolPresent = container.getSlot(3).getHasStack();
 		if (toolPresent) {
 			AbstractReforge reforge = ReforgeHelper.getReforge(container.getSlot(3).getStack());
@@ -147,10 +150,8 @@ public class GuiReforgeStation extends GuiTinkerStation {
 			}
 			String reforgeFlavor = Util.translate(AbstractReforge.LOC_Flav, reforge == null ? "reforgenone" : reforge.getIdentifier());
 			String reforgeDesc = Util.translate(AbstractReforge.LOC_Desc, reforge == null ? "reforgenone" : reforge.getIdentifier());
-			
-			info.setCaption(reforgeName);
-			
-			String infoDesc = reforgeFlavor + "\n\n" + TextFormatting.RESET + reforgeDesc;
+						
+			String infoDesc = "" + TextFormatting.UNDERLINE + CustomFontColor.encodeColor(reforge == null ? 0xaaaaaa : reforge.getColor()) + reforgeName + TextFormatting.RESET + "\n" + reforgeFlavor + "\n\n" + TextFormatting.RESET + reforgeDesc;
 						
 			if (container.getSlot(0).getHasStack()) {
 				reforge = ReforgeHelper.getReforge(container.getSlot(0).getStack());
@@ -162,14 +163,11 @@ public class GuiReforgeStation extends GuiTinkerStation {
 				reforgeFlavor = Util.translate(AbstractReforge.LOC_Flav, reforge == null ? "reforgenone" : reforge.getIdentifier());
 				reforgeDesc = Util.translate(AbstractReforge.LOC_Desc, reforge == null ? "reforgenone" : reforge.getIdentifier());
 				
-				infoDesc += "\n\n" + TextFormatting.UNDERLINE + I18n.translateToLocal("text.new_reforge_marker") + ": " + reforgeName + TextFormatting.RESET + "\n" + reforgeFlavor + "\n\n" + TextFormatting.RESET + reforgeDesc;
+				infoDesc += "\n\n" + TextFormatting.UNDERLINE + CustomFontColor.encodeColor(reforge == null ? 0xaaaaaa : reforge.getColor()) + I18n.translateToLocal("text.new_reforge_marker") + ": " + reforgeName + TextFormatting.RESET + "\n" + reforgeFlavor + "\n\n" + TextFormatting.RESET + reforgeDesc;
 			} 
 			
 			info.setText(infoDesc);
-//		currentRefoge = ReforgeHelper.getReforge(stack);
-//		currentRefoge = ReforgeHelper.getReforge(toolSlot.getStack());
 		} else {
-			info.setCaption(container.getInventoryDisplayName());
 			info.setText(I18n.translateToLocal("gui." + ModInfo.MODID + ".reforgestation.info"));
 		}
 	}

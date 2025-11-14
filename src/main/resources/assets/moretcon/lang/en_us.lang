@@ -702,7 +702,7 @@ text.err.unique.only_make=This part can only be used to create a __s__
 text.err.middle_gem_only_once=Middle Gem modifiers can only be applied once.
 text.misc.one_of=a(n) 
 text.reforge_marker=Reforged
-text.new_reforge_marker=New Reforge
+text.new_reforge_marker=New
 
 tile.moretcon.betweensludge.name=Between Sludge
 tile.moretcon.blockarkenium.name=Block of Arkenium
