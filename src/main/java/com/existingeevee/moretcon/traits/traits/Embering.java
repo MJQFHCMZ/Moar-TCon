@@ -12,12 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class Embering extends NumberTrackerTrait {
 
-	//TODO blockign
 	public Embering() {
 		super(MiscUtils.createNonConflictiveName("embering"), 0x00ed00);
 		ReequipHack.registerIgnoredKey(this.getModifierIdentifier());
@@ -32,6 +32,15 @@ public class Embering extends NumberTrackerTrait {
 					player.world.spawnParticle(EnumParticleTypes.LAVA, true, target.posX, target.posY + 0.6, target.posZ, MiscUtils.randomN1T1() * 0.05 + 0.05, MiscUtils.randomN1T1() * 0.05 + 0.05, MiscUtils.randomN1T1() * 0.05 + 0.05);
 				}
 			}
+		}
+	}
+
+	@Override
+	public void onBlock(ItemStack tool, EntityPlayer player, LivingHurtEvent event) {
+		Entity entity = event.getSource().getImmediateSource();
+		
+		if (this.getNumber(tool) > 0 && entity instanceof EntityLivingBase) {
+			attackEntitySecondary(DamageSource.IN_FIRE, Math.max(1f, this.getNumber(tool) / 20f), entity, false, false);
 		}
 	}
 
