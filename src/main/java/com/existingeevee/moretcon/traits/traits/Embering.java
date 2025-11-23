@@ -7,6 +7,7 @@ import com.existingeevee.moretcon.traits.traits.abst.NumberTrackerTrait;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -32,6 +33,16 @@ public class Embering extends NumberTrackerTrait {
 				}
 			}
 		}
+	}
+
+	@Override
+	public String getStringToRender(ItemStack tool) {
+		return getNumber(tool) + "%";
+	}
+
+	@Override
+	public int getDefaultNumber(ItemStack stack) {
+		return 0;
 	}
 
 	@Override
