@@ -44,8 +44,13 @@ public class Evasive extends AbstractTraitLeveled implements ISimpleArmorTrait {
 		for (ItemStack s : event.getEntityLiving().getArmorInventoryList()) {
 			if (event.getEntityLiving() instanceof EntityPlayer) {
 				CooldownTracker cooldowns = ((EntityPlayer) event.getEntityLiving()).getCooldownTracker();
+				
 				if (cooldowns.hasCooldown(s.getItem()))
 					continue;
+				
+				if (((EntityPlayer) event.getEntityLiving()).capabilities.isCreativeMode) {
+					return;
+				}
 			}
 
 			if (this.isToolWithTrait(s) && !ToolHelper.isBroken(s)) {
