@@ -384,6 +384,7 @@ modifier.moretcon.weightless.name=Weightless
 modifier.moretcon.shielding.desc=§omoar Armor? Lets gooooo!!!§r\nYour tool provides +4 armor when held or worn on an armor slot.
 modifier.moretcon.shielding.name=Warding
 modifier.moretcon.extratrait2.name=Embossment II
+modifier.moretcon.extratrait2_armor.name=Embossment II
 modifier.moretcon.extratrait2.desc=§oIf embossment is so good why isn't there an embossment 2§r\nEmbossed with the power of %s, obtaining some of its traits.
 modifier.moretcon.electrified.name=Electrified
 modifier.moretcon.electrified.desc=§oUNLIMITED POWAH!!!!!!§r\nYour tool can build up and eventually discharge damaging amounts of electric current in targets.
