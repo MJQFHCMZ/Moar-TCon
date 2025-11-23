@@ -16,6 +16,7 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class Embering extends NumberTrackerTrait {
 
+	//TODO blockign
 	public Embering() {
 		super(MiscUtils.createNonConflictiveName("embering"), 0x00ed00);
 		ReequipHack.registerIgnoredKey(this.getModifierIdentifier());
@@ -24,7 +25,7 @@ public class Embering extends NumberTrackerTrait {
 	@Override
 	public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical) {
 		if (this.getNumber(tool) > 0) {
-			target.attackEntityFrom(DamageSource.IN_FIRE, Math.max(1f, this.getNumber(tool) / 20f));
+			attackEntitySecondary(DamageSource.IN_FIRE, Math.max(1f, this.getNumber(tool) / 20f), target, false, true);
 			if (player.world.isRemote) {
 				for (int i = 1; i <= 2 * Math.ceil(this.getNumber(tool) / 20f); i++) {
 					player.world.spawnParticle(EnumParticleTypes.LAVA, true, target.posX, target.posY + 0.6, target.posZ, MiscUtils.randomN1T1() * 0.05 + 0.05, MiscUtils.randomN1T1() * 0.05 + 0.05, MiscUtils.randomN1T1() * 0.05 + 0.05);
