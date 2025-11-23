@@ -415,8 +415,6 @@ public class ModMaterials implements MaterialTypes {
 				materialFusionite.addTrait(ArmorTraits.enderport, CORE);
 
 				addArmorLum(materialFusionite);
-				
-				ArmorMaterials.addArmorTrait(materialFusionite, ArmorTraits.dense, ArmorTraits.alien);
 			}
 
 			materialBrinkstone.addItem("brinkstone", 1, Material.VALUE_Ingot);
