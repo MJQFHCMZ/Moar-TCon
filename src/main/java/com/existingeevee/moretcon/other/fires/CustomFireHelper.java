@@ -53,6 +53,12 @@ public class CustomFireHelper {
 		setAblaze(entity, new CustomFireInfo(effect, time, false));
 	}
 
+	public static void extinguishCustom(EntityLivingBase entity) {
+		entity.extinguish();
+		entity.getEntityData().removeTag(ModInfo.MODID + ".fire");
+		customBurning.remove(entity.getEntityId());
+	}
+	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onRenderLivingEvent(RenderLivingEvent.Pre<?> event) {

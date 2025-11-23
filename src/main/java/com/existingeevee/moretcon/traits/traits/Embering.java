@@ -1,0 +1,72 @@
+package com.existingeevee.moretcon.traits.traits;
+
+import com.existingeevee.moretcon.other.utils.MiscUtils;
+import com.existingeevee.moretcon.other.utils.ReequipHack;
+import com.existingeevee.moretcon.traits.ModTraits;
+import com.existingeevee.moretcon.traits.traits.abst.NumberTrackerTrait;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.World;
+import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
+
+public class Embering extends NumberTrackerTrait {
+
+	public Embering() {
+		super(MiscUtils.createNonConflictiveName("embering"), 0x00ed00);
+		ReequipHack.registerIgnoredKey(this.getModifierIdentifier());
+	}
+
+	@Override
+	public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, boolean isCritical) {
+		if (this.getNumber(tool) > 0) {
+			target.attackEntityFrom(DamageSource.IN_FIRE, Math.max(1f, this.getNumber(tool) / 20f));
+			if (player.world.isRemote) {
+				for (int i = 1; i <= 2 * Math.ceil(this.getNumber(tool) / 20f); i++) {
+					player.world.spawnParticle(EnumParticleTypes.LAVA, true, target.posX, target.posY + 0.6, target.posZ, MiscUtils.randomN1T1() * 0.05 + 0.05, MiscUtils.randomN1T1() * 0.05 + 0.05, MiscUtils.randomN1T1() * 0.05 + 0.05);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
+		if (entity.world.isRemote)
+			return;
+
+		if (world.getTotalWorldTime() % 10 == 0 && (entity.isBurning() || ModTraits.pyrophoric.isBurning(tool))) {
+			this.addNumber(tool, 1);
+			return;
+		}
+
+		if (world.getTotalWorldTime() % 100 == 0 && TinkerUtil.hasTrait(TagUtil.getTagSafe(tool), ModTraits.burning.getIdentifier())) {
+			this.addNumber(tool, 1);
+			return;
+		}
+
+		if (isSelected && random.nextInt(100) == 0) {
+			this.removeNumber(tool, 1);
+		}
+	}
+
+	@Override
+	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
+		if (target.isBurning()) {
+			this.addNumber(tool, 2);
+		}
+	}
+
+	@Override
+	public int getPriority() {
+		return 10; // we need this to run last ish.
+	}
+
+	@Override
+	public int getNumberMax(ItemStack stack) {
+		return 100;
+	}
+}

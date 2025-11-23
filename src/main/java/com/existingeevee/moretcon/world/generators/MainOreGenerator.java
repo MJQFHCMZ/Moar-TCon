@@ -26,6 +26,7 @@ public class MainOreGenerator extends WorldGenModifier {
 		runGenerator(ModBlocks.oreGarstone.getDefaultState(), 3, 2, 75, 100, BlockMatcher.forBlock(Blocks.STONE), ctx);
 		runGenerator(ModBlocks.oreEtherstone.getDefaultState(), 3, 3, 198, 202, BlockMatcher.forBlock(ModBlocks.blockOtherstone), ctx);
 		runGenerator(ModBlocks.oreGeodesium.getDefaultState(), 4, 3, 128, 150, BlockMatcher.forBlock(ModBlocks.blockBrinkstone), ctx);
+		runGenerator(ModBlocks.oreAnthracite.getDefaultState(), 6, 6, 128, 150, BlockMatcher.forBlock(ModBlocks.blockBrinkstone), ctx);
 		runGenerator(ModBlocks.oreHallowsite.getDefaultState(), 3, 4, 45, 90, BlockMatcher.forBlock(Blocks.NETHERRACK), ctx);
 
 		if (ctx.rand.nextInt(2) == 0) {

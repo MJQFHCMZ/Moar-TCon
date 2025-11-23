@@ -31,6 +31,7 @@ import com.existingeevee.moretcon.traits.traits.Corroding;
 import com.existingeevee.moretcon.traits.traits.Cryogenics;
 import com.existingeevee.moretcon.traits.traits.Darkened;
 import com.existingeevee.moretcon.traits.traits.Electrified;
+import com.existingeevee.moretcon.traits.traits.Embering;
 import com.existingeevee.moretcon.traits.traits.EulersWrath;
 import com.existingeevee.moretcon.traits.traits.Fireslime;
 import com.existingeevee.moretcon.traits.traits.Flashbang;
@@ -191,7 +192,8 @@ public class ModTraits {
 	public static DummyTrait saturpigting = new DummyTrait("saturpigting", 0xffffff);
 	public static Burning burning = new Burning(); 
 	public static Ricoshot ricoshot = new Ricoshot();
-
+	public static Embering embering = new Embering();
+	
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
 	public static Stormcaller stormcaller = new Stormcaller();

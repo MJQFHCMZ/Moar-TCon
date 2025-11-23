@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.inits.misc.ModSponges;
-import com.existingeevee.moretcon.inits.misc.OreDictionaryManager;
+import com.existingeevee.moretcon.inits.misc.OreDictionaryInit;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.other.ModTabs;
 
@@ -52,7 +52,7 @@ public class SpongeRegistry {
 		for (Entry<String, SpongeRecipe> s : RECIPES.entrySet()) {
 
 			for (String ore : s.getValue().resultOreDict) {
-				OreDictionaryManager.registerOre(ore, s.getValue().result);
+				OreDictionaryInit.registerOre(ore, s.getValue().result);
 			}
 
 			GameRegistry.addSmelting(new ItemStack(s.getValue().result, 1), s.getValue().smeltResult.copy(), 0F);

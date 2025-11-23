@@ -110,6 +110,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialPorksteel = new Material(MiscUtils.createNonConflictiveName("porksteel"), 0xc3af7d);
 	public static final Material materialPerimidum = new Material(MiscUtils.createNonConflictiveName("perimidum"), 0xdfd3ff);
 	public static final Material materialBrinkstone = new Material(MiscUtils.createNonConflictiveName("brinkstone"), 0x606059);
+	public static final Material materialAnthracite = new Material(MiscUtils.createNonConflictiveName("anthracite"), 0x2d3945);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -1305,6 +1306,30 @@ public class ModMaterials implements MaterialTypes {
 			
 			materialInertialRedirector.addTrait(ModTraits.ricoshot);
 			TinkerRegistry.addMaterialStats(materialInertialRedirector, new HeadMaterialStats(2048, 6f, 16f, 5));
+		
+			materialAnthracite.addItem("gemAnthracite", 1, Material.VALUE_Ingot);
+			materialAnthracite.addItem("blockAnthracite", 1, Material.VALUE_Block);
+			materialAnthracite.setCastable(false);
+			materialAnthracite.setCraftable(true);
+			materialAnthracite.setRepresentativeItem("gemAnthracite");
+			materialAnthracite.addTrait(ModTraits.bottomsEnd, HEAD);
+			materialAnthracite.addTrait(ModTraits.embering, HEAD);
+			materialAnthracite.addTrait(ModTraits.darkened);
+			materialAnthracite.addTrait(ModTraits.embering);
+			TinkerRegistry.addMaterialStats(materialAnthracite, new HeadMaterialStats(800, 12.5f, 11f, 7));
+			TinkerRegistry.addMaterialStats(materialAnthracite, new HandleMaterialStats(2.0f, 67));
+			TinkerRegistry.addMaterialStats(materialAnthracite, new ExtraMaterialStats(40));
+			TinkerRegistry.addMaterialStats(materialAnthracite, new ArrowShaftMaterialStats(1.5f, 20));
+			TinkerRegistry.addMaterialStats(materialAnthracite, whyWouldYouMakeABowOutOfThis);
+			if (CompatManager.conarm) {
+				TinkerRegistry.addMaterialStats(materialAnthracite, new CoreMaterialStats(16f, 22f));
+				TinkerRegistry.addMaterialStats(materialAnthracite, new PlatesMaterialStats(2f, 4f, 1.4f));
+				TinkerRegistry.addMaterialStats(materialAnthracite, new TrimMaterialStats(1.2f));
+				
+				ArmorMaterials.addArmorTrait(materialAnthracite, ModArmorTraits.burningThorns, ArmorTraits.combustible);
+				
+				addArmorLum(materialAnthracite);
+			}
 		}	
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
@@ -1783,6 +1808,8 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialGeodesium).toolforge();
 			ModMaterials.registerMaterial(materialInertialRedirector, null);
 			ModMaterials.registerMaterial(materialBrinkstone, null);
+			ModMaterials.registerMaterial(materialAnthracite).toolforge();
+			
 			
 			
 		}

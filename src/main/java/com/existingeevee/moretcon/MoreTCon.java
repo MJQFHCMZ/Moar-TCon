@@ -11,7 +11,7 @@ import com.existingeevee.moretcon.inits.ModMaterials;
 import com.existingeevee.moretcon.inits.ModPotions;
 import com.existingeevee.moretcon.inits.ModReforges;
 import com.existingeevee.moretcon.inits.misc.ModSponges;
-import com.existingeevee.moretcon.inits.misc.OreDictionaryManager;
+import com.existingeevee.moretcon.inits.misc.OreDictionaryInit;
 import com.existingeevee.moretcon.inits.recipes.ExplosiveChargeRecipes;
 import com.existingeevee.moretcon.inits.recipes.FurnaceInit;
 import com.existingeevee.moretcon.inits.recipes.MiscRecipes;
@@ -107,7 +107,7 @@ public class MoreTCon {
 		ModTraits.init();
 		ModReforges.init();
 
-		OreDictionaryManager.preInit();
+		OreDictionaryInit.preInit();
 
 		proxy.preInit();
 
@@ -123,7 +123,7 @@ public class MoreTCon {
 
 	@SubscribeEvent
 	public static void registerRecipes(Register<IRecipe> event) {
-		OreDictionaryManager.init();
+		OreDictionaryInit.init();
 
 		IForgeRegistry<IRecipe> registry = event.getRegistry();
 

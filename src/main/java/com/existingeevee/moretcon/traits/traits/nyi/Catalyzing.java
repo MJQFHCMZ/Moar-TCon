@@ -31,6 +31,7 @@ public class Catalyzing extends AbstractTrait {
 			int burning = ObfuscationReflectionHelper.getPrivateValue(Entity.class, target, "field_190534_ay");
 			target.hurtResistantTime = hurtResist;
 			target.attackEntityFrom(DamageSource.ON_FIRE, burning / 22.5f);
+			CustomFireHelper.extinguishCustom(target);
 			return;
 		} 
 		CustomFireInfo info = CustomFireHelper.getBurningInfo(target);
@@ -41,12 +42,13 @@ public class Catalyzing extends AbstractTrait {
 			float damage = Math.max(4, target.getHealth() / 10) * info.getTimeRemaining() / 30f;
 			target.hurtResistantTime = hurtResist;
 			target.attackEntityFrom(new DamageSource("coldfire").setFireDamage(), damage);
+			CustomFireHelper.extinguishCustom(target);
 			
 		} else if (info.getEffect() == CustomFireEffect.SPIRIT_FIRE) {
 			float damage = 4 * info.getTimeRemaining() / 15f;
 			target.hurtResistantTime = 0;
 			target.attackEntityFrom(new DamageSource("haunted").setFireDamage(), damage);
-			
+			CustomFireHelper.extinguishCustom(target);
 		}
 	}
 
@@ -57,6 +59,6 @@ public class Catalyzing extends AbstractTrait {
 	
 	@Override
 	public int getPriority() {
-		return -2; //we need this to run last.
+		return -3; //we need this to run last.
 	}
 }
