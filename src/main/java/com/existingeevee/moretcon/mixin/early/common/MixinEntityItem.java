@@ -12,8 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import slimeknights.tconstruct.library.traits.ITrait;
-import slimeknights.tconstruct.library.utils.ToolHelper;
 
 @Mixin(EntityItem.class)
 public abstract class MixinEntityItem extends Entity{
@@ -30,7 +28,7 @@ public abstract class MixinEntityItem extends Entity{
 		if (!MixinEarlyAccessor.isITinkerable(tool))
 			return;
 		
-		for (ITrait t : ToolHelper.getTraits(tool)) {
+		for (Object t : MixinEarlyAccessor.getTraits(tool)) {
 			if (t instanceof IAdditionalTraitMethods) {
 				((IAdditionalTraitMethods) t).onEntityItemTick(tool, $this);
 			}

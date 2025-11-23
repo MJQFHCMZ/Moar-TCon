@@ -1,5 +1,8 @@
 package com.existingeevee.moretcon.other;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.tinkering.ITinkerable;
 import slimeknights.tconstruct.library.tools.ToolCore;
@@ -18,4 +21,9 @@ public class MixinEarlyAccessor {
 	public static boolean isITinkerable(ItemStack is) {
 		return is.getItem() instanceof ITinkerable;
 	}
+	
+	public static List<Object> getTraits(ItemStack tool) {
+		return new ArrayList<>(ToolHelper.getTraits(tool));
+	}
+	
 }
