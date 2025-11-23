@@ -90,6 +90,10 @@ repositories {
         name "ChickenBones"
         url "http://chickenbones.net/maven/"
     }
+    maven {
+        name "BlameJared Maven"
+        url "https://maven.blamejared.com/"
+    }
     flatDir {
         dir 'libs'
     }
@@ -113,8 +117,8 @@ dependencies {
     
     implementation  'curse.maven:mantle-74924:2713386'
     //implementation  'curse.maven:tinkers-construct-74072:2902483'
-    //implementation  'curse.maven:tinkers-antique-1242239:6460333'
- 	implementation  'elite_modding_team:TinkersAntique:1.12.2-2.13.0.203' 
+    implementation  'curse.maven:tinkers-antique-1242239:7242538'
+ 	//implementation  'elite_modding_team:TinkersAntique:1.12.2-2.13.0.203' 
     implementation  'com.azanor.baubles:Baubles:1.12-1.5.2'
     implementation  'curse.maven:plusticminusbad-376903:3648592'
 
@@ -128,6 +132,9 @@ dependencies {
     implementation  'curse.maven:tinkers-tool-leveling-250957:2630860'
 
     implementation  'curse.maven:jei-238222:4538010'
+
+    compileOnly "CraftTweaker2:ZenScript:4.1.9.491"
+    compileOnly "CraftTweaker2:CraftTweaker2-API:4.1.14.519"
 
     implementation  'codechicken:CodeChickenLib:1.12.2-3.2.3_devfix.1-universal'
 	implementation  'curse.maven:fermiumbooter-968474:6848648'
