@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.Loader;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import thebetweenlands.common.capability.circlegem.CircleGemHelper;
 import thebetweenlands.common.capability.circlegem.CircleGemType;
@@ -19,7 +20,7 @@ public class Burning extends AbstractTrait {
 
 	@Override
 	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
-		if (player.world.rand.nextFloat() < getOctineToolFireChance(tool, target, player) && wasHit) {
+		if (player.world.rand.nextFloat() < (Loader.isModLoaded("thebetweenlands") ? getOctineToolFireChance(tool, target, player) : 0.25) && wasHit) {
 			target.setFire(5);
 		}
 		super.afterHit(tool, target, player, damageDealt, wasHit, wasHit);

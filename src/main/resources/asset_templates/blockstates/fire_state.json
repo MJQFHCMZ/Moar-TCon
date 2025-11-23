@@ -1,0 +1,50 @@
+{
+    "multipart": [
+        {   "when": {"north": false, "east": false, "south": false, "west": false, "up": false},
+            "apply": [
+                { "model": "${modelFloor0}" },
+                { "model": "${modelFloor1}" }
+            ]
+        },
+        {   "when": {"OR": [{"north": true}, {"north": false, "east": false, "south": false, "west": false, "up": false}]},
+            "apply": [
+                { "model": "${modelSide0}" },
+                { "model": "${modelSide1}" },
+                { "model": "${modelAltSide0}" },
+                { "model": "${modelAltSide1}" }
+            ]
+        },
+        {   "when": {"OR": [{"east": true}, {"north": false, "east": false, "south": false, "west": false, "up": false}]},
+            "apply": [
+                { "model": "${modelSide0}", "y": 90 },
+                { "model": "${modelSide1}", "y": 90 },
+                { "model": "${modelAltSide0}", "y": 90 },
+                { "model": "${modelAltSide1}", "y": 90 }
+            ]
+        },
+        {   "when": {"OR": [{"south": true}, {"north": false, "east": false, "south": false, "west": false, "up": false}]},
+            "apply": [
+                { "model": "${modelSide0}", "y": 180 },
+                { "model": "${modelSide1}", "y": 180 },
+                { "model": "${modelAltSide0}", "y": 180 },
+                { "model": "${modelAltSide1}", "y": 180 }
+            ]
+        },
+        {   "when": {"OR": [{"west": true}, {"north": false, "east": false, "south": false, "west": false, "up": false}]},
+            "apply": [
+                { "model": "${modelSide0}", "y": 270 },
+                { "model": "${modelSide1}", "y": 270 },
+                { "model": "${modelAltSide0}", "y": 270 },
+                { "model": "${modelAltSide1}", "y": 270 }
+            ]
+        },
+        {   "when": {"up": true},
+            "apply": [
+                { "model": "${modelUp0}" },
+                { "model": "${modelUp1}" },
+                { "model": "${modelAltUp0}" },
+                { "model": "${modelAltUp1}" }
+            ]
+        }
+    ]
+}

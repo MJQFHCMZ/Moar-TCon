@@ -2,9 +2,12 @@ package com.existingeevee.moretcon.mixin.early.common;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.existingeevee.moretcon.other.OverrideItemUseEvent;
+import com.existingeevee.moretcon.other.utils.ReequipHack;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 @Mixin(ItemStack.class)
@@ -32,6 +36,20 @@ public class MixinItemStack {
 			return EnumActionResult.FAIL;
 		}
 		return item.onItemUse(player, worldIn, pos, hand, side, hitX, hitY, hitZ);
+	}
+
+	@Inject(method = "areItemStacksEqual", at = @At("HEAD"), cancellable = true, remap = false)
+	private static void moretcon$HEAD_Inject$areItemStacksEqual(ItemStack from, ItemStack to, CallbackInfoReturnable<Boolean> ci) {
+		if (ReequipHack.HAS_PROCESSED.get()) {
+			return;
+		}
+		
+		// dsurr this is all your fault grrrr /jk i made a janky and now im paying the price
+		if (Loader.isModLoaded("dsurround")) {
+			StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+			if (trace[3].getClassName().equals("org.orecruncher.dsurround.client.handlers.effects.EntityBowSoundEffect") && trace[3].getMethodName().equals("update"))			
+				ci.setReturnValue(ReequipHack.areItemStacksEqualIgnoring(from, to));
+		}
 	}
 
 }

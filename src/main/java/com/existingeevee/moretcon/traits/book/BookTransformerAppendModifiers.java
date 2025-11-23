@@ -15,28 +15,42 @@ import slimeknights.tconstruct.library.modifiers.Modifier;
 // adapted from Tinkers' MEMES BookTransformerAppendModifiers
 public class BookTransformerAppendModifiers extends SectionTransformer {
 
-    private final BookRepository source;
-    private final List<Modifier> modCollector;
+	private final BookRepository source;
+	private final boolean armor;
+	private final List<Modifier> modCollector;
 
-    public BookTransformerAppendModifiers(BookRepository source, List<Modifier> modCollector) {
-        super("modifiers");
-        this.source = source;
-        this.modCollector = modCollector;
-    }
+	public BookTransformerAppendModifiers(BookRepository source, boolean armor, List<Modifier> modCollector) {
+		super("modifiers");
+		this.source = source;
+		this.modCollector = modCollector;
+		this.armor = armor;
+	}
 
-    @Override
-    public void transform(BookData book, SectionData section) {
-        ContentListing listing = (ContentListing) section.pages.get(0).content;
-        for (Modifier mod : modCollector) {
-        	PageData page = new PageData();
-        	page.source = source;
-        	page.parent = section;
-        	page.type = mod instanceof Shocked ? "lightning_modifier" : "modifier";
-        	page.data = "modifiers/" + mod.identifier.replaceFirst("moretcon.", "") + ".json";
-        	section.pages.add(page);
-        	page.load();
-        	listing.addEntry(mod.getLocalizedName(), page);
-        }
-    }
+	public BookTransformerAppendModifiers(BookRepository source, List<Modifier> modCollector) {
+		this(source, false, modCollector);
+	}
 
+	@Override
+	public void transform(BookData book, SectionData section) {
+		ContentListing listing = (ContentListing) section.pages.get(0).content;
+		for (Modifier mod : modCollector) {
+			PageData page = new PageData();
+			page.source = source;
+			page.parent = section;
+			page.data = "modifiers/" + mod.identifier.replaceFirst("moretcon.", "") + ".json";
+			page.type = mod instanceof Shocked ? "lightning_modifier" : "modifier";
+						
+			if (armor) {
+				page.data = "armor_" + page.data;
+				page.type = "armor" + page.type;
+			}
+	
+			section.pages.add(page);
+			page.load();
+			
+//			System.out.println(new Gson().toJson(page));
+
+			listing.addEntry(mod.getLocalizedName(), page);
+		}
+	}
 }

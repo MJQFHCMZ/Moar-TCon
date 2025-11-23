@@ -1,12 +1,7 @@
 {
-  "parent": "block/cube",
+  "parent": "moretcon:block/template/layered_cube_all_2",
   "textures": {
-    "down": "moretcon:blocks/blockirradium",
-    "up": "moretcon:blocks/blockirradium",
-    "north": "moretcon:blocks/blockirradium",
-    "east": "moretcon:blocks/blockirradium",
-    "south": "moretcon:blocks/blockirradium",
-    "west": "moretcon:blocks/blockirradium",
-    "particle": "moretcon:blocks/blockirradium"
+    "bot_all": "moretcon:blocks/blockirradium",
+    "top_all": "moretcon:blocks/bloom/blockirradium_bloom"    
   }
 }

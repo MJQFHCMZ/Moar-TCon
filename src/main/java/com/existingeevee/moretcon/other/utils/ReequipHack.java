@@ -20,6 +20,13 @@ public class ReequipHack {
 
 	public static final ThreadLocal<Boolean> HAS_PROCESSED = ThreadLocal.withInitial(() -> false);
 
+	public static boolean areItemStacksEqualIgnoring(ItemStack from, ItemStack to) {
+		HAS_PROCESSED.set(true);
+		boolean ret = ItemStack.areItemStacksEqual(getProcessedStack(from), getProcessedStack(to));
+		HAS_PROCESSED.set(false);
+		return ret;
+	}
+	
 	public static boolean canContinueUsing(ItemStack from, ItemStack to) {
 		HAS_PROCESSED.set(true);
 		boolean ret = ForgeHooks.canContinueUsing(getProcessedStack(from), getProcessedStack(to));

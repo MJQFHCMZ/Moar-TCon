@@ -1,10 +1,6 @@
 package com.existingeevee.moretcon.reforges;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.existingeevee.moretcon.item.ItemReforgeStone;
-import com.google.common.collect.Lists;
+import com.existingeevee.moretcon.other.WeightedItem;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
@@ -23,12 +18,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
+import slimeknights.tconstruct.library.modifiers.TinkerGuiException;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
@@ -51,9 +46,18 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 		TinkerRegistry.addTrait(this);
 		this.addAspects(new ModifierAspect.SingleAspect(this), new ModifierAspect.DataAspect(this, color));
-		this.addRecipeMatch(new ReforgeStoneRecipeMatch(this));
 	}
 
+	public AbstractReforge setRandomReforge(double weight) {
+		if (ReforgeHelper.RANDOM_REFORGES.contains(this.getIdentifier()))
+			return this;
+		
+		ReforgeHelper.RANDOM_REFORGES.add(this.getIdentifier());
+		ReforgeHelper.REFORGE_WEIGHTS.add(new WeightedItem<>(this, weight));
+		
+		return this;
+	}
+	
 	@Override
 	public String getIdentifier() {
 		return identifier;
@@ -65,12 +69,12 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 	@Override
 	public String getLocalizedName() {
-		return I18n.translateToLocal("text.reforge_marker") + ": " + Util.translate(LOC_Name, getIdentifier());
+		return I18n.translateToLocal("text.reforge_marker") + ": " + getLocalizedPrefix();
 	}
 
 	@Override
 	public String getLocalizedDesc() {
-		return Util.translate(LOC_Flav, getIdentifier()) + "\n" + ChatFormatting.RESET + Util.translate(LOC_Desc, getIdentifier());
+		return Util.translate(LOC_Flav, getIdentifier()) + "\n" + ChatFormatting.RESET + getLocalizedDescWithoutFlavor();
 	}
 
 	public String getLocalizedDescWithoutFlavor() {
@@ -171,7 +175,7 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 	}
 
 	@Override
-	public boolean canApplyCustom(ItemStack stack) {
+	public boolean canApplyCustom(ItemStack stack) throws TinkerGuiException {
 		// can only apply if the trait isn't present already
 		NBTTagList tagList = TagUtil.getTraitsTagList(stack);
 		int index = TinkerUtil.getIndexInList(tagList, this.getIdentifier());
@@ -198,6 +202,9 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 	@Override
 	public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag) {
+		// Set the key for easy lookup
+		rootCompound.setString(ReforgeHelper.REFORGE_KEY, getModifierIdentifier());
+		
 		// add the trait to the traitlist so it gets processed
 		NBTTagList traits = TagUtil.getTraitsTagList(rootCompound);
 		// if it's not already present
@@ -209,9 +216,6 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 		traits.appendTag(new NBTTagString(identifier));
 		TagUtil.setTraitsTagList(rootCompound, traits);
-
-		// Set the key for easy lookup
-		rootCompound.setString(ReforgeHelper.REFORGE_KEY, getModifierIdentifier());
 	}
 
 	@Override
@@ -229,43 +233,5 @@ public abstract class AbstractReforge extends Modifier implements ITrait {
 
 	public int getColor() {
 		return color;
-	}
-
-	public static class ReforgeStoneRecipeMatch extends RecipeMatch {
-
-		final AbstractReforge reforge;
-
-		public ReforgeStoneRecipeMatch(AbstractReforge reforge) {
-			super(1, 1);
-			this.reforge = reforge;
-		}
-
-		@Override
-		public Optional<Match> matches(NonNullList<ItemStack> stacks) {
-			List<ItemStack> found = Lists.newLinkedList();
-			int stillNeeded = amountNeeded;
-
-			for (ItemStack stack : stacks) {
-				if (stack.getItem() instanceof ItemReforgeStone && ((ItemReforgeStone) stack.getItem()).getReforge() == reforge) {
-					// add the amount found to the list
-					ItemStack copy = stack.copy();
-					copy.setCount(Math.min(copy.getCount(), stillNeeded));
-					found.add(copy);
-					stillNeeded -= copy.getCount();
-
-					// we found enough
-					if (stillNeeded <= 0) {
-						return Optional.of(new Match(found, amountMatched));
-					}
-				}
-			}
-
-			return Optional.empty();
-		}
-
-		@Override
-		public List<ItemStack> getInputs() {
-			return Lists.newArrayList();
-		}
 	}
 }

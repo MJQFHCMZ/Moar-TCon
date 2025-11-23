@@ -4,45 +4,76 @@ import java.util.UUID;
 
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.ReequipHack;
-import com.google.common.collect.Multimap;
+import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
+import com.existingeevee.moretcon.traits.traits.abst.ISimpleArmorTrait;
 
+import c4.conarm.lib.armor.ArmorModifications;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import slimeknights.tconstruct.library.traits.AbstractTrait;
+import slimeknights.tconstruct.library.utils.ToolHelper;
 
-public class Pyrophoric extends AbstractTrait {
+@Optional.Interface(iface = "com.existingeevee.moretcon.traits.traits.abst.ISimpleArmorTrait", modid = "conarm")
+public class Pyrophoric extends AttributeTrait implements ISimpleArmorTrait {
 
 	public static final UUID SPEED_MODIFIER = UUID.fromString("ae3dabe7-ffff-0000-9089-002f90370738");
 
 	public Pyrophoric() {
-		super(MiscUtils.createNonConflictiveName("pyrophoric"), 0);
+		super("pyrophoric", 0xffffff, new AttributeModifier(SPEED_MODIFIER, "atk speed modifier", 1, 1), SharedMonsterAttributes.ATTACK_SPEED);
 		ReequipHack.registerIgnoredKey(this.getModifierIdentifier());
 		MinecraftForge.EVENT_BUS.register(this);
-		// TODO Your tool will randomly ignite, granting a bonus to attack speed, attack
-		// damage, harvest level, and mining speed
 	}
 
 	@Override
-	public void getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack, Multimap<String, AttributeModifier> attributeMap) {
-		if (slot != EntityEquipmentSlot.MAINHAND || !this.isBurning(stack)) {
-			return;
+	@Optional.Method(modid = "conarm")
+	public ArmorModifications getModifications(EntityPlayer player, ArmorModifications mods, ItemStack armor, DamageSource source, double damage, int slot) {
+		if (this.isBurning(armor)) {
+			mods.addEffectiveness(0.5f);
 		}
+		return mods;
+	}
 
-		attributeMap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(SPEED_MODIFIER, "atk speed modifier", 1, 1));
+	@Override
+	public float onDamaged(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingDamageEvent evt) {
+		if (this.isBurning(armor)) {
+			return newDamage - damage / 8f;
+		} 
+		return newDamage;
+	}
+	
+	@Override
+	@Optional.Method(modid = "conarm")
+	public void onAbilityTick(int level, World world, EntityPlayer player) {
+		if (world instanceof WorldServer) {
+			for (ItemStack stack : player.getArmorInventoryList()) {
+				if (this.isBurning(stack)) {
+					Vec3d center = MiscUtils.getCenter(player.getEntityBoundingBox());
+					((WorldServer) world).spawnParticle(EnumParticleTypes.FLAME, center.x, center.y, center.z, 5, 0.5, 0.5, 0.5, 0.01);
+					return;
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean shouldApply(ItemStack tool, World world, EntityLivingBase entity) {
+		return this.isBurning(tool) && super.shouldApply(tool, world, entity);
 	}
 
 	@Override
@@ -65,7 +96,7 @@ public class Pyrophoric extends AbstractTrait {
 	@Override
 	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
 		if (this.isBurning(tool)) {
-			return newDamage +  damage * .75f;
+			return newDamage + damage * .75f;
 		}
 		return newDamage;
 	}
@@ -81,15 +112,24 @@ public class Pyrophoric extends AbstractTrait {
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
 		this.update(tool);
 
-		if (!isSelected || (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getActiveItemStack() == tool) || world.isRemote)
-		 {
+		if (!isSelected || (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getActiveItemStack() == tool) || world.isRemote) {
 			return; // we only want things to execute if theyre holding it.
 		}
 
 		if (this.isBurning(tool)) {
 			if (world instanceof WorldServer) {
-				Vec3d center = MiscUtils.getCenter(entity.getEntityBoundingBox());
-				((WorldServer) world).spawnParticle(EnumParticleTypes.FLAME, center.x, center.y, center.z, 5, 0.5, 0.5, 0.5, 0.01);
+				boolean worn = false;
+
+				if (itemSlot < 4)
+					for (ItemStack armor : ((EntityLivingBase) entity).getArmorInventoryList()) {
+						worn = tool == armor;
+						if (worn)
+							break;
+					}
+				if (!worn) {
+					Vec3d center = MiscUtils.getCenter(entity.getEntityBoundingBox());
+					((WorldServer) world).spawnParticle(EnumParticleTypes.FLAME, center.x, center.y, center.z, 5, 0.5, 0.5, 0.5, 0.01);
+				}
 			}
 		}
 
@@ -117,7 +157,7 @@ public class Pyrophoric extends AbstractTrait {
 			return false;
 		}
 		NBTTagCompound data = tool.getOrCreateSubCompound(this.getModifierIdentifier());
-		return data.getInteger("BurningTime") > 0;
+		return data.getInteger("BurningTime") > 0 && !ToolHelper.isBroken(tool);
 	}
 
 	public void update(ItemStack tool) {

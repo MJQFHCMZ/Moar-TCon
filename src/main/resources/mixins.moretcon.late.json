@@ -1,8 +1,10 @@
 {
+  "required": true,
   "compatibilityLevel": "JAVA_8",
   "package": "com.existingeevee.moretcon.mixin",
   "refmap": "refmap.moretcon.json",
-  "plugin": "com.existingeevee.moretcon.mixinext.MoreTConMixinPlugin",
+  "plugin": "com.existingeevee.moretcon.mixinext.MoarTConMixinPlugin",
+  "minVersion": "0.8",
   
   "mixins": [
   	"late.common.MixinToolPart",
@@ -10,13 +12,22 @@
   	"late.common.MixinTinkerProjectileHandler",
   	"late.common.MixinEntityProjectileBase",
   	"late.common.MixinBowCore",
+  	"late.common.MixinToolCore",
+  	"late.common.MixinTraitTasty",
+  	"late.common.MixinBoltHeadPartMaterialType",
   	
   	"softdep.thebetweenlands.MixinBlockEnergyBarrier",
   	"softdep.thebetweenlands.MixinEntityFortressBossProjectile",
-  	
+  	"softdep.thebetweenlands.MixinEntityBLLightningBolt",
+  	"softdep.thebetweenlands.MixinEntityShockwaveBlock",
   	"softdep.thebetweenlands.MixinToolCore",
-  	"softdep.thebetweenlands.MixinItemGreataxe"
+  	"softdep.thebetweenlands.MixinItemGreataxe",
+  	
+  	"softdep.tinkertoolleveling.MixinModToolLeveling",
+  	
+  	"softdep.conarm.MixinTraitTasty"
   ],
+  
   "client": [
   	"late.client.MixinContentMaterial",
   	"late.client.MixinModFortifyDisplay",

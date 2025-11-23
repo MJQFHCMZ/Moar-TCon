@@ -33,6 +33,7 @@ public class ConfigHandler {
 	public static boolean shouldLoadDustForCompatability = true;
 
 	public static boolean disableOreGen = false;
+	public static boolean disableLuminescent = false;
 
 	public static boolean weakenToolsInBetweenLands = true;
 	public static boolean registerBetweenTinkerTools = true;
@@ -45,6 +46,7 @@ public class ConfigHandler {
 
 	public static int decayingEffectEntityID = 8690001;
 	public static int plasmaBoltEntityID = 8690002;
+	public static int bombEntityID = 8690003; //TODO
 
 	public static boolean shouldDurabilityCapNonProjectiles = true;
 
@@ -67,6 +69,10 @@ public class ConfigHandler {
 
 	public static boolean inertiaOnlyWorksOnAdvancedTools = false;
 
+	public static boolean invasiveWorldgen = true;
+
+	public static boolean enableBomb = true;
+
 	public static void initConfig(File file) {
 		config = new Configuration(file, ModInfo.VERSION);
 
@@ -86,25 +92,25 @@ public class ConfigHandler {
 		ConfigHandler.shouldAllowAether = config.getBoolean("aether_legacy", category, true, "Set to \"false\" if you don't want to allow Aether compatibility to load.");
 		ConfigHandler.shouldAllowBaubles = config.getBoolean("baubles", category, true, "Set to \"false\" if you don't want to allow Baubles compatibility to load. (FYI disabling this may leave leave some items without recipes)");
 		ConfigHandler.shouldAllowOreDictionary = config.getBoolean("oredict", category, true, "[NYI] Set to \"false\" if you don't want to allow oredict compatibility to load.");
-		ConfigHandler.shouldAllowTiC3ContentBackport = config.getBoolean("tic3backport", category, true, "Set to \"false\" if you don't want to allow backported content from TinkersConstruct 3 to load.");
+		ConfigHandler.shouldAllowTiC3ContentBackport = config.getBoolean("tic3backport", category, true, "Set to \"false\" if you don't want to allow backported content from Tinker's Construct 3 to load.");
 
 		category = "Misc";
 		config.addCustomCategoryComment(category, "Tweak the miscellaneous values/content of the mod");
 		ConfigHandler.shouldLoadDust = config.getBoolean("allowdust", category, true, "Set to \"true\" if you want to load dust.");
 		ConfigHandler.enableGauntlet = config.getBoolean("enablegauntlet", category, true, "Set to \"false\" if you want to disable the gauntlet tool.");
 		ConfigHandler.enableRing = config.getBoolean("enablering", category, true, "Set to \"false\" if you want to disable the ring tool.");
+		ConfigHandler.enableBomb = config.getBoolean("enablebomb", category, true, "Set to \"false\" if you want to disable the bomb tool.");
 		ConfigHandler.shouldLoadDustForCompatability = config.getBoolean("compatdust", category, true, "Set to \"false\" if you do not want to load dust for other mods.");
-		ConfigHandler.disableOreGen = config.getBoolean("disableoregen", category, false, "Set to \"true\" if you want to remove world generation");
 		ConfigHandler.weakenToolsInBetweenLands = config.getBoolean("weakennonbetweentinkers", category, true, "Set to \"false\" if you do not want to weaken non BetweenTinker tinker items.");
 		ConfigHandler.registerBetweenTinkerTools = config.getBoolean("registerBetweenTinkerTools".toLowerCase(), category, true, "Set to \"false\" if you do not want to  BetweenTinker tinker items to be loaded.");
 		ConfigHandler.middleGemsRequireModifierSlots = config.getBoolean("middleGemsRequireModifierSlots".toLowerCase(), category, true, "Set to \"false\" if you do not want to Betweenlands middle gems to cost modifier slots.");
 		String triRed = config.getString("trichromic_red", category, "minecraft:strength;1", "Set to a potion effect to affect trichromic color effect.");
-		String triGreen = config.getString("trichromic_green", category, "none;0", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
-		String triBlue = config.getString("trichromic_blue", category, "none;0", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
-
+		String triGreen = config.getString("trichromic_green", category, "minecraft:regeneration;1", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
+		String triBlue = config.getString("trichromic_blue", category, "minecraft:absorption;1", "Set to a potion effect to affect trichromic color effect, or \"none\" for default effect.");
+		
 		unfracturedBedrockObtainable = config.getBoolean("unfracturedbedrockobtainable", category, unfracturedBedrockObtainable, "Whether or not regular (typically unbreakable) bedrock should be obtainable.");
 		ConfigHandler.inertiaOnlyWorksOnAdvancedTools = config.getBoolean("inertiaOnlyWorksOnAdvancedTools".toLowerCase(), category, false, "Set to \"true\" if you do not want inertia (betweenlands greataxe/greatsword trait) to function on basic tools.");
-
+		disableLuminescent = config.getBoolean("disableluminescent", category, disableLuminescent, "Whether or not the trait \"Luminescent\" should be enable. If diabled, Luminescent will not be added to materials.");
 		try {
 			ConfigHandler.trichromicRed = new ResourceLocation(triRed.split(";")[0]);
 			ConfigHandler.trichromicRedLvl = Integer.parseInt(triRed.split(";")[1]);
@@ -128,6 +134,10 @@ public class ConfigHandler {
 
 		hyperheatMaximumStack = config.getInt("hyperheatmaximumstack", category, 4, 1, 127, "The maximum stack of Hyper Heat that is allowed");
 
+		category = "Worldgen";
+		ConfigHandler.disableOreGen = config.getBoolean("disableoregen", category, false, "Set to \"true\" if you want to remove world generation");
+		ConfigHandler.invasiveWorldgen  = config.getBoolean("invasiveworldgen", category, true, "Set to \"false\" if you want to disable more invasive worldgen aspects. (IE new biomes ect.)");
+		
 		category = "Durability Issue Fix";
 		config.addCustomCategoryComment(category, "A category dedicated to fixing the strange behavior of tools with durability greater than (2 ^ 15 - 1)");
 
@@ -144,6 +154,7 @@ public class ConfigHandler {
 		config.addCustomCategoryComment(category, "A category dedicated to a list of ID's of various things which may cause errors if they are not unique");
 		ConfigHandler.decayingEffectEntityID = config.getInt("decayingEffectEntityID".toLowerCase(), category, 8690001, Integer.MIN_VALUE, Integer.MAX_VALUE, "Decaying Effect Entity ID");
 		ConfigHandler.plasmaBoltEntityID = config.getInt("plasmaBoltEntityID".toLowerCase(), category, 8690002, Integer.MIN_VALUE, Integer.MAX_VALUE, "Plasma Bolt Entity ID");
+		ConfigHandler.bombEntityID = config.getInt("bombEntityID".toLowerCase(), category, 8690004, Integer.MIN_VALUE, Integer.MAX_VALUE, "Bomb Entity ID");
 		config.save();
 
 		MoreTConLogger.log("Finished Reading Config.");

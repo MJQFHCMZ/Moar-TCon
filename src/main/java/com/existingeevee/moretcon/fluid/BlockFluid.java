@@ -40,7 +40,7 @@ public class BlockFluid extends BlockFluidClassic implements ISimpleBlockItemPro
 	@Override
 	public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks) {
 		int color = (getFluid() instanceof LiquidFluid) ? ((LiquidFluid) getFluid()).getCColor() : getFluid().getColor();
-		if (getFluid().equals(ModFluids.liquidPenguinite)) {
+		if (getFluid() == ModFluids.liquidPenguinite) {
 			renderRng.setSeed(("" + (Math.ceil(entity.getPositionVector().x * 10.0) / 10D) + (Math.ceil(entity.getPositionVector().y * 10.0) / 10D) + (Math.ceil(entity.getPositionVector().z * 10.0) / 10D)).hashCode());
 			color = (renderRng.nextBoolean() ? 0x000000 : 0xffffff);
 

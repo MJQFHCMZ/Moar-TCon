@@ -12,8 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ExtendedAttackMessage implements IMessage, IMessageHandler<ExtendedAttackMessage, IMessage> {
 
-	static final String ticksSinceLastSwing = "field_184617_aD";
-
 	int entID = -1;
 
 	public ExtendedAttackMessage() {
@@ -31,7 +29,7 @@ public class ExtendedAttackMessage implements IMessage, IMessageHandler<Extended
 		EntityPlayer sender = ctx.getServerHandler().player;
 		Entity target = world.getEntityByID(message.entID);
 
-		if (sender.getDistanceSq(target) > 25 * 25 || message.entID < 0 || target == null) {
+		if (target == null || message.entID < 0 || sender.getDistanceSq(target) > 25 * 25) {
 			return null;
 		}
 

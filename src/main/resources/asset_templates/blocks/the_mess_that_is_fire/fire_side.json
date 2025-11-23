@@ -1,0 +1,7 @@
+{
+    "parent": "block/fire_side",
+    "textures": {
+        "particle": "${texturePath}",
+        "fire": "${texturePath}"
+    }
+}

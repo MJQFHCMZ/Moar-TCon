@@ -17,8 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class LightningEffectAction extends ClientAction {
 
-	private static final Constructor<Overlay> __init__$Overlay = ObfuscationReflectionHelper.findConstructor(Overlay.class, World.class, double.class, double.class, double.class);
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void runAsClient(World world, double x, double y, double z, NBTBase data) {
@@ -31,7 +29,7 @@ public class LightningEffectAction extends ClientAction {
 
 		if (big) {
 			try {
-				Minecraft.getMinecraft().effectRenderer.addEffect(__init__$Overlay.newInstance(world, x, y, z));
+				Minecraft.getMinecraft().effectRenderer.addEffect(ClientFields.__init__$Overlay.newInstance(world, x, y, z));
 			} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
 			}
 		} else {
@@ -39,5 +37,10 @@ public class LightningEffectAction extends ClientAction {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new Spark(world, x, y, z, MiscUtils.randomN1T1() * speedModifier, MiscUtils.randomN1T1() * speedModifier, MiscUtils.randomN1T1() * speedModifier, Minecraft.getMinecraft().effectRenderer));
 			}
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private static class ClientFields {
+		private static final Constructor<Overlay> __init__$Overlay = ObfuscationReflectionHelper.findConstructor(Overlay.class, World.class, double.class, double.class, double.class);
 	}
 }

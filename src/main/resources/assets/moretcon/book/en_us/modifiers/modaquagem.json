@@ -1,0 +1,16 @@
+{
+  "modifier": "moretcon.modaquagem",
+  "text": [
+    {
+      "text": "Aqua Middle Gems seem to work just as well on modular tools..."
+    }
+  ],
+  "effects": [
+    "Chance to weaken enemy when attacking.",
+    "Not compatible with other middle gem modifiers",
+    "Single level"
+  ],
+  "demoTool": [
+    "moretcon:blsword"
+  ]
+}

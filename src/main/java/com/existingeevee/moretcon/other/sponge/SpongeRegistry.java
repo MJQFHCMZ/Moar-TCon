@@ -11,6 +11,7 @@ import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.inits.misc.ModSponges;
 import com.existingeevee.moretcon.inits.misc.OreDictionaryManager;
 import com.existingeevee.moretcon.item.ItemBase;
+import com.existingeevee.moretcon.other.ModTabs;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -58,12 +59,14 @@ public class SpongeRegistry {
 			int i = 1;
 
 			for (SpongeStep s2 : s.getValue().steps) {
+				boolean isResult = true;
 				ItemStack input = new ItemStack(s.getValue().result, 1, i);
 				ItemStack output = new ItemStack(s.getValue().result, 1, 0);
 				if (i != s.getValue().steps.length) {
 					output = new ItemStack(s.getValue().result, 1, i + 1);
+					isResult = false;
 				}
-				TinkerRegistry.registerBasinCasting(new CastingRecipe(output, RecipeMatch.of(input, 1), s2.getFluidStack(), 200, true, true));
+				TinkerRegistry.registerBasinCasting(new CastingRecipe(output, RecipeMatch.of(input, 1), s2.getFluidStack(), 200, true, !isResult));
 				i++;
 			}
 		}
@@ -169,6 +172,7 @@ public class SpongeRegistry {
 			this.recipe.result = this;
 			this.setHasSubtypes(true);
 			this.setMaxDamage(0);
+			this.setTab(ModTabs.moarTConMaterials);
 			RECIPES.put(recipe.recipeName, recipe);
 		}
 

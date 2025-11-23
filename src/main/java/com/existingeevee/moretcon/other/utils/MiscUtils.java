@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.other.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -19,9 +21,12 @@ import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.modifiers.ModExtraTrait2;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import akka.japi.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -37,6 +42,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
@@ -64,6 +70,14 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modifiers.ModExtraTrait;
 
 public class MiscUtils {
+	
+	@SuppressWarnings("unchecked")
+	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith)::apply;
+	
+	public static boolean canArrowHit(Entity e) {
+		return ARROW_TARGETS.test(e);
+	}
+	
 	private static final Gson GSON = new GsonBuilder().create();
 
 	public static boolean isClass(String className) {
@@ -105,6 +119,24 @@ public class MiscUtils {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends Entity> T copyEntity(T entity) {
+		if (!entity.world.isRemote && entity != null) {
+			try {
+				Class<T> c = (Class<T>) entity.getClass();
+				Constructor<T> constructor = c.getDeclaredConstructor(World.class);
+				T newInstance = constructor.newInstance(entity.world);
+				newInstance.deserializeNBT(entity.serializeNBT());
+				newInstance.setUniqueId(UUID.randomUUID()); // Prevent UUID fuckups
+ 
+				return newInstance;
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -177,22 +209,17 @@ public class MiscUtils {
 		}
 	}
 
-	public static String fileread(String str) {
-		String textfile = "";
-		try {
-			File myObj = new File(new File(ClassLoader.getSystemClassLoader().getResource(".").getPath())
-					.getAbsolutePath().replace("%20", " ") + "/" + str);
-			Scanner myReader = new Scanner(myObj);
-			while (myReader.hasNextLine()) {
-				String data = myReader.nextLine();
-				textfile += (data + "\n");
+	public static String readTextFile(File file) throws FileNotFoundException {
+		String text = "";
+		Scanner scanner = new Scanner(file);
+		while (scanner.hasNextLine()) {
+			String data = scanner.nextLine();
+			text += (data + "\n");
 
-			}
-			myReader.close();
-		} catch (FileNotFoundException e) {
-			return null;
 		}
-		return textfile;
+		scanner.close();
+
+		return text;
 
 	}
 
@@ -251,7 +278,7 @@ public class MiscUtils {
 		for (NBTBase base : list) {
 			NBTTagString string = (NBTTagString) base;
 			Material mat = TinkerRegistry.getMaterial(string.getString());
-			if (mat != null) {
+			if (mat != null) { // BlockToolForge
 				retList.add(mat);
 			}
 		}
@@ -318,30 +345,47 @@ public class MiscUtils {
 				.setRegistryName("od_" + odLarge + "_to_" + odSmall));
 	}
 
-	public static void executeInNTicks(Runnable runnable, int executeIn) {
-		new Object() {
-			private int ticks = 0;
-			private float waitTicks;
-
-			public void start(int waitTicks) {
-				this.waitTicks = waitTicks;
-				MinecraftForge.EVENT_BUS.register(this);
-			}
-
-			@SubscribeEvent
-			public void tick(TickEvent.ServerTickEvent event) {
-				if (event.phase == TickEvent.Phase.END) {
-					if (this.ticks++ >= this.waitTicks) {
-						run();
-						MinecraftForge.EVENT_BUS.unregister(this);
+	public static class NTickTracker {
+		protected static boolean hasStarted = false;
+		
+		protected static final List<NTickTracker> LIST = Lists.newArrayList();
+		
+		public NTickTracker(Runnable runnable, int executeIn) {
+			this.runnable = runnable;
+			this.waitTicks = executeIn;
+		}
+		
+		protected boolean start() {
+			if (LIST.contains(this))
+				return false;
+			LIST.add(this);
+			if (!hasStarted)
+				MinecraftForge.EVENT_BUS.register(NTickTracker.class);
+			return true;
+		}
+		
+		private int ticks = 0;
+		private float waitTicks;
+		private Runnable runnable;
+		
+		@SubscribeEvent
+		public static void tick(TickEvent.ServerTickEvent event) {
+			if (event.phase == TickEvent.Phase.END) {
+				for (int i = 0; i < LIST.size(); i++) {
+					NTickTracker tracker = LIST.get(i);
+					
+					if (tracker.ticks++ > tracker.waitTicks) {
+						tracker.runnable.run();
+						LIST.remove(i--);
 					}
 				}
 			}
-
-			private void run() {
-				runnable.run();
-			}
-		}.start(executeIn);
+		}
+		
+	}
+	
+	public static void executeInNTicks(Runnable runnable, int executeIn) {
+		new NTickTracker(runnable, executeIn).start();
 	}
 
 	public static double randomN1T1() {
@@ -371,7 +415,8 @@ public class MiscUtils {
 	public static RayTraceResult rayTrace(Vec3d start, Vec3d direction, World world, double maxRange, List<Entity> exclude, boolean affectedByBlocks, boolean ignoreNoBounding) {
 		Vec3d end = start.add(direction.scale(maxRange));
 		RayTraceResult firstTrace = affectedByBlocks ? world.rayTraceBlocks(start, end, false, ignoreNoBounding, true) : null;
-		AxisAlignedBB area = new AxisAlignedBB(start, firstTrace != null ? firstTrace.hitVec : end);
+		Vec3d path = (firstTrace != null ? firstTrace.hitVec : end).add(direction.scale(2));
+		AxisAlignedBB area = new AxisAlignedBB(start.x, start.y, start.z, path.x, path.y, path.z);
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, area);
 
 		Entity closestValid = null;
@@ -384,7 +429,7 @@ public class MiscUtils {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().calculateIntercept(start, end);
 
-			if (intercept != null) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= start.squareDistanceTo(end)) {
 				double distSq = intercept.hitVec.squareDistanceTo(start);
 				if (closestDistSq > distSq) {
 					closestValid = e;
@@ -411,7 +456,7 @@ public class MiscUtils {
 		if (vec.lengthSquared() != 1) {
 			vec = vec.normalize();
 		}
-		
+
 		double pitch = Math.asin(-vec.y);
 		double yaw = Math.atan2(vec.z, vec.z);
 
@@ -429,14 +474,13 @@ public class MiscUtils {
 	public static Vec3d rotateVec3d(Vec3d original, Vec3d axis, float theta) {
 		Quaternion quaternion = new Quaternion(axis.normalize(), theta, false);
 		return quaternion.transformVector(original);
+	}
 
-		/*
-		 * axis = axis.normalize();
-		 * 
-		 * double cos = Math.cos(theta); double sin = Math.sin(theta);
-		 * 
-		 * return original.scale(cos) .add(axis.crossProduct(original).scale(sin))
-		 * .add(axis.scale(axis.dotProduct(original) * (1 - cos)));
-		 */
+	public static AxisAlignedBB pointBound(Vec3d point) {
+		return vectorBound(point, point);
+	}
+	
+	public static AxisAlignedBB vectorBound(Vec3d a, Vec3d b) {
+		return new AxisAlignedBB(a.x, a.y, a.z, b.x, b.y, b.z);
 	}
 }

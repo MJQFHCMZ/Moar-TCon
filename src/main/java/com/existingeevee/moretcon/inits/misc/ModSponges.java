@@ -42,6 +42,7 @@ public class ModSponges {
 			gravitoniumSpongeSolarsteel = SpongeRegistry.getSponge(SpongeRegistry.createSpongeRecipe("solarsteel", "oreSolarsteel", new ItemStack(ModItems.ingotSolsteel), new OreIngredient("gemIgniglomerate"),
 					SpongeRegistry.createSpongeStep(() -> ModFluids.liquidFusionite, Material.VALUE_Ingot * 4),
 					SpongeRegistry.createSpongeStep(() -> ModFluids.liquidHydrogen, Material.VALUE_Ingot * 8),
+					SpongeRegistry.createSpongeStep(() -> ModFluids.liquidGeodesium, Material.VALUE_Ingot * 8),
 					SpongeRegistry.createSpongeStep(() -> TinkerFluids.steel, Material.VALUE_Ingot * 3)).addResultOreDict("oreSolsteel"));
 
 			gravitoniumSpongeValasium = SpongeRegistry.getSponge(SpongeRegistry.createSpongeRecipe("valasium", "oreValasium", new ItemStack(ModItems.ingotValasium), new OreIngredient("ingotSteel"),

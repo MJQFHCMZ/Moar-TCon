@@ -26,11 +26,6 @@ public class Plasmatic extends AbstractTrait {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	@Override
-	public void onHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical) {
-		target.setFire(5);
-	}
-
 	public static final ThreadLocal<Boolean> IS_ALREADY_PROCING = ThreadLocal.withInitial(() -> false);
 
 	private static final Field ticksSinceLastAtt = ObfuscationReflectionHelper.findField(EntityLivingBase.class, "field_184617_aD");
@@ -57,7 +52,7 @@ public class Plasmatic extends AbstractTrait {
 		Vec3d start = player.getPositionEyes(0.5f);
 		Vec3d lookVec = player.getLook(0.5f);
 		Vec3d end = start.add(lookVec.scale(maxRange));
-		AxisAlignedBB area = new AxisAlignedBB(start, end);
+		AxisAlignedBB area = MiscUtils.vectorBound(start, end.add(lookVec.scale(2)));
 		List<Entity> entities = player.world.getEntitiesWithinAABBExcludingEntity(player, area);
 
 		for (Entity e : entities) {
@@ -67,7 +62,7 @@ public class Plasmatic extends AbstractTrait {
 
 			RayTraceResult intercept = e.getEntityBoundingBox().calculateIntercept(start, end);
 
-			if (intercept != null) {
+			if (intercept != null && intercept.hitVec.squareDistanceTo(start) <= start.squareDistanceTo(end)) {
 				try {
 					IS_ALREADY_PROCING.set(true);
 					int orig = ticksSinceLastAtt.getInt(player);

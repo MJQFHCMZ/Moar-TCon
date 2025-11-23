@@ -9,8 +9,10 @@ import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.world.generators.AetherOreGenerator;
 import com.existingeevee.moretcon.world.generators.AsteroidGenerator;
 import com.existingeevee.moretcon.world.generators.EtheralToplayerGenerator;
+import com.existingeevee.moretcon.world.generators.HelltopIslandsGenerator;
 import com.existingeevee.moretcon.world.generators.IgniglomerateGenerator;
 import com.existingeevee.moretcon.world.generators.MainOreGenerator;
+import com.existingeevee.moretcon.world.generators.MonoliteGenerator;
 import com.existingeevee.moretcon.world.generators.NetherPrismGenerator;
 import com.existingeevee.moretcon.world.generators.NetherSpikeGenerator;
 
@@ -32,25 +34,34 @@ public class MoreTConWorldGen implements IWorldGenerator {
 			modifiers.add(new AetherOreGenerator());
 		}
 		if (CompatManager.loadMain) {
-			//Loaded first
-			modifiers.add(new EtheralToplayerGenerator());
+			// Loaded first
+			if (ConfigHandler.invasiveWorldgen) {
+				modifiers.add(new EtheralToplayerGenerator());
+			}
 
-			//Order dosent really matter at this point
-			modifiers.add(new MainOreGenerator());
+			// Order dosent really matter at this point
 			modifiers.add(new AsteroidGenerator());
 			modifiers.add(new NetherSpikeGenerator());
 			modifiers.add(new IgniglomerateGenerator());
 			modifiers.add(new NetherPrismGenerator());
+			modifiers.add(new MonoliteGenerator());
+			
+			if (ConfigHandler.invasiveWorldgen) {
+				modifiers.add(new HelltopIslandsGenerator()); // perimidum crystals are here also
+			}
+			
+			// main generator last
+			modifiers.add(new MainOreGenerator());
 		}
 	}
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		WorldgenContext ctx = new WorldgenContext(world, chunkX, chunkZ, random);
-
 		if (ConfigHandler.disableOreGen) {
 			return;
 		}
+
 		modifiers.forEach(w -> w.generate(chunkGenerator, chunkProvider, ctx));
 	}
 }

@@ -20,7 +20,7 @@ public class Hardcore extends AbstractTrait {
 	}
 
     private int multiplier(ItemStack tool) {
-        double percent = ((double) ToolHelper.getCurrentDurability(tool)) / ((double) ToolHelper.getMaxDurability(tool));
+        double percent = (double) ToolHelper.getCurrentDurability(tool) / (double) ToolHelper.getMaxDurability(tool);
 
         if (percent <= 0.2) return 6;
         if (percent <= 0.4) return 4;

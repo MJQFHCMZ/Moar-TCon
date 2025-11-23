@@ -1,0 +1,24 @@
+package com.existingeevee.moretcon.traits.traits;
+
+import com.existingeevee.moretcon.other.fires.CustomFireEffect;
+import com.existingeevee.moretcon.other.fires.CustomFireHelper;
+import com.existingeevee.moretcon.other.utils.MiscUtils;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import slimeknights.tconstruct.library.traits.AbstractTrait;
+
+
+public class Frostburn extends AbstractTrait {
+
+	public Frostburn() {
+		super(MiscUtils.createNonConflictiveName("cold_fire"), 0x0066ff);
+	}
+
+	@Override
+	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
+		if (wasHit) {
+			CustomFireHelper.setAblaze(target, CustomFireEffect.COLD_FIRE, Math.max(Math.round(damageDealt * 5) + 100, 40));
+		}
+	}
+}

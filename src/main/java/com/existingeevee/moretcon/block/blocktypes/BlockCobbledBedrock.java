@@ -1,5 +1,7 @@
 package com.existingeevee.moretcon.block.blocktypes;
 
+import com.existingeevee.moretcon.block.ore.IBedrockMineable;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -9,7 +11,7 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockCobbledBedrock extends BlockBase {
+public class BlockCobbledBedrock extends BlockBase implements IBedrockMineable {
 	public BlockCobbledBedrock(String itemName, Material material, int harvestLevel) {
 		super(itemName, material, harvestLevel);
 	}
@@ -25,6 +27,11 @@ public class BlockCobbledBedrock extends BlockBase {
 
 	@Override
 	public boolean isToolEffective(String type, IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type) {
 		return false;
 	}
 }

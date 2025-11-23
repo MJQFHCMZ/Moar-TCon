@@ -29,10 +29,11 @@ import slimeknights.tconstruct.library.utils.ToolHelper;
 
 public class Reaching extends AbstractTraitLeveled {
 	public static final UUID REACH_MODIFIER = UUID.fromString("df6eabe7-ffff-0000-9099-002f90370708");
-
+	
 	public Reaching(int level) {
 		super(MiscUtils.createNonConflictiveName("reaching"), 0, 3, level);
-		MinecraftForge.EVENT_BUS.register(this);
+		if (this.levels == 1)
+			MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -51,12 +52,18 @@ public class Reaching extends AbstractTraitLeveled {
 	}
 
 	public boolean shouldHaveReach(ItemStack stack) {
-		return this.isToolWithTrait(stack) && !ToolHelper.isBroken(stack);
+		NBTTagList tagList = TagUtil.getModifiersTagList(stack);
+		int index = TinkerUtil.getIndexInCompoundList(tagList, getModifierIdentifier());
+		
+		return index > -1 && !ToolHelper.isBroken(stack);
 	}
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onMouseClick(PlayerInteractEvent.LeftClickEmpty event) {
+		if (!event.getWorld().isRemote)
+			return;
+			
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stack = player.getHeldItemMainhand();
 		NBTTagList tagList = TagUtil.getModifiersTagList(stack);

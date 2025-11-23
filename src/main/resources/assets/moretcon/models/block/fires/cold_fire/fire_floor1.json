@@ -1,0 +1,7 @@
+{
+    "parent": "block/fire_floor",
+    "textures": {
+        "particle": "moretcon:other/fire/cold_1",
+        "fire": "moretcon:other/fire/cold_1"
+    }
+}

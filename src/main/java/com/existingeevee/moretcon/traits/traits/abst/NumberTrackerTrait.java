@@ -36,7 +36,7 @@ public abstract class NumberTrackerTrait extends AdditionalDisplayTrait {
 	}
 
 	public int getDefaultNumber(ItemStack stack) {
-		return 0;
+		return this.getNumberMax(stack);
 	}
 
 	@Override

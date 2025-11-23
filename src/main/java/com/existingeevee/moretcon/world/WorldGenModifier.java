@@ -99,7 +99,7 @@ public abstract class WorldGenModifier {
 
 												if (!spawnExposed) {
 													for (EnumFacing facing : EnumFacing.values()) {
-														if (ctx.world.isAirBlock(blockpos.offset(facing))) {
+														if (!ctx.world.isBlockFullCube(blockpos.offset(facing))) {
 															shouldSpawn = false;
 														}
 													}

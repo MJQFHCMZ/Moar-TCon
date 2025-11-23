@@ -6,11 +6,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.inits.ModMaterials;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import slimeknights.tconstruct.library.events.MaterialEvent.TraitRegisterEvent;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tinkering.MaterialItem;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
@@ -23,12 +27,21 @@ public class Luminescent extends AbstractTrait {
 		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialFusionite, 0x0000ff);
 		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialTrichromadentium, 0xaaaaaa);
 		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialGravitonium, 0x00a000);
+		MATERIAL_COLOR_OVERRIDE.put(ModMaterials.materialGeodesium, 0xffffff);
 	}
 
 	public Luminescent(String identifier, int color) {
 		super(MiscUtils.createNonConflictiveName(identifier), color);
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
+	@SubscribeEvent
+	public void onTraitRegisterEvent(TraitRegisterEvent<Luminescent> event) {
+		if (event.trait == this && ConfigHandler.disableLuminescent) {
+			event.setCanceled(true);
+		}
+	}
+	
 	@Override
 	public boolean isToolWithTrait(ItemStack itemStack) {
 		return super.isToolWithTrait(itemStack);

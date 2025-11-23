@@ -1,7 +1,6 @@
 package com.existingeevee.moretcon;
 
 import com.existingeevee.moretcon.compat.betweenlands.BLRecipes;
-import com.existingeevee.moretcon.compat.betweenlands.EventWatcherBL;
 import com.existingeevee.moretcon.compat.betweenlands.IBetweenTinkerTool;
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.inits.ModBlocks;
@@ -13,6 +12,7 @@ import com.existingeevee.moretcon.inits.ModPotions;
 import com.existingeevee.moretcon.inits.ModReforges;
 import com.existingeevee.moretcon.inits.misc.ModSponges;
 import com.existingeevee.moretcon.inits.misc.OreDictionaryManager;
+import com.existingeevee.moretcon.inits.recipes.ExplosiveChargeRecipes;
 import com.existingeevee.moretcon.inits.recipes.FurnaceInit;
 import com.existingeevee.moretcon.inits.recipes.MiscRecipes;
 import com.existingeevee.moretcon.inits.recipes.OreRecipes;
@@ -22,7 +22,9 @@ import com.existingeevee.moretcon.inits.recipes.UniqueToolpartRecipes;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MTMaterialIntegration;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.other.ClusterTickingHandler;
 import com.existingeevee.moretcon.other.EventWatcherMain;
+import com.existingeevee.moretcon.other.MTGuiHandler;
 import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
 import com.existingeevee.moretcon.other.fires.CustomFireHelper;
@@ -38,8 +40,8 @@ import com.existingeevee.moretcon.other.utils.SoundHandler;
 import com.existingeevee.moretcon.proxy.CommonProxy;
 import com.existingeevee.moretcon.reforges.ReforgeHandler;
 import com.existingeevee.moretcon.traits.ModTraits;
+import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 import com.existingeevee.moretcon.world.MoreTConWorldGen;
-//import net.minecraftforge.fml.common.event.;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.crafting.IRecipe;
@@ -55,6 +57,7 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.tconstruct.library.MaterialIntegration;
@@ -76,7 +79,7 @@ public class MoreTCon {
 		CustomFireEffect.init();
 		MinecraftForge.EVENT_BUS.register(MoreTCon.class);
 	}
-
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		CompatManager.init();
@@ -99,6 +102,8 @@ public class MoreTCon {
 		MinecraftForge.EVENT_BUS.register(CustomFireHelper.class);
 		MinecraftForge.EVENT_BUS.register(ArrowReferenceHelper.class);
 		MinecraftForge.EVENT_BUS.register(ReforgeHandler.class);
+		MinecraftForge.EVENT_BUS.register(ClusterTickingHandler.class);
+		
 		ModTraits.init();
 		ModReforges.init();
 
@@ -106,7 +111,7 @@ public class MoreTCon {
 
 		proxy.preInit();
 
-	} //BowCore
+	} 
 
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event) {
@@ -125,7 +130,8 @@ public class MoreTCon {
 		OreRecipes.init(event);
 		UniqueToolpartRecipes.init(event);
 		ReforgeRecipes.init(event);
-
+		ExplosiveChargeRecipes.init(event);
+		
 		SpongeRegistry.registerRecipes(event);
 
 		if (CompatManager.thebetweenlands) {
@@ -151,6 +157,8 @@ public class MoreTCon {
 			}
 		}
 
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new MTGuiHandler());
+		
 		proxy.init();
 	}
 
@@ -166,9 +174,6 @@ public class MoreTCon {
 			BLRecipes.postInit();
 		}
 
-		if (CompatManager.thebetweenlands) {
-			MinecraftForge.EVENT_BUS.register(new EventWatcherBL());
-		}
 		MinecraftForge.EVENT_BUS.register(new EventWatcherMain());
 		for (MaterialIntegration integration : RegisterHelper.moreTConIntegrations) {
 			integration.integrate();
@@ -180,6 +185,13 @@ public class MoreTCon {
 		CompositeRegistry.onPostInit();
 
 		ModTraits.postInit();
+		if (CompatManager.conarm)
+			ModArmorTraits.postInit(); //EntityPlayer
+			
+		//You're welcome!
+		ReequipHack.registerIgnoredKey(Tags.TOOL_DATA); 
+		ReequipHack.registerIgnoredKey(Tags.TINKER_EXTRA); 
+		ReequipHack.registerIgnoredKey(Tags.BASE_MODIFIERS);
 	}
 
 	@EventHandler

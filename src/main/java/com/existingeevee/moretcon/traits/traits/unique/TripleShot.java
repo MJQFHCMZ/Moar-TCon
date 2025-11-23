@@ -33,8 +33,9 @@ public class TripleShot extends AbstractProjectileTrait {
 			TinkerProjectileHandler ticProjectile = projectileBase.tinkerProjectile;
 			if (!world.isRemote && ticProjectile.getItemStack().getItem() instanceof ProjectileCore) {
 				IS_ALREADY_PROCING.set(true);
-				shootProjectile(ticProjectile, shooter, -11.25f);
-				shootProjectile(ticProjectile, shooter, 11.25f);
+				float theta = 11.25f;
+				shootProjectile(ticProjectile, shooter, -theta);
+				shootProjectile(ticProjectile, shooter, theta);
 				IS_ALREADY_PROCING.set(false);
 			}
 			if (shooter instanceof EntityPlayer) {
@@ -44,7 +45,7 @@ public class TripleShot extends AbstractProjectileTrait {
 	}
 
 	public static void shootProjectile(TinkerProjectileHandler ticProjectile, EntityLivingBase shooter, float angle) {
-		EntityProjectileBase proj = ((ProjectileCore) ticProjectile.getItemStack().getItem()).getProjectile(ticProjectile.getItemStack().copy(), ticProjectile.getLaunchingStack().copy(), shooter.world, shooter instanceof EntityPlayer ? (EntityPlayer) shooter : null, 2.1f, 0f, 1f, false);
+		EntityProjectileBase proj = ((ProjectileCore) ticProjectile.getItemStack().getItem()).getProjectile(ticProjectile.getItemStack(), ticProjectile.getLaunchingStack(), shooter.world, shooter instanceof EntityPlayer ? (EntityPlayer) shooter : null, 2.1f, 0f, 1f, false);
 		shooter.world.spawnEntity(proj);
 		proj.pickupStatus = PickupStatus.CREATIVE_ONLY;
 

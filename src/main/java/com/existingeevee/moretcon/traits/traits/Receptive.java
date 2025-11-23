@@ -79,7 +79,7 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	public static final int POINT_CAP = 8000;
 
 	public static final float MAX_DMG_MULT = 2.5f;
-	public static final float MAX_MINING_MULT = 2.0f;
+	public static final float MAX_MINING_MULT = 3.5f;
 
 	public static final float MAX_DRAWSPEED_MULT = 2f;
 	public static final float MAX_RANGE_MULT = 2f;
@@ -93,7 +93,8 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	public int setMining(ItemStack stack, int amount) {
 		NBTTagCompound comp = stack.getOrCreateSubCompound(this.getModifierIdentifier());
 		comp.setInteger("mining", amount);
-		recalculateStats(TagUtil.getTagSafe(stack), this.getAttack(stack), amount);
+		if (this.isToolWithTrait(stack))
+			recalculateStats(TagUtil.getTagSafe(stack), this.getAttack(stack), amount);
 		return amount;
 	}
 
@@ -105,7 +106,8 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	public int setAttack(ItemStack stack, int amount) {
 		NBTTagCompound comp = stack.getOrCreateSubCompound(this.getModifierIdentifier());
 		comp.setInteger("attack", amount);
-		recalculateStats(TagUtil.getTagSafe(stack), amount, this.getMining(stack));
+		if (this.isToolWithTrait(stack))
+			recalculateStats(TagUtil.getTagSafe(stack), amount, this.getMining(stack));
 		return amount;
 	}
 
@@ -188,7 +190,7 @@ public class Receptive extends AdditionalDisplayTrait implements IProjectileTrai
 	@Override
 	public void afterHit(EntityProjectileBase projectile, World world, ItemStack ammoStack, EntityLivingBase attacker, Entity target, double impactSpeed) {
 		if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getHealth() <= 0) { // Murder!! YAYYY
-			ItemStack origArrowStack = ArrowReferenceHelper.getProjectileStack(projectile.tinkerProjectile);
+			ItemStack origArrowStack = ArrowReferenceHelper.getLinkedItemstackFromInventory(projectile.tinkerProjectile.getItemStack(), attacker);
 			if (!origArrowStack.isEmpty()) {
 				this.addAttack(origArrowStack);
 			}

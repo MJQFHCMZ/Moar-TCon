@@ -14,12 +14,12 @@ public class Liquid extends AbstractTrait {
 
 	@Override
 	public int onToolDamage(ItemStack tool, int damage, int newDamage, EntityLivingBase entity) {
-	    return ((newDamage - damage) + (Math.round((entity.world.getBiome(entity.getPosition()).getTemperature(entity.getPosition()) + 2) / 2) * damage));
+	    return newDamage - damage + Math.round(entity.world.getBiome(entity.getPosition()).getTemperature(entity.getPosition()) + 2) / 2 * damage;
 	}
 
 	@Override
 	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
-		newDamage += (player.world.getBiome(player.getPosition()).getTemperature(player.getPosition()) + 2);
+		newDamage += player.world.getBiome(player.getPosition()).getTemperature(player.getPosition()) + 2;
 		return super.damage(tool, player, target, damage, newDamage, isCritical);
 	}
 }

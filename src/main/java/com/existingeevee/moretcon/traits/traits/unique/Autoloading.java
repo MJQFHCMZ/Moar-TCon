@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
+import slimeknights.tconstruct.tools.melee.item.FryPan;
 
 public class Autoloading extends AbstractTrait {
 
@@ -37,13 +38,19 @@ public class Autoloading extends AbstractTrait {
 		ItemStack stack = event.getEntityLiving().getActiveItemStack();
 
 		if (this.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
+			
+			boolean fullyDrawn = false;
+			
 			if (stack.getItem() instanceof BowCore) {
 				BowCore core = (BowCore) stack.getItem();
-				boolean fullyDrawn = core.getDrawbackProgress(stack, event.getEntityLiving()) >= 1;
-
-				if (fullyDrawn) {
-					event.getEntityLiving().stopActiveHand();
-				}
+				fullyDrawn = core.getDrawbackProgress(stack, event.getEntityLiving()) >= 1;
+			} else if (stack.getItem() instanceof FryPan) {
+				int ticks = stack.getItem().getMaxItemUseDuration(stack) - event.getEntityLiving().getItemInUseCount();
+				fullyDrawn = ticks >= 1;
+			}
+			
+			if (fullyDrawn) {
+				event.getEntityLiving().stopActiveHand();
 			}
 		}
 	}

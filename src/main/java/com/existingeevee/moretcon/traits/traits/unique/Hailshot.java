@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.traits.traits.unique;
 
 import javax.annotation.Nullable;
 
+import com.existingeevee.moretcon.client.actions.GlacialParticleAction;
 import com.existingeevee.moretcon.other.utils.ArrowReferenceHelper;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.SoundHandler;
@@ -14,6 +15,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -45,21 +47,24 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 		if (target instanceof EntityLivingBase) {
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5 * 20, 3));
 			if (((EntityLivingBase) target).getHealth() <= 0) {
-				ItemStack ammoStackOrig = ArrowReferenceHelper.getProjectileStack(projectile.tinkerProjectile);
+				ItemStack ammoStackOrig = ArrowReferenceHelper.getLinkedItemstackFromInventory(projectile.tinkerProjectile.getItemStack(), attacker);
 				setActive(ammoStackOrig, true);
 			}
 		}
-
+		
 		if (isEmpowered(projectile)) {
+			if (!world.isRemote)
+				GlacialParticleAction.INSTANCE.run(world, target.posX, target.posY, target.posZ, null);
 			this.setEmpowered(projectile, false);
-			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
+			world.playSound(null, target.posX, target.posY, target.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
 
-			for (Entity e : world.getEntitiesInAABBexcluding(target, projectile.getEntityBoundingBox().grow(2), e -> e != attacker && e != projectile && e != target)) {
+			float origPower = projectile.tinkerProjectile.getPower();
+
+			for (Entity e : world.getEntitiesInAABBexcluding(target, new AxisAlignedBB(target.posX, target.posY, target.posZ, target.posX, target.posY, target.posZ).grow(2), e -> e != attacker && e != projectile && e != target)) {
 				if (!(e instanceof EntityLivingBase)) {
 					continue;
 				}
 
-				float origPower = projectile.tinkerProjectile.getPower();
 				float damageMultiplier = (float) (0.5 * Math.pow(Math.E, -0.25 * target.getDistanceSq(e)) + 0.25);
 
 				projectile.tinkerProjectile.setPower(origPower * damageMultiplier);
@@ -67,6 +72,11 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 				projectile.tinkerProjectile.setPower(origPower);
 
 			}
+
+			target.hurtResistantTime = 0;
+			projectile.tinkerProjectile.setPower(origPower * 0.1f);
+			projectile.onHitEntity(new RayTraceResult(target));
+			projectile.tinkerProjectile.setPower(origPower);
 		}
 	}
 
@@ -84,6 +94,26 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
+		if (projectile.inGround && isEmpowered(projectile)) {
+			if (!world.isRemote)
+				GlacialParticleAction.INSTANCE.run(world, projectile.posX, projectile.posY, projectile.posZ, null);
+			this.setEmpowered(projectile, false);
+			world.playSound(null, projectile.posX, projectile.posY, projectile.posZ, SoundHandler.ICY_EXPLOSION, SoundCategory.PLAYERS, 3, 0.5f);
+
+			for (Entity e : world.getEntitiesInAABBexcluding(projectile, projectile.getEntityBoundingBox().grow(2), e -> e != projectile.shootingEntity)) {
+				if (!(e instanceof EntityLivingBase)) {
+					continue;
+				}
+
+				float origPower = projectile.tinkerProjectile.getPower();
+				float damageMultiplier = (float) (0.5 * Math.pow(Math.E, -0.25 * projectile.getDistanceSq(e)) + 0.25);
+
+				projectile.tinkerProjectile.setPower(origPower * damageMultiplier);
+				projectile.onHitEntity(new RayTraceResult(e));
+				projectile.tinkerProjectile.setPower(origPower);
+			}
+			projectile.setDead();
+		}
 	}
 
 	@Override

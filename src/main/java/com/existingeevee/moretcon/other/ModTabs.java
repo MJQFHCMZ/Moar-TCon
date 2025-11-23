@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.item.ItemReforgeStone;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
@@ -70,6 +71,13 @@ public class ModTabs {
 			}
 		});
 
+		moarTConWorld = (new CreativeTabs("moarTConWorld") {
+			@Override
+			public ItemStack getTabIconItem() {
+				return new ItemStack(ModBlocks.blockMossyBrinkstone, 1);
+			}
+		});
+		
 		uniqueToolParts = (new CreativeTabs("uniqueToolParts") {
 			@Override
 			public ItemStack getTabIconItem() {
@@ -122,6 +130,7 @@ public class ModTabs {
 	}
 
 	public static CreativeTabs moarTConMaterials;
+	public static CreativeTabs moarTConWorld;
 	public static CreativeTabs moarTConMisc;
 	public static CreativeTabs uniqueToolParts;
 	public static CreativeTabs reforgeStones;

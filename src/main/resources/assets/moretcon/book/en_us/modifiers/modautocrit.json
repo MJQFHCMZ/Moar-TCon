@@ -1,0 +1,17 @@
+{
+  "modifier": "moretcon.modautocrit",
+  "text": [
+    {
+      "text": "Oof ouch owie your (not mine) bones!"
+    }
+  ],
+  "effects": [
+    "Chance to crit, even if youre not in the air",
+    "Wow how did you do that?!?!",
+    "Multiple levels",
+    "Relentless!"
+  ],
+  "demoTool": [
+    "moretcon:blsword"
+  ]
+}

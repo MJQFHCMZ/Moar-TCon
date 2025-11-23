@@ -1,0 +1,7 @@
+{
+    "parent": "block/fire_up",
+    "textures": {
+        "particle": "moretcon:other/fire/spirit_0",
+        "fire": "moretcon:other/fire/spirit_0"
+    }
+}

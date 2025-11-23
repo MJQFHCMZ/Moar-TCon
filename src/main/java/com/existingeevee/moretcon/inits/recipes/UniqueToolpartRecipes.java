@@ -19,7 +19,11 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.materials.MaterialTypes;
+import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.tools.TinkerMaterials;
+import slimeknights.tconstruct.tools.ranged.item.BoltCore;
 
 public class UniqueToolpartRecipes {
 
@@ -39,6 +43,22 @@ public class UniqueToolpartRecipes {
 								Pair.of('G', new OreIngredient("ingotGallium")),
 								Pair.of('D', new OreIngredient("blockDiamond")),
 								Pair.of('P', new TinkerPartIngredient(TinkerMaterials.pigiron, "tconstruct:sword_blade"))));
+			}
+		}
+
+		if (ConfigHandler.enableBomb) {
+			if (canRegisterUniqueRecipe(ModMaterials.materialImpact)) {
+				event.getRegistry().register(
+						RecipeHelper.createRecipe("impact_recipe", ModMaterials.materialImpact.getUniqueToolPart(),
+								new String[] {
+										"RER",
+										"FCF",
+										"RER"
+								},
+								Pair.of('E', new OreIngredient("gemElectarite")),
+								Pair.of('F', new OreIngredient("ingotFusionite")),
+								Pair.of('C', Ingredient.fromItem(Items.END_CRYSTAL)),
+								Pair.of('R', new OreIngredient("dustRedstone"))));
 			}
 		}
 
@@ -108,11 +128,12 @@ public class UniqueToolpartRecipes {
 						RecipeHelper.createRecipe("triblade_recipe", ModMaterials.materialTriblade.getUniqueToolPart(),
 								new String[] {
 										"W W",
-										"VB ",
+										"VM ",
 										"BVW"
 								},
 								Pair.of('W', Ingredient.fromStacks(new ItemStack(Items.SKULL, 1, 1))),
-								Pair.of('V', new OreIngredient("gemVoidSpar")),
+								Pair.of('V', new OreIngredient("blockVoidSpar")),
+								Pair.of('M', new OreIngredient("blockMonolite")),
 								Pair.of('B', new OreIngredient("boneWithered"))));
 			}
 
@@ -161,13 +182,13 @@ public class UniqueToolpartRecipes {
 				event.getRegistry().register(
 						RecipeHelper.createRecipe("quakestruck_recipe", ModMaterials.materialQuakestruck.getUniqueToolPart(),
 								new String[] {
-										"OFO",
-										"EIE",
-										"OFO"
+										"EFE",
+										"OIO",
+										"EFE"
 								},
-								Pair.of('E', new OreIngredient("gemElectarite")),
-								Pair.of('I', new TinkerPartIngredient(ModMaterials.materialIgniglomerate, "tconstruct:large_plate")),
-								Pair.of('O', new TinkerPartIngredient(TinkerMaterials.obsidian, "tconstruct:large_plate")),
+								Pair.of('E', Ingredient.fromStacks(new ItemStack(ModItems.solidLightning, 1, 0))),
+								Pair.of('I', new TinkerPartIngredient(ModMaterials.materialElectarite, "tconstruct:large_plate")),
+								Pair.of('O', new TinkerPartIngredient(ModMaterials.materialGallium, "tconstruct:large_plate")),
 								Pair.of('F', new OreIngredient("ingotFusionite"))));
 			}
 
@@ -226,7 +247,41 @@ public class UniqueToolpartRecipes {
 								Pair.of('L', Ingredient.fromItem(ModItems.solidLightning)),
 								Pair.of('S', new OreIngredient("netherStar")),
 								Pair.of('E', new TinkerPartIngredient(ModMaterials.materialElectarite, "tconstruct:bow_limb")),
-								Pair.of('R',  Ingredient.fromStacks(new ItemStack(Blocks.END_ROD)))));
+								Pair.of('R', Ingredient.fromStacks(new ItemStack(Blocks.END_ROD)))));
+			}
+
+			if (canRegisterUniqueRecipe(ModMaterials.materialShotgun)) {
+				event.getRegistry().register(
+						RecipeHelper.createRecipe("shotgun_recipe", ModMaterials.materialShotgun.getUniqueToolPart(),
+								new String[] {
+										"VV ",
+										" ZV",
+										"T V"
+								},
+								Pair.of('Z', new TinkerPartIngredient(ModMaterials.materialZracohlium, "tconstruct:tough_binding")),
+								Pair.of('V', new OreIngredient("ingotValasium")),
+								Pair.of('T', Ingredient.fromStacks(new ItemStack(Blocks.TNT)))));
+			}
+
+			if (canRegisterUniqueRecipe(ModMaterials.materialInertialRedirector)) {
+				for (Material mat : TinkerRegistry.getAllMaterialsWithStats(MaterialTypes.SHAFT)) { //FIX
+					if (!PartMaterialType.arrowShaft(null).isValidMaterial(mat)) {
+						continue;
+					}
+					
+					event.getRegistry().register( //ModMaterials.materialInertialRedirector.getUniqueToolPart()
+							RecipeHelper.createRecipe("inertial_redirector_recipe_" + mat.identifier, BoltCore.getItemstackWithMaterials(mat, ModMaterials.materialInertialRedirector),
+									new String[] {
+											"KVT",
+											"SmV",
+											" SK"
+									},
+									Pair.of('m', new TinkerPartIngredient(mat, "tconstruct:arrow_shaft")),
+									Pair.of('V', new OreIngredient("blockValasium")),
+									Pair.of('K', new TinkerPartIngredient(TinkerMaterials.knightslime, "moretcon:smallplate")),
+									Pair.of('S', new TinkerPartIngredient(ModMaterials.materialValasium, "moretcon:shrapnel")),
+									Pair.of('T', new TinkerPartIngredient(ModMaterials.materialSlimesteel, "tconstruct:large_plate"))));
+				}
 			}
 		}
 	}

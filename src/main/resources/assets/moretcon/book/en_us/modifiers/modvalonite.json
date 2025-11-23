@@ -1,0 +1,17 @@
+{
+  "modifier": "moretcon.modvalonite",
+  "text": [
+    {
+      "text": "Slotting a valonite into a tool protects it harm like durability damage and corrosion. Also seems to boost it's (and my) morale!!"
+    }
+  ],
+  "effects": [
+    "Prevents durability and corrosion half of the time",
+    "Temporary stat increase after blocking corrosion or durability damage",
+    "Single level",
+    "Cool AF"
+  ],
+  "demoTool": [
+    "moretcon:blsword"
+  ]
+}

@@ -14,7 +14,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 
 public class EtheralToplayerGenerator extends WorldGenModifier {
-	public static final SimplexNoiseGenerator ETHERAL_GENERATOR = new SimplexNoiseGenerator(7, 0.2f, 0.025f); // dL = 0.5
+	public static final SimplexNoiseGenerator ETHERAL_GENERATOR = new SimplexNoiseGenerator(7, 0.2f, 0.025f, 0); // dL = 0.5
 
 	@Override
 	public void generate(IChunkGenerator chunkGenerator, IChunkProvider chunkProvider, WorldgenContext ctx) {
@@ -45,13 +45,11 @@ public class EtheralToplayerGenerator extends WorldGenModifier {
 				}
 				if (d > 0.75) {
 					BlockPos pos = new BlockPos(i + chunkX * 16 + 8, 201, j + chunkZ * 16 + 8);
-					world.setBlockState(new BlockPos(i + chunkX * 16 + 8, 201, j + chunkZ * 16 + 8), ModBlocks.blockOtherstone.getDefaultState(), 2);
 					if (isAir(world, pos)) {
 						world.setBlockState(pos, ModBlocks.blockOtherstone.getDefaultState(), 2);
 					}
 
 					pos = new BlockPos(i + chunkX * 16 + 8, 199, j + chunkZ * 16 + 8);
-					world.setBlockState(new BlockPos(i + chunkX * 16 + 8, 199, j + chunkZ * 16 + 8), ModBlocks.blockOtherstone.getDefaultState(), 2);
 					if (isAir(world, pos)) {
 						world.setBlockState(pos, ModBlocks.blockOtherstone.getDefaultState(), 2);
 					}

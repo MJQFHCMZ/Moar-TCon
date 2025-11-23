@@ -1,0 +1,16 @@
+{
+  "modifier": "moretcon.modgreengem",
+  "text": [
+    {
+      "text": "Green Middle Gems seem to work just as well on modular tools..."
+    }
+  ],
+  "effects": [
+    "Chance to heal when attacking.",
+    "Not compatible with other middle gem modifiers",
+    "Single level"
+  ],
+  "demoTool": [
+    "moretcon:blsword"
+  ]
+}

@@ -16,6 +16,6 @@ public class Penetrant extends AbstractTrait {
 	@Override
 	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
 		double amount = target.getEntityAttribute(SharedMonsterAttributes.ARMOR).getAttributeValue();
-		return (float) (newDamage + amount / 4);
+		return (float) (newDamage + amount / 2);
 	}
 }

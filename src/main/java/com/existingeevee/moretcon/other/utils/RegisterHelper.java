@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.block.ISimpleBlockItemProvider;
-import com.existingeevee.moretcon.block.ore.BlockEtheralOre;
-import com.existingeevee.moretcon.block.ore.BlockEtheralOreMetal;
+import com.existingeevee.moretcon.block.ore.BlockEtherealOre;
+import com.existingeevee.moretcon.block.ore.BlockEtherealOreMetal;
 import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.block.ore.BlockOreMetal;
 import com.existingeevee.moretcon.config.ConfigHandler;
@@ -26,9 +26,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.tconstruct.common.ModelRegisterUtil;
@@ -58,22 +58,23 @@ public class RegisterHelper {
 
 		if (itemBlock != null) {
 			ForgeRegistries.ITEMS.register(itemBlock.apply(block).setRegistryName(block.getRegistryName()));
-			if (MiscUtils.isClient()) {
-				RenderHandler.registerBlockModel(block);
-				if (block instanceof BlockFluidClassic) {
-					RenderHandler.registerFluidCustomMeshesAndStates(block);
-				}
-			}
 		}
 
+		if (MiscUtils.isClient()) {
+			ModelRegistryHelper.registerBlockModel(block);
+			if (block instanceof IFluidBlock) {
+				ModelRegistryHelper.registerFluidCustomMeshesAndStates(block);
+			}
+		}
+		
 		if (block instanceof BlockOre) {
 			oreDrops.add(new BiValue<>(block, ((BlockOre) block).getOreDrop()));
 		} else if (block instanceof BlockOreMetal) {
 			oreDrops.add(new BiValue<>(block, ((BlockOreMetal) block).getOreDrop()));
-		} else if (block instanceof BlockEtheralOre) {
-			oreDrops.add(new BiValue<>(block, ((BlockEtheralOre) block).getOreDrop()));
-		} else if (block instanceof BlockEtheralOreMetal) {
-			oreDrops.add(new BiValue<>(block, ((BlockEtheralOreMetal) block).getOreDrop()));
+		} else if (block instanceof BlockEtherealOre) {
+			oreDrops.add(new BiValue<>(block, ((BlockEtherealOre) block).getOreDrop()));
+		} else if (block instanceof BlockEtherealOreMetal) {
+			oreDrops.add(new BiValue<>(block, ((BlockEtherealOreMetal) block).getOreDrop()));
 		}
 	}
 
@@ -82,7 +83,7 @@ public class RegisterHelper {
 	}
 
 	public static void registerItem(Item item) {
-		String name = item.getUnlocalizedName().replaceFirst(("item." + ModInfo.MODID + "."), "");
+		String name = item.getUnlocalizedName().replaceFirst("item." + ModInfo.MODID + ".", "");
 		if (item instanceof ItemBase) {
 			item.setCreativeTab(((ItemBase) item).getTab());
 		}
@@ -95,11 +96,11 @@ public class RegisterHelper {
 			} else if (item instanceof ToolPart) {
 				ModelRegisterUtil.registerPartModel((ToolPart) item);
 			} else if (item instanceof GravitoniumSpongeItem) {
-				RenderHandler.registerSponge((GravitoniumSpongeItem) item);
+				ModelRegistryHelper.registerSponge((GravitoniumSpongeItem) item);
 			} else if (item instanceof ItemCompositeRep) {
 				//Nothing here. it will be handled later
 			} else {
-				RenderHandler.registerItemModel(item);
+				ModelRegistryHelper.registerItemModel(item);
 			}
 		}
 	}

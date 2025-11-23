@@ -30,11 +30,23 @@ public class ReforgeRecipes {
 					RecipeHelper.createRecipe("reforgesharpened", new ItemStack(ModItems.reforgeSharpened),
 							new String[] {
 									" D ",
-									"DQD",
+									"DSD",
 									"QDQ"
 							},
 							Pair.of('Q', new OreIngredient("gemQuartz")),
+							Pair.of('S', new OreIngredient("ingotSteel")),
 							Pair.of('D', new OreIngredient("gemDiamond"))));
+			
+			event.getRegistry().register(
+					RecipeHelper.createRecipe("reforgeconsistant", new ItemStack(ModItems.reforgeConsistant),
+							new String[] {
+									" B ",
+									"RPR",
+									" B "
+							},
+							Pair.of('R', new OreIngredient("ingotRunesteel")),
+							Pair.of('B', new OreIngredient("brinkstone")),
+							Pair.of('P', new OreIngredient("gemPerimidum"))));
 		}
 	}
 }

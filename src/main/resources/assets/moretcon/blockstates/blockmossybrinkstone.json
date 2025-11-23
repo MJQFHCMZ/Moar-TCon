@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": [
+      { "model": "moretcon:blockmossybrinkstone" },
+      { "model": "moretcon:blockmossybrinkstone", "y": 90 },
+      { "model": "moretcon:blockmossybrinkstone", "y": 180 },
+      { "model": "moretcon:blockmossybrinkstone", "y": 270 }
+    ]
+  }
+}

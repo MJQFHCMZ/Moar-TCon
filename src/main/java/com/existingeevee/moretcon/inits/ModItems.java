@@ -1,9 +1,10 @@
 package com.existingeevee.moretcon.inits;
 
 import com.existingeevee.moretcon.config.ConfigHandler;
+import com.existingeevee.moretcon.devtools.ItemDebugTool;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.item.ItemCompositeRep;
-import com.existingeevee.moretcon.item.ItemDebugTool;
+import com.existingeevee.moretcon.item.ItemNoGravity;
 import com.existingeevee.moretcon.item.ItemNonflamable;
 import com.existingeevee.moretcon.item.ItemReforgeStone;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer.GlowType;
@@ -82,6 +83,10 @@ public class ModItems {
 	public static final Item nuggetEbonite = new ItemBase("nuggetEbonite", 0x270339);
 	public static final Item dustEbonite = new ItemBase("dustEbonite", GlowType.CIRCLE_BIG, 0x270339);
 
+	public static final Item ingotSlimesteel = new ItemBase("ingotSlimesteel");
+	public static final Item nuggetSlimesteel = new ItemBase("nuggetSlimesteel");
+	public static final Item dustSlimesteel = new ItemBase("dustSlimesteel");
+	
 	public static final Item carbonPile = new ItemBase("carbonPile").setTab(ModTabs.moarTConMisc);
 	public static final Item ingotSteel = new ItemBase("ingotSteel");
 	public static final Item nuggetSteel = new ItemBase("nuggetSteel");
@@ -96,6 +101,16 @@ public class ModItems {
 	public static final Item nuggetBlightsteel = new ItemBase("nuggetBlightsteel");
 	public static final Item dustBlightsteel = new ItemBase("dustBlightsteel");
 
+	public static final Item ingotPorksteel = new ItemBase("ingotPorksteel");
+	public static final Item nuggetPorksteel = new ItemBase("nuggetPorksteel");
+	public static final Item dustPorksteel = new ItemBase("dustPorksteel");
+	public static final Item rawPorksteel = new ItemBase("rawPorksteel").setTab(ModTabs.moarTConMisc);
+	public static final Item cookedPorksteel = new ItemBase("cookedPorksteel").setTab(ModTabs.moarTConMisc);
+
+	public static final Item ingotGeodesium = new ItemBase("ingotGeodesium", GlowType.EXTREME, 0xffffff);
+	public static final Item nuggetGeodesium = new ItemBase("nuggetGeodesium", GlowType.EXTREME, 0xffffff);
+	public static final Item dustGeodesium = new ItemBase("dustGeodesium", GlowType.EXTREME, 0xffffff);
+	
 	public static final Item ingotZracohlium = new ItemBase("ingotZracohlium");
 	public static final Item nuggetZracohlium = new ItemBase("nuggetZracohlium");
 	public static final Item dustZracohlium = new ItemBase("dustZracohlium");
@@ -116,6 +131,8 @@ public class ModItems {
 
 	public static final Item dustSyrmorite = new ItemBase("dustSyrmorite");
 
+	public static final Item perimimoss = new ItemBase("perimimoss").setTab(ModTabs.moarTConWorld);
+
 	//Gems
 	public static final Item gemVoidSpar = new ItemBase("gemVoidSpar", 0x7e15ff);
 	public static final Item gemEnderal = new ItemBase("gemEnderal", GlowType.CIRCLE_BIG, 0x2b0082);
@@ -123,9 +140,11 @@ public class ModItems {
 	public static final Item gemBloodstone = new ItemBase("gemBloodstone");
 	public static final Item gemEchostone = new ItemBase("gemEchostone", 0x00725a);
 	public static final Item gemIgniglomerate = new ItemNonflamable("gemIgniglomerate").withColor(0xda6540).withType(GlowType.EXTREME);
-	public static final Item gemErythynite = new ItemBase("gemErythynite", GlowType.CIRCLE_BIG, 0x32ff00);
+	public static final Item gemErythynite = new ItemNoGravity("gemErythynite", GlowType.CIRCLE_BIG, 0x32ff00);
 	public static final Item gemEtherstone = new ItemBase("gemEtherstone", GlowType.CIRCLE_BIG, 0xffff00);
 	public static final Item gemElectarite = new ItemBase("gemElectarite", GlowType.CIRCLE_BIG, 0x6666ff);
+	public static final Item gemMonolite = new ItemBase("gemMonolite", GlowType.CIRCLE_BIG, 0x4a74f0);
+	public static final Item gemPerimidum = new ItemBase("gemPerimidum", GlowType.CIRCLE_BIG, 0xdfd3ff);
 
 	//Ingriedients
 	public static final Item itemSiltClay = new ItemBase("itemSiltClay").setTab(ModTabs.moarTConMisc);
@@ -141,6 +160,7 @@ public class ModItems {
 	//Modifier items
 	public static final Item betweenifiedModifier = new ItemBase("betweenifiedModifier").setTab(ModTabs.moarTConMisc);
 	public static final Item crushingModifier = new ItemBase("crushingModifier").setTab(ModTabs.moarTConMisc);
+	public static final Item autocritModifier = new ItemBase("autocritModifier").setTab(ModTabs.moarTConMisc);
 
 	//Reforge stones
 	public static final Item reforgeHeavy = new ItemReforgeStone("reforgeheavy", () -> ModReforges.reforgeHeavy);
@@ -161,9 +181,20 @@ public class ModItems {
 				new ItemDebugTool()
 		);
 
+		if (CompatManager.tic3backport) {
+			ModItems.registerItems(
+					ingotSlimesteel,
+					nuggetSlimesteel
+			);
+			if (ConfigHandler.shouldLoadDust) {
+				ModItems.registerItems(
+						dustSlimesteel
+				);
+			}
+		}
+
 		if (CompatManager.loadMain) {
 			ModItems.registerItems(
-					/**-------------------------------------**/
 					ingotFusionite,
 					nuggetFusionite,
 
@@ -209,6 +240,13 @@ public class ModItems {
 					ingotZracohlium,
 					nuggetZracohlium,
 
+					ingotPorksteel,
+					nuggetPorksteel,
+					
+					ingotGeodesium,
+					nuggetGeodesium,
+					dustGeodesium,
+					
 					gemVoidSpar,
 					gemEnderal,
 					gemGarstone,
@@ -218,21 +256,24 @@ public class ModItems {
 					gemErythynite,
 					gemEtherstone,
 					gemElectarite,
+					gemMonolite,
+					gemPerimidum,
 
 					crushingModifier,
+					autocritModifier,
 					matterReconstructionGel,
 					carbonPile,
 					rawSteel,
+					rawPorksteel, 
+					cookedPorksteel, 
 					spaceTimeDisruptionPowder,
 					hydrogenRichRedstonePowder,
 					solidLightning,
-
+					perimimoss,
+					
 					reforgeHeavy,
 					reforgeSharpened,
 					reforgeConsistant
-
-			/**-------------------------------------**/
-
 			);
 			if (ConfigHandler.shouldLoadDust) {
 				ModItems.registerItems(
@@ -250,7 +291,8 @@ public class ModItems {
 						dustHallowsite,
 						dustBlightsteel,
 						dustSanguiseelium,
-						dustZracohlium
+						dustZracohlium,
+						dustPorksteel
 						);
 			}
 		}

@@ -46,6 +46,11 @@ public class ModFluidBlocks {
 	public static Block blockLiquifiedSouls;
 	public static Block blockLiquidSanguiseelium;
 	public static Block blockLiquidZracohlium;
+	public static Block blockLiquidSlimesteel;
+	public static Block blockLiquidPorksteel;
+	public static Block blockLiquidGeodesium;
+	
+	
 	/* ------------------------------------- */
 	private static void registerBlocks(Block... block) {
 		for (Block i : block) {
@@ -54,25 +59,35 @@ public class ModFluidBlocks {
 	}
 
 	public static void init() {
+		if (CompatManager.tic3backport) {
+			blockLiquidSlimesteel = new BlockFluid("liquidslimesteel", ModFluids.liquidSlimesteel, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+		    
+			ModFluidBlocks.registerBlocks(
+		    		blockLiquidSlimesteel
+		    );
+		}
+		
 		if (CompatManager.loadMain) {
-			blockLiquidFusionite = new CustomFireBlockFluid("liquidfusionite", ModFluids.liquidFusionite, CustomFireEffect.COLD_FIRE, Material.LAVA).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
-			blockLiquidIrradium = new RadioactiveBlockFluid("liquidirradium", ModFluids.liquidIrradium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidSolarSteel = new BlockFluid("liquidsolarsteel", ModFluids.liquidSolsteel, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidHydrogen = new BlockFluid("liquidhydrogen", ModFluids.liquidHydrogen, BlockMaterials.GAS).setResistance(Float.MAX_VALUE);
-			blockLiquidGallium = new BlockFluid("liquidgallium", ModFluids.liquidGallium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidRuneSteel = new BlockFluid("liquidrunesteel", ModFluids.liquidRuneSteel, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidGravitonium = new BlockFluid("liquidgravitonium", ModFluids.liquidGravitonium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidTrichromadentium = new BlockFluid("liquidtrichromadentium", ModFluids.liquidTrichromadentium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidAtronium = new BlockFluid("liquidatronium", ModFluids.liquidAtronium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidEbonite = new BlockFluid("liquidebonite", ModFluids.liquidEbonite, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidValasium = new BlockFluid("liquidvalasium", ModFluids.liquidValasium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidHallowsite = new CustomFireBlockFluid("liquidhallowsite", ModFluids.liquidHallowsite, CustomFireEffect.SPIRIT_FIRE, Material.LAVA).setSource(new DamageSource("haunted").setFireDamage()).setResistance(Float.MAX_VALUE);
-			blockLiquidBlightsteel = new BlockFluid("liquidblightsteel", ModFluids.liquidBlightsteel, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidSanguiseelium = new BlockFluid("liquidsanguiseelium", ModFluids.liquidSanguiseelium, Material.LAVA).setResistance(Float.MAX_VALUE);
-			blockLiquidZracohlium = new BlockFluid("liquidzracohlium", ModFluids.liquidZracohlium, Material.LAVA).setResistance(Float.MAX_VALUE);
+			blockLiquidFusionite = new CustomFireBlockFluid("liquidfusionite", ModFluids.liquidFusionite, CustomFireEffect.COLD_FIRE, Material.LAVA).setBypassFireImmunity(true).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidIrradium = new RadioactiveBlockFluid("liquidirradium", ModFluids.liquidIrradium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidSolarSteel = new BlockFluid("liquidsolarsteel", ModFluids.liquidSolsteel, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidHydrogen = new BlockFluid("liquidhydrogen", ModFluids.liquidHydrogen, BlockMaterials.GAS).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidGallium = new BlockFluid("liquidgallium", ModFluids.liquidGallium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidRuneSteel = new BlockFluid("liquidrunesteel", ModFluids.liquidRuneSteel, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidGravitonium = new BlockFluid("liquidgravitonium", ModFluids.liquidGravitonium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidTrichromadentium = new BlockFluid("liquidtrichromadentium", ModFluids.liquidTrichromadentium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidAtronium = new BlockFluid("liquidatronium", ModFluids.liquidAtronium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidEbonite = new BlockFluid("liquidebonite", ModFluids.liquidEbonite, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidValasium = new BlockFluid("liquidvalasium", ModFluids.liquidValasium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidHallowsite = new CustomFireBlockFluid("liquidhallowsite", ModFluids.liquidHallowsite, CustomFireEffect.SPIRIT_FIRE, Material.LAVA).setSource(new DamageSource("haunted").setFireDamage()).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidBlightsteel = new BlockFluid("liquidblightsteel", ModFluids.liquidBlightsteel, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidSanguiseelium = new BlockFluid("liquidsanguiseelium", ModFluids.liquidSanguiseelium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidZracohlium = new BlockFluid("liquidzracohlium", ModFluids.liquidZracohlium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidPorksteel = new BlockFluid("liquidporksteel", ModFluids.liquidPorksteel, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquidGeodesium = new BlockFluid("liquidgeodesium", ModFluids.liquidGeodesium, Material.LAVA).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
 
-			blockLiquidFusionLava = new CustomFireBlockFluid("liquidfusionlava", ModFluids.liquidFusionLava, CustomFireEffect.COLD_FIRE, Material.LAVA).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE);
-			blockLiquifiedSouls = new BlockFluid("liquifiedsouls", ModFluids.liquidLiquifiedSouls, Material.WATER).setResistance(Float.MAX_VALUE);
+			blockLiquidFusionLava = new CustomFireBlockFluid("liquidfusionlava", ModFluids.liquidFusionLava, CustomFireEffect.COLD_FIRE, Material.LAVA).setBypassFireImmunity(true).setSource(new DamageSource("coldfire").setFireDamage()).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
+			blockLiquifiedSouls = new BlockFluid("liquifiedsouls", ModFluids.liquidLiquifiedSouls, Material.WATER).setResistance(Float.MAX_VALUE).setBlockUnbreakable();
 
 		    ModFluidBlocks.registerBlocks(
 /* ------------------------------------- */
@@ -92,7 +107,9 @@ public class ModFluidBlocks {
 				blockLiquidBlightsteel,
 				blockLiquidSanguiseelium,
 				blockLiquifiedSouls,
-				blockLiquidZracohlium
+				blockLiquidZracohlium,
+				blockLiquidPorksteel,
+				blockLiquidGeodesium
 /* ------------------------------------- */
 				);
 		}

@@ -27,7 +27,7 @@ public class AsteroidGenerator extends WorldGenModifier {
 		int chunkX = ctx.chunkX;
 		int chunkZ = ctx.chunkZ;
 
-		if (!(world.provider.getDimensionType().getId() == DimensionType.THE_END.getId()) || !(peekNextInt(random, 125) == 0)) {
+		if ((world.provider.getDimensionType().getId() != DimensionType.THE_END.getId()) || (random.nextInt(125) != 0)) {
 			return;
 		}
 

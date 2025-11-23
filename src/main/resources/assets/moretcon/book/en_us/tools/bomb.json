@@ -1,0 +1,17 @@
+{
+  "tool": "bomb",
+  "text": [
+    {
+      "text": "The bomb is a ranged throwing weapon that does heavy AOE damage. They take time to explode and curve downwards fast. Good for close/medium ranged swarms. "
+    }
+  ],
+  "properties": [
+    "Requires a Tool Forge",
+    "Slow ranged weapon",
+    "Takes time to explode",
+    "Large AOE",
+    "Kaboom??",
+    "Yes Rico, kaboom!",
+    "Can be thrown from the offhand"
+  ]
+}

@@ -3,6 +3,7 @@ package com.existingeevee.moretcon.traits.traits.unique;
 import javax.annotation.Nullable;
 
 import com.existingeevee.moretcon.other.utils.MiscUtils;
+import com.existingeevee.moretcon.other.utils.ReequipHack;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 import com.existingeevee.moretcon.traits.traits.abst.NumberTrackerTrait;
 
@@ -21,17 +22,12 @@ public class Wormed extends NumberTrackerTrait implements IAdditionalTraitMethod
 	public Wormed() {
 		super(MiscUtils.createNonConflictiveName("wormed"), 0);
 		MinecraftForge.EVENT_BUS.register(this);
+		ReequipHack.registerIgnoredKey(this.getModifierIdentifier());
 	}
 
 	@Override
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
-		if (!world.isRemote && world.getWorldTime() % 20 == 0 && entity instanceof EntityLivingBase) {
-
-			EntityLivingBase living = (EntityLivingBase) entity;
-			if (living.getActiveItemStack() == tool) {
-				return;
-			}
-
+		if (!world.isRemote && world.getWorldTime() % 20 == 0) {
 			int current = getNumber(tool);
 			int cap = getNumberMax(tool);
 

@@ -1,0 +1,17 @@
+{
+  "modifier": "moretcon.modcrushing",
+  "text": [
+    {
+      "text": "NOW THATS A LOTTA DAMAGE! It's perfect for those that want to CRUSH your enemies."
+    }
+  ],
+  "effects": [
+    "Converts some of your damage into true damage..",
+    "True damage bypasses armor, potions, absorption, or any other source of damage reduction.",
+    "Multiple levels",
+    "Ouch!!"
+  ],
+  "demoTool": [
+    "tconstruct:broadsword"
+  ]
+}

@@ -75,14 +75,14 @@ public class Soulforged extends NumberTrackerTrait implements IProjectileTrait {
 	@Override
 	public void afterHit(EntityProjectileBase projectile, World world, ItemStack ammoStack, EntityLivingBase attacker, Entity target, double impactSpeed) {
 		if (random.nextInt(2) == 0) {
-			ItemStack origArrowStack = ArrowReferenceHelper.getProjectileStack(projectile.tinkerProjectile);
+			ItemStack origArrowStack = ArrowReferenceHelper.getLinkedItemstackFromInventory(projectile.tinkerProjectile.getItemStack(), attacker);
 			if (!origArrowStack.isEmpty()) {
 				this.removeNumber(origArrowStack, 1);
 			}
 		}
 
 		if (target instanceof EntityLivingBase && ((EntityLivingBase) target).getHealth() <= 0) { // Murder!! YAYYY
-			ItemStack origArrowStack = ArrowReferenceHelper.getProjectileStack(projectile.tinkerProjectile);
+			ItemStack origArrowStack = ArrowReferenceHelper.getLinkedItemstackFromInventory(projectile.tinkerProjectile.getItemStack(), attacker);
 			if (!origArrowStack.isEmpty()) {
 				this.addNumber(origArrowStack, random.nextInt(2) + 1);
 			}
@@ -117,7 +117,7 @@ public class Soulforged extends NumberTrackerTrait implements IProjectileTrait {
 
 	@Override
 	public void onProjectileUpdate(EntityProjectileBase projectile, World world, ItemStack toolStack) {
-		//BowCore
+
 	}
 
 	@Override

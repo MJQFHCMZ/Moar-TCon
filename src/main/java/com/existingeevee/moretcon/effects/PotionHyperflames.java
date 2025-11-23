@@ -31,7 +31,7 @@ public class PotionHyperflames extends Potion {
 	@SubscribeEvent
 	public void onDamage(LivingHurtEvent event) {
 		if (event.getSource().isFireDamage() && event.getEntityLiving().isPotionActive(this)) {
-			event.setAmount(event.getAmount() * (event.getEntityLiving().getActivePotionEffect(this).getAmplifier() + 1));
+			event.setAmount(event.getAmount() * (event.getEntityLiving().getActivePotionEffect(this).getAmplifier() + 2));
 		}
 	}
 
@@ -63,7 +63,7 @@ public class PotionHyperflames extends Potion {
 
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
-		if (CustomFireHelper.getBurningInfo(entity) == null || CustomFireHelper.getBurningInfo(entity).isInvalid()) {
+		if (!entity.isBurning() && (CustomFireHelper.getBurningInfo(entity) == null || CustomFireHelper.getBurningInfo(entity).isInvalid())) {
 			entity.setFire(1);
 		}
 	}

@@ -1,12 +1,7 @@
 {
-  "parent": "block/cube",
+  "parent": "moretcon:block/template/layered_cube_all_2",
   "textures": {
-    "down": "moretcon:blocks/blockgravitonium",
-    "up": "moretcon:blocks/blockgravitonium",
-    "north": "moretcon:blocks/blockgravitonium",
-    "east": "moretcon:blocks/blockgravitonium",
-    "south": "moretcon:blocks/blockgravitonium",
-    "west": "moretcon:blocks/blockgravitonium",
-    "particle": "moretcon:blocks/blockgravitonium"
+    "bot_all": "moretcon:blocks/blockgravitonium",
+    "top_all": "moretcon:blocks/bloom/blockgravitonium_bloom"    
   }
 }

@@ -78,13 +78,19 @@ public class ModFluids {
 			.setDensity(1000).setViscosity(800).setTemperature(1100);
 	public static Fluid liquidBlightsteel = new LiquidFluid("liquidblightsteel").setCColor(0x243c5a).setLuminosity(15)
 			.setDensity(1000).setViscosity(800).setTemperature(1100);
-	public static Fluid liquidSanguiseelium = new LiquidFluid("liquidSanguiseelium").setCColor(0xFF0000).setLuminosity(15)
+	public static Fluid liquidSanguiseelium = new LiquidFluid("liquidsanguiseelium").setCColor(0xFF0000).setLuminosity(15)
 			.setDensity(1000).setViscosity(800).setTemperature(1100);
-
+	public static Fluid liquidZracohlium = new LiquidFluid("liquidzracohlium").setCColor(0x696942).setLuminosity(12)
+			.setDensity(1000).setViscosity(800).setTemperature(1500);
+	public static Fluid liquidSlimesteel = new LiquidFluid("liquidSlimesteel").setCColor(0x47efea).setLuminosity(15)
+			.setDensity(1000).setViscosity(800).setTemperature(1100);
+	public static Fluid liquidPorksteel = new LiquidFluid("liquidPorksteel").setCColor(0xcbb681).setLuminosity(15)
+			.setDensity(1000).setViscosity(800).setTemperature(1100);
+	
 	public static Fluid liquidFusionLava = new LiquidFluid("liquidfusionlava",
-			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_still"), //were gonna just use the solsteel textures for now until i have more time
+			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_still"),
 			new ResourceLocation(ModInfo.MODID + ":blocks/fluids/liquidfusionlava_flowing")).setCColor(0x00ffff).setLuminosity(15)
-			.setDensity(8000).setViscosity(1500).setTemperature(2000);
+			.setDensity(8000).setViscosity(1500).setTemperature(4500);
 	public static Fluid liquidLiquifiedSouls = new LiquidFluid("liquifiedSouls".toLowerCase()).setCColor(0xffffff).setLuminosity(0)
 			.setDensity(1000).setViscosity(800).setTemperature(0);
 
@@ -104,9 +110,10 @@ public class ModFluids {
 
 	public static Fluid liquidAncientAlloy = new LiquidFluid("liquidAncientAlloy".toLowerCase()).setCColor(0x9fc1c0).setLuminosity(13)
 			.setDensity(1000).setViscosity(800).setTemperature(1100);
+	
+	public static Fluid liquidGeodesium = new LiquidFluid("liquidGeodesium".toLowerCase()).setCColor(0x9fc1c0).setLuminosity(20)
+			.setDensity(1000).setViscosity(800).setTemperature(3000);
 
-	public static Fluid liquidZracohlium = new LiquidFluid("liquidZracohlium".toLowerCase()).setCColor(0x696942).setLuminosity(12)
-			.setDensity(1000).setViscosity(800).setTemperature(1500);
 	/** ------------------------------------- **/
 
 	private static void registerFluids(Fluid... fluid) {
@@ -116,6 +123,12 @@ public class ModFluids {
 	}
 
 	public static void init() {
+		if (CompatManager.tic3backport) {
+			ModFluids.registerFluids(
+					liquidSlimesteel
+			);
+		}
+		
 		if (CompatManager.loadMain) {
 			ModFluids.registerFluids(
 					/** ------------------------------------- **/
@@ -135,7 +148,9 @@ public class ModFluids {
 					liquidBlightsteel,
 					liquidSanguiseelium,
 					liquidLiquifiedSouls,
-					liquidZracohlium
+					liquidZracohlium,
+					liquidPorksteel,
+					liquidGeodesium
 			/** ------------------------------------- **/
 			);
 		} //CustomModelRenderCoreHooks

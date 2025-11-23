@@ -21,6 +21,16 @@ public class OreDictionaryManager {
 	public static void preInit() {
 		registerOre("gemCoal", new ItemStack(Items.COAL));
 
+		if (CompatManager.tic3backport) {
+			registerOre("blockSlimesteel", ModBlocks.blockSlimesteel);
+			registerOre("ingotSlimesteel", ModItems.ingotSlimesteel);
+			registerOre("nuggetSlimesteel", ModItems.nuggetSlimesteel);
+
+			if (ConfigHandler.shouldLoadDust) {
+				registerOre("dustSlimesteel", ModItems.dustSlimesteel);
+			}
+		}	
+		
 		if (CompatManager.loadMain) {
 			registerOre("blockFusionite", ModBlocks.blockFusionite);
 			registerOre("oreFusionite", ModBlocks.oreFusionite);
@@ -55,6 +65,11 @@ public class OreDictionaryManager {
 			registerOre("ingotGallium", ModItems.ingotGallium);
 			registerOre("nuggetGallium", ModItems.nuggetGallium);
 
+			registerOre("blockGeodesium", ModBlocks.blockGeodesium);
+			registerOre("oreGeodesium", ModBlocks.oreGeodesium);
+			registerOre("ingotGeodesium", ModItems.ingotGeodesium);
+			registerOre("nuggetGeodesium", ModItems.nuggetGeodesium);
+			
 			registerOre("blockRunesteel", ModBlocks.blockRuneSteel);
 			registerOre("ingotRunesteel", ModItems.ingotRuneSteel);
 			registerOre("nuggetRunesteel", ModItems.nuggetRuneSteel);
@@ -113,7 +128,7 @@ public class OreDictionaryManager {
 			registerOre("blockErythynite", ModBlocks.blockErythynite);
 			registerOre("gemErythynite", ModItems.gemErythynite);
 			registerOre("oreErythynite", ModBlocks.oreErythynite);
-
+			
 			registerOre("blockEtherstone", ModBlocks.blockEtherstone);
 			registerOre("gemEtherstone", ModItems.gemEtherstone);
 			registerOre("oreEtherstone", ModBlocks.oreEtherstone);
@@ -132,6 +147,21 @@ public class OreDictionaryManager {
 			registerOre("ingotZracohlium", ModItems.ingotZracohlium);
 			registerOre("nuggetZracohlium", ModItems.nuggetZracohlium);
 
+			registerOre("blockMonolite", ModBlocks.blockMonolite);
+			registerOre("gemMonolite", ModItems.gemMonolite);
+			registerOre("oreMonolite", ModBlocks.oreMonolite);
+			
+			registerOre("blockPorksteel", ModBlocks.blockPorksteel);
+			registerOre("ingotPorksteel", ModItems.ingotPorksteel);
+			registerOre("nuggetPorksteel", ModItems.nuggetPorksteel);
+			
+			registerOre("blockPerimidum", ModBlocks.blockPerimidum);
+			registerOre("gemPerimidum", ModItems.gemPerimidum);
+			registerOre("orePerimidum", ModBlocks.orePerimidum);
+			
+			registerOre("stone", ModBlocks.blockBrinkstone, ModBlocks.blockDarkBrinkstone);
+			registerOre("brinkstone", ModBlocks.blockBrinkstone, ModBlocks.blockDarkBrinkstone);
+			
 			if (ConfigHandler.shouldLoadDust) {
 				registerOre("dustIrradium", ModItems.dustIrradium);
 				registerOre("dustValasium", ModItems.dustValasium);
@@ -139,7 +169,7 @@ public class OreDictionaryManager {
 				registerOre("dustSolsteel", ModItems.dustSolarSteel);
 				registerOre("dustFusionite", ModItems.dustFusionite);
 				registerOre("dustGallium", ModItems.dustGallium);
-				registerOre("dustRuneSteel", ModItems.dustRuneSteel);
+				registerOre("dustRunesteel", ModItems.dustRuneSteel);
 				registerOre("dustTrichromadentium", ModItems.dustTrichromadentium);
 				registerOre("dustGravitonium", ModItems.dustGravitonium);
 				registerOre("dustAtronium", ModItems.dustAtronium);
@@ -149,6 +179,8 @@ public class OreDictionaryManager {
 				registerOre("dustBlightsteel", ModItems.dustBlightsteel);
 				registerOre("dustSanguiseelium", ModItems.dustSanguiseelium);
 				registerOre("dustZracohlium", ModItems.dustZracohlium);
+				registerOre("dustGeodesium", ModItems.dustGeodesium);
+				registerOre("dustPorksteel", ModItems.dustPorksteel);
 			}
 		}
 
