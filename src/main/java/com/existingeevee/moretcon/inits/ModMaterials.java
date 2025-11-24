@@ -52,9 +52,9 @@ import twilightforest.compat.TConstruct;
 public class ModMaterials implements MaterialTypes {
 
 	public static String CORE = "core";
-    public static String PLATES = "plates";
-    public static String TRIM = "trim";
-	
+	public static String PLATES = "plates";
+	public static String TRIM = "trim";
+
 	public static int totalMaterials;
 
 	public static final Material materialWeedwood = new Material(MiscUtils.createNonConflictiveName("weedwood"), 0xcc9900);
@@ -106,7 +106,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialZracohlium = new Material(MiscUtils.createNonConflictiveName("zracohlium"), 0x444c2a);
 	public static final Material materialIoximite = new Material(MiscUtils.createNonConflictiveName("ioximite"), 0x978cea);
 	public static final Material materialMonolite = new Material(MiscUtils.createNonConflictiveName("monolite"), 0x4a74f0);
-	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xf6e6ce); //0xbbd190
+	public static final Material materialGeodesium = new Material(MiscUtils.createNonConflictiveName("geodesium"), 0xf6e6ce); // 0xbbd190
 	public static final Material materialPorksteel = new Material(MiscUtils.createNonConflictiveName("porksteel"), 0xc3af7d);
 	public static final Material materialPerimidum = new Material(MiscUtils.createNonConflictiveName("perimidum"), 0xdfd3ff);
 	public static final Material materialBrinkstone = new Material(MiscUtils.createNonConflictiveName("brinkstone"), 0x606059);
@@ -216,7 +216,6 @@ public class ModMaterials implements MaterialTypes {
 	public static final UniqueMaterial materialInertialRedirector = new UniqueMaterial(
 			MiscUtils.createNonConflictiveName("inertial_redirector"), 0xb2a1ff, "tconstruct:bolt_core",
 			"tconstruct:bolt");
-	
 
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
@@ -239,7 +238,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialImpact, new ExplosiveMaterialStats(3.25, 0));
 			materialImpact.addTrait(ModTraits.impactDetonated);
 		}
-		
+
 		if (CompatManager.tic3backport) {
 			materialNahuatl.setCastable(false);
 			materialNahuatl.setCraftable(false);
@@ -259,7 +258,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialNahuatl, new CoreMaterialStats(13.2f, 14.9f));
 				TinkerRegistry.addMaterialStats(materialNahuatl, new PlatesMaterialStats(0.9f, 8.1f, 1.7f));
 				TinkerRegistry.addMaterialStats(materialNahuatl, new TrimMaterialStats(3.75f));
-				
+
 				ArmorMaterials.addArmorTrait(materialNahuatl, ArmorTraits.ecological);
 				ArmorMaterials.addArmorTrait(materialNahuatl, ArmorTraits.dense);
 				materialNahuatl.addTrait(ModTraits.darkened, CORE);
@@ -267,7 +266,6 @@ public class ModMaterials implements MaterialTypes {
 
 			}
 
-			
 			materialSlimewood.setCastable(false);
 			materialSlimewood.setCraftable(false);
 			materialSlimewood.addTrait(ModTraits.overgrowth, HEAD);
@@ -286,11 +284,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSlimewood, new CoreMaterialStats(13.7f, 3.4f));
 				TinkerRegistry.addMaterialStats(materialSlimewood, new PlatesMaterialStats(1.3f, 8.1f, 0));
 				TinkerRegistry.addMaterialStats(materialSlimewood, new TrimMaterialStats(3.75f));
-				
+
 				ArmorMaterials.addArmorTrait(materialSlimewood, ArmorTraits.slimeyGreen);
 
 			}
-			
+
 			// Overslime for the win!
 			TinkerMaterials.knightslime.addTrait(ModTraits.overslime, HEAD);
 			TinkerMaterials.knightslime.addTrait(ModTraits.overcast, HEAD);
@@ -332,12 +330,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSearedStone, new CoreMaterialStats(10.6f, 14.7f));
 				TinkerRegistry.addMaterialStats(materialSearedStone, new PlatesMaterialStats(0.85f, -1.6f, 0));
 				TinkerRegistry.addMaterialStats(materialSearedStone, new TrimMaterialStats(-0.75f));
-				
-				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.mundane2, ArmorTraits.mundane);				
-				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.combustible, CORE);				
+
+				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.mundane2, ArmorTraits.mundane);
+				ArmorMaterials.addArmorTrait(materialSearedStone, ArmorTraits.combustible, CORE);
 
 			}
-			
+
 			materialSlimesteel.addCommonItems("Slimesteel");
 			materialSlimesteel.setFluid(ModFluids.liquidSlimesteel);
 			materialSlimesteel.setCastable(true);
@@ -355,10 +353,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSlimesteel, new CoreMaterialStats(22.8f, 16.9f));
 				TinkerRegistry.addMaterialStats(materialSlimesteel, new PlatesMaterialStats(0.6f, 7.8f, 1.2f));
 				TinkerRegistry.addMaterialStats(materialSlimesteel, new TrimMaterialStats(2.25f));
-				
+
 				materialSlimesteel.addTrait(ModArmorTraits.galvanized, CORE);
 				materialSlimesteel.addTrait(ModTraits.overslime, CORE);
-			}			
+			}
 		}
 
 		if (CompatManager.plustic) {
@@ -405,12 +403,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialFusionite, new CoreMaterialStats(15.8f, 20.6f));
 				TinkerRegistry.addMaterialStats(materialFusionite, new PlatesMaterialStats(3.0f, 1.3f, 0.8f));
 				TinkerRegistry.addMaterialStats(materialFusionite, new TrimMaterialStats(1.0f));
-				
+
 				materialFusionite.addTrait(ArmorTraits.alien, TRIM);
-				materialFusionite.addTrait(ArmorTraits.alien, PLATES);				
+				materialFusionite.addTrait(ArmorTraits.alien, PLATES);
 				materialFusionite.addTrait(ArmorTraits.dense, TRIM);
 				materialFusionite.addTrait(ArmorTraits.dense, PLATES);
-				
+
 				materialFusionite.addTrait(ModArmorTraits.frostburnThorns, CORE);
 				materialFusionite.addTrait(ArmorTraits.enderport, CORE);
 
@@ -434,10 +432,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialBrinkstone, new CoreMaterialStats(17.3f, 22.4f));
 				TinkerRegistry.addMaterialStats(materialBrinkstone, new PlatesMaterialStats(1.2f, -1.3f, 0.4f));
 				TinkerRegistry.addMaterialStats(materialBrinkstone, new TrimMaterialStats(2.5f));
-				
+
 				ArmorMaterials.addArmorTrait(materialBrinkstone, ArmorTraits.steady);
 			}
-			
+
 			// MinecraftMixin TextureManager TextureAtlasSprite
 
 			materialValasium.addItem("oreValasium", 1, Material.VALUE_Ore());
@@ -464,17 +462,17 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialValasium, new CoreMaterialStats(28.3f, 36.9f));
 				TinkerRegistry.addMaterialStats(materialValasium, new PlatesMaterialStats(4.0f, 3.9f, 4.0f));
 				TinkerRegistry.addMaterialStats(materialValasium, new TrimMaterialStats(25.0f));
-				
+
 				ArmorMaterials.addArmorTrait(materialValasium, ModArmorTraits.overload, ArmorTraits.dense);
 				ArmorMaterials.addArmorTrait(materialValasium, ArmorTraits.alien, ArmorTraits.alien);
 				materialValasium.addTrait(ArmorTraits.indomitable, CORE);
 			}
-			
-			materialPorksteel.setFluid(ModFluids.liquidPorksteel); 
+
+			materialPorksteel.setFluid(ModFluids.liquidPorksteel);
 			materialPorksteel.addCommonItems("Porksteel");
 			materialPorksteel.setCastable(true);
 			materialPorksteel.setCraftable(false);
-			materialPorksteel.setRepresentativeItem("ingotPorksteel"); 
+			materialPorksteel.setRepresentativeItem("ingotPorksteel");
 			materialPorksteel.addTrait(TinkerTraits.baconlicious, HEAD);
 			materialPorksteel.addTrait(ModTraits.burning, HEAD);
 			materialPorksteel.addTrait(ModTraits.saturpigting, HEAD);
@@ -482,7 +480,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerRegistry.addMaterialStats(materialPorksteel, new HeadMaterialStats(430, 7.40f, 5.50f, 3));
 			TinkerRegistry.addMaterialStats(materialPorksteel, new HandleMaterialStats(1.30f, 20));
 			TinkerRegistry.addMaterialStats(materialPorksteel, new ExtraMaterialStats(190));
-		    TinkerRegistry.addMaterialStats(materialPorksteel, new BowMaterialStats(0.55f, 1.5f, 7.3f));
+			TinkerRegistry.addMaterialStats(materialPorksteel, new BowMaterialStats(0.55f, 1.5f, 7.3f));
 			TinkerRegistry.addMaterialStats(materialPorksteel, new ArrowShaftMaterialStats(1.2f, 15));
 			if (CompatManager.conarm) {
 				TinkerRegistry.addMaterialStats(materialPorksteel, new CoreMaterialStats(14.7f, 15.9f));
@@ -491,7 +489,7 @@ public class ModMaterials implements MaterialTypes {
 
 				materialPorksteel.addTrait(ArmorTraits.baconlicious, CORE);
 				materialPorksteel.addTrait(ArmorTraits.combustible, CORE);
-				
+
 				ArmorMaterials.addArmorTrait(materialPorksteel, ModTraits.saturpigting);
 			}
 
@@ -520,12 +518,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIrradium, new CoreMaterialStats(18.7f, 12.9f));
 				TinkerRegistry.addMaterialStats(materialIrradium, new PlatesMaterialStats(3.0f, 2.6f, 0));
 				TinkerRegistry.addMaterialStats(materialIrradium, new TrimMaterialStats(2.0f));
-				
+
 				ArmorMaterials.addArmorTrait(materialIrradium, ArmorTraits.steady, ModArmorTraits.mutant);
-				
+
 				addArmorLum(materialIrradium);
 			}
-			
+
 			materialSolsteel.setFluid(ModFluids.liquidSolsteel);
 			materialSolsteel.addCommonItems("Solarsteel");
 			materialSolsteel.setCastable(true);
@@ -552,16 +550,16 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSolsteel, new CoreMaterialStats(47.4f, 40.0f));
 				TinkerRegistry.addMaterialStats(materialSolsteel, new PlatesMaterialStats(4.0f, 39f, 5.25f));
 				TinkerRegistry.addMaterialStats(materialSolsteel, new TrimMaterialStats(30.0f));
-				
+
 				ArmorMaterials.addArmorTrait(materialSolsteel, ArmorTraits.superhot, ArmorTraits.combustible);
 				ArmorMaterials.addArmorTrait(materialSolsteel, ModArmorTraits.burningThorns);
-				
+
 				materialSolsteel.addTrait(ArmorTraits.dense, TRIM);
 				materialSolsteel.addTrait(ArmorTraits.dense, PLATES);
-				
+
 				addArmorLum(materialSolsteel);
 			}
-			
+
 			materialTrichromadentium.addItem("oreTrichromadentium", 1, Material.VALUE_Ore());
 			materialTrichromadentium.addCommonItems("Trichromadentium");
 			materialTrichromadentium.setFluid(ModFluids.liquidTrichromadentium);
@@ -585,7 +583,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialTrichromadentium, new CoreMaterialStats(30f, 37f));
 				TinkerRegistry.addMaterialStats(materialTrichromadentium, new PlatesMaterialStats(4.0f, 3.9f, 4.2f));
 				TinkerRegistry.addMaterialStats(materialTrichromadentium, new TrimMaterialStats(25.0f));
-				
+
 				ArmorMaterials.addArmorTrait(materialTrichromadentium, ArmorTraits.invigorating);
 				materialTrichromadentium.addTrait(ModTraits.trichromic, CORE);
 				materialTrichromadentium.addTrait(ModTraits.trichromic, TRIM);
@@ -615,14 +613,14 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialAtronium, new CoreMaterialStats(27.4f, 35.5f));
 				TinkerRegistry.addMaterialStats(materialAtronium, new PlatesMaterialStats(3.0f, 11.7f, 3.7f));
 				TinkerRegistry.addMaterialStats(materialAtronium, new TrimMaterialStats(37.5f));
-				
+
 				materialAtronium.addTrait(ArmorTraits.dense, CORE);
-				
+
 				ArmorMaterials.addArmorTrait(materialAtronium, ArmorTraits.lightweight);
 				ArmorMaterials.addArmorTrait(materialAtronium, ModTraits.magicallyReactive);
 				ArmorMaterials.addArmorTrait(materialAtronium, ModArmorTraits.etherealTangibility);
 			}
-			
+
 			materialEbonite.addItem("oreEbonite", 1, Material.VALUE_Ore());
 			materialEbonite.setFluid(ModFluids.liquidEbonite);
 			materialEbonite.addCommonItems("Ebonite");
@@ -650,7 +648,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEbonite, new CoreMaterialStats(19.4f, 22.4f));
 				TinkerRegistry.addMaterialStats(materialEbonite, new PlatesMaterialStats(2.5f, 3.9f, 1));
 				TinkerRegistry.addMaterialStats(materialEbonite, new TrimMaterialStats(1.25f));
-				
+
 				ArmorMaterials.addArmorTrait(materialEbonite, ArmorTraits.vengeful, ArmorTraits.dense);
 				ArmorMaterials.addArmorTrait(materialEbonite, ModTraits.darkened, ArmorTraits.rough);
 
@@ -683,14 +681,14 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialVoidSpar, new CoreMaterialStats(12.2f, 24.1f));
 				TinkerRegistry.addMaterialStats(materialVoidSpar, new PlatesMaterialStats(2.0f, -3.2f, 1.5f));
 				TinkerRegistry.addMaterialStats(materialVoidSpar, new TrimMaterialStats(0.1f));
-				
+
 				ArmorMaterials.addArmorTrait(materialVoidSpar, ModTraits.voidic, ArmorTraits.dense);
 				materialVoidSpar.addTrait(ArmorTraits.ecological, TRIM);
 				materialVoidSpar.addTrait(ArmorTraits.ecological, PLATES);
 
 				addArmorLum(materialVoidSpar);
 			}
-			
+
 			materialGarstone.addItem("gemGarstone", 1, Material.VALUE_Ingot);
 			materialGarstone.addItem("blockGarstone", 1, Material.VALUE_Block);
 			materialGarstone.setCastable(false);
@@ -710,13 +708,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGarstone, new CoreMaterialStats(15.8f, 24.1f));
 				TinkerRegistry.addMaterialStats(materialGarstone, new PlatesMaterialStats(2.0f, -3.2f, 2.2f));
 				TinkerRegistry.addMaterialStats(materialGarstone, new TrimMaterialStats(0.1f));
-				
+
 				ArmorMaterials.addArmorTrait(materialGarstone, ArmorTraits.vengeful);
 				ArmorMaterials.addArmorTrait(materialGarstone, ArmorTraits.rough);
-				
+
 				addArmorLum(materialGarstone);
 			}
-			
+
 			materialEchostone.addItem("gemEchostone", 1, Material.VALUE_Ingot);
 			materialEchostone.addItem("blockEchostone", 1, Material.VALUE_Block);
 			materialEchostone.setCastable(false);
@@ -736,12 +734,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEchostone, new CoreMaterialStats(15.8f, 24.1f));
 				TinkerRegistry.addMaterialStats(materialEchostone, new PlatesMaterialStats(2.0f, -3.2f, 0.2f));
 				TinkerRegistry.addMaterialStats(materialEchostone, new TrimMaterialStats(0.1f));
-				
+
 				ArmorMaterials.addArmorTrait(materialEchostone, ModArmorTraits.warpedEcho, ArmorTraits.lightweight);
-				
+
 				addArmorLum(materialEchostone);
 			}
-			
+
 			materialBloodstone.addItem("gemBloodstone", 1, Material.VALUE_Ingot);
 			materialBloodstone.addItem("blockBloodstone", 1, Material.VALUE_Block);
 			materialBloodstone.setCastable(false);
@@ -765,7 +763,6 @@ public class ModMaterials implements MaterialTypes {
 
 			}
 
-			
 			materialErythynite.addItem("gemErythynite", 1, Material.VALUE_Ingot);
 			materialErythynite.addItem("blockErythynite", 1, Material.VALUE_Block);
 			materialErythynite.setCastable(false);
@@ -792,13 +789,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialErythynite, new CoreMaterialStats(17.3f, 24.1f));
 				TinkerRegistry.addMaterialStats(materialErythynite, new PlatesMaterialStats(2.2f, 3.9f, 1.3f));
 				TinkerRegistry.addMaterialStats(materialErythynite, new TrimMaterialStats(1.5f));
-				
+
 				ArmorMaterials.addArmorTrait(materialErythynite, ModArmorTraits.weightless);
 				ArmorMaterials.addArmorTrait(materialErythynite, ArmorTraits.dense, ArmorTraits.lightweight);
-				
+
 				addArmorLum(materialErythynite);
 			}
-			
+
 			materialGravitonium.addItem("oreGravitonium", 1, Material.VALUE_Ore());
 			materialGravitonium.addItem("oreGravitoniumDense", 1, Material.VALUE_Ore() * 4);
 			materialGravitonium.setFluid(ModFluids.liquidGravitonium);
@@ -821,13 +818,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGravitonium, new CoreMaterialStats(18.7f, 27.5f));
 				TinkerRegistry.addMaterialStats(materialGravitonium, new PlatesMaterialStats(3.0f, 26f, 1.6969420f));
 				TinkerRegistry.addMaterialStats(materialGravitonium, new TrimMaterialStats(15.0f));
-				
+
 				ArmorMaterials.addArmorTrait(materialGravitonium, ArmorTraits.magnetic2, ArmorTraits.magnetic);
 				ArmorMaterials.addArmorTrait(materialGravitonium, ModArmorTraits.gravitating);
 
 				addArmorLum(materialGravitite);
 			}
-			
+
 			materialGallium.addCommonItems("Gallium");
 			materialGallium.setFluid(ModFluids.liquidGallium);
 			materialGallium.setCastable(true);
@@ -846,11 +843,11 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGallium, new CoreMaterialStats(7.1f, 14.9f));
 				TinkerRegistry.addMaterialStats(materialGallium, new PlatesMaterialStats(2.0f, -3.2f, 0));
 				TinkerRegistry.addMaterialStats(materialGallium, new TrimMaterialStats(0.1f));
-				
+
 				ArmorMaterials.addArmorTrait(materialGallium, ModArmorTraits.liquid);
 				ArmorMaterials.addArmorTrait(materialGallium, ArmorTraits.aquaspeed);
 			}
-			
+
 			materialRuneSteel.addCommonItems("Runesteel");
 			materialRuneSteel.setFluid(ModFluids.liquidRuneSteel);
 			materialRuneSteel.setCastable(true);
@@ -872,7 +869,7 @@ public class ModMaterials implements MaterialTypes {
 				ArmorMaterials.addArmorTrait(materialRuneSteel, ModTraits.warding);
 
 			}
-			
+
 			materialEnderal.addItem("gemEnderal", 1, Material.VALUE_Ingot);
 			materialEnderal.addItem("blockEnderal", 1, Material.VALUE_Block);
 			materialEnderal.setCastable(false);
@@ -894,13 +891,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEnderal, new CoreMaterialStats(14f, 24.1f));
 				TinkerRegistry.addMaterialStats(materialEnderal, new PlatesMaterialStats(2.0f, -3.2f, 1));
 				TinkerRegistry.addMaterialStats(materialEnderal, new TrimMaterialStats(0.1f));
-				
+
 				ArmorMaterials.addArmorTrait(materialEnderal, ModArmorTraits.pulsating, ArmorTraits.rough);
 				materialEnderal.addTrait(ArmorTraits.rough, CORE);
-				
+
 				addArmorLum(materialEnderal);
 			}
-			
+
 			materialEnderexamite.setCastable(false);
 			materialEnderexamite.setCraftable(false);
 			materialEnderexamite.addTrait(TinkerTraits.slimeyBlue, HEAD);
@@ -919,13 +916,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEnderexamite, new CoreMaterialStats(25.5f, 25.8f));
 				TinkerRegistry.addMaterialStats(materialEnderexamite, new PlatesMaterialStats(2.25f, 1.3f, 2));
 				TinkerRegistry.addMaterialStats(materialEnderexamite, new TrimMaterialStats(0.60f));
-				
+
 				materialEnderexamite.addTrait(ArmorTraits.slimeyBlue, CORE);
 				materialEnderexamite.addTrait(ModTraits.warding, CORE);
 				materialEnderexamite.addTrait(ModArmorTraits.pulsating);
 				ArmorMaterials.addArmorTrait(materialEnderexamite, ModTraits.voidic, ArmorTraits.dense);
 			}
-			
+
 			materialShadowglass.setCastable(false);
 			materialShadowglass.setCraftable(false);
 			materialShadowglass.addTrait(TinkerTraits.jagged, HEAD);
@@ -946,7 +943,7 @@ public class ModMaterials implements MaterialTypes {
 				ArmorMaterials.addArmorTrait(materialShadowglass, ArmorTraits.rough, ArmorTraits.subterranean);
 				materialShadowglass.addTrait(ModTraits.darkened, CORE);
 			}
-			
+
 			TinkerRegistry.addMaterialStats(materialPlasma, new HeadMaterialStats(4096, 6f, 12f, 5));
 			materialPlasma.addTrait(ModTraits.plasmatic);
 			materialPlasma.addTrait(ModTraits.luminescent);
@@ -992,17 +989,15 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIgniglomerate, new CoreMaterialStats(18.7f, 18.8f));
 				TinkerRegistry.addMaterialStats(materialIgniglomerate, new PlatesMaterialStats(1.25f, -0.7f, 0));
 				TinkerRegistry.addMaterialStats(materialIgniglomerate, new TrimMaterialStats(12.5f));
-								
+
 				ArmorMaterials.addArmorTrait(materialIgniglomerate, ModArmorTraits.unmeltable);
 				ArmorMaterials.addArmorTrait(materialIgniglomerate, ModArmorTraits.burningThorns);
-				
+
 				materialIgniglomerate.addTrait(ArmorTraits.autoforge, CORE);
 
-
-				
 				addArmorLum(materialIgniglomerate);
 			}
-			
+
 			materialEtherstone.addItem("gemEtherstone", 1, Material.VALUE_Ingot);
 			materialEtherstone.addItem("blockEtherstone", 1, Material.VALUE_Block);
 			materialEtherstone.setCastable(false);
@@ -1024,16 +1019,16 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEtherstone, new CoreMaterialStats(26.9f, 37f));
 				TinkerRegistry.addMaterialStats(materialEtherstone, new PlatesMaterialStats(4.0f, -3.2f, 3.8f));
 				TinkerRegistry.addMaterialStats(materialEtherstone, new TrimMaterialStats(25.0f));
-				
+
 				ArmorMaterials.addArmorTrait(materialEtherstone, ModArmorTraits.etherealTangibility);
 				ArmorMaterials.addArmorTrait(materialEtherstone, ModTraits.darkened, ModArmorTraits.overlasting);
-				
+
 				materialEtherstone.addTrait(ModTraits.voidic, TRIM);
 				materialEtherstone.addTrait(ModTraits.voidic, PLATES);
-				
+
 				addArmorLum(materialEtherstone);
 			}
-			
+
 			TinkerRegistry.addMaterialStats(materialEssencore, new HeadMaterialStats(4096, 10f, 12f, 7));
 			materialEssencore.addTrait(ModTraits.essentialObliteration);
 			materialEssencore.addTrait(ModTraits.luminescent);
@@ -1060,7 +1055,7 @@ public class ModMaterials implements MaterialTypes {
 
 				ArmorMaterials.addArmorTrait(materialElectarite, ArmorTraits.dramatic);
 				materialElectarite.addTrait(ModTraits.stormcaller, CORE);
-				
+
 				addArmorLum(materialElectarite);
 			}
 
@@ -1081,12 +1076,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialHallowsite, new CoreMaterialStats(17.6f, 18.8f));
 				TinkerRegistry.addMaterialStats(materialHallowsite, new PlatesMaterialStats(2.2f, 0.7f, 0));
 				TinkerRegistry.addMaterialStats(materialHallowsite, new TrimMaterialStats(3.5f));
-				
+
 				ArmorMaterials.addArmorTrait(materialHallowsite, ModArmorTraits.hauntingThorns);
 				ArmorMaterials.addArmorTrait(materialHallowsite, ArmorTraits.skeletal);
 
 			}
-			
+
 			materialBlightsteel.addCommonItems("Blightsteel");
 			materialBlightsteel.setFluid(ModFluids.liquidBlightsteel);
 			materialBlightsteel.setCastable(true);
@@ -1105,15 +1100,15 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialBlightsteel, new CoreMaterialStats(22.6f, 20.6f));
 				TinkerRegistry.addMaterialStats(materialBlightsteel, new PlatesMaterialStats(2.5f, 5.2f, 3.2f));
 				TinkerRegistry.addMaterialStats(materialBlightsteel, new TrimMaterialStats(5.0f));
-				
+
 				materialBlightsteel.addTrait(ModArmorTraits.blightshield, CORE);
 				materialBlightsteel.addTrait(ModArmorTraits.woeful, TRIM);
 				materialBlightsteel.addTrait(ModArmorTraits.woeful, PLATES);
-				
-				ArmorMaterials.addArmorTrait(materialBlightsteel, ArmorTraits.infernal);				
-				
+
+				ArmorMaterials.addArmorTrait(materialBlightsteel, ArmorTraits.infernal);
+
 			}
-			
+
 			materialQuakestruck.addTrait(ModTraits.seismishock);
 			TinkerRegistry.addMaterialStats(materialQuakestruck, new HeadMaterialStats(1800, 17.5f, 10f, 8));
 
@@ -1143,14 +1138,14 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new CoreMaterialStats(31.7f, 29.1f));
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new PlatesMaterialStats(2.5f, 5.2f, 3.7f));
 				TinkerRegistry.addMaterialStats(materialSanguiseelium, new TrimMaterialStats(5.0f));
-				
-				ArmorMaterials.addArmorTrait(materialSanguiseelium, ArmorTraits.invigorating);	
+
+				ArmorMaterials.addArmorTrait(materialSanguiseelium, ArmorTraits.invigorating);
 				materialSanguiseelium.addTrait(ModArmorTraits.afterheal, CORE);
 			}
 
 			TinkerRegistry.addMaterialStats(materialVengeance, new HeadMaterialStats(1024, 6f, 10f, 7));
 			materialVengeance.addTrait(ModTraits.offense);
-			
+
 			materialZracohlium.addCommonItems("Zracohlium");
 			materialZracohlium.setFluid(ModFluids.liquidZracohlium);
 			materialZracohlium.setCastable(true);
@@ -1174,10 +1169,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialZracohlium, new CoreMaterialStats(24.5f, 29.9f));
 				TinkerRegistry.addMaterialStats(materialZracohlium, new PlatesMaterialStats(1.25f, 8.1f, 0.6f));
 				TinkerRegistry.addMaterialStats(materialZracohlium, new TrimMaterialStats(4.5f));
-				
+
 				materialZracohlium.addTrait(ArmorTraits.dramatic, CORE);
-				ArmorMaterials.addArmorTrait(materialZracohlium, ModArmorTraits.fissile);	
-				
+				ArmorMaterials.addArmorTrait(materialZracohlium, ModArmorTraits.fissile);
+
 				materialZracohlium.addTrait(ModTraits.pyrophoric, TRIM);
 				materialZracohlium.addTrait(ModTraits.pyrophoric, EXTRA);
 			}
@@ -1209,12 +1204,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialIoximite, new CoreMaterialStats(26f, 25.8f));
 				TinkerRegistry.addMaterialStats(materialIoximite, new PlatesMaterialStats(2.5f, 5.5f, 1.8f));
 				TinkerRegistry.addMaterialStats(materialIoximite, new TrimMaterialStats(1.5f));
-				
-				ArmorMaterials.addArmorTrait(materialIoximite, ModArmorTraits.plasmaShield);				
-				ArmorMaterials.addArmorTrait(materialIoximite, ArmorTraits.alien);		
+
+				ArmorMaterials.addArmorTrait(materialIoximite, ModArmorTraits.plasmaShield);
+				ArmorMaterials.addArmorTrait(materialIoximite, ArmorTraits.alien);
 				materialIoximite.addTrait(ModTraits.voidic, CORE);
 			}
-			
+
 			TinkerRegistry.addMaterialStats(materialShotgun, new ExtraMaterialStats(1024));
 			TinkerRegistry.addMaterialStats(materialShotgun, thankYouTinkersForNeedingAHeadMat);
 			materialShotgun.addTrait(ModTraits.polyshot);
@@ -1236,13 +1231,13 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialMonolite, new CoreMaterialStats(26.9f, 30.7f));
 				TinkerRegistry.addMaterialStats(materialMonolite, new PlatesMaterialStats(3.0f, -3.2f, 3f));
 				TinkerRegistry.addMaterialStats(materialMonolite, new TrimMaterialStats(25.0f));
-				
-				ArmorMaterials.addArmorTrait(materialMonolite, ModTraits.macrocrystaline);				
-				ArmorMaterials.addArmorTrait(materialMonolite, ArmorTraits.dense);				
-				
+
+				ArmorMaterials.addArmorTrait(materialMonolite, ModTraits.macrocrystaline);
+				ArmorMaterials.addArmorTrait(materialMonolite, ArmorTraits.dense);
+
 				addArmorLum(materialMonolite);
 			}
-			
+
 			materialPerimidum.addItem("gemPerimidum", 1, Material.VALUE_Ingot);
 			materialPerimidum.addItem("blockPerimidum", 1, Material.VALUE_Block);
 			materialPerimidum.setCastable(false);
@@ -1263,14 +1258,14 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialPerimidum, new CoreMaterialStats(24.8f, 32.3f));
 				TinkerRegistry.addMaterialStats(materialPerimidum, new PlatesMaterialStats(2.6f, -3.2f, 3.2f));
 				TinkerRegistry.addMaterialStats(materialPerimidum, new TrimMaterialStats(30.5f));
-				
-				ArmorMaterials.addArmorTrait(materialPerimidum, ModArmorTraits.evasive2, ModArmorTraits.evasive);	
+
+				ArmorMaterials.addArmorTrait(materialPerimidum, ModArmorTraits.evasive2, ModArmorTraits.evasive);
 				materialPerimidum.addTrait(ArmorTraits.dense, TRIM);
 				materialPerimidum.addTrait(ArmorTraits.dense, PLATES);
 
 				addArmorLum(materialPerimidum);
 			}
-			
+
 			materialGeodesium.addCommonItems("Geodesium");
 			materialGeodesium.setFluid(ModFluids.liquidGeodesium);
 			materialGeodesium.setCastable(true);
@@ -1293,18 +1288,18 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGeodesium, new CoreMaterialStats(26f, 29.9f));
 				TinkerRegistry.addMaterialStats(materialGeodesium, new PlatesMaterialStats(1.25f, 8.1f, 0));
 				TinkerRegistry.addMaterialStats(materialGeodesium, new TrimMaterialStats(8.05f));
-				
+
 				materialGeodesium.addTrait(ModTraits.pyrophoric, CORE);
 				materialGeodesium.addTrait(ModArmorTraits.burningThorns, CORE);
 				ArmorMaterials.addArmorTrait(materialGeodesium, ModArmorTraits.immolating);
 				ArmorMaterials.addArmorTrait(materialGeodesium, ArmorTraits.aridiculous);
-				
+
 				addArmorLum(materialGeodesium);
 			}
-			
+
 			materialInertialRedirector.addTrait(ModTraits.ricoshot);
 			TinkerRegistry.addMaterialStats(materialInertialRedirector, new HeadMaterialStats(2048, 6f, 16f, 5));
-		
+
 			materialAnthracite.addItem("gemAnthracite", 1, Material.VALUE_Ingot);
 			materialAnthracite.addItem("blockAnthracite", 1, Material.VALUE_Block);
 			materialAnthracite.setCastable(false);
@@ -1323,12 +1318,12 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialAnthracite, new CoreMaterialStats(16f, 22f));
 				TinkerRegistry.addMaterialStats(materialAnthracite, new PlatesMaterialStats(2f, 4f, 1.4f));
 				TinkerRegistry.addMaterialStats(materialAnthracite, new TrimMaterialStats(1.2f));
-				
+
 				ArmorMaterials.addArmorTrait(materialAnthracite, ModArmorTraits.burningThorns, ArmorTraits.combustible);
-				
+
 				addArmorLum(materialAnthracite);
 			}
-		}	
+		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
 			materialZanite.addItem("blockZanite", 1, Material.VALUE_Block);
@@ -1351,7 +1346,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialZanite, new PlatesMaterialStats(0.9f, 4.2f, 0));
 				TinkerRegistry.addMaterialStats(materialZanite, new TrimMaterialStats(2.5f));
 			}
-			
+
 			materialSkyroot.addItem("plankWoodSkyroot", 1, Material.VALUE_Ingot);
 			materialSkyroot.addItem("logWoodSkyroot", 1, Material.VALUE_Ingot * 4);
 			materialSkyroot.addItem("stickWoodSkyroot", 1, Material.VALUE_Ingot / 2);
@@ -1372,7 +1367,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSkyroot, new PlatesMaterialStats(1.2f, 1.6f, 0));
 				TinkerRegistry.addMaterialStats(materialSkyroot, new TrimMaterialStats(0.75f));
 			}
-			
+
 			materialAmberwood.setCastable(false);
 			materialAmberwood.setCraftable(false);
 			materialAmberwood.addTrait(ModTraits.aetheric);
@@ -1392,7 +1387,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialAmberwood, new PlatesMaterialStats(1.2f, 8.1f, 0));
 				TinkerRegistry.addMaterialStats(materialAmberwood, new TrimMaterialStats(3.75f));
 			}
-			
+
 			materialArkenium.addCommonItems("Arkenium");
 			materialArkenium.setFluid(ModFluids.liquidArkenium);
 			materialArkenium.setCastable(true);
@@ -1413,7 +1408,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialArkenium, new PlatesMaterialStats(1.1f, 6.5f, 2.25f));
 				TinkerRegistry.addMaterialStats(materialArkenium, new TrimMaterialStats(6.25f));
 			}
-			
+
 			materialValkyrieMetal.addCommonItems("ValkyrieMetal");
 			materialValkyrieMetal.setFluid(ModFluids.liquidValkyrieMetal);
 			materialValkyrieMetal.setCastable(true);
@@ -1433,7 +1428,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialValkyrieMetal, new PlatesMaterialStats(1.1f, 6.5f, 2));
 				TinkerRegistry.addMaterialStats(materialValkyrieMetal, new TrimMaterialStats(6.25f));
 			}
-			
+
 			materialHolystone.addItem("holystone", 1, Material.VALUE_Ingot);
 			materialHolystone.setCastable(false);
 			materialHolystone.setCraftable(true);
@@ -1453,7 +1448,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialHolystone, new PlatesMaterialStats(0.25f, -3.2f, 0));
 				TinkerRegistry.addMaterialStats(materialHolystone, new TrimMaterialStats(1.5f));
 			}
-			
+
 			materialGravitite.addItem("blockGravitite", 1, Material.VALUE_Block);
 			materialGravitite.addItem("gemGravitite", 1, Material.VALUE_Ingot);
 			materialGravitite.setCastable(false);
@@ -1473,10 +1468,10 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialGravitite, new CoreMaterialStats(21.8f, 14.9f));
 				TinkerRegistry.addMaterialStats(materialGravitite, new PlatesMaterialStats(0.9f, 5.9f, 2));
 				TinkerRegistry.addMaterialStats(materialGravitite, new TrimMaterialStats(4.5f));
-				
+
 				ArmorMaterials.addArmorTrait(materialGravitite, ArmorTraits.magnetic2, ArmorTraits.magnetic);
 			}
-			
+
 			TinkerRegistry.addMaterialStats(materialSkybolt, new HeadMaterialStats(1070, 7.50f, 5.00f, 3));
 			materialSkybolt.addTrait(ModTraits.boltforged);
 		}
@@ -1497,9 +1492,9 @@ public class ModMaterials implements MaterialTypes {
 			if (CompatManager.conarm) {
 				TinkerRegistry.addMaterialStats(materialIronwood, new CoreMaterialStats(7.1f, 14.9f));
 				TinkerRegistry.addMaterialStats(materialIronwood, new PlatesMaterialStats(1.0f, 1.6f, 0));
-				TinkerRegistry.addMaterialStats(materialIronwood, new TrimMaterialStats(1.25f)); //TinkerMaterials
+				TinkerRegistry.addMaterialStats(materialIronwood, new TrimMaterialStats(1.25f)); // TinkerMaterials
 			}
-			
+
 			materialFerroherb.setCastable(false);
 			materialFerroherb.setCraftable(false);
 			materialFerroherb.addTrait(TConstruct.synergy);
@@ -1520,7 +1515,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialFerroherb, new PlatesMaterialStats(1.125f, 6.5f, 0.8f));
 				TinkerRegistry.addMaterialStats(materialFerroherb, new TrimMaterialStats(6.25f));
 			}
-			
+
 			materialPenguinite.addCommonItems("Penguinite");
 			materialPenguinite.setCastable(true);
 			materialPenguinite.setFluid(ModFluids.liquidPenguinite);
@@ -1559,7 +1554,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSyrmorite, new PlatesMaterialStats(0.8f, 3.9f, 0));
 				TinkerRegistry.addMaterialStats(materialSyrmorite, new TrimMaterialStats(-1.25f));
 			}
-			
+
 			materialRotiron.setFluid(ModFluids.liquidRotiron);
 			materialRotiron.addCommonItems("Rotiron");
 			materialRotiron.setCastable(true);
@@ -1597,7 +1592,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSwampSteel, new PlatesMaterialStats(0.9f, 5.2f, 0.8f));
 				TinkerRegistry.addMaterialStats(materialSwampSteel, new TrimMaterialStats(-0.6f));
 			}
-			
+
 			materialOctine.addItem("oreOctine", 1, Material.VALUE_Ore());
 			materialOctine.setFluid(ModFluids.liquidOctine);
 			materialOctine.addCommonItems("Octine");
@@ -1615,7 +1610,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialOctine, new PlatesMaterialStats(1.25f, -3.2f, 0));
 				TinkerRegistry.addMaterialStats(materialOctine, new TrimMaterialStats(-1.25f));
 			}
-			
+
 			materialValonite.addItem("gemValonite", 1, Material.VALUE_Ingot);
 			materialValonite.addItem("blockValonite", 1, Material.VALUE_Block);
 			materialValonite.addItem("nuggetValonite", 1, Material.VALUE_Nugget);
@@ -1634,7 +1629,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialValonite, new PlatesMaterialStats(1.0f, -4.9f, 2));
 				TinkerRegistry.addMaterialStats(materialValonite, new TrimMaterialStats(-1.25f));
 			}
-			
+
 			materialEmberlight.setCastable(false);
 			materialEmberlight.setCraftable(false);
 			materialEmberlight.addTrait(TinkerTraits.dense);
@@ -1652,7 +1647,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialEmberlight, new PlatesMaterialStats(2.0f, 1.3f, 2.2f));
 				TinkerRegistry.addMaterialStats(materialEmberlight, new TrimMaterialStats(0.6f));
 			}
-			
+
 			materialSlimyBone.addItem("gemSlimyBone", 1, Material.VALUE_Ingot);
 			materialSlimyBone.addItem("blockSlimyBone", 1, Material.VALUE_Block);
 			materialSlimyBone.setCastable(false);
@@ -1671,7 +1666,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSlimyBone, new PlatesMaterialStats(1.1f, 1.6f, 0));
 				TinkerRegistry.addMaterialStats(materialSlimyBone, new TrimMaterialStats(0.25f));
 			}
-			
+
 			materialReedRope.addItem("ropeReed", 1, Material.VALUE_Ingot);
 			materialReedRope.setCastable(false);
 			materialReedRope.setCraftable(true);
@@ -1715,7 +1710,7 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialWeedwood, new PlatesMaterialStats(1.2f, 1.6f, 0));
 				TinkerRegistry.addMaterialStats(materialWeedwood, new TrimMaterialStats(0.75f));
 			}
-			
+
 			TinkerRegistry.addMaterialStats(materialShockwave, new HeadMaterialStats(1256, 6f, 6.125f, 3));
 			materialShockwave.addTrait(ModTraits.shockwaving);
 
@@ -1807,10 +1802,8 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialInertialRedirector, null);
 			ModMaterials.registerMaterial(materialBrinkstone, null);
 			ModMaterials.registerMaterial(materialAnthracite).toolforge();
-			
-			
-			
 		}
+
 		if (CompatManager.tic3backport) {
 			ModMaterials.registerMaterial(materialNahuatl, null);
 			ModMaterials.registerMaterial(materialSlimewood, null);
@@ -1856,10 +1849,10 @@ public class ModMaterials implements MaterialTypes {
 	}
 
 	private static final IField<Map<String, List<ITrait>>> traits$Material = MirrorUtils.reflectField(Material.class, "traits");
-	
+
 	public static void addArmorLum(Material mat) {
 		Map<String, List<ITrait>> traits = traits$Material.get(mat);
-		
+
 		if (traits.get(CORE) != null) {
 			mat.addTrait(ModTraits.luminescent, CORE);
 		}
@@ -1870,7 +1863,7 @@ public class ModMaterials implements MaterialTypes {
 			mat.addTrait(ModTraits.luminescent, PLATES);
 		}
 	}
-	
+
 	public static MaterialIntegration registerMaterial(Material material) {
 		String mat = material.getIdentifier().replaceFirst(ModInfo.MODID + ".", "");
 		return registerMaterials(material, material.getFluid(), mat.substring(0, 1).toUpperCase() + mat.substring(1));
