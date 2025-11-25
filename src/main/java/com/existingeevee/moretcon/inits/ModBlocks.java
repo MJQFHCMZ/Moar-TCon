@@ -98,7 +98,7 @@ public class ModBlocks {
 	public static final Block orePerimidum = ((BlockBase) new BlockPerimidumOre().setHardness(9.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false).setLightLevel(1);
 	public static final Block blockPerimidum = ((BlockBase) new BlockBase("blockPerimidum", Material.IRON, 5).setClusterDate(() -> (IClusterType) orePerimidum, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block blockGeodesium = ((BlockBase) new BlockBase("blockGeodesium", Material.IRON, 6).setLightLevel(1).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
-	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setLightLevel(8).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
+	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setLightLevel(12).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
 	public static final Block oreAnthracite = (new BlockOre("oreAnthracite", 5, ModItems.gemAnthracite).setHardness(12).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockAnthracite = ((BlockBase) new BlockBase("blockAnthracite", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	
