@@ -19,6 +19,7 @@ import com.existingeevee.moretcon.traits.modifiers.Shocked;
 import com.existingeevee.moretcon.traits.modifiers.Tarred;
 import com.existingeevee.moretcon.traits.modifiers.Valonite;
 import com.existingeevee.moretcon.traits.modifiers.internal.ModExtraTraitDisplay2;
+import com.existingeevee.moretcon.traits.modifiers.misc.MatterDeconstructionGel;
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterReconstructionGel;
 import com.existingeevee.moretcon.traits.traits.Aetheric;
 import com.existingeevee.moretcon.traits.traits.Afterimage;
@@ -222,6 +223,7 @@ public class ModTraits {
 	public static Inertia inertia;
 
 	public static MatterReconstructionGel repair;
+	public static MatterDeconstructionGel depair;
 
 	static {
 		if (CompatManager.thebetweenlands) {
@@ -252,6 +254,7 @@ public class ModTraits {
 		if (CompatManager.loadMain) {
 			modDebug = new Debug();
 			repair = new MatterReconstructionGel();
+			depair = new MatterDeconstructionGel();
 			modCrushing = new Crushing();
 			modAutocrit = new Autocrit();
 			registerModifier(

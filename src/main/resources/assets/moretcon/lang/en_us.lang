@@ -49,7 +49,8 @@ fluid.moretcon.liquidgeodesium=Molten Geodesium
 item.moretcon.betweenifiedmodifier.desc=Betweenified Modifier
 item.moretcon.crushingmodifier.desc=Crushing Modifier
 item.moretcon.autocritmodifier.desc=Autocrit Modifier
-item.moretcon.matterreconstructiongel.desc=Adding this to any tool will repair 256 damage or 10% of the durability on it, whichever is greater.
+item.moretcon.matterreconstructiongel.desc=Adding this to any tool will repair 256 damage or 50% of the durability on it, whichever is greater.
+item.moretcon.matterdeconstructiongel.desc=Adding this to any tool will damage it down to 1 durability.
 item.moretcon.repitem.desc=This material is a composite. Craft the base toolparts, and then pour the catalyst on using a casting table.
 item.reforgestone.desc=When applied to a tool:
 
@@ -172,6 +173,8 @@ item.moretcon.ingotgeodesium.name=Geodesium Ingot
 item.moretcon.itemsiltclay.name=Silt Clay
 item.moretcon.lightning.name=Lightning
 item.moretcon.matterreconstructiongel.name=Matter Reconstruction Gel
+item.moretcon.matterdeconstructiongel.name=Matter Deconstruction Gel
+
 item.moretcon.nuggetarkenium.name=Arkenium Nugget
 item.moretcon.nuggetatronium.name=Atronium Nugget
 item.moretcon.nuggetfusionite.name=Fusionite Nugget

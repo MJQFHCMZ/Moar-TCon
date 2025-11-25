@@ -75,6 +75,9 @@ public interface ICustomSlotRenderer {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
+	default void postRender(ItemStack stack, int x, int y, IBakedModel bakedmodel) {
+	}
+
 	public static enum GlowType {
 		CIRCLE, OVAL, EXTREME, CIRCLE_BIG;
 	}

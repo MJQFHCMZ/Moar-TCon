@@ -18,11 +18,11 @@ import slimeknights.tconstruct.library.modifiers.TinkerGuiException;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
-public class MatterReconstructionGel extends Modifier {
+public class MatterDeconstructionGel extends Modifier {
 
-	public MatterReconstructionGel() {
-		super(MiscUtils.createNonConflictiveName("MatterReconstructionGel".toLowerCase()));
-		this.addItem(ModItems.matterReconstructionGel);
+	public MatterDeconstructionGel() {
+		super(MiscUtils.createNonConflictiveName("MatterDeconstructionGel".toLowerCase()));
+		this.addItem(ModItems.matterDeconstructionGel);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -33,38 +33,36 @@ public class MatterReconstructionGel extends Modifier {
 
 	@Override
 	public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag) {
-		rootCompound.setInteger("ToRepair", rootCompound.getInteger("ToRepair") + 1);
+		rootCompound.setBoolean("ToDepair", true);
 	}
 
 	@Override
 	public boolean canApplyCustom(ItemStack stack) throws TinkerGuiException {
-		int toRepair = TagUtil.getTagSafe(stack).getInteger("ToRepair") + 1;
+		boolean toDepair = TagUtil.getTagSafe(stack).getBoolean("ToDepair");
+
 		int maxDamage = stack.getMaxDamage();
-		float fixAmountOne = Math.max(256, maxDamage / 2f);
-		float fixAmount = toRepair * fixAmountOne;
-
 		int damage = ToolHelper.isBroken(stack) ? maxDamage : stack.getItemDamage();
-		boolean isDamaged = damage > 0;
+		int durability = ToolHelper.getMaxDurability(stack) - damage;
+			
+		boolean shouldAllow = durability > 1 && !toDepair;
 
-		boolean shouldAllow = fixAmount - damage <= fixAmountOne;
-
-		if (!shouldAllow || !isDamaged) {
+		if (!shouldAllow) {
 			return false;
 		}
 		return true;
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void handleToolModifyEvent(ToolModifyEvent event) {
+	public void handleToolModifyEvent(ToolModifyEvent event) {				
 		NBTTagCompound comp = TagUtil.getTagSafe(event.getItemStack());
-				
-		int toRepair = comp.getInteger("ToRepair") - 1; // For some reason tinkers does it an extra time aggghhh
+		
+		boolean toDepair = comp.getBoolean("ToDepair");
 
-		if (toRepair > 0) {
-
+		if (toDepair) {
 			int maxDamage = event.getItemStack().getMaxDamage();
-			int fixAmount = Math.round(toRepair * Math.max(256, maxDamage / 2f));
-			ToolHelper.repairTool(event.getItemStack(), fixAmount);
+			
+			event.getItemStack().setItemDamage(maxDamage - 1);
+			
 			NBTTagList list = comp.getCompoundTag("TinkerData").getTagList("Modifiers", NBT.TAG_STRING);
 			
 			for (int i = 0; i < list.tagCount(); i++) {
@@ -73,7 +71,7 @@ public class MatterReconstructionGel extends Modifier {
 					list.removeTag(i--);
 				} 
 			}
-			comp.removeTag("ToRepair");
+			comp.removeTag("ToDepair");
 		}
 	}
 }
