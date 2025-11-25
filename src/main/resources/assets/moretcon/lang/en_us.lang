@@ -138,6 +138,7 @@ item.moretcon.gemvoidspar.name=Void Spar
 item.moretcon.gemelectarite.name=Electarite
 item.moretcon.gemmonolite.name=Monolite
 item.moretcon.gemperimidum.name=Perimidum
+item.moretcon.gemanthracite.name=Anthracite
 
 item.moretcon.hydrogenrichredstonepowder.name=Hydrogen Rich Redstone Powder
 item.moretcon.solidlightning.name=Solid Lightning
@@ -263,6 +264,7 @@ material.moretcon.porksteel.name=Porksteel
 material.moretcon.perimidum.name=Perimidum
 material.moretcon.geodesium.name=Geodesium
 material.moretcon.brinkstone.name=Brinkstone
+material.moretcon.anthracite.name=Anthracite
 
 material.uniquetoolpart.name=Unique
 
@@ -748,6 +750,8 @@ tile.moretcon.blockmonolite.name=Block of Monolite
 tile.moretcon.blockporksteel.name=Block of Porksteel
 tile.moretcon.blockperimidum.name=Block of Perimidum
 tile.moretcon.blockgeodesium.name=Block of Geodesium
+tile.moretcon.blockanthracite.name=Block of Anthracite
+
 tile.moretcon.blockreforgestation.name=Reforge Station
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
@@ -817,6 +821,7 @@ tile.moretcon.orezracohlium.name=Zracohlium Ore
 tile.moretcon.oremonolite.name=Monolite Ore
 tile.moretcon.oreperimidum.name=Perimidum Cluster
 tile.moretcon.oregeodesium.name=Geodesium Ore
+tile.moretcon.oreanthracite.name=Anthracite Ore
 
 tile.moretcon.rottensludge.name=Rotten Sludge
 
