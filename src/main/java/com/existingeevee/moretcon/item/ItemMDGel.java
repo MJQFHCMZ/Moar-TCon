@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 
 	@SideOnly(Side.CLIENT)
-	WeakHashMap<ItemStack, MDGelGuiParticleRenderer> MAP = new WeakHashMap<>();
+	WeakHashMap<ItemStack, MDGelGuiParticleRenderer> renderers = new WeakHashMap<>();
 
 	public ItemMDGel() {
 		super("matterDeconstructionGel");
@@ -36,7 +36,7 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void render(ItemStack stack, int x, int y, IBakedModel bakedmodel) {
-		MAP.computeIfAbsent(stack, s -> new MDGelGuiParticleRenderer()).render(x, y);;
+		renderers.computeIfAbsent(stack, s -> new MDGelGuiParticleRenderer()).render(x, y);;
 		super.render(stack, x, y, bakedmodel);
 	}
 
@@ -71,9 +71,7 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 				} else {
 
 					GlStateManager.pushMatrix();
-
 					GlStateManager.translate(x + 8, y + 8, 0);
-					
 					GlStateManager.rotate((float) (particle.theta / Math.PI * 180), 0, 0, 1);
 
 					float lifeLived = cTime - particle.gtStart;

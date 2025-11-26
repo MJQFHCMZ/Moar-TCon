@@ -101,6 +101,8 @@ public class ModBlocks {
 	public static final Block oreGeodesium = ((BlockBase) new BlockOreMetal("oreGeodesium", 6, ModItems.ingotGeodesium).setHardness(9.5f).setLightLevel(12).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);  
 	public static final Block oreAnthracite = (new BlockOre("oreAnthracite", 5, ModItems.gemAnthracite).setHardness(12).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockAnthracite = ((BlockBase) new BlockBase("blockAnthracite", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
+	public static final Block oreIonstone = (new BlockEtherealOre("oreIonstone", 8, ModItems.gemIonstone).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockIonstone = ((BlockBase) new BlockBase("blockIonstone", Material.IRON, 8).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true).setLightLevel(0.5f);
 	
 	public static final Block blockOtherstone = (new BlockEtherealBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
@@ -205,6 +207,8 @@ public class ModBlocks {
 					blockGeodesium,
 					oreAnthracite,
 					blockAnthracite,
+					oreIonstone,
+					blockIonstone,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
 					blockBrinkstone,

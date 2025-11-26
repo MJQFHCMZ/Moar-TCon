@@ -1,5 +1,7 @@
 package com.existingeevee.moretcon.block.blocktypes;
 
+import com.existingeevee.moretcon.inits.ModBlocks;
+import com.existingeevee.moretcon.item.ItemIonstoneBlock;
 import com.existingeevee.moretcon.other.WorldGravityUtils;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
@@ -44,26 +46,26 @@ public class BlockEtherealBase extends BlockBase {
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
 		if (entity instanceof EntityLivingBase) {
-			
-			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));//;.contains(entity.getPositionVector())
+
+			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));// ;.contains(entity.getPositionVector())
 			AxisAlignedBB foot = entity.getEntityBoundingBox().setMaxY(entity.getEntityBoundingBox().minY + 0.0001);
 			if (!foot.intersects(blockBB)) {
 				return;
 			}
-			
+
 			EntityLivingBase living = (EntityLivingBase) entity;
-			
-			boolean canWalkOn = false; //ScaffoldBlock
-			
+
+			boolean canWalkOn = false; // ScaffoldBlock
+
 			for (ItemStack stack : living.getArmorInventoryList()) {
 				if (ModArmorTraits.etherealTangibility.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
 					canWalkOn = true;
 					break;
 				}
 			}
-			
+
 			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(worldIn, entity.getPositionVector());
-			
+
 			if (canWalkOn && !(living.isElytraFlying() || (living instanceof EntityPlayer && ((EntityPlayer) living).capabilities.isFlying))) {
 				entity.fallDistance = 0;
 				entity.onGround = true;
@@ -72,7 +74,7 @@ public class BlockEtherealBase extends BlockBase {
 				}
 			}
 		}
-	
+
 	}
 
 	@Override
@@ -125,6 +127,19 @@ public class BlockEtherealBase extends BlockBase {
 
 	@Override
 	public ItemBlock createBlockItem() {
+		if (this == ModBlocks.oreIonstone) {
+			return new ItemIonstoneBlock(this) {
+
+				@Override
+				public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+					USED_ETHERAL_BLOCK.set(true);
+					EnumActionResult ret = super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+					USED_ETHERAL_BLOCK.remove();
+					return ret;
+				}
+			};
+		}
+
 		return new ItemBlock(this) {
 
 			@Override
@@ -135,6 +150,7 @@ public class BlockEtherealBase extends BlockBase {
 				return ret;
 			}
 		};
+
 	}
 
 	@Override
