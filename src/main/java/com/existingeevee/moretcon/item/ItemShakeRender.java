@@ -43,7 +43,7 @@ public class ItemShakeRender extends ItemBase implements ICustomSlotRenderer {
 				
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x + 8, y + 8, 0);
-		double d = (this.hashCode() + Minecraft.getSystemTime()) / 1000d;
+		double d = (stack.hashCode() + Minecraft.getSystemTime()) / 1000d;
 		double m = Math.sin(d) * Math.sin(d) * pulseStr;
 		GlStateManager.scale(pulseMin + m, pulseMin + m, 1);
 		if (spinSpeed != 0)
