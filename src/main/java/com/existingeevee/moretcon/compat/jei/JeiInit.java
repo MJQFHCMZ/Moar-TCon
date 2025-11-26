@@ -18,6 +18,8 @@ public class JeiInit {
 	public static final List<JeiCustomContainer> CUSTOM = new ArrayList<>();
 
 	public static void init(IModRegistry registry) {
+		CUSTOM.clear();
+		
 		IIngredientType<FluidStack> fluidstack = registry.getIngredientRegistry().getIngredientType(FluidStack.class);
 		IIngredientType<ItemStack> itemstack = registry.getIngredientRegistry().getIngredientType(ItemStack.class);
 
