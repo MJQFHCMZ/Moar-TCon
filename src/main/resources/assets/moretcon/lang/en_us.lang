@@ -269,6 +269,7 @@ material.moretcon.perimidum.name=Perimidum
 material.moretcon.geodesium.name=Geodesium
 material.moretcon.brinkstone.name=Brinkstone
 material.moretcon.anthracite.name=Anthracite
+material.moretcon.ionstone.name=Ionstone
 
 material.uniquetoolpart.name=Unique
 
@@ -468,6 +469,8 @@ modifier.moretcon.stormcaller.name=Stormcaller
 modifier.moretcon.stormcaller.desc=§oZEUS!! GIVE ME POWAHHH!!§r\nYour tool will call down lightning during rain, granting a massive overall boost.
 modifier.moretcon.embering.name=Embering 
 modifier.moretcon.embering.desc=§oFrom a single spark...§r\nYour tool will retain embers. Embers collected grant additional fire damage on attack and blocking.
+modifier.moretcon.voltrend.name=Voltrend 
+modifier.moretcon.voltrend.desc=§oOne coulumb of electrons, ionize this man.§r\nYour tool will occasionally cause targets to become electrically charged, dealing damage over time as well as amplifying incoming damage.
 
 modifier.moretcon.galvanized_armor.name=Galvanized 
 modifier.moretcon.galvanized_armor.desc=§oMORE DAMAGEEEEE§r\nYour armor will grant you additional attack damage.

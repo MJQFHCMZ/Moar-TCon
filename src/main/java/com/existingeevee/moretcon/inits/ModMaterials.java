@@ -111,6 +111,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialPerimidum = new Material(MiscUtils.createNonConflictiveName("perimidum"), 0xdfd3ff);
 	public static final Material materialBrinkstone = new Material(MiscUtils.createNonConflictiveName("brinkstone"), 0x606059);
 	public static final Material materialAnthracite = new Material(MiscUtils.createNonConflictiveName("anthracite"), 0x2d3945);
+	public static final Material materialIonstone = new Material(MiscUtils.createNonConflictiveName("ionstone"), 0x05a8f3);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -1323,6 +1324,33 @@ public class ModMaterials implements MaterialTypes {
 
 				addArmorLum(materialAnthracite);
 			}
+			
+			materialIonstone.addItem("gemIonstone", 1, Material.VALUE_Ingot);
+			materialIonstone.addItem("blockIonstone", 1, Material.VALUE_Block);
+			materialIonstone.setCastable(false);
+			materialIonstone.setCraftable(true);
+			materialIonstone.setRepresentativeItem("gemIonstone");
+			materialIonstone.addTrait(ModTraits.etheralHarvest, HEAD);
+			materialIonstone.addTrait(ModTraits.voltrend, HEAD);
+			materialIonstone.addTrait(ModTraits.stormcaller);
+			materialIonstone.addTrait(TinkerTraits.shocking);
+			materialIonstone.addTrait(ModTraits.luminescent, HEAD);
+			materialIonstone.addTrait(ModTraits.luminescent);
+			TinkerRegistry.addMaterialStats(materialIonstone, new HeadMaterialStats(1650, 18.5f, 18.5f, 8));
+			TinkerRegistry.addMaterialStats(materialIonstone, new HandleMaterialStats(4f, -30));
+			TinkerRegistry.addMaterialStats(materialIonstone, new ExtraMaterialStats(600));
+			TinkerRegistry.addMaterialStats(materialIonstone, new ArrowShaftMaterialStats(1.2f, 30));
+			TinkerRegistry.addMaterialStats(materialIonstone, whyWouldYouMakeABowOutOfThis);
+			if (CompatManager.conarm) {
+				TinkerRegistry.addMaterialStats(materialIonstone, new CoreMaterialStats(27f, 38.5f));
+				TinkerRegistry.addMaterialStats(materialIonstone, new PlatesMaterialStats(4.0f, -2.2f, 3.8f));
+				TinkerRegistry.addMaterialStats(materialIonstone, new TrimMaterialStats(27f));
+
+				ArmorMaterials.addArmorTrait(materialIonstone, ModArmorTraits.etherealTangibility);
+				ArmorMaterials.addArmorTrait(materialIonstone, ModTraits.stormcaller, ModArmorTraits.evasive);
+
+				addArmorLum(materialIonstone);
+			}
 		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
@@ -1802,6 +1830,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialInertialRedirector, null);
 			ModMaterials.registerMaterial(materialBrinkstone, null);
 			ModMaterials.registerMaterial(materialAnthracite).toolforge();
+			ModMaterials.registerMaterial(materialIonstone).toolforge();
 		}
 
 		if (CompatManager.tic3backport) {

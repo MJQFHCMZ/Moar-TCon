@@ -22,6 +22,7 @@ import com.existingeevee.moretcon.traits.modifiers.internal.ModExtraTraitDisplay
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterDeconstructionGel;
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterReconstructionGel;
 import com.existingeevee.moretcon.traits.traits.Aetheric;
+import com.existingeevee.moretcon.traits.traits.Voltrend;
 import com.existingeevee.moretcon.traits.traits.Afterimage;
 import com.existingeevee.moretcon.traits.traits.AntiGravity;
 import com.existingeevee.moretcon.traits.traits.Approximate;
@@ -194,6 +195,7 @@ public class ModTraits {
 	public static Burning burning = new Burning(); 
 	public static Ricoshot ricoshot = new Ricoshot();
 	public static Embering embering = new Embering();
+	public static Voltrend voltrend = new Voltrend();
 	
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
