@@ -75,6 +75,7 @@ public interface ICustomSlotRenderer {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
+	@SideOnly(Side.CLIENT)
 	default void postRender(ItemStack stack, int x, int y, IBakedModel bakedmodel) {
 	}
 

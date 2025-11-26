@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 
+	@SideOnly(Side.CLIENT)
 	WeakHashMap<ItemStack, MDGelGuiParticleRenderer> MAP = new WeakHashMap<>();
 
 	public ItemMDGel() {
@@ -37,7 +38,6 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 	public void render(ItemStack stack, int x, int y, IBakedModel bakedmodel) {
 		MAP.computeIfAbsent(stack, s -> new MDGelGuiParticleRenderer()).render(x, y);;
 		super.render(stack, x, y, bakedmodel);
-		//GlStateManager.translate(0, -100, 0);
 	}
 
 	@Override
@@ -48,6 +48,7 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 
 	protected static final Random rand = new Random();
 
+	@SideOnly(Side.CLIENT)
 	public static class MDGelGuiParticleRenderer extends Gui {
 		public static final ResourceLocation DOT = new ResourceLocation(ModInfo.MODID, "other/dot");
 
@@ -132,6 +133,7 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static class MDGelGuiParticle {
 		float rRot0 = (float) (rand.nextDouble() * Math.PI * 2);
 		float theta = (float) (rand.nextDouble() * Math.PI * 2);
