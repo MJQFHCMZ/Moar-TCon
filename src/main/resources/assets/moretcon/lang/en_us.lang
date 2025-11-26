@@ -860,6 +860,38 @@ gui.moretcon.reforgestation.name=Reforge Station
 gui.moretcon.reforgestation.info=Here you can reforge your tools for a small additional boost in power!\n\nTo reforge a tool, simply place it into the left slot with some material it can be repaired with. You can optionally add a reforge stone to get unusual reforges too!  
 gui.error.invalid_reforge_material=This tool cannot be reforged using %s!
 
+jei_info.melt_mummy.desc=Obtained by melting down a Dreadful Peat Mummy.
+
+jei_info.orefusionite.desc=Found extremely rarely in all stonebearing dimensions from y = 1 <-> 6.
+jei_info.orefusionitebedrock.desc=Found extremely rarely in all bedrockbearing dimensions  in the lower bedrock layer. \n\nMust be mined with a tool with "Bottom's End".
+jei_info.oreirradium.desc=Found more or less commonly in all stonebearing dimensions from y = 12 <-> 32.
+jei_info.orevoidspar.desc=Found rare-ish-ly in all stonebearing dimensions from y = 1 <-> 3.
+jei_info.orevoidsparbedrock.desc=Found rare-ish-ly commonly in all bedrockbearing dimensions in the lower bedrock layer. \n\nBedrock varient must be mined with a tool with "Bottom's End".
+jei_info.oreenderal.desc=Found rare-ish-ly in all endstone-bearing dimensions from y = 12 <-> 32.
+jei_info.oregallium.desc=Found very rarely in all stonebearing dimensions from y = 12 <-> 24.
+jei_info.oreechostone.desc=Found rare-ish-ly in all endstone-bearing dimensions from y = 12 <-> 48 or in floating shards. Shards are generated approx. one in 750 chunks within the end.
+jei_info.oregarstone.desc=Found extremely rarely in all stonebearing dimensions from y = 75 <-> 100.
+jei_info.oregravitonium.desc=Found astronomically rarely in the end inside of floating asteroids. Asteroids are generated approx. one in 125 chunks.
+jei_info.oreigniglomerate.desc=Found rarely in The Nether within the lava lake.
+jei_info.orebloodstone.desc=Found commonly in The Nether above the bedrock roof. \n\nMust be mined with a tool with "Bottom's End".
+jei_info.oreebonite.desc=Found very rarely in all bedrockbearing dimensions in the lower bedrock layer. \n\nMust be mined with a tool with "Bottom's End".
+jei_info.oreerythynite.desc=Found very rarely in The Nether in nether prisms which generates from y = 160 <-> 224
+jei_info.oreetherstone.desc=Found rarely in The End within the otherstone layer from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
+jei_info.oreelectarite.desc=Found more or less commonly in all stonebearing dimensions from y = 24 <-> 48. \n\nDoes not spawn exposed to air.
+jei_info.orehallowsite.desc=Found more or less commonly in all netherrack-bearing dimensions from y = 45 <-> 90.
+jei_info.orezracohlium.desc=Found rare-ish-ly in all endstone-bearing dimensions from y = 24 <-> 72. \n\nDoes not spawn exposed to air.
+jei_info.oremonolite.desc=Found astronomically rarely in the end inside of floating shards. Shards are generated approx. one in 750 chunks.
+jei_info.oreperimidum.desc=Found rarely in the helltop isles on The Nether's roof in glowing crystals crystals.
+jei_info.oregeodesium.desc=Found rare-ish-ly within the stone of the helltop isles on The Nether's roof.
+jei_info.oreanthracite.desc=Found more or less commonly within the stone of the helltop isles on The Nether's roof.
+jei_info.oreionstone.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
+jei_info.oregalliumethereal.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
+jei_info.orearkenium.desc=Found rarely in all holystone-bearing dimensions from y = 5 <-> 250.
+
+
+jei_info.solid_lightning.desc=Created by placing an Electarite Block above y = 245 during a thunderstorm...
+jei_info.orefusionite.desc=
+
 booltracker.active.name=Active
 booltracker.inactive.name=Inactive
 booltracker.empowered.name=Empowered
