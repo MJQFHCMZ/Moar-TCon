@@ -134,7 +134,7 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	@Override
 	public ItemBlock createBlockItem() {
-		if (this == ModBlocks.blockIonstone || this == ModBlocks.oreIonstone) {
+		if (this == ModBlocks.blockIonstone) {
 			return new ItemIonstoneBlock(this);
 		}
 

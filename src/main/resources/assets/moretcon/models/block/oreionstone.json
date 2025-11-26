@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "moretcon:block/template/layered_cube_all_2",
   "textures": {
-    "all": "moretcon:blocks/oreionstone"
+    "bot_all": "moretcon:blocks/oreionstone",
+    "top_all": "moretcon:blocks/bloom/oreionstone_bloom"    
   }
 }

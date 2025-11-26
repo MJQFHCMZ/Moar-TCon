@@ -3,6 +3,7 @@ package com.existingeevee.moretcon.block.blocktypes;
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.item.ItemIonstoneBlock;
 import com.existingeevee.moretcon.other.WorldGravityUtils;
+import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 
@@ -44,8 +45,8 @@ public class BlockEtherealBase extends BlockBase {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
-		if (entity instanceof EntityLivingBase) {
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {		
+		if (CompatManager.conarm && entity instanceof EntityLivingBase) {
 
 			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));// ;.contains(entity.getPositionVector())
 			AxisAlignedBB foot = entity.getEntityBoundingBox().setMaxY(entity.getEntityBoundingBox().minY + 0.0001);

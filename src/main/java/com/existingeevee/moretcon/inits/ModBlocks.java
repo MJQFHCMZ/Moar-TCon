@@ -22,6 +22,7 @@ import com.existingeevee.moretcon.block.blocktypes.unique.BlockVoidPrismTop;
 import com.existingeevee.moretcon.block.ore.BlockBedrockOre;
 import com.existingeevee.moretcon.block.ore.BlockBedrockOreMetal;
 import com.existingeevee.moretcon.block.ore.BlockEtherealOre;
+import com.existingeevee.moretcon.block.ore.BlockEtherealOreMetal;
 import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.block.ore.BlockOreMetal;
 import com.existingeevee.moretcon.other.ClusterTickingHandler.IClusterType;
@@ -57,6 +58,7 @@ public class ModBlocks {
 	public static final Block blockRuneSteel = ((BlockBase) new BlockRunesteel("blockRuneSteel", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block blockGallium = ((BlockBase) new BlockBase("blockGallium", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block oreGallium = ((BlockBase) new BlockOreMetal("oreGallium", 5, ModItems.ingotGallium).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);
+	public static final Block oreGalliumEthereal = ((BlockBase) new BlockEtherealOreMetal("oreGalliumEthereal", 5, ModItems.ingotGallium).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);
 	public static final Block oreArkenium = ((BlockBase) new BlockOreMetal("oreArkenium", 2, ModItems.ingotArkenium).setHardness(7.5f).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(false);
 	public static final Block blockArkenium = ((BlockBase) new BlockBase("blockArkenium", Material.IRON, 2).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
 	public static final Block blockSteel = ((BlockBase) new BlockBase("blockSteel", Material.IRON, 1).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
@@ -209,6 +211,7 @@ public class ModBlocks {
 					blockAnthracite,
 					oreIonstone,
 					blockIonstone,
+					oreGalliumEthereal,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
 					blockBrinkstone,
