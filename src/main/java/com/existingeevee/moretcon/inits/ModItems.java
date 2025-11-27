@@ -149,6 +149,7 @@ public class ModItems {
 	public static final Item gemPerimidum = new ItemBase("gemPerimidum", GlowType.CIRCLE_BIG, 0xdfd3ff);
 	public static final Item gemAnthracite = new ItemBase("gemAnthracite");
 	public static final Item gemIonstone = new ItemShakeRender("gemIonstone", GlowType.CIRCLE_BIG, 0xb4e5ff).withShakeIntensity(0.5f);
+	public static final Item gemVacuuite = new ItemBase("gemVacuuite", 0x300a6a);
 
 	//Ingriedients
 	public static final Item itemSiltClay = new ItemBase("itemSiltClay").setTab(ModTabs.moarTConMisc);
@@ -265,6 +266,7 @@ public class ModItems {
 					gemPerimidum,
 					gemAnthracite,
 					gemIonstone,
+					gemVacuuite,
 
 					crushingModifier,
 					autocritModifier,

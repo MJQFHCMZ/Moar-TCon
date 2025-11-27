@@ -141,6 +141,7 @@ item.moretcon.gemmonolite.name=Monolite
 item.moretcon.gemperimidum.name=Perimidum
 item.moretcon.gemanthracite.name=Anthracite
 item.moretcon.gemionstone.name=Ionstone
+item.moretcon.gemvacuuite.name=Vacuuite
 
 item.moretcon.hydrogenrichredstonepowder.name=Hydrogen Rich Redstone Powder
 item.moretcon.solidlightning.name=Solid Lightning
@@ -270,6 +271,7 @@ material.moretcon.geodesium.name=Geodesium
 material.moretcon.brinkstone.name=Brinkstone
 material.moretcon.anthracite.name=Anthracite
 material.moretcon.ionstone.name=Ionstone
+material.moretcon.vacuuite.name=Vacuuite
 
 material.uniquetoolpart.name=Unique
 
@@ -471,6 +473,8 @@ modifier.moretcon.embering.name=Embering
 modifier.moretcon.embering.desc=§oFrom a single spark...§r\nYour tool will retain embers. Embers collected grant additional fire damage on attack and blocking.
 modifier.moretcon.voltrend.name=Voltrend 
 modifier.moretcon.voltrend.desc=§oOne coulumb of electrons, ionize this man.§r\nYour tool will occasionally cause targets to become electrically charged, dealing damage over time as well as amplifying incoming damage.
+modifier.moretcon.nulltouched.name=Nulltouched 
+modifier.moretcon.nulltouched.desc=§oVisions of the beyond...§r\nYour tool deal additional void damage.
 
 modifier.moretcon.galvanized_armor.name=Galvanized 
 modifier.moretcon.galvanized_armor.desc=§oMORE DAMAGEEEEE§r\nYour armor will grant you additional attack damage.
@@ -759,6 +763,7 @@ tile.moretcon.blockperimidum.name=Block of Perimidum
 tile.moretcon.blockgeodesium.name=Block of Geodesium
 tile.moretcon.blockanthracite.name=Block of Anthracite
 tile.moretcon.blockionstone.name=Block of Ionstone
+tile.moretcon.blockvacuuite.name=Block of Vacuuite
 
 tile.moretcon.blockreforgestation.name=Reforge Station
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
@@ -832,6 +837,7 @@ tile.moretcon.oregeodesium.name=Geodesium Ore
 tile.moretcon.oreanthracite.name=Anthracite Ore
 tile.moretcon.oreionstone.name=Ionstone Ore
 tile.moretcon.oregalliumethereal.name=Ethereal Gallium Ore
+tile.moretcon.orevacuuite.name=Vacuuite Ore
 
 tile.moretcon.rottensludge.name=Rotten Sludge
 

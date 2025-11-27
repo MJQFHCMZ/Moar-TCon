@@ -2,6 +2,7 @@ package com.existingeevee.moretcon.block.blocktypes;
 
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.item.ItemIonstoneBlock;
+import com.existingeevee.moretcon.item.ItemVacuuiteBlock;
 import com.existingeevee.moretcon.other.WorldGravityUtils;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.traits.ModTraits;
@@ -128,6 +129,19 @@ public class BlockEtherealBase extends BlockBase {
 
 	@Override
 	public ItemBlock createBlockItem() {
+		if (this == ModBlocks.oreVacuuite) {
+			return new ItemVacuuiteBlock(this) {
+
+				@Override
+				public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+					USED_ETHERAL_BLOCK.set(true);
+					EnumActionResult ret = super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+					USED_ETHERAL_BLOCK.remove();
+					return ret;
+				}
+			};
+		}
+		
 		if (this == ModBlocks.oreIonstone) {
 			return new ItemIonstoneBlock(this) {
 

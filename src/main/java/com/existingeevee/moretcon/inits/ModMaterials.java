@@ -112,6 +112,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialBrinkstone = new Material(MiscUtils.createNonConflictiveName("brinkstone"), 0x606059);
 	public static final Material materialAnthracite = new Material(MiscUtils.createNonConflictiveName("anthracite"), 0x2d3945);
 	public static final Material materialIonstone = new Material(MiscUtils.createNonConflictiveName("ionstone"), 0x05a8f3);
+	public static final Material materialVacuuite = new Material(MiscUtils.createNonConflictiveName("vacuuite"), 0x300a6a);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -1351,6 +1352,37 @@ public class ModMaterials implements MaterialTypes {
 
 				addArmorLum(materialIonstone);
 			}
+			
+			materialVacuuite.addItem("gemVacuuite", 1, Material.VALUE_Ingot);
+			materialVacuuite.addItem("blockVacuuite", 1, Material.VALUE_Block);
+			materialVacuuite.setCastable(false);
+			materialVacuuite.setCraftable(true);
+			materialVacuuite.setRepresentativeItem("gemVacuuite");
+			materialVacuuite.addTrait(ModTraits.etheralHarvest, HEAD);
+			materialVacuuite.addTrait(ModTraits.nulltouched2, HEAD);
+			materialVacuuite.addTrait(ModTraits.voidic, HEAD);
+			materialVacuuite.addTrait(ModTraits.voidic);
+			materialVacuuite.addTrait(ModTraits.nulltouched);
+			materialVacuuite.addTrait(TinkerTraits.unnatural);
+			materialVacuuite.addTrait(ModTraits.luminescent, HEAD);
+			materialVacuuite.addTrait(ModTraits.luminescent);
+			TinkerRegistry.addMaterialStats(materialVacuuite, new HeadMaterialStats(1700, 19f, 19f, 8));
+			TinkerRegistry.addMaterialStats(materialVacuuite, new HandleMaterialStats(3.8f, -25));
+			TinkerRegistry.addMaterialStats(materialVacuuite, new ExtraMaterialStats(620));
+			TinkerRegistry.addMaterialStats(materialVacuuite, new ArrowShaftMaterialStats(1.3f, 20));
+			TinkerRegistry.addMaterialStats(materialVacuuite, whyWouldYouMakeABowOutOfThis);
+			if (CompatManager.conarm) {
+				TinkerRegistry.addMaterialStats(materialVacuuite, new CoreMaterialStats(27.4f, 38.3f));
+				TinkerRegistry.addMaterialStats(materialVacuuite, new PlatesMaterialStats(4.0f, -2.0f, 3.6f));
+				TinkerRegistry.addMaterialStats(materialVacuuite, new TrimMaterialStats(27.6f));
+
+				ArmorMaterials.addArmorTrait(materialVacuuite, ModArmorTraits.etherealTangibility);
+				ArmorMaterials.addArmorTrait(materialVacuuite, ModTraits.voidic);
+				ArmorMaterials.addArmorTrait(materialVacuuite, ArmorTraits.dense);
+
+				addArmorLum(materialVacuuite);
+			}
+			
 		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
@@ -1831,6 +1863,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialBrinkstone, null);
 			ModMaterials.registerMaterial(materialAnthracite).toolforge();
 			ModMaterials.registerMaterial(materialIonstone).toolforge();
+			ModMaterials.registerMaterial(materialVacuuite).toolforge();
 		}
 
 		if (CompatManager.tic3backport) {

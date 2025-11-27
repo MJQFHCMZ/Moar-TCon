@@ -165,6 +165,10 @@ public class OreDictionaryInit {
 			registerOre("gemIonstone", ModItems.gemIonstone);
 			registerOre("oreIonstone", ModBlocks.oreIonstone);
 			
+			registerOre("blockVacuuite", ModBlocks.blockVacuuite);
+			registerOre("gemVacuuite", ModItems.gemVacuuite);
+			registerOre("oreVacuuite", ModBlocks.oreVacuuite);
+			
 			registerOre("stone", ModBlocks.blockBrinkstone, ModBlocks.blockDarkBrinkstone);
 			registerOre("brinkstone", ModBlocks.blockBrinkstone, ModBlocks.blockDarkBrinkstone);
 			

@@ -22,7 +22,6 @@ import com.existingeevee.moretcon.traits.modifiers.internal.ModExtraTraitDisplay
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterDeconstructionGel;
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterReconstructionGel;
 import com.existingeevee.moretcon.traits.traits.Aetheric;
-import com.existingeevee.moretcon.traits.traits.Voltrend;
 import com.existingeevee.moretcon.traits.traits.Afterimage;
 import com.existingeevee.moretcon.traits.traits.AntiGravity;
 import com.existingeevee.moretcon.traits.traits.Approximate;
@@ -51,6 +50,7 @@ import com.existingeevee.moretcon.traits.traits.Luminescent;
 import com.existingeevee.moretcon.traits.traits.Macrocrystaline;
 import com.existingeevee.moretcon.traits.traits.Magical;
 import com.existingeevee.moretcon.traits.traits.MagicallyReactive;
+import com.existingeevee.moretcon.traits.traits.Nulltouched;
 import com.existingeevee.moretcon.traits.traits.Overdrive;
 import com.existingeevee.moretcon.traits.traits.Overgrowth;
 import com.existingeevee.moretcon.traits.traits.Overslime;
@@ -75,6 +75,7 @@ import com.existingeevee.moretcon.traits.traits.Supercritical;
 import com.existingeevee.moretcon.traits.traits.Treetap;
 import com.existingeevee.moretcon.traits.traits.Tricromatic;
 import com.existingeevee.moretcon.traits.traits.Voidic;
+import com.existingeevee.moretcon.traits.traits.Voltrend;
 import com.existingeevee.moretcon.traits.traits.Weightless;
 import com.existingeevee.moretcon.traits.traits.Withered;
 import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
@@ -196,6 +197,8 @@ public class ModTraits {
 	public static Ricoshot ricoshot = new Ricoshot();
 	public static Embering embering = new Embering();
 	public static Voltrend voltrend = new Voltrend();
+	public static Nulltouched nulltouched = new Nulltouched(1);
+	public static Nulltouched nulltouched2 = new Nulltouched(2);
 	
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
