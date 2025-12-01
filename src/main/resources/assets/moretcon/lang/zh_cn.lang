@@ -869,7 +869,7 @@ gui.moretcon.reforgestation.name=重铸站
 gui.moretcon.reforgestation.info=在此处可重铸工具，使其获得额外的小幅威力提升！\n\n重铸工具时，只需将其放入左侧插槽，并搭配可修复该工具的材料。若想获得特殊重铸效果，还可选择性添加重铸石！  
 gui.error.invalid_reforge_material=此工具无法使用 %s 进行重铸！
 
-jei_info.melt_mummy.desc=通过熔化泥炭木乃伊获得。
+jei_info.melt_mummy.desc=通过熔化恐虐泥炭木乃伊获得。
 
 jei_info.orefusionite.desc=在所有拥有基岩层的维度中都极为罕见，主要分布在 y = 1 <-> 6。
 jei_info.orefusionitebedrock.desc=在所有拥有基岩层的维度中都相当罕见，需要使用带有 底至终末 特性的工具进行挖掘
