@@ -1902,7 +1902,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialRotiron).toolforge();
 			ModMaterials.registerMaterial(materialEmberlight, null);
 			ModMaterials.registerMaterial(materialWormed, null);
-			ModMaterials.registerMaterial(materialAncientAlloy).toolforge();
+			ModMaterials.registerMaterial(materialAncientAlloy, "AncientAlloy").toolforge();
 
 			MaterialUtils.readdTinkerMaterial(TinkerMaterials.bone);
 

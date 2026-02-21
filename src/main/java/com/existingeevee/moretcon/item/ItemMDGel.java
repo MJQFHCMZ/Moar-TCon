@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 
 	@SideOnly(Side.CLIENT)
-	WeakHashMap<ItemStack, MDGelGuiParticleRenderer> renderers = new WeakHashMap<>();
+	WeakHashMap<ItemStack, MDGelGuiParticleRenderer> renderers;
 
 	public ItemMDGel() {
 		super("matterDeconstructionGel");
@@ -36,6 +36,8 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void render(ItemStack stack, int x, int y, IBakedModel bakedmodel) {
+		if (renderers == null) 
+			renderers = new WeakHashMap<>();
 		renderers.computeIfAbsent(stack, s -> new MDGelGuiParticleRenderer()).render(x, y);;
 		super.render(stack, x, y, bakedmodel);
 	}
