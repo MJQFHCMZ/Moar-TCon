@@ -4,6 +4,7 @@ $$done - vacuuite - maybe spawning in a lower rarer ethereal toplayer (bottomlay
 
 
 ================================================================
+malithyst
 
 wispiron + steel -> Transisteel
 Wispiron (Alk proc) -> Phasium A  B  Ω
@@ -32,10 +33,9 @@ Froststich ? Needleice Rapier - "§oA bad stitch meets a sharp and cold end.§r\
 custom gui effects for all uniques
 
 T1 -> vanilla tcon
-T1.5 -> B.E. tools (opens roof and bedrock ores)
-T2 -> Gravitonium sponges
-T3 -> ethereal toplayer
-T4 -> alkinium processing of lower tier ores to transmute them (alk proc)
+T2 -> B.E. tools (opens roof and bedrock ores) + catalytic processing
+T3 -> Gravitonium sponges
+T4 -> ethereal toplayer
 
 taintsteel + thaumcraft support
 srp :D
