@@ -81,7 +81,7 @@ public class ParticleFieryPillar extends Particle {
 			Minecraft.getMinecraft().getTextureManager().bindTexture(FIRE_OUTER);
 			renderPillar(dx, dy, dz, partialTicks, posX, posY, posZ, this.particleAge, 1, 1 * size, minY, lightCoords, (float) mult, rOff);
 		} catch (Throwable t) {
-			t.printStackTrace();
+			//t.printStackTrace();
 		}
 	}
 
