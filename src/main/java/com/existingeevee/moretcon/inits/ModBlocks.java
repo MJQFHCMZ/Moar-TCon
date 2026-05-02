@@ -9,6 +9,7 @@ import com.existingeevee.moretcon.block.blocktypes.BlockFallingBase;
 import com.existingeevee.moretcon.block.blocktypes.BlockHot;
 import com.existingeevee.moretcon.block.blocktypes.BlockMossyBrinkstone;
 import com.existingeevee.moretcon.block.blocktypes.BlockRadioactive;
+import com.existingeevee.moretcon.block.blocktypes.unique.BlockCatalyzationChamber;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockGravitoniumFaucet;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockIgniglomerateCluster;
 import com.existingeevee.moretcon.block.blocktypes.unique.BlockOreGravitonium;
@@ -119,6 +120,7 @@ public class ModBlocks {
 	public static final Block blockDarkBrinkstone = (new BlockBase("blockDarkBrinkstone", Material.ROCK, 3).setHardness(15).setLightLevel(1).setCreativeTab(ModTabs.moarTConWorld));
 
 	public static final Block blockGravitoniumFaucet = new BlockGravitoniumFaucet();
+	public static final Block blockCatalyzationChamber = new BlockCatalyzationChamber();
 	public static final Block blockCragravel = ((BlockBase) new BlockFallingBase("blockCragravel", Material.GROUND, 0).setHarvestLevelC("shovel", 0).setHardness(0.6f).setResistance(0.6f)).canBeBeacon(false).setCreativeTab(ModTabs.moarTConMisc);
 	public static final Block blockSiltClay = ((BlockBase) new BlockBase("blockSiltClay", Material.CLAY, 0).setHarvestLevelC("shovel", 0).setHardness(0.6f).setResistance(0.6f)).canBeBeacon(false).setCreativeTab(ModTabs.moarTConMisc);
 
@@ -142,7 +144,8 @@ public class ModBlocks {
 	public static void init() {		
 		ModBlocks.registerBlocks(
 				blockGravitoniumFaucet,
-				blockReforgeStation
+				blockReforgeStation,
+				blockCatalyzationChamber
 		//FYI these will be back in the future. just not now.
 		//blockVoidPrismTop,
 		//blockVoidPrismBottom,

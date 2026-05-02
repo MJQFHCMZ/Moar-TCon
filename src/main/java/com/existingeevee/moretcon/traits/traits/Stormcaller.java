@@ -48,7 +48,7 @@ public class Stormcaller extends AttributeTrait implements ISimpleArmorTrait {
 	public ArmorModifications getModifications(EntityPlayer player, ArmorModifications mods, ItemStack armor, DamageSource source, double damage, int slot) {
 		if (this.isElectrified(armor)) {
 			mods.addEffectiveness(.75f);
-		}
+		} 
 		return mods;
 	}
 

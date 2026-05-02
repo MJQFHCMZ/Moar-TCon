@@ -3,11 +3,14 @@ package com.existingeevee.moretcon.compat.jei;
 import com.existingeevee.moretcon.inits.ModMaterials;
 import com.google.common.collect.Lists;
 
+import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 
 @JEIPlugin
 public class MoreTConJEIPlugin implements IModPlugin {
@@ -30,6 +33,14 @@ public class MoreTConJEIPlugin implements IModPlugin {
 				cont.onRun(registry);
 			}
 		}
+	}
+
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registry) {
+		final IJeiHelpers jeiHelpers = registry.getJeiHelpers();
+		final IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
+		registry.addRecipeCategories(new CatalyzedAlloyRecipeCategory(guiHelper));
+
 	}
 
 	@Override

@@ -219,6 +219,10 @@ public class ModMaterials implements MaterialTypes {
 			MiscUtils.createNonConflictiveName("inertial_redirector"), 0xb2a1ff, "tconstruct:bolt_core",
 			"tconstruct:bolt");
 
+	public static final UniqueMaterial materialImpulseConcentrator = new UniqueMaterial(
+			MiscUtils.createNonConflictiveName("impulse_concentrator"), 0xfcba03, "tconstruct:pan_head", 
+			"tconstruct:frypan");
+	
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
 		HeadMaterialStats thankYouTinkersForNeedingAHeadMat = new HeadMaterialStats(700, 6f, 4f, 5);
@@ -1382,6 +1386,9 @@ public class ModMaterials implements MaterialTypes {
 
 				addArmorLum(materialVacuuite);
 			}
+		
+			materialImpulseConcentrator.addTrait(ModTraits.velocibliteration);
+			TinkerRegistry.addMaterialStats(materialImpulseConcentrator, new HeadMaterialStats(4000, 6f, 18f, 7));
 			
 		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
@@ -1864,6 +1871,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialAnthracite).toolforge();
 			ModMaterials.registerMaterial(materialIonstone).toolforge();
 			ModMaterials.registerMaterial(materialVacuuite).toolforge();
+			ModMaterials.registerMaterial(materialImpulseConcentrator, null);
 		}
 
 		if (CompatManager.tic3backport) {

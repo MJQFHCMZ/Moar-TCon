@@ -3,7 +3,6 @@ package com.existingeevee.moretcon.item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.WeakHashMap;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer;
@@ -12,9 +11,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -27,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 
 	@SideOnly(Side.CLIENT)
-	WeakHashMap<ItemStack, MDGelGuiParticleRenderer> renderers;
+	MDGelGuiParticleRenderer renderer;
 
 	public ItemMDGel() {
 		super("matterDeconstructionGel");
@@ -36,9 +35,9 @@ public class ItemMDGel extends ItemShakeRender implements ICustomSlotRenderer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void render(ItemStack stack, int x, int y, IBakedModel bakedmodel) {
-		if (renderers == null) 
-			renderers = new WeakHashMap<>();
-		renderers.computeIfAbsent(stack, s -> new MDGelGuiParticleRenderer()).render(x, y);;
+		if (renderer == null) 
+			renderer = new MDGelGuiParticleRenderer();
+		renderer.render(x, y);;
 		super.render(stack, x, y, bakedmodel);
 	}
 

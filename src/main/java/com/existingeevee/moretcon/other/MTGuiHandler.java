@@ -1,6 +1,9 @@
 package com.existingeevee.moretcon.other;
 
+import com.existingeevee.moretcon.block.tile.TileCatalyzationChamber;
 import com.existingeevee.moretcon.block.tile.TileReforgeStation;
+import com.existingeevee.moretcon.block.tile.container.ContainerCatalyzationChamber;
+import com.existingeevee.moretcon.block.tile.container.ContainerReforgeStation;
 import com.existingeevee.moretcon.block.tile.gui.GuiCatalyzationChamber;
 import com.existingeevee.moretcon.block.tile.gui.GuiReforgeStation;
 
@@ -17,6 +20,8 @@ public class MTGuiHandler implements IGuiHandler {
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 		if (tile instanceof TileReforgeStation)
 			return new ContainerReforgeStation(player.inventory, (TileReforgeStation) tile);
+		if (tile instanceof TileCatalyzationChamber)
+			return new ContainerCatalyzationChamber(player.inventory, (TileCatalyzationChamber) tile);
 		return null;
 	}
 
@@ -25,6 +30,8 @@ public class MTGuiHandler implements IGuiHandler {
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 		if (tile instanceof TileReforgeStation)
 			return new GuiReforgeStation(player.inventory, world, new BlockPos(x, y, z), (TileReforgeStation) tile);
+		if (tile instanceof TileCatalyzationChamber)
+			return new GuiCatalyzationChamber(player.inventory, (TileCatalyzationChamber) tile);
 		return null;
 	}
 

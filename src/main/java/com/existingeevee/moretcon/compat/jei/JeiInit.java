@@ -27,6 +27,7 @@ public class JeiInit {
 		CUSTOM.add(new JeiAddBoltCoreBreakingContainer());
 
 		CUSTOM.add(new JeiSupportDIRecipes());
+		CUSTOM.add(new JeiRegisterCatalyzedAlloys());
 		
 		if (CompatManager.thebetweenlands) {
 			CUSTOM.add(new JeiInformationContainer<>(fluidstack, new FluidStack(ModFluids.liquidMummySludge, 1000), "melt_mummy", () -> CompatManager.thebetweenlands));

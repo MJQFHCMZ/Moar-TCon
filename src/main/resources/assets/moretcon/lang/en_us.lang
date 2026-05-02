@@ -202,6 +202,8 @@ item.moretcon.nuggetslimesteel.name=Slimesteel Nugget
 item.moretcon.nuggetporksteel.name=Porksteel Nugget
 item.moretcon.nuggetgeodesium.name=Geodesium Nugget
 
+item.moretcon.catalystrunic.name=Runic Catalyst
+
 itemGroup.moarTConMaterials=Moar TCon: Materials
 itemGroup.moarTConMisc=Moar TCon: Misc
 itemGroup.moarTConWorld=Moar TCon: World
@@ -524,6 +526,8 @@ modifier.moretcon.evasive_armor.desc=§olmao imagine missing!\n§rYour armor wil
 modifier.moretcon.evasive_armor.name=Evasive
 modifier.moretcon.weightless_armor.desc=§oLight as a feather...\n§r...as if you could walk on a cloud...
 modifier.moretcon.weightless_armor.name=Weightless
+modifier.moretcon.velocibliteration.desc=§obro hit a red gauge. absolute jackhammer\n§rYour tool's charged frying pan attacks deal increased damage based on your speed when charged past a certain threshold. If this tool is used to attack at an absurd speed, it will deal 15% true damage and grant 3 seconds of invulnerability to the user.  
+modifier.moretcon.velocibliteration.name=Velocibliteration
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??
@@ -700,6 +704,7 @@ modifier.reforgeplaceholder.desc=Your tool might be awesomely reforged, or it mi
 moretcon.bloodgodsblessing=Blood God's Blessing
 moretcon.hyperflames=Hyperflames
 moretcon.bleeding=Bleeding
+moretcon.invulnerability=Invulnerability
 
 stat.moretcon.explosive_charge.name=Explosive Charge
 stat.explosive.radius.name=Radius
@@ -766,6 +771,9 @@ tile.moretcon.blockvacuuite.name=Block of Vacuuite
 tile.moretcon.blockreforgestation.name=Reforge Station
 tile.moretcon.blockgravitoniumfaucet.desc=Drains tanks 6x faster than a standard faucet.
 tile.moretcon.blockgravitoniumfaucet.name=Gravitonium Infused Faucet
+tile.moretcon.blockcatalyzationchamber.desc=Place under a valid smeltery controller to catalyze exotic recipes...
+tile.moretcon.blockcatalyzationchamber.name=Catalyzation Chamber
+
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
 tile.moretcon.blockotherstone.name=Otherstone
@@ -868,6 +876,8 @@ uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
 gui.moretcon.reforgestation.name=Reforge Station
 gui.moretcon.reforgestation.info=Here you can reforge your tools for a small additional boost in power!\n\nTo reforge a tool, simply place it into the left slot with some material it can be repaired with. You can optionally add a reforge stone to get unusual reforges too!  
 gui.error.invalid_reforge_material=This tool cannot be reforged using %s!
+
+gui.jei.cata_alloy.title=Catalyzed Alloying 
 
 jei_info.melt_mummy.desc=Obtained by melting down a Dreadful Peat Mummy.
 

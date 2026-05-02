@@ -3,6 +3,7 @@ package com.existingeevee.moretcon.inits;
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.devtools.ItemDebugTool;
 import com.existingeevee.moretcon.item.ItemBase;
+import com.existingeevee.moretcon.item.ItemCatalyst;
 import com.existingeevee.moretcon.item.ItemCompositeRep;
 import com.existingeevee.moretcon.item.ItemMDGel;
 import com.existingeevee.moretcon.item.ItemNoGravity;
@@ -173,6 +174,8 @@ public class ModItems {
 	public static final Item reforgeSharpened = new ItemReforgeStone("reforgesharpened", () -> ModReforges.reforgeSharpened);
 	public static final Item reforgeConsistant = new ItemReforgeStone("reforgeconsistant", () -> ModReforges.reforgeConsistant);
 
+	public static final ItemCatalyst catalystRunic = new ItemCatalyst("catalystrunic");
+	
 	/*---------------------------------------*/
 
 	public static void registerItems(Item... items) {
@@ -283,7 +286,9 @@ public class ModItems {
 					
 					reforgeHeavy,
 					reforgeSharpened,
-					reforgeConsistant
+					reforgeConsistant,
+					
+					catalystRunic
 			);
 			if (ConfigHandler.shouldLoadDust) {
 				ModItems.registerItems(

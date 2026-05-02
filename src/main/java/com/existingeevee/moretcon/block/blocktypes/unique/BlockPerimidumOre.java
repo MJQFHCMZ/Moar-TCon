@@ -58,8 +58,6 @@ public class BlockPerimidumOre extends BlockOre implements ISimpleClusterable {
 		payload.setDouble("Mass", mass);
 		payload.setDouble("Height", bound.maxY - bound.minY);
 		
-		
-		
 		PerimidumAuraAction.INSTANCE.run(worldIn, MiscUtils.getCenter(bound).x, bound.minY, MiscUtils.getCenter(bound).z, payload);
 	}
 }

@@ -74,6 +74,7 @@ import com.existingeevee.moretcon.traits.traits.Stormcaller;
 import com.existingeevee.moretcon.traits.traits.Supercritical;
 import com.existingeevee.moretcon.traits.traits.Treetap;
 import com.existingeevee.moretcon.traits.traits.Tricromatic;
+import com.existingeevee.moretcon.traits.traits.Velocibliteration;
 import com.existingeevee.moretcon.traits.traits.Voidic;
 import com.existingeevee.moretcon.traits.traits.Voltrend;
 import com.existingeevee.moretcon.traits.traits.Weightless;
@@ -199,7 +200,8 @@ public class ModTraits {
 	public static Voltrend voltrend = new Voltrend();
 	public static Nulltouched nulltouched = new Nulltouched(1);
 	public static Nulltouched nulltouched2 = new Nulltouched(2);
-	
+	public static Velocibliteration velocibliteration = new Velocibliteration();
+
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
 	public static Stormcaller stormcaller = new Stormcaller();
