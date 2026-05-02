@@ -36,7 +36,8 @@ public class ParticleSpawner extends Particle {
 			this.setExpired();
 		}
 
-		Minecraft.getMinecraft().effectRenderer.addEffect(particleSupplier.provide(this.world, this.posX, this.posY, this.posZ));
+		if (this.world != null)
+			Minecraft.getMinecraft().effectRenderer.addEffect(particleSupplier.provide(this.world, this.posX, this.posY, this.posZ));
 
 		this.motionY -= 0.04D * this.particleGravity;
 		this.move(this.motionX, this.motionY, this.motionZ);
