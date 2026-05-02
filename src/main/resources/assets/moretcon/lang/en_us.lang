@@ -699,7 +699,7 @@ modifier.reforgeplaceholder.desc=Your tool might be awesomely reforged, or it mi
 
 moretcon.bloodgodsblessing=Blood God's Blessing
 moretcon.hyperflames=Hyperflames
-moretcon.bleeding=bleeding
+moretcon.bleeding=Bleeding
 
 stat.moretcon.explosive_charge.name=Explosive Charge
 stat.explosive.radius.name=Radius
@@ -731,8 +731,6 @@ tile.moretcon.blockgallium.name=Block of Gallium
 tile.moretcon.blockgarstone.name=Block of Garstone
 tile.moretcon.blockgravitite.name=Block of Enchanted Gravitite
 tile.moretcon.blockgravitonium.name=Block of Gravitonium
-tile.moretcon.blockgravitoniumfaucet.desc=Drains tanks 6x faster than a standard faucet.
-tile.moretcon.blockgravitoniumfaucet.name=Gravitonium Infused Faucet
 tile.moretcon.blockigniglomerate.name=Block of Igniglomerate
 tile.moretcon.blockirradium.name=Block of Irradium
 tile.moretcon.blockvalasium.name=Block of Valasium
@@ -766,6 +764,8 @@ tile.moretcon.blockionstone.name=Block of Ionstone
 tile.moretcon.blockvacuuite.name=Block of Vacuuite
 
 tile.moretcon.blockreforgestation.name=Reforge Station
+tile.moretcon.blockgravitoniumfaucet.desc=Drains tanks 6x faster than a standard faucet.
+tile.moretcon.blockgravitoniumfaucet.name=Gravitonium Infused Faucet
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
 tile.moretcon.blockotherstone.name=Otherstone
@@ -896,7 +896,6 @@ jei_info.oreanthracite.desc=Found more or less commonly within the stone of the 
 jei_info.oreionstone.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
 jei_info.oregalliumethereal.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
 jei_info.orearkenium.desc=Found rarely in all holystone-bearing dimensions from y = 5 <-> 250.
-
 
 jei_info.solid_lightning.desc=Created by placing an Electarite Block above y = 245 during a thunderstorm...
 jei_info.orefusionite.desc=
