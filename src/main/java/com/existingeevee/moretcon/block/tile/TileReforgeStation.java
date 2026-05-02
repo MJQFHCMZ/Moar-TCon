@@ -1,6 +1,8 @@
 package com.existingeevee.moretcon.block.tile;
 
 import com.existingeevee.moretcon.ModInfo;
+import com.existingeevee.moretcon.block.tile.container.ContainerReforgeStation;
+import com.existingeevee.moretcon.block.tile.gui.GuiReforgeStation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;

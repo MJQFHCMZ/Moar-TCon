@@ -1,8 +1,8 @@
 package com.existingeevee.moretcon.other;
 
-import com.existingeevee.moretcon.block.tile.ContainerReforgeStation;
-import com.existingeevee.moretcon.block.tile.GuiReforgeStation;
 import com.existingeevee.moretcon.block.tile.TileReforgeStation;
+import com.existingeevee.moretcon.block.tile.gui.GuiCatalyzationChamber;
+import com.existingeevee.moretcon.block.tile.gui.GuiReforgeStation;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

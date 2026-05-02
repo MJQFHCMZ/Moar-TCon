@@ -1,10 +1,11 @@
-package com.existingeevee.moretcon.block.tile;
+package com.existingeevee.moretcon.block.tile.container;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
+import com.existingeevee.moretcon.block.tile.TileReforgeStation;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.inits.ModReforges;
 import com.existingeevee.moretcon.item.ItemReforgeStone;

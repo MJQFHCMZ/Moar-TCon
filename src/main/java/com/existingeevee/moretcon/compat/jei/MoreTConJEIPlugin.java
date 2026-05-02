@@ -23,7 +23,7 @@ public class MoreTConJEIPlugin implements IModPlugin {
 		if (!hasRan) {
 			hasRan = true;
 		}
-		
+
 		JeiInit.init(registry);
 		for (JeiCustomContainer cont : JeiInit.CUSTOM) {
 			if (cont.shouldLoad.getAsBoolean()) {

@@ -1,9 +1,11 @@
-package com.existingeevee.moretcon.block.tile;
+package com.existingeevee.moretcon.block.tile.gui;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.existingeevee.moretcon.ModInfo;
+import com.existingeevee.moretcon.block.tile.TileReforgeStation;
+import com.existingeevee.moretcon.block.tile.container.ContainerReforgeStation;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.inits.ModReforges;
 import com.existingeevee.moretcon.other.MatterReconstructionGelRMR;
