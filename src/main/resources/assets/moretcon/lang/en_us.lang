@@ -477,6 +477,8 @@ modifier.moretcon.voltrend.name=Voltrend
 modifier.moretcon.voltrend.desc=§oOne coulumb of electrons, ionize this man.§r\nYour tool will occasionally cause targets to become electrically charged, dealing damage over time as well as amplifying incoming damage.
 modifier.moretcon.nulltouched.name=Nulltouched 
 modifier.moretcon.nulltouched.desc=§oVisions of the beyond...§r\nYour tool deal additional void damage.
+modifier.moretcon.gaseous.name=Gaseous 
+modifier.moretcon.gaseous.desc=§owe love the geneva suggestions :3§r\nYour tool deal significantly reduced damage, but will spawn a lingering gas cloud that deals continuous AoE damage upon exploding.
 
 modifier.moretcon.galvanized_armor.name=Galvanized 
 modifier.moretcon.galvanized_armor.desc=§oMORE DAMAGEEEEE§r\nYour armor will grant you additional attack damage.
@@ -872,6 +874,8 @@ uniquetoolpart.moretcon.dematerializer.name=Dematerializer
 uniquetoolpart.moretcon.shotgun.name=Shotgun
 uniquetoolpart.moretcon.impact.name=Impact
 uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
+uniquetoolpart.moretcon.impulse_concentrator.name=Impulse Concentrator
+uniquetoolpart.moretcon.gas_vials.name=Gas Vials
 
 gui.moretcon.reforgestation.name=Reforge Station
 gui.moretcon.reforgestation.info=Here you can reforge your tools for a small additional boost in power!\n\nTo reforge a tool, simply place it into the left slot with some material it can be repaired with. You can optionally add a reforge stone to get unusual reforges too!  

@@ -20,6 +20,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.existingeevee.math.Quaternion;
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.other.DamageScalar;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.modifiers.ModExtraTrait2;
 import com.google.common.base.Predicates;
@@ -103,6 +104,9 @@ public class MiscUtils {
 				return;
 			}
 		}
+
+		amount *= DamageScalar.getMult(); 
+
 		float health = entity.getHealth();
 		entity.getCombatTracker().trackDamage(src, health, amount);
 		entity.setHealth(health - amount);

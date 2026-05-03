@@ -48,17 +48,17 @@ public class Luminescent extends AbstractTrait {
 		return super.isToolWithTrait(itemStack);
 	}
 
-	private final Map<NBTTagCompound, Integer> map = new HashMap<>();
+	private final Map<Integer, Integer> map = new HashMap<>();
 
 	public int calculateColor(ItemStack stack) {
 		NBTTagCompound nbt = stack.serializeNBT();
 		if (stack.getItem() instanceof MaterialItem) {
 			Material m = ((MaterialItem) stack.getItem()).getMaterial(stack);
 			int color = MATERIAL_COLOR_OVERRIDE.containsKey(m) ? MATERIAL_COLOR_OVERRIDE.get(m) : m.materialTextColor;
-			map.put(nbt, color);
+			map.put(nbt.hashCode(), color);
 		}
-		if (map.containsKey(nbt)) {
-			return map.get(nbt);
+		if (map.containsKey(nbt.hashCode())) {
+			return map.get(nbt.hashCode());
 		} else {
 			int sumRed = 0;
 			int sumGreen = 0;
@@ -80,12 +80,12 @@ public class Luminescent extends AbstractTrait {
 			}
 
 			if (sumTotal == 0) {
-				map.put(nbt, Integer.MIN_VALUE);
+				map.put(nbt.hashCode(), Integer.MIN_VALUE);
 			} else {
 				Color color = new Color(sumRed / 255f / sumTotal, sumGreen / 255f / sumTotal, sumBlue / 255f / sumTotal);
-				map.put(nbt, color.getRGB());
+				map.put(nbt.hashCode(), color.getRGB());
 			}
-			return map.get(nbt);
+			return map.get(nbt.hashCode());
 		}
 	}
 }

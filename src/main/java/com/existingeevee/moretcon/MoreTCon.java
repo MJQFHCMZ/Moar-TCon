@@ -131,7 +131,7 @@ public class MoreTCon {
 		OreDictionaryInit.init();
 
 		IForgeRegistry<IRecipe> registry = event.getRegistry();
-
+		
 		OreRecipes.init(event);
 		UniqueToolpartRecipes.init(event);
 		ReforgeRecipes.init(event);

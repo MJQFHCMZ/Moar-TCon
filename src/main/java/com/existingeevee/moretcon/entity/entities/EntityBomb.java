@@ -261,8 +261,8 @@ public class EntityBomb extends EntityProjectileBase {
 					// remove stats from projectile
 					// apply stats from projectile
 					if (item.getItem() instanceof IProjectile) {
-						assert projectileAttributes != null;
-						attacker.getAttributeMap().removeAttributeModifiers(projectileAttributes);
+						if (projectileAttributes != null)
+							attacker.getAttributeMap().removeAttributeModifiers(projectileAttributes);
 					}
 
 					// readd stats from held items

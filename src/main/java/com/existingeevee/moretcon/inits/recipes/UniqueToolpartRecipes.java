@@ -46,22 +46,6 @@ public class UniqueToolpartRecipes {
 			}
 		}
 
-		if (ConfigHandler.enableBomb) {
-			if (canRegisterUniqueRecipe(ModMaterials.materialImpact)) {
-				event.getRegistry().register(
-						RecipeHelper.createRecipe("impact_recipe", ModMaterials.materialImpact.getUniqueToolPart(),
-								new String[] {
-										"RER",
-										"FCF",
-										"RER"
-								},
-								Pair.of('E', new OreIngredient("gemElectarite")),
-								Pair.of('F', new OreIngredient("ingotFusionite")),
-								Pair.of('C', Ingredient.fromItem(Items.END_CRYSTAL)),
-								Pair.of('R', new OreIngredient("dustRedstone"))));
-			}
-		}
-
 		if (ConfigHandler.shouldAllowPlusTiC) {
 			if (canRegisterUniqueRecipe(ModMaterials.materialCrimson)) {
 				event.getRegistry().register(
@@ -80,6 +64,39 @@ public class UniqueToolpartRecipes {
 		}
 
 		if (ConfigHandler.shouldAllowAether) {
+			if (ConfigHandler.enableBomb) {
+				if (canRegisterUniqueRecipe(ModMaterials.materialImpact)) {
+					event.getRegistry().register(
+							RecipeHelper.createRecipe("impact_recipe", ModMaterials.materialImpact.getUniqueToolPart(),
+									new String[] {
+											"RER",
+											"FCF",
+											"RER"
+									},
+									Pair.of('E', new OreIngredient("gemElectarite")),
+									Pair.of('F', new OreIngredient("ingotFusionite")),
+									Pair.of('C', Ingredient.fromItem(Items.END_CRYSTAL)),
+									Pair.of('R', new OreIngredient("dustRedstone"))));
+				}
+				
+				if (canRegisterUniqueRecipe(ModMaterials.materialGasVials)) {
+					event.getRegistry().register(
+							RecipeHelper.createRecipe("gas_vials_recipe", ModMaterials.materialGasVials.getUniqueToolPart(),
+									new String[] {
+											"GOG",
+											"VLV",
+											"IBI"
+									},
+									Pair.of('G', new OreIngredient("blockGallium")),
+									Pair.of('V', new OreIngredient("gemVacuuite")),
+									Pair.of('I', new OreIngredient("blockIrradium")),
+									Pair.of('O', new OreIngredient("blockIonstone")),
+									Pair.of('L', Ingredient.fromItem(ModItems.solidLightning)),
+									Pair.of('B', Ingredient.fromItem(Items.GLASS_BOTTLE))));
+				}
+			}
+
+			
 			if (canRegisterUniqueRecipe(ModMaterials.materialSkybolt)) {
 				event.getRegistry().register(
 						RecipeHelper.createRecipe("skybolt_recipe", ModMaterials.materialSkybolt.getUniqueToolPart(),
@@ -222,6 +239,23 @@ public class UniqueToolpartRecipes {
 								Pair.of('S', new TinkerPartIngredient(TinkerMaterials.steel, "tconstruct:tough_tool_rod"))));
 			}
 
+			if (canRegisterUniqueRecipe(ModMaterials.materialImpulseConcentrator)) {
+				event.getRegistry().register(
+						RecipeHelper.createRecipe("impulse_concentrator_recipe", ModMaterials.materialImpulseConcentrator.getUniqueToolPart(),
+								new String[] {
+										"ISI",
+										"VMV",
+										"ZPE"
+								},
+								Pair.of('I', new OreIngredient("gemIonstone")),
+								Pair.of('V', new OreIngredient("ingotValasium")),
+								Pair.of('Z', new OreIngredient("blockZracohlium")),
+								Pair.of('S', new OreIngredient("blockSolsteel")),
+								Pair.of('E', new OreIngredient("blockEtherstone")),
+								Pair.of('M', Ingredient.fromStacks(new ItemStack(ModItems.matterDeconstructionGel))),
+								Pair.of('P', Ingredient.fromStacks(new ItemStack(Blocks.PISTON)))));
+			}
+			
 			if (canRegisterUniqueRecipe(ModMaterials.materialVengeance)) {
 				event.getRegistry().register(
 						RecipeHelper.createRecipe("vengeance_recipe", ModMaterials.materialVengeance.getUniqueToolPart(),

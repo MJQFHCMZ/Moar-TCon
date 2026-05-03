@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.existingeevee.moretcon.traits.ModTraits;
-import com.existingeevee.moretcon.traits.traits.Velocibliteration;
-import com.existingeevee.moretcon.traits.traits.Velocibliteration.VelocibliterationData;
+import com.existingeevee.moretcon.traits.traits.unique.Velocibliteration;
+import com.existingeevee.moretcon.traits.traits.unique.Velocibliteration.VelocibliterationData;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;

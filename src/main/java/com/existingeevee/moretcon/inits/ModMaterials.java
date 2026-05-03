@@ -223,6 +223,10 @@ public class ModMaterials implements MaterialTypes {
 			MiscUtils.createNonConflictiveName("impulse_concentrator"), 0xfcba03, "tconstruct:pan_head", 
 			"tconstruct:frypan");
 	
+	public static final UniqueMaterial materialGasVials = new UniqueMaterial(
+			MiscUtils.createNonConflictiveName("gas_vials"), 0x009400, "moretcon:shrapnel",
+			"moretcon:bomb");
+	
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
 		HeadMaterialStats thankYouTinkersForNeedingAHeadMat = new HeadMaterialStats(700, 6f, 4f, 5);
@@ -1390,6 +1394,8 @@ public class ModMaterials implements MaterialTypes {
 			materialImpulseConcentrator.addTrait(ModTraits.velocibliteration);
 			TinkerRegistry.addMaterialStats(materialImpulseConcentrator, new HeadMaterialStats(4000, 6f, 18f, 7));
 			
+			materialGasVials.addTrait(ModTraits.gaseous);
+			TinkerRegistry.addMaterialStats(materialGasVials, new HeadMaterialStats(3000, 6f, 16f, 7));			
 		}
 		if (CompatManager.aether_legacy) { // TODO add unique toolparts for various aether artifacts
 			materialZanite.addItem("gemZanite", 1, Material.VALUE_Ingot);
@@ -1541,6 +1547,7 @@ public class ModMaterials implements MaterialTypes {
 
 			TinkerRegistry.addMaterialStats(materialSkybolt, new HeadMaterialStats(1070, 7.50f, 5.00f, 3));
 			materialSkybolt.addTrait(ModTraits.boltforged);
+			
 		}
 		if (CompatManager.twilightforest) { // TODO add carminite & more alloys
 			materialIronwood.addCommonItems("Ironwood");
@@ -1872,6 +1879,7 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialIonstone).toolforge();
 			ModMaterials.registerMaterial(materialVacuuite).toolforge();
 			ModMaterials.registerMaterial(materialImpulseConcentrator, null);
+			ModMaterials.registerMaterial(materialGasVials, null);
 		}
 
 		if (CompatManager.tic3backport) {
