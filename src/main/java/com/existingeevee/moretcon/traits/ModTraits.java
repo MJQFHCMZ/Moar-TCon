@@ -34,6 +34,7 @@ import com.existingeevee.moretcon.traits.traits.Darkened;
 import com.existingeevee.moretcon.traits.traits.Electrified;
 import com.existingeevee.moretcon.traits.traits.Embering;
 import com.existingeevee.moretcon.traits.traits.EulersWrath;
+import com.existingeevee.moretcon.traits.traits.Executor;
 import com.existingeevee.moretcon.traits.traits.Fireslime;
 import com.existingeevee.moretcon.traits.traits.Flashbang;
 import com.existingeevee.moretcon.traits.traits.Frostburn;
@@ -203,6 +204,7 @@ public class ModTraits {
 	public static Nulltouched nulltouched2 = new Nulltouched(2);
 	public static Velocibliteration velocibliteration = new Velocibliteration();
 	public static Gaseous gaseous = new Gaseous();
+	public static Executor executor = new Executor();
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();

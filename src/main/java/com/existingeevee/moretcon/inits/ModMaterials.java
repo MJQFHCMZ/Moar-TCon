@@ -113,6 +113,7 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialAnthracite = new Material(MiscUtils.createNonConflictiveName("anthracite"), 0x2d3945);
 	public static final Material materialIonstone = new Material(MiscUtils.createNonConflictiveName("ionstone"), 0x05a8f3);
 	public static final Material materialVacuuite = new Material(MiscUtils.createNonConflictiveName("vacuuite"), 0x300a6a);
+	public static final Material materialMalithyst = new Material(MiscUtils.createNonConflictiveName("malithyst"), 0x00df00);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -1391,6 +1392,29 @@ public class ModMaterials implements MaterialTypes {
 				addArmorLum(materialVacuuite);
 			}
 		
+			materialMalithyst.addItem("gemMalithyst", 1, Material.VALUE_Ingot);
+			materialMalithyst.addItem("blockMalithyst", 1, Material.VALUE_Block);
+			materialMalithyst.setCastable(false);
+			materialMalithyst.setCraftable(true);
+			materialMalithyst.setRepresentativeItem("gemMalithyst");
+			materialMalithyst.addTrait(ModTraits.bottomsEnd, HEAD);
+			materialMalithyst.addTrait(ModTraits.executor, HEAD);
+			materialMalithyst.addTrait(ModTraits.darkened);
+			materialMalithyst.addTrait(TinkerTraits.fractured);
+			TinkerRegistry.addMaterialStats(materialMalithyst, new HeadMaterialStats(750, 12.5f, 11.5f, 7));
+			TinkerRegistry.addMaterialStats(materialMalithyst, new HandleMaterialStats(2.0f, 69));
+			TinkerRegistry.addMaterialStats(materialMalithyst, new ExtraMaterialStats(42));
+			TinkerRegistry.addMaterialStats(materialMalithyst, new ArrowShaftMaterialStats(1.2f, 16));
+			TinkerRegistry.addMaterialStats(materialMalithyst, whyWouldYouMakeABowOutOfThis);
+			if (CompatManager.conarm) {
+				TinkerRegistry.addMaterialStats(materialMalithyst, new CoreMaterialStats(16f, 22f));
+				TinkerRegistry.addMaterialStats(materialMalithyst, new PlatesMaterialStats(2f, 4f, 1.4f));
+				TinkerRegistry.addMaterialStats(materialMalithyst, new TrimMaterialStats(1.2f));
+
+				ArmorMaterials.addArmorTrait(materialMalithyst, ModArmorTraits.woeful);
+			}
+			
+			
 			materialImpulseConcentrator.addTrait(ModTraits.velocibliteration);
 			TinkerRegistry.addMaterialStats(materialImpulseConcentrator, new HeadMaterialStats(4000, 6f, 18f, 7));
 			
@@ -1880,6 +1904,8 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialVacuuite).toolforge();
 			ModMaterials.registerMaterial(materialImpulseConcentrator, null);
 			ModMaterials.registerMaterial(materialGasVials, null);
+			ModMaterials.registerMaterial(materialMalithyst).toolforge();
+			
 		}
 
 		if (CompatManager.tic3backport) {

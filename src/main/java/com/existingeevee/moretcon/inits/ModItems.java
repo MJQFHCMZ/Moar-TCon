@@ -151,6 +151,7 @@ public class ModItems {
 	public static final Item gemAnthracite = new ItemBase("gemAnthracite");
 	public static final Item gemIonstone = new ItemShakeRender("gemIonstone", GlowType.CIRCLE_BIG, 0xb4e5ff).withShakeIntensity(0.5f);
 	public static final Item gemVacuuite = new ItemBase("gemVacuuite", 0x300a6a);
+	public static final Item gemMalithyst = new ItemBase("gemMalithyst");
 
 	//Ingriedients
 	public static final Item itemSiltClay = new ItemBase("itemSiltClay").setTab(ModTabs.moarTConMisc);
@@ -270,6 +271,7 @@ public class ModItems {
 					gemAnthracite,
 					gemIonstone,
 					gemVacuuite,
+					gemMalithyst,
 
 					crushingModifier,
 					autocritModifier,

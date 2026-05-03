@@ -108,7 +108,9 @@ public class ModBlocks {
 	public static final Block blockIonstone = ((BlockBase) new BlockBase("blockIonstone", Material.IRON, 8).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true).setLightLevel(0.5f);
 	public static final Block oreVacuuite = (new BlockEtherealOre("oreVacuuite", 8, ModItems.gemVacuuite).setHardness(40).setCreativeTab(ModTabs.moarTConMaterials));
 	public static final Block blockVacuuite = ((BlockBase) new BlockBase("blockVacuuite", Material.IRON, 8).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
-	
+	public static final Block oreMalithyst = (new BlockOre("oreMalithyst", 5, ModItems.gemMalithyst).setHardness(12).setLightLevel(1).setResistance(10).setCreativeTab(ModTabs.moarTConMaterials));
+	public static final Block blockMalithyst = ((BlockBase) new BlockBase("blockMalithyst", Material.IRON, 5).setHardness(12).setResistance(20).setCreativeTab(ModTabs.moarTConMaterials)).canBeBeacon(true);
+
 	public static final Block blockOtherstone = (new BlockEtherealBase("blockOtherstone", Material.ROCK, 1).setHardness(30).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockCobbledBedrock = (new BlockBase("blockCobbledBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
 	public static final Block blockCobbledBetweenBedrock = (new BlockBase("blockCobbledBetweenBedrock", Material.ROCK, 4).setResistance(Float.MAX_VALUE).setHardness(40).setCreativeTab(ModTabs.moarTConWorld));
@@ -219,6 +221,8 @@ public class ModBlocks {
 					oreGalliumEthereal,
 					oreVacuuite,
 					blockVacuuite,
+					blockMalithyst,
+					oreMalithyst,
 					/**-------------------------------------**/
 					blockCobbledBedrock,
 					blockBrinkstone,

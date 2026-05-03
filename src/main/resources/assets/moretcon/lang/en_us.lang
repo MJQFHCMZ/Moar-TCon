@@ -142,6 +142,7 @@ item.moretcon.gemperimidum.name=Perimidum
 item.moretcon.gemanthracite.name=Anthracite
 item.moretcon.gemionstone.name=Ionstone
 item.moretcon.gemvacuuite.name=Vacuuite
+item.moretcon.gemmalithyst.name=Malithyst
 
 item.moretcon.hydrogenrichredstonepowder.name=Hydrogen Rich Redstone Powder
 item.moretcon.solidlightning.name=Solid Lightning
@@ -274,6 +275,7 @@ material.moretcon.brinkstone.name=Brinkstone
 material.moretcon.anthracite.name=Anthracite
 material.moretcon.ionstone.name=Ionstone
 material.moretcon.vacuuite.name=Vacuuite
+material.moretcon.malithyst.name=Malithyst
 
 material.uniquetoolpart.name=Unique
 
@@ -530,6 +532,8 @@ modifier.moretcon.weightless_armor.desc=§oLight as a feather...\n§r...as if yo
 modifier.moretcon.weightless_armor.name=Weightless
 modifier.moretcon.velocibliteration.desc=§obro hit a red gauge. absolute jackhammer\n§rYour tool's charged frying pan attacks deal increased damage based on your speed when charged past a certain threshold. If this tool is used to attack at an absurd speed, it will deal 15% true damage and grant 3 seconds of invulnerability to the user.  
 modifier.moretcon.velocibliteration.name=Velocibliteration
+modifier.moretcon.executor.desc=§oPOV: youve insulted my glorious dictatorship\n§rYour tools 2000% damage to targets whose health is <10% of their maximum.
+modifier.moretcon.executor.name=Executor
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??
@@ -769,6 +773,7 @@ tile.moretcon.blockgeodesium.name=Block of Geodesium
 tile.moretcon.blockanthracite.name=Block of Anthracite
 tile.moretcon.blockionstone.name=Block of Ionstone
 tile.moretcon.blockvacuuite.name=Block of Vacuuite
+tile.moretcon.blockmalithyst.name=Block of Malithyst
 
 tile.moretcon.blockreforgestation.name=Reforge Station
 tile.moretcon.blockgravitoniumfaucet.desc=Drains tanks 6x faster than a standard faucet.
@@ -848,6 +853,7 @@ tile.moretcon.oreanthracite.name=Anthracite Ore
 tile.moretcon.oreionstone.name=Ionstone Ore
 tile.moretcon.oregalliumethereal.name=Ethereal Gallium Ore
 tile.moretcon.orevacuuite.name=Vacuuite Ore
+tile.moretcon.oremalithyst.name=Malithyst Ore
 
 tile.moretcon.rottensludge.name=Rotten Sludge
 

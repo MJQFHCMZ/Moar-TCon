@@ -73,9 +73,6 @@ public class MaterialClient {
 		ModMaterials.materialValasium.setRenderInfo(new ValasiumTexture.RenderInfo());
 		ModMaterials.materialPerimidum.setRenderInfo(new PerimidumTexture.RenderInfo());
 		ModMaterials.materialGeodesium.setRenderInfo(new GeodesiumTexture.RenderInfo());
-		
-		
-	
-		
+		ModMaterials.materialMalithyst.setRenderInfo(new GlintTexture.RenderInfo(0x2c621e, 0x1a3e11, 0xffffff, 0x00ff00, 0x00ff00, 0x007b00));
 	}
 }
