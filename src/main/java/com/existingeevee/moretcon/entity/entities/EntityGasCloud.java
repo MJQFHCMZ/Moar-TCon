@@ -49,7 +49,7 @@ public class EntityGasCloud extends Entity {
 	private UUID attackerUUID;
 
 	private static final GameProfile GAS_PROFILE = new GameProfile(UUID.fromString("b8c3a9de-13f6-4b63-9e55-37fd3b7e9a11"), "Gas Cloud");
-	
+
 	public EntityGasCloud(World world) {
 		super(world);
 		setSize(1.0F, 1.0F);
@@ -147,7 +147,7 @@ public class EntityGasCloud extends Entity {
 			ItemStack stack = getStack().copy();
 
 			FakePlayer fp = FakePlayerFactory.get(world, GAS_PROFILE);
-			
+
 			unequip(fp, EntityEquipmentSlot.MAINHAND);
 			fp.setHeldItem(EnumHand.MAIN_HAND, stack);
 			equip(fp, EntityEquipmentSlot.MAINHAND);
@@ -171,18 +171,19 @@ public class EntityGasCloud extends Entity {
 			EntityLivingBase revengeTarget = entity.getRevengeTarget();
 			int hrt = entity.hurtResistantTime;
 			entity.hurtResistantTime = 0;
-			if (stack.getItem() instanceof ToolCore) {
-				fp.resetCooldown();
-				try {
+			try {
+				if (stack.getItem() instanceof ToolCore) {
+					fp.resetCooldown();
 					ToolHelper.attackEntity(stack, (ToolCore) stack.getItem(), fp, entity, null, false);
-				} catch (Exception e) {
-					// even if a buggy hit happens i think its okay to skip it.
-				} finally {
-					if (attr != null)
-						fp.getAttributeMap().removeAttributeModifiers(attr);
+
+				} else {
+					fp.attackTargetEntityWithCurrentItem(entity);
 				}
-			} else {
-				fp.attackTargetEntityWithCurrentItem(entity);
+			} catch (Exception e) {
+				// even if a buggy hit happens i think its okay to skip it.
+			} finally {
+				if (attr != null)
+					fp.getAttributeMap().removeAttributeModifiers(attr);
 			}
 			entity.hurtResistantTime = hrt;
 			entity.setRevengeTarget(this.attacker != null ? this.attacker : revengeTarget);
