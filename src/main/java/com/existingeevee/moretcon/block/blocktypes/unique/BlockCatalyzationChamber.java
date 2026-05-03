@@ -12,6 +12,7 @@ import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -19,6 +20,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -42,6 +44,14 @@ public class BlockCatalyzationChamber extends BlockContainer implements ISimpleB
 		super(Material.ROCK);
 		this.setCreativeTab(ModTabs.moarTConMisc);
 		this.setUnlocalizedName(MiscUtils.createNonConflictiveName("blockcatalyzationchamber"));
+	    this.setHardness(3F);
+	    this.setResistance(20F);
+	    this.setSoundType(SoundType.METAL);
+	} 
+
+	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return isValid(world, pos) ? 15 : 0;
 	}
 
 	public boolean isValid(IBlockAccess worldIn, BlockPos pos) {
@@ -67,7 +77,7 @@ public class BlockCatalyzationChamber extends BlockContainer implements ISimpleB
 	@Nonnull
 	@Override
 	public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-		return new TileCatalyzationChamber(); 
+		return new TileCatalyzationChamber();
 	}
 
 	@Override
@@ -90,7 +100,7 @@ public class BlockCatalyzationChamber extends BlockContainer implements ISimpleB
 			ItemStackHandler inv = cata.inventory;
 			for (int i = 0; i < inv.getSlots(); i++) {
 				ItemStack stack = inv.getStackInSlot(i);
-				if (!stack.isEmpty()) //BlockDispenser
+				if (!stack.isEmpty())
 					amnt++;
 			}
 		}
@@ -100,6 +110,18 @@ public class BlockCatalyzationChamber extends BlockContainer implements ISimpleB
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+
+		if (tileentity instanceof TileCatalyzationChamber) {
+			InventoryHelper.dropInventoryItems(worldIn, pos, (TileCatalyzationChamber) tileentity);
+			worldIn.updateComparatorOutputLevel(pos, this);
+		}
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override

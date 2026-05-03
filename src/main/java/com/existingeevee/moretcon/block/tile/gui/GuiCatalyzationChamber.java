@@ -8,7 +8,9 @@ import com.existingeevee.moretcon.inits.ModBlocks;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class GuiCatalyzationChamber extends GuiContainer {
 	private static final ResourceLocation LOCATION = new ResourceLocation(ModInfo.MODID, "textures/other/catalyzation_chamber.png");
@@ -39,5 +41,11 @@ public class GuiCatalyzationChamber extends GuiContainer {
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
+		
+		for (Slot s : this.inventorySlots.inventorySlots) {
+			if (!s.getHasStack() && s instanceof SlotItemHandler && ((SlotItemHandler) s).getItemHandler() == tile.getInventory()) {
+				this.drawTexturedModalRect(i + s.xPos, j + s.yPos, 176, 0, 16, 16);
+			}
+		}
 	}
 }
