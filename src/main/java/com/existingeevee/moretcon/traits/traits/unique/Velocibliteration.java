@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.traits.traits;
+package com.existingeevee.moretcon.traits.traits.unique;
 
 import com.existingeevee.moretcon.client.actions.ImpactFrameAction;
 import com.existingeevee.moretcon.inits.ModPotions;
