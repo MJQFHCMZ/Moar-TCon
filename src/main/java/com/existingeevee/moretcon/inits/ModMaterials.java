@@ -516,7 +516,7 @@ public class ModMaterials implements MaterialTypes {
 			materialIrradium.addTrait(ModTraits.luminescent, EXTRA);
 			materialIrradium.addTrait(TinkerTraits.momentum);
 			materialIrradium.addTrait(ModTraits.luminescent);
-			TinkerRegistry.addMaterialStats(materialIrradium, new HeadMaterialStats(700, 6f, 4f, 5));
+			TinkerRegistry.addMaterialStats(materialIrradium, new HeadMaterialStats(700, 6f, 4f, 4));
 			if (CompatManager.plustic) {
 				TinkerRegistry.addMaterialStats(materialIrradium, new LaserMediumMaterialStats(8, 25));
 				TinkerRegistry.addMaterialStats(materialIrradium, new BatteryCellMaterialStats(480000));
