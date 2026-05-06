@@ -18,7 +18,7 @@ import slimeknights.tconstruct.tools.melee.item.FryPan;
 @Mixin(FryPan.class)
 public class MixinFryPan extends Item {
 
-	@Inject(at = @At(value = "HEAD"), method = "onPlayerStoppedUsing")
+	@Inject(at = @At(value = "HEAD"), method = "onPlayerStoppedUsing(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;I)V")
 	public void moretcon$HEAD_Inject$onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft, CallbackInfo ci) {
 		if (ModTraits.velocibliteration.isToolWithTrait(stack)) {
 			double velSq = player.motionX * player.motionX + player.motionY * player.motionY + player.motionZ * player.motionZ;
@@ -28,7 +28,7 @@ public class MixinFryPan extends Item {
 		}
 	}
 	
-	@Inject(at = @At(value = "RETURN"), method = "onPlayerStoppedUsing")
+	@Inject(at = @At(value = "RETURN"), method = "onPlayerStoppedUsing(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;I)V")
 	public void moretcon$RETURN_Inject$onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft, CallbackInfo ci) {
 		if (Velocibliteration.VELO_HIT.get() != null) {
 			Velocibliteration.VELO_HIT.remove();
