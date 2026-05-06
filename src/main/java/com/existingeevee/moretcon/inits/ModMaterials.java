@@ -514,6 +514,8 @@ public class ModMaterials implements MaterialTypes {
 			materialIrradium.addTrait(ModTraits.luminescent, HANDLE);
 			materialIrradium.addTrait(ModTraits.helpfulRadiation, EXTRA);
 			materialIrradium.addTrait(ModTraits.luminescent, EXTRA);
+			materialIrradium.addTrait(ModTraits.helpfulRadiation, PROJECTILE);
+			materialIrradium.addTrait(ModTraits.luminescent, PROJECTILE);
 			materialIrradium.addTrait(TinkerTraits.momentum);
 			materialIrradium.addTrait(ModTraits.luminescent);
 			TinkerRegistry.addMaterialStats(materialIrradium, new HeadMaterialStats(700, 6f, 4f, 4));
