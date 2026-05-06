@@ -140,7 +140,7 @@ public class ModTraits {
 	public static Hyperheat hyperheat = new Hyperheat();
 	public static Frostburn frostburn = new Frostburn();
 	public static Tricromatic trichromic = new Tricromatic();
-	public static HelpfulRadiation radioactive = new HelpfulRadiation();
+	public static HelpfulRadiation helpfulRadiation = new HelpfulRadiation();
 	public static Voidic voidic = new Voidic();
 	public static Pulsating pulsating = new Pulsating();
 	public static Liquid liquid = new Liquid();

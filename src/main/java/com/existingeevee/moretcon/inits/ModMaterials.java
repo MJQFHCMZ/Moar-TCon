@@ -510,9 +510,9 @@ public class ModMaterials implements MaterialTypes {
 			materialIrradium.setCastable(true);
 			materialIrradium.setCraftable(false);
 			materialIrradium.setRepresentativeItem("ingotIrradium");
-			materialIrradium.addTrait(ModTraits.radioactive, HANDLE);
+			materialIrradium.addTrait(ModTraits.helpfulRadiation, HANDLE);
 			materialIrradium.addTrait(ModTraits.luminescent, HANDLE);
-			materialIrradium.addTrait(ModTraits.radioactive, EXTRA);
+			materialIrradium.addTrait(ModTraits.helpfulRadiation, EXTRA);
 			materialIrradium.addTrait(ModTraits.luminescent, EXTRA);
 			materialIrradium.addTrait(TinkerTraits.momentum);
 			materialIrradium.addTrait(ModTraits.luminescent);
@@ -1166,7 +1166,7 @@ public class ModMaterials implements MaterialTypes {
 			materialZracohlium.addTrait(TinkerTraits.coldblooded, HEAD);
 			materialZracohlium.addTrait(ModTraits.pyrophoric);
 			materialZracohlium.addTrait(ModTraits.supercritical1);
-			materialZracohlium.addTrait(ModTraits.radioactive);
+			materialZracohlium.addTrait(ModTraits.helpfulRadiation);
 			TinkerRegistry.addMaterialStats(materialZracohlium, new HeadMaterialStats(1200, 8f, 13.5f, 5));
 			TinkerRegistry.addMaterialStats(materialZracohlium, new HandleMaterialStats(1.25f, 125));
 			TinkerRegistry.addMaterialStats(materialZracohlium, new ExtraMaterialStats(90));
