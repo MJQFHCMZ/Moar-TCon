@@ -353,7 +353,7 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 								}
 								
 								boolean spawnMalithyst = ctx.rand.nextInt(20) == 0;
-								
+								boolean hollow = ctx.rand.nextInt(3) == 0;
 								for (char[][] layer : CRYSTAL_LAYOUT_BASE) {
 
 									for (int cx = -1; cx < 2; cx++) {
@@ -373,6 +373,9 @@ public class HelltopIslandsGenerator extends WorldGenModifier {
 												if (spawnMalithyst && block == ModBlocks.blockDarkBrinkstone) {
 													world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), ModBlocks.oreMalithyst.getDefaultState(), 2);
 													break;	
+												} else if (!hollow) {
+													world.setBlockState(new BlockPos(x + cx, cy + y - 3, z + cz), block.getDefaultState(), 2);
+													break;
 												}
 											}
 										}
