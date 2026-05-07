@@ -22,7 +22,7 @@ public class MixinProjectileCore {
 	public void moretcon$RETURN_Inject$useAmmo(ItemStack stack, @Nullable EntityLivingBase player, CallbackInfoReturnable<Boolean> ci) {
 		for (ITrait t : ToolHelper.getTraits(stack)) {
 			if (t instanceof IAdditionalTraitMethods) {
-				((IAdditionalTraitMethods) t).onAmmoConsumed(stack, player);
+				((IAdditionalTraitMethods) t).onAmmoUsed(stack, player, ci.getReturnValueZ());
 			}
 		}
 	}

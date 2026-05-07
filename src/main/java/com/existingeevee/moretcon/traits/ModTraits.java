@@ -11,6 +11,7 @@ import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 import com.existingeevee.moretcon.traits.modifiers.Autocrit;
 import com.existingeevee.moretcon.traits.modifiers.Betweenified;
+import com.existingeevee.moretcon.traits.modifiers.Celebratory;
 import com.existingeevee.moretcon.traits.modifiers.Crushing;
 import com.existingeevee.moretcon.traits.modifiers.Debug;
 import com.existingeevee.moretcon.traits.modifiers.Gem;
@@ -220,10 +221,10 @@ public class ModTraits {
 	public static Tarred modTarred;
 	public static Betweenified modBetweenified;
 
-
 	public static Crushing modCrushing;
 	public static Autocrit modAutocrit;
-
+	public static Celebratory modCelebratory;
+	
 	public static Debug modDebug;
 
 	public static Corroding corroding;
@@ -268,9 +269,11 @@ public class ModTraits {
 			depair = new MatterDeconstructionGel();
 			modCrushing = new Crushing();
 			modAutocrit = new Autocrit();
+			modCelebratory = new Celebratory();
 			registerModifier(
 					modAutocrit,
-					modCrushing);
+					modCrushing,
+					modCelebratory);
 		}
 		if (CompatManager.thebetweenlands) {
 			modRedGem = new Gem(CircleGemType.CRIMSON, ItemRegistry.CRIMSON_MIDDLE_GEM, 0xFF0000);

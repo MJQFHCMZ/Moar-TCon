@@ -1,0 +1,18 @@
+{
+  "modifier": "moretcon.modcelebratory",
+  "text": [
+    {
+      "text": "Fireworks for celebration!! (of their maiming ofc)"
+    }
+  ],
+  "effects": [
+    "Explodes on hit",
+    "Cooldown of 2 seconds",
+    "Multiple levels",
+    "Waow",
+    "Wait hol on is that Zracohlium????"
+  ],
+  "demoTool": [
+    "tconstruct:broadsword"
+  ]
+}
