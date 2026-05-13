@@ -903,7 +903,7 @@ jei_info.oreenderal.desc=Found rare-ish-ly in all endstone-bearing dimensions fr
 jei_info.oregallium.desc=Found very rarely in all stonebearing dimensions from y = 12 <-> 24.
 jei_info.oreechostone.desc=Found rare-ish-ly in all endstone-bearing dimensions from y = 12 <-> 48 or in floating shards. Shards are generated approx. one in 750 chunks within the end.
 jei_info.oregarstone.desc=Found extremely rarely in all stonebearing dimensions from y = 75 <-> 100.
-jei_info.oregravitonium.desc=Found astronomically rarely in the end inside of floating asteroids. Asteroids are generated approx. one in 125 chunks.
+jei_info.oregravitonium.desc=Found somewhat rarely in the end inside of floating asteroids. Asteroids are generated approx. one in 125 chunks.
 jei_info.oreigniglomerate.desc=Found rarely in The Nether within the lava lake.
 jei_info.orebloodstone.desc=Found commonly in The Nether above the bedrock roof. \n\nMust be mined with a tool with "Bottom's End".
 jei_info.oreebonite.desc=Found very rarely in all bedrockbearing dimensions in the lower bedrock layer. \n\nMust be mined with a tool with "Bottom's End".
@@ -919,6 +919,8 @@ jei_info.oreanthracite.desc=Found more or less commonly within the stone of the 
 jei_info.oreionstone.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
 jei_info.oregalliumethereal.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
 jei_info.orearkenium.desc=Found rarely in all holystone-bearing dimensions from y = 5 <-> 250.
+jei_info.oremalithyst.desc=Found very rarely inside of dark brinkstone spikes within the helltop isles on The Nether's roof.
+jei_info.orevacuuite.desc=Found astronomically rarely in The End in the ethereal stone from y = 4 <-> 6. \n\nMust be mined with a tool with "Etheral Harvest".
 
 jei_info.solid_lightning.desc=Created by placing an Electarite Block above y = 245 during a thunderstorm...
 jei_info.orefusionite.desc=
