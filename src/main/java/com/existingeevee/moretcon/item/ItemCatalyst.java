@@ -35,6 +35,8 @@ public class ItemCatalyst extends ItemBase {
 	public Collection<AlloyRecipe> getCatalyzedAlloys() {
 		return catalyzedRecipes;
 	}
+	
+	//TODO crafttweaker
 
 	public void registerAlloy(FluidStack result, FluidStack... inputs) {
 		if (result.amount < 1) {
@@ -49,8 +51,11 @@ public class ItemCatalyst extends ItemBase {
 
 	public void registerAlloy(AlloyRecipe recipe) {
 		//TODO add events and cancelling and such
-		//waow
+		//prob will not be in this update.
+		//sowwyyy ;-;
+		
 		catalyzedRecipes.add(recipe);
+		//waow
 	}
 	
 	  private static void error(String message, Object... params) {
