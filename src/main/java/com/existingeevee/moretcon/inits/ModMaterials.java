@@ -117,7 +117,7 @@ public class ModMaterials implements MaterialTypes {
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
-	public static final DelagateFluidMaterial materialSearedStone = new DelagateFluidMaterial(MiscUtils.createNonConflictiveName("searedstone"), 0x4f4a47);
+	public static final Material materialSearedStone = new DelagateFluidMaterial(MiscUtils.createNonConflictiveName("searedstone"), 0x4f4a47);
 	public static final Material materialSlimesteel = new Material(MiscUtils.createNonConflictiveName("slimesteel"), 0x47efea);
 
 	// really not gonna be used lmao. only really there for explosive charge
@@ -324,7 +324,7 @@ public class ModMaterials implements MaterialTypes {
 
 			materialSearedStone.addItem("blockSeared", 1, Material.VALUE_Ingot);
 			materialSearedStone.addItem("ingotSeared", 1, Material.VALUE_Ingot / 4);
-			materialSearedStone.setFluid(() -> TinkerFluids.searedStone);
+			((DelagateFluidMaterial) materialSearedStone).setFluid(() -> TinkerFluids.searedStone);
 			materialSearedStone.setCastable(true);
 			materialSearedStone.setCraftable(true);
 			materialSearedStone.setRepresentativeItem("blockSeared");
