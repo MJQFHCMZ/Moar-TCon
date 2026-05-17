@@ -29,12 +29,15 @@ public class Autocrit extends ModifierTrait {
 	}
 
 	public static final DecimalFormat format = new DecimalFormat("%");
+	public static final DecimalFormat format2 = new DecimalFormat("0.##");
 
 	@Override
 	public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-		String loc = String.format(LOC_Extra, getModifierIdentifier());
+		String loc1 = String.format(LOC_Extra, getModifierIdentifier() + ".chance");
+		String loc2 = String.format(LOC_Extra, getModifierIdentifier() + ".dmg");
+
 		float amount = getPercentage(modifierTag);
-		return ImmutableList.of(Util.translateFormatted(loc, format.format(amount)));
+		return ImmutableList.of(Util.translateFormatted(loc1, format.format(amount)), Util.translateFormatted(loc2, format2.format(amount * 10)));
 	}
 
 	@Override
@@ -44,5 +47,11 @@ public class Autocrit extends ModifierTrait {
 			return Math.random() < chance;
 		}
 		return false;
+	}
+
+	@Override
+	public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
+		float extraDamage = getPercentage(TinkerUtil.getModifierTag(tool, getModifierIdentifier())) * 10;
+		return newDamage + (isCritical ? extraDamage : 0);
 	}
 }
