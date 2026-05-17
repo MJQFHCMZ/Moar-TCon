@@ -40,19 +40,26 @@ public class Velocibliteration extends AbstractTrait {
 
 	@Override
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
-		if (entity instanceof EntityLivingBase && world.isRemote && isSelected) { 
+		if (entity instanceof EntityLivingBase && world.isRemote && isSelected) {
 			EntityLivingBase living = (EntityLivingBase) entity;
 			if (living.getActiveItemStack() == tool) {
 				float progress = Math.min(1f, (tool.getMaxItemUseDuration() - living.getItemInUseCount()) / 30f);
 				if (progress < 0.75)
-					return; 
-				
+					return;
+
 				Vec3d eye = entity.getPositionEyes(0.5f);
 				Vec3d pos = eye.add(entity.getLookVec().scale(1.75));
-				entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, pos.x, pos.y + 0.05, pos.z, 0, 0, 0);
+
+				boolean ultrakillRedHitWahoo = Math.min(3, 1f * (entity.motionX * entity.motionX + entity.motionY * entity.motionY + entity.motionZ * entity.motionZ) * 4) + 0.5 * (progress - 0.75f) > 2;
+				if (ultrakillRedHitWahoo) {
+					entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, pos.x, pos.y + 0.05, pos.z, 0.703, 0.703, 0.961);
+					entity.world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, true, pos.x, pos.y + 0.05, pos.z, 0, 0, 0);
+				} else {
+					entity.world.spawnParticle(EnumParticleTypes.REDSTONE, true, pos.x, pos.y + 0.05, pos.z, 0.0001, 0, 1);
+				}
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -69,10 +76,16 @@ public class Velocibliteration extends AbstractTrait {
 					}
 				}
 			}
-			
+
 			if (Math.min(3, 1f * velohit.getVelSq() * 4) + 0.5 * (velohit.getProgress() - 0.75f) > 2) {
 				player.addPotionEffect(new PotionEffect(ModPotions.invulnerability, 60));
 				ImpactFrameAction.INSTANCE.run(player.world, player.posX, player.posY, player.posZ, ImpactFrameAction.build(player, 0, true));
+				Vec3d vec = player.getLookVec().scale(-Math.sqrt(velohit.getVelSq()) * 2);
+				if (player.isElytraFlying()) {
+					vec = vec.scale(2);
+				}
+				player.addVelocity(vec.x, vec.y, vec.z);
+				player.velocityChanged = true;
 			}
 		}
 	}

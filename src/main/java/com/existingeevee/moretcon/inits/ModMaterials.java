@@ -221,7 +221,7 @@ public class ModMaterials implements MaterialTypes {
 			"tconstruct:bolt");
 
 	public static final UniqueMaterial materialImpulseConcentrator = new UniqueMaterial(
-			MiscUtils.createNonConflictiveName("impulse_concentrator"), 0xfcba03, "tconstruct:pan_head", 
+			MiscUtils.createNonConflictiveName("impulse_concentrator"), 0x4c4cdc, "tconstruct:pan_head", 
 			"tconstruct:frypan");
 	
 	public static final UniqueMaterial materialGasVials = new UniqueMaterial(
