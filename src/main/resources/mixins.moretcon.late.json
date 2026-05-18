@@ -24,6 +24,7 @@
   	"softdep.thebetweenlands.MixinEntityShockwaveBlock",
   	"softdep.thebetweenlands.MixinToolCore",
   	"softdep.thebetweenlands.MixinItemGreataxe",
+  	"softdep.thebetweenlands.MixinEntityTinySludgeWorm",
   	
   	"softdep.tinkertoolleveling.MixinModToolLeveling",
   	

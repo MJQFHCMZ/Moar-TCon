@@ -68,6 +68,9 @@ public class Wormed extends NumberTrackerTrait implements IAdditionalTraitMethod
 			if (attacker instanceof EntityPlayer) {
 				worm.setOwnerId(attacker.getUniqueID());
 			}
+			worm.getEntityData().setBoolean("moretcon.wormed", true);
+			worm.getEntityData().setTag("moretcon.wormed.tool", ammoStack.serializeNBT());
+			
 			world.spawnEntity(worm);
 			projectile.setDead();
 		}
