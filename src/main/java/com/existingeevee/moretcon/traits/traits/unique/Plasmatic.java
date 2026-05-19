@@ -49,7 +49,7 @@ public class Plasmatic extends AbstractTrait {
 		}
 	}
 
-	public void proc(EntityPlayer player, EntityLivingBase origTargat) {
+	public void proc(EntityPlayer player, EntityLivingBase origTarget) {
 		double maxRange = 4.0D;
 
 		Vec3d start = player.getPositionEyes(0.5f);
@@ -61,7 +61,7 @@ public class Plasmatic extends AbstractTrait {
 		List<EntityLivingBase> toProcOn = new ArrayList<>();
 
 		for (Entity e : entities) {
-			if (!(e instanceof EntityLivingBase) || e.equals(player) || e == player.getRidingEntity() || e == origTargat) {
+			if (!(e instanceof EntityLivingBase) || e.equals(player) || e == player.getRidingEntity() || e == origTarget) {
 				continue;
 			}
 
@@ -94,10 +94,11 @@ public class Plasmatic extends AbstractTrait {
 		}
 		
 		//deal in the bonus damage
+		if (origTarget != null)
+			toProcOn.add(origTarget);
+		
 		double x = toProcOn.size() + 1;
 		double bonusDmg = x * Math.log(x + 1);
-		
-		toProcOn.add(origTargat);
 		for (EntityLivingBase e : toProcOn) {
 			int hrt = e.hurtResistantTime;
 			e.hurtResistantTime = 0;
