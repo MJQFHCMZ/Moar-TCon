@@ -26,7 +26,7 @@ public class Weightless extends AbstractArmorTrait implements IAdditionalTraitMe
 
 	@Override
 	public void onEntityItemTick(ItemStack tool, EntityItem entity) {		
-		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entity.world, entity.getPositionVector()) == -0.08)
+		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entity, entity.world, entity.getPositionVector()) == -0.08)
 			entity.motionY += 0.039f;
 	}
 
@@ -37,7 +37,7 @@ public class Weightless extends AbstractArmorTrait implements IAdditionalTraitMe
 		if (entity.isElytraFlying() || (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying) || entity.onGround)
 			return;
 		
-		double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(e.getEntityLiving().world, entity.getPositionVector());
+		double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(entity, e.getEntityLiving().world, entity.getPositionVector());
 
 		int count = 0;
 		

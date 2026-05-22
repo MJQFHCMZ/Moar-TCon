@@ -5,6 +5,7 @@ import com.existingeevee.moretcon.other.utils.MirrorUtils;
 import com.existingeevee.moretcon.other.utils.MirrorUtils.IMethod;
 import com.existingeevee.moretcon.other.utils.MirrorUtils.MirrorException;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -32,12 +33,12 @@ public class GCGravityCalculator implements GravityModifier {
 	}
 
 	@Override
-	public boolean isApplicable(World world, Vec3d vec) {
+	public boolean isApplicable(Entity e, World world, Vec3d vec) {
 		return worldProvider != null && getGravity != null && worldProvider.isInstance(world.provider);
 	}
 
 	@Override
-	public double getGravitationalAcceleration(World world, Vec3d vec) {
+	public double getGravitationalAcceleration(Entity e, World world, Vec3d vec) {
 		return -0.08 + getGravity.invoke(world.provider);
 	}
 

@@ -70,7 +70,7 @@ public class BlockEtherealBase extends BlockBase {
 				}
 			}
 
-			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(worldIn, entity.getPositionVector());
+			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(entity, worldIn, entity.getPositionVector());
 
 			if (canWalkOn && !(living.isElytraFlying() || (living instanceof EntityPlayer && ((EntityPlayer) living).capabilities.isFlying))) {
 				entity.fallDistance = 0;
