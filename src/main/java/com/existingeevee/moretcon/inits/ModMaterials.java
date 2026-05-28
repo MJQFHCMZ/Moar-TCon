@@ -709,6 +709,7 @@ public class ModMaterials implements MaterialTypes {
 			materialGarstone.setRepresentativeItem("gemGarstone");
 			materialGarstone.addTrait(TinkerTraits.coldblooded, HEAD);
 			materialGarstone.addTrait(ModTraits.luminescent, HEAD);
+			materialGarstone.addTrait(ModTraits.anguish, HEAD);
 			materialGarstone.addTrait(TinkerTraits.jagged, HEAD);
 			materialGarstone.addTrait(TinkerTraits.unnatural);
 			materialGarstone.addTrait(ModTraits.luminescent);

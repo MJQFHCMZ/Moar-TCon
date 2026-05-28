@@ -24,6 +24,7 @@ import com.existingeevee.moretcon.traits.modifiers.misc.MatterDeconstructionGel;
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterReconstructionGel;
 import com.existingeevee.moretcon.traits.traits.Aetheric;
 import com.existingeevee.moretcon.traits.traits.Afterimage;
+import com.existingeevee.moretcon.traits.traits.Anguish;
 import com.existingeevee.moretcon.traits.traits.AntiGravity;
 import com.existingeevee.moretcon.traits.traits.Approximate;
 import com.existingeevee.moretcon.traits.traits.Blighted;
@@ -206,6 +207,7 @@ public class ModTraits {
 	public static Velocibliteration velocibliteration = new Velocibliteration();
 	public static Gaseous gaseous = new Gaseous();
 	public static Executor executor = new Executor();
+	public static Anguish anguish = new Anguish();
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
