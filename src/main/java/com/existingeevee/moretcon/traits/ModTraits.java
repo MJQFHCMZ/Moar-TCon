@@ -49,7 +49,6 @@ import com.existingeevee.moretcon.traits.traits.Inertia;
 import com.existingeevee.moretcon.traits.traits.KineticBattery;
 import com.existingeevee.moretcon.traits.traits.Leeching;
 import com.existingeevee.moretcon.traits.traits.Liquid;
-import com.existingeevee.moretcon.traits.traits.Luminescent;
 import com.existingeevee.moretcon.traits.traits.Macrocrystaline;
 import com.existingeevee.moretcon.traits.traits.Magical;
 import com.existingeevee.moretcon.traits.traits.MagicallyReactive;
@@ -158,7 +157,6 @@ public class ModTraits {
 	public static Penetrant penetrant = new Penetrant();
 	public static Darkened darkened = new Darkened();
 	public static DummyTrait etheralHarvest = new DummyTrait("etheralharvest", 0);
-	public static Luminescent luminescent = new Luminescent("luminescent", 0);
 	public static Weightless weightless = new Weightless();
 	public static AttributeTrait warding = new AttributeTrait("shielding", 0, new AttributeModifier(UUID.fromString("aed073df-79af-4de9-b62c-44b5fcc44fef"), "shielding", 4, 0), SharedMonsterAttributes.ARMOR).setWorksInArmor(true).setWorksInOffhand(true);
 	public static Overdrive overdrive = new Overdrive();

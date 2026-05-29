@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,11 @@ import com.existingeevee.math.Quaternion;
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.existingeevee.moretcon.other.DamageScalar;
+import com.existingeevee.moretcon.other.TimedWeakCache;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.modifiers.ModExtraTrait2;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,6 +43,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.DamageSource;
@@ -249,7 +253,19 @@ public class MiscUtils {
 		return getEmbossments(stack).stream().filter(m -> m instanceof UniqueMaterial).map(m -> ((UniqueMaterial) m)).collect(Collectors.toList());
 	}
 
+	private static final TimedWeakCache<NBTTagCompound, List<Material>> EMB_CACHE = new TimedWeakCache<NBTTagCompound, List<Material>>(50, 60000L);
+	
 	public static List<Material> getEmbossments(ItemStack stack) {
+		
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null) {
+			return Arrays.asList();
+		}
+		
+		if (EMB_CACHE.contains(nbt)) {
+			return EMB_CACHE.get(nbt);
+		}
+		
 		List<Material> material = new ArrayList<>();
 
 		NBTTagList modifiers = TagUtil.getBaseModifiersTagList(stack);
@@ -271,7 +287,8 @@ public class MiscUtils {
 				}
 			}
 		}
-
+		material = ImmutableList.copyOf(material);
+		EMB_CACHE.put(nbt, material);
 		return material;
 	}
 

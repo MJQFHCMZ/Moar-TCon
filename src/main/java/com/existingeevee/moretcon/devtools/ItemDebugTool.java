@@ -67,6 +67,12 @@ public class ItemDebugTool extends ItemBase {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			try {
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}

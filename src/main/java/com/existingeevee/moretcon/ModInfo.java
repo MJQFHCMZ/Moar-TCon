@@ -11,7 +11,7 @@ public class ModInfo {
     		"after:thebetweenlands;" +
     		"after:aether_legacy;" +
     		"after:iceandfire;" +
-    		"after:plustic;" +
+    		"after:plustic;" + 
     		"after:crafttweaker";
 
     public static final String ISSUE_TRACKER = "https://github.com/DabbingEevee/Moar-TCon/issues";
