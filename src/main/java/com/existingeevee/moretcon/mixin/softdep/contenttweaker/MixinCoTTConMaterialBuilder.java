@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.CoTTConUniqueMaterialBuilder;
-import com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.CoTUniqueTConMaterial;
+import com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.material.CoTTConUniqueMaterialBuilder;
+import com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.material.CoTUniqueTConMaterial;
 import com.existingeevee.moretcon.item.tooltypes.Bomb.ExplosiveMaterialStats;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;

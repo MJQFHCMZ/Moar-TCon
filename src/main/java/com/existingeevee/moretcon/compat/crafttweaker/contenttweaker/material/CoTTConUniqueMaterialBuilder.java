@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.compat.crafttweaker.contenttweaker;
+package com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.material;
 
 import com.teamacronymcoders.contenttweaker.modules.tinkers.materials.CoTTConMaterialBuilder;
 
