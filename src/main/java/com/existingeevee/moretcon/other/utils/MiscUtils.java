@@ -3,16 +3,12 @@ package com.existingeevee.moretcon.other.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -21,13 +17,12 @@ import com.existingeevee.math.Quaternion;
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.existingeevee.moretcon.other.DamageScalar;
+import com.existingeevee.moretcon.other.utils.MirrorUtils.IField;
+import com.existingeevee.moretcon.other.utils.MirrorUtils.IMethod;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.modifiers.ModExtraTrait2;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -72,15 +67,10 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modifiers.ModExtraTrait;
 
 public class MiscUtils {
-	
-	@SuppressWarnings("unchecked")
-	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith)::apply;
-	
+
 	public static boolean canArrowHit(Entity e) {
-		return ARROW_TARGETS.test(e);
+		return EntitySelectors.NOT_SPECTATING.test(e) && EntitySelectors.IS_ALIVE.test(e) && e.canBeCollidedWith();
 	}
-	
-	private static final Gson GSON = new GsonBuilder().create();
 
 	public static boolean isClass(String className) {
 		try {
@@ -91,10 +81,10 @@ public class MiscUtils {
 		}
 	}
 
-	public static final Method getDeathSound$EntityLivingBase = ObfuscationReflectionHelper.findMethod(EntityLivingBase.class, "func_184615_bR", SoundEvent.class);
-	public static final Method getSoundVolume$EntityLivingBase = ObfuscationReflectionHelper.findMethod(EntityLivingBase.class, "func_70599_aP", float.class);
-	public static final Method getSoundPitch$EntityLivingBase = ObfuscationReflectionHelper.findMethod(EntityLivingBase.class, "func_70647_i", float.class);
-	public static final Method checkTotemDeathProtection$EntityLivingBase = ObfuscationReflectionHelper.findMethod(EntityLivingBase.class, "func_190628_d", boolean.class, DamageSource.class);
+	protected static final IMethod<SoundEvent> getDeathSound$EntityLivingBase = MirrorUtils.reflectObfusMethod(EntityLivingBase.class, "func_184615_bR", SoundEvent.class);
+	protected static final IMethod<Float> getSoundVolume$EntityLivingBase = MirrorUtils.reflectObfusMethod(EntityLivingBase.class, "func_70599_aP", float.class);
+	protected static final IMethod<Float> getSoundPitch$EntityLivingBase = MirrorUtils.reflectObfusMethod(EntityLivingBase.class, "func_70647_i", float.class);
+	protected static final IMethod<Boolean> checkTotemDeathProtection$EntityLivingBase = MirrorUtils.reflectObfusMethod(EntityLivingBase.class, "func_190628_d", boolean.class, DamageSource.class);
 
 	public static void trueDamage(EntityLivingBase entity, float amount, DamageSource src, boolean bypassChecks) {
 		if (entity.getHealth() <= 0 || ((entity instanceof EntityPlayer) && ((EntityPlayer) entity).capabilities.isCreativeMode)) {
@@ -106,22 +96,18 @@ public class MiscUtils {
 			}
 		}
 
-		amount *= DamageScalar.getMult(); 
+		amount *= DamageScalar.getMult();
 
 		float health = entity.getHealth();
 		entity.getCombatTracker().trackDamage(src, health, amount);
 		entity.setHealth(health - amount);
 		if (entity.getHealth() <= 0) {
-			try {
-				if (!((Boolean) checkTotemDeathProtection$EntityLivingBase.invoke(entity, src))) {
-					SoundEvent soundevent = (SoundEvent) getDeathSound$EntityLivingBase.invoke(entity);
-					if (soundevent != null) {
-						entity.playSound(soundevent, (Float) getSoundVolume$EntityLivingBase.invoke(entity), (Float) getSoundPitch$EntityLivingBase.invoke(entity));
-					}
-					entity.onDeath(src);
+			if (!checkTotemDeathProtection$EntityLivingBase.invoke(entity, src)) {
+				SoundEvent soundevent = getDeathSound$EntityLivingBase.invoke(entity);
+				if (soundevent != null) {
+					entity.playSound(soundevent, getSoundVolume$EntityLivingBase.invoke(entity), getSoundPitch$EntityLivingBase.invoke(entity));
 				}
-			} catch (IllegalAccessException | InvocationTargetException e) {
-				e.printStackTrace();
+				entity.onDeath(src);
 			}
 		}
 	}
@@ -135,7 +121,7 @@ public class MiscUtils {
 				T newInstance = constructor.newInstance(entity.world);
 				newInstance.deserializeNBT(entity.serializeNBT());
 				newInstance.setUniqueId(UUID.randomUUID()); // Prevent UUID fuckups
- 
+
 				return newInstance;
 			} catch (Throwable t) {
 				t.printStackTrace();
@@ -170,6 +156,9 @@ public class MiscUtils {
 		return null;
 	}
 
+	protected static final IField<Boolean> isUnblockable$DamageSource = MirrorUtils.reflectObfusField(DamageSource.class, "func_76363_c");
+	protected static final IField<Float> hungerDamage$DamageSource = MirrorUtils.reflectObfusField(DamageSource.class, "func_76345_d");
+
 	public static void penetratingDamage(EntityLivingBase entity, int amount, DamageSource src, boolean bypassChecks) {
 		int iframe = entity.hurtResistantTime;
 
@@ -177,8 +166,14 @@ public class MiscUtils {
 			entity.hurtResistantTime = 0;
 		}
 
-		DamageSource clone = GSON.fromJson(GSON.toJson(src), src.getClass()).setDamageBypassesArmor();
-		entity.attackEntityFrom(clone, amount);
+		boolean isUnblockable = src.isUnblockable();
+		float hungerDamage = src.getHungerDamage();
+		try {
+			entity.attackEntityFrom(src.setDamageBypassesArmor(), amount);
+		} finally {
+			isUnblockable$DamageSource.set(src, isUnblockable);
+			hungerDamage$DamageSource.set(src, hungerDamage);
+		}
 
 		if (bypassChecks) {
 			entity.hurtResistantTime = iframe;
@@ -244,12 +239,12 @@ public class MiscUtils {
 		}
 	}
 
-	private static final Field material$ModExtraTrait = ObfuscationReflectionHelper.findField(ModExtraTrait.class, "material");
+	protected static final IField<Material> material$ModExtraTrait = MirrorUtils.reflectObfusField(ModExtraTrait.class, "material");
 
 	public static List<UniqueMaterial> getUniqueEmbossments(ItemStack stack) {
 		return getEmbossments(stack).stream().filter(m -> m instanceof UniqueMaterial).map(m -> ((UniqueMaterial) m)).collect(Collectors.toList());
 	}
-	
+
 	public static List<Material> getEmbossments(ItemStack stack) {
 		List<Material> material = new ArrayList<>();
 
@@ -265,10 +260,7 @@ public class MiscUtils {
 			} else if (identifier.startsWith(ModExtraTrait.EXTRA_TRAIT_IDENTIFIER)) {
 				ModExtraTrait mod = extratrait.get(identifier);
 				if (mod != null) {
-					try {
-						material.add((Material) material$ModExtraTrait.get(mod));
-					} catch (IllegalAccessException ignored) {
-					}
+					material.add(material$ModExtraTrait.get(mod));
 				}
 			}
 		}
@@ -352,14 +344,14 @@ public class MiscUtils {
 
 	public static class NTickTracker {
 		protected static boolean hasStarted = false;
-		
+
 		protected static final List<NTickTracker> LIST = Lists.newArrayList();
-		
+
 		public NTickTracker(Runnable runnable, int executeIn) {
 			this.runnable = runnable;
 			this.waitTicks = executeIn;
 		}
-		
+
 		protected boolean start() {
 			if (LIST.contains(this))
 				return false;
@@ -368,17 +360,17 @@ public class MiscUtils {
 				MinecraftForge.EVENT_BUS.register(NTickTracker.class);
 			return true;
 		}
-		
+
 		private int ticks = 0;
 		private float waitTicks;
 		private Runnable runnable;
-		
+
 		@SubscribeEvent
 		public static void tick(TickEvent.ServerTickEvent event) {
 			if (event.phase == TickEvent.Phase.END) {
 				for (int i = 0; i < LIST.size(); i++) {
 					NTickTracker tracker = LIST.get(i);
-					
+
 					if (tracker.ticks++ > tracker.waitTicks) {
 						tracker.runnable.run();
 						LIST.remove(i--);
@@ -386,9 +378,9 @@ public class MiscUtils {
 				}
 			}
 		}
-		
+
 	}
-	
+
 	public static void executeInNTicks(Runnable runnable, int executeIn) {
 		new NTickTracker(runnable, executeIn).start();
 	}
@@ -484,7 +476,7 @@ public class MiscUtils {
 	public static AxisAlignedBB pointBound(Vec3d point) {
 		return vectorBound(point, point);
 	}
-	
+
 	public static AxisAlignedBB vectorBound(Vec3d a, Vec3d b) {
 		return new AxisAlignedBB(a.x, a.y, a.z, b.x, b.y, b.z);
 	}
