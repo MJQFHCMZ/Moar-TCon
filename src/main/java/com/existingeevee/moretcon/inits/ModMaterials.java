@@ -321,7 +321,7 @@ public class ModMaterials implements MaterialTypes {
 			TinkerMaterials.magmaslime.addTrait(ModTraits.overslime);
 
 			materialSearedStone.addItem("blockSeared", 1, Material.VALUE_Ingot);
-			materialSearedStone.addItem("ingotSeared", 1, Material.VALUE_Ingot / 4);
+			materialSearedStone.addItem("ingotBrickSeared", 1, Material.VALUE_Ingot / 4);
 			((DelagateFluidMaterial) materialSearedStone).setFluid(() -> TinkerFluids.searedStone);
 			materialSearedStone.setCastable(true);
 			materialSearedStone.setCraftable(true);
