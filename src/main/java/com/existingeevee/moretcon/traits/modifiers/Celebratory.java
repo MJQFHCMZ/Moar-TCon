@@ -13,8 +13,10 @@ import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.other.DamageScalar;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.ReequipHack;
+import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
 import com.existingeevee.moretcon.traits.traits.abst.IBombTrait;
+import com.existingeevee.moretcon.traits.traits.internal.PolyshotProj;
 import com.existingeevee.moretcon.traits.traits.unique.Dematerializing;
 import com.google.common.collect.ImmutableList;
 
@@ -56,7 +58,22 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 				return;
 			}
 
-			explode(toolStack, world, projectile.shootingEntity == null ? null : projectile.shootingEntity.getUniqueID(), null, projectile.getPositionVector(), true);
+			boolean pushed = false;
+
+			if (ModTraits.polyshotProj.isToolWithTrait(toolStack)) {
+				NBTTagCompound comp = projectile.getEntityData().getCompoundTag(ModTraits.polyshotProj.getModifierIdentifier());
+				double distTraveled = comp.getDouble("DistTraveled");
+				float mult = (float) (2 * Math.exp(-(PolyshotProj.DSQ_SCALAR * distTraveled) * (PolyshotProj.DSQ_SCALAR * distTraveled)));
+				DamageScalar.push(mult);
+				pushed = true;
+			}
+			try {
+				explode(toolStack, world, projectile.shootingEntity == null ? null : projectile.shootingEntity.getUniqueID(), null, projectile.getPositionVector(), true);
+			} finally {
+				if (pushed) {
+					DamageScalar.pop();
+				}
+			}
 
 			projectile.getTags().add("CelebratoryDefused");
 		}
@@ -71,7 +88,22 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 			return;
 		}
 
-		explode(tool, world, attacker == null ? null : attacker.getUniqueID(), null, bomb.getPositionVector(), true);
+		boolean pushed = false;
+
+		if (ModTraits.polyshotProj.isToolWithTrait(tool)) {
+			NBTTagCompound comp = bomb.getEntityData().getCompoundTag(ModTraits.polyshotProj.getModifierIdentifier());
+			double distTraveled = comp.getDouble("DistTraveled");
+			float mult = (float) (2 * Math.exp(-(PolyshotProj.DSQ_SCALAR * distTraveled) * (PolyshotProj.DSQ_SCALAR * distTraveled)));
+			DamageScalar.push(mult);
+			pushed = true;
+		}
+		try {
+			explode(tool, world, attacker == null ? null : attacker.getUniqueID(), null, bomb.getPositionVector(), true);
+		} finally {
+			if (pushed) {
+				DamageScalar.pop();
+			}
+		}
 	}
 
 	@Override
@@ -124,7 +156,7 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 		if (attacker != null) {
 			rocket.getEntityData().setUniqueId("moretcon.modcelebratory_uuid", attacker);
 		}
-		
+
 		rocket.motionX = 0;
 		rocket.motionY = -0.04; // it ticks upwards by 0.04
 		rocket.motionZ = 0;
@@ -242,7 +274,7 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 			if (!projectile.getTags().contains("CelebratoryBoom")) {
 				return;
 			}
-			
+
 			explode(ammoStack, world, attacker == null ? null : attacker.getUniqueID(), target, null, true);
 		}
 	}
