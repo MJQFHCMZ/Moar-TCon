@@ -28,7 +28,9 @@
   	
   	"softdep.tinkertoolleveling.MixinModToolLeveling",
   	
-  	"softdep.conarm.MixinTraitTasty"
+  	"softdep.conarm.MixinTraitTasty",
+  	
+  	"softdep.contenttweaker.MixinCoTTConMaterialBuilder"
   ],
   
   "client": [

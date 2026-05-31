@@ -1,0 +1,39 @@
+package com.existingeevee.moretcon.mixin.softdep.contenttweaker;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import com.existingeevee.moretcon.item.tooltypes.Bomb.ExplosiveMaterialStats;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.teamacronymcoders.contenttweaker.modules.tinkers.materials.CoTTConMaterial;
+import com.teamacronymcoders.contenttweaker.modules.tinkers.materials.CoTTConMaterialBuilder;
+import com.teamacronymcoders.contenttweaker.modules.tinkers.materials.TConMaterialRepresentation;
+
+import slimeknights.tconstruct.library.materials.Material;
+import stanhebben.zenscript.annotations.ZenMethod;
+
+@Mixin(CoTTConMaterialBuilder.class)
+public class MixinCoTTConMaterialBuilder {
+
+	@Unique
+	private ExplosiveMaterialStats explosiveMaterialStats = null;
+
+	@Unique
+	@ZenMethod("addExplosiveMaterialStats")
+	public void moretcon$Unique$addExplosiveMaterialStats(double radius, int fuseTime) {
+		this.explosiveMaterialStats = new ExplosiveMaterialStats(radius, fuseTime);
+	}
+
+	@Inject(method = "register", at = @At(value = "RETURN"), remap = false)
+	public void moretcon$TAIL_Inject$register(CallbackInfoReturnable<TConMaterialRepresentation> ci) {
+		if (explosiveMaterialStats != null) {
+			TConMaterialRepresentation ret = ci.getReturnValue();
+			Material mat = ret.getMaterial();
+			mat.addStats(explosiveMaterialStats);
+		}
+	}
+}
