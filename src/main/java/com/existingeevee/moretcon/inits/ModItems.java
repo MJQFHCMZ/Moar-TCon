@@ -4,7 +4,6 @@ import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.devtools.ItemDebugTool;
 import com.existingeevee.moretcon.item.ItemBase;
 import com.existingeevee.moretcon.item.ItemCatalyst;
-import com.existingeevee.moretcon.item.ItemCompositeRep;
 import com.existingeevee.moretcon.item.ItemMDGel;
 import com.existingeevee.moretcon.item.ItemNoGravity;
 import com.existingeevee.moretcon.item.ItemNonflamable;
@@ -187,7 +186,6 @@ public class ModItems {
 
 	public static void init() {
 		ModItems.registerItems(
-				new ItemCompositeRep(),
 				new ItemDebugTool()
 		);
 

@@ -6,15 +6,14 @@ import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.entity.EntityInit;
 import com.existingeevee.moretcon.inits.ModTools;
 import com.existingeevee.moretcon.item.ItemMDGel;
-import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MaterialClient;
 import com.existingeevee.moretcon.other.BookTransformerAppendTools;
 import com.existingeevee.moretcon.other.ContentLigntningModifier;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer.GlowType;
+import com.existingeevee.moretcon.other.SlotRendererRegistry;
 import com.existingeevee.moretcon.other.slotrender.ColoredGlowTicRender;
 import com.existingeevee.moretcon.other.slotrender.ShakeTicRender;
-import com.existingeevee.moretcon.other.SlotRendererRegistry;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 import com.existingeevee.moretcon.traits.TraitClient;
@@ -77,8 +76,6 @@ public class ClientProxy extends CommonProxy {
 			BLItems.initBL(true);
 		}
 		ModTools.init(true);
-
-		CompositeRegistry.updateCompositeRenderer();
 
 		TraitClient.init(); //we have to do it here bc tinkers registered the stuff here
 	}

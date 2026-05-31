@@ -14,7 +14,6 @@ import com.existingeevee.moretcon.block.ore.BlockOre;
 import com.existingeevee.moretcon.block.ore.BlockOreMetal;
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.item.ItemBase;
-import com.existingeevee.moretcon.item.ItemCompositeRep;
 import com.existingeevee.moretcon.other.BiValue;
 import com.existingeevee.moretcon.other.sponge.SpongeRegistry.GravitoniumSpongeItem;
 import com.google.common.base.Function;
@@ -97,8 +96,6 @@ public class RegisterHelper {
 				ModelRegisterUtil.registerPartModel((ToolPart) item);
 			} else if (item instanceof GravitoniumSpongeItem) {
 				ModelRegistryHelper.registerSponge((GravitoniumSpongeItem) item);
-			} else if (item instanceof ItemCompositeRep) {
-				//Nothing here. it will be handled later
 			} else {
 				ModelRegistryHelper.registerItemModel(item);
 			}
