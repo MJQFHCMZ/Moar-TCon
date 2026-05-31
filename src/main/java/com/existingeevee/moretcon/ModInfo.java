@@ -12,7 +12,8 @@ public class ModInfo {
     		"after:aether_legacy;" +
     		"after:iceandfire;" +
     		"after:plustic;" + 
-    		"after:crafttweaker";
+    		"after:crafttweaker;" + 
+    		"after:contenttweaker";
 
     public static final String ISSUE_TRACKER = "https://github.com/DabbingEevee/Moar-TCon/issues";
 
