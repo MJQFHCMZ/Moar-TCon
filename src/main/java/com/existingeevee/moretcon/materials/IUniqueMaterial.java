@@ -44,6 +44,7 @@ import slimeknights.tconstruct.tools.ranged.item.BoltCore;
 public interface IUniqueMaterial {
 
 	public static final Set<IUniqueMaterial> uniqueMaterials = new HashSet<>();
+	public static final ThreadLocal<Boolean> reentrant = ThreadLocal.withInitial(() -> false);
 	
 	default ItemStack getUniqueToolPart() {
 		if ((TinkerRegistry.getMaterial(((Material) this).identifier) == null) || TinkerRegistry.getMaterial(((Material) this).getIdentifier()).getIdentifier().equals(Material.UNKNOWN.getIdentifier()) || (UniqueMaterial.getToolFromResourceLocation(getToolResLoc()) == null)) {
@@ -67,32 +68,29 @@ public interface IUniqueMaterial {
 		if (defName == null) {
 			defName = I18n.translateToLocal("uniquetoolpart." + ((Material) this).getIdentifier() + ".name");
 		}
+		
+		String partName = UniqueMaterial.getToolPartFromResourceLocation(this.getPartResLoc()).getUnlocalizedName() + ".name";
+		
 		try {
 			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			if ((stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.sectiontransformer.AbstractMaterialSectionTransformer") && stacktrace[4].getMethodName().equals("transform")) || (stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.content.ContentMaterial") && stacktrace[4].getMethodName().equals("build"))) {
-				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
+
+			//embossment
+			if ((stacktrace[3].getClassName().equals(ModExtraTrait.class.getName()) || stacktrace[3].getClassName().equals(ModExtraTrait2.class.getName())) && stacktrace[3].getMethodName().equals("getLocalizedDesc")) {
+				return I18n.translateToLocal("text.misc.one_of") + defName + " " + partName;
 			}
-			if (stacktrace[3].getClassName().equals(ModExtraTrait.class.getName()) && stacktrace[3].getMethodName().equals("getLocalizedDesc")) {
-				return I18n.translateToLocal("text.misc.one_of") + defName + " " + I18n.translateToLocal(UniqueMaterial.getToolPartFromResourceLocation(this.getPartResLoc()).getUnlocalizedName() + ".name");
-			}
-			if (stacktrace[3].getClassName().equals(ModExtraTrait.class.getName()) && stacktrace[3].getMethodName().equals("getLocalizedName")) {
+			if ((stacktrace[3].getClassName().equals(ModExtraTrait.class.getName()) || stacktrace[3].getClassName().equals(ModExtraTrait2.class.getName())) && stacktrace[3].getMethodName().equals("getLocalizedName")) {
 				return defName;
 			}
-			if (stacktrace[3].getClassName().equals(ModExtraTrait2.class.getName()) && stacktrace[3].getMethodName().equals("getLocalizedDesc")) {
-				return I18n.translateToLocal("text.misc.one_of") + defName + " " + I18n.translateToLocal(UniqueMaterial.getToolPartFromResourceLocation(this.getPartResLoc()).getUnlocalizedName() + ".name");
-			}
-			if (stacktrace[3].getClassName().equals(ModExtraTrait2.class.getName()) && stacktrace[3].getMethodName().equals("getLocalizedName")) {
-				return defName;
-			}
-			if (stacktrace[4].getClassName().equals(ToolPart.class.getName()) && (stacktrace[4].getMethodName().equals("getItemStackDisplayName") || stacktrace[4].getMethodName().equals("func_77653_i"))) {
-				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
-			}
+			
+			//book
 			if (stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.sectiontransformer.BowMaterialSectionTransformer") && (stacktrace[4].getMethodName().equals("generateContent"))) {
 				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
 			}
 			if (stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.content.ContentSingleStatMultMaterial") && (stacktrace[4].getMethodName().equals("build"))) {
 				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
 			}
+			
+			//bolts
 			if (stacktrace[4].getClassName().equals(BoltCore.class.getName()) && (stacktrace[4].getMethodName().equals("getItemStackDisplayName") || stacktrace[4].getMethodName().equals("func_77653_i"))) {
 				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
 			}
@@ -103,6 +101,13 @@ public interface IUniqueMaterial {
 		} 
 
 		return I18n.translateToLocal("material.uniquetoolpart.name");
+	}
+	
+	default String getUniqueLocItemName(@Nullable String defName, String itemName) {
+		if (defName == null) {
+			defName = I18n.translateToLocal("uniquetoolpart." + ((Material) this).getIdentifier() + ".name");
+		}
+		return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ") " + itemName;
 	}
 	
 	ItemStack getCrafter();

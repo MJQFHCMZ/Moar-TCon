@@ -54,6 +54,11 @@ public class UniqueMaterial extends Material implements IUniqueMaterial {
 		return this.getUniqueLocName(null);
 	}
 
+	@Override
+	public String getLocalizedItemName(String itemName) {
+		return this.getUniqueLocItemName(null, itemName);
+	}
+
 	public static ToolPart getToolPartFromResourceLocation(ResourceLocation res) {
 		for (IToolPart part : TinkerRegistry.getToolParts()) {
 			if (part instanceof ToolPart) {

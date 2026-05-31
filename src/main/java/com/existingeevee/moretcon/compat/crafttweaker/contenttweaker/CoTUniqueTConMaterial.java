@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import com.existingeevee.moretcon.materials.IUniqueMaterial;
-import com.existingeevee.moretcon.other.utils.MirrorUtils;
-import com.existingeevee.moretcon.other.utils.MirrorUtils.IField;
 import com.teamacronymcoders.contenttweaker.modules.tinkers.materials.CoTTConMaterial;
-import com.teamacronymcoders.contenttweaker.modules.tinkers.materials.TConMaterialRepresentation;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -16,8 +13,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import stanhebben.zenscript.util.Pair;
 
 public class CoTUniqueTConMaterial extends CoTTConMaterial implements IUniqueMaterial {
-
-	protected static final IField<TConMaterialRepresentation> thisMaterial$CoTTConMaterial = MirrorUtils.reflectField(CoTTConMaterial.class, "thisMaterial");
 	
 	private ResourceLocation toolResLoc;
 	private ResourceLocation partResLoc;
@@ -44,6 +39,14 @@ public class CoTUniqueTConMaterial extends CoTTConMaterial implements IUniqueMat
 		return this.getUniqueLocName(localizedName);
 	}      
 
+	@Override
+	public String getLocalizedItemName(String itemName) {
+        if(itemLocalizer != null) {
+            return super.getLocalizedItemName(itemName);
+        }
+		return this.getUniqueLocItemName(localizedName, itemName);
+	}
+	
     @Override
     public Fluid getFluid() {
         return null;
