@@ -21,7 +21,6 @@ import com.existingeevee.moretcon.inits.recipes.SmelteryInit;
 import com.existingeevee.moretcon.inits.recipes.UniqueToolpartRecipes;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MTMaterialIntegration;
-import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.existingeevee.moretcon.other.ClusterTickingHandler;
 import com.existingeevee.moretcon.other.EventWatcherMain;
 import com.existingeevee.moretcon.other.ImpactFrameHelper;
@@ -186,7 +185,6 @@ public class MoreTCon {
 		if (ConfigHandler.maxToolDurability >= 0) {
 			MinecraftForge.EVENT_BUS.register(new ExtremeToolDurabilityFix());
 		}
-		UniqueMaterial.onPostInit();
 		CompositeRegistry.onPostInit();
 
 		ModTraits.postInit();

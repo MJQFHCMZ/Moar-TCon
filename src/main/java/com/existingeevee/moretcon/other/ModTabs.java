@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.item.ItemReforgeStone;
+import com.existingeevee.moretcon.materials.IUniqueMaterial;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -77,12 +77,12 @@ public class ModTabs {
 				return new ItemStack(ModBlocks.blockMossyBrinkstone, 1);
 			}
 		});
-		
+
 		uniqueToolParts = (new CreativeTabs("uniqueToolParts") {
 			@Override
 			public ItemStack getTabIconItem() {
-				for (Entry<String, BiValue<UniqueMaterial, String>> e : UniqueMaterial.uniqueMaterials.entrySet()) {
-					ItemStack part = e.getValue().getA().getUniqueToolPart();
+				for (IUniqueMaterial e : UniqueMaterial.uniqueMaterials) {
+					ItemStack part = e.getUniqueToolPart();
 					if (part.isEmpty()) {
 						continue;
 					}
@@ -95,12 +95,10 @@ public class ModTabs {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void displayAllRelevantItems(NonNullList<ItemStack> list) {
-				for (Entry<String, BiValue<UniqueMaterial, String>> matObj : UniqueMaterial.uniqueMaterials.entrySet()) {
-					if (matObj.getValue().getA() != null) {
-						ItemStack toolpart = matObj.getValue().getA().getUniqueToolPart();
-						if (toolpart != null && !toolpart.isEmpty()) {
-							list.add(toolpart);
-						}
+				for (IUniqueMaterial matObj : UniqueMaterial.uniqueMaterials) {
+					ItemStack toolpart = matObj.getUniqueToolPart();
+					if (toolpart != null && !toolpart.isEmpty()) {
+						list.add(toolpart);
 					}
 				}
 			}

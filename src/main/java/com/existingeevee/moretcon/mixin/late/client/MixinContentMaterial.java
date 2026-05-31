@@ -47,7 +47,7 @@ public abstract class MixinContentMaterial {
 	private boolean moretcon$INVOKE_Redirect$addStatsDisplay(IToolPart tp, String string, Operation<Boolean> original) {
 		if (material instanceof UniqueMaterial) {
 			UniqueMaterial unique = (UniqueMaterial) material;
-			if (((Item) tp).getRegistryName().toString().equals(unique.getPartResLoc())) {
+			if (((Item) tp).getRegistryName().equals(unique.getPartResLoc())) {
 				return true;
 			}
 			return false;

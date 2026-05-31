@@ -15,7 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.existingeevee.math.Quaternion;
 import com.existingeevee.moretcon.ModInfo;
-import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.materials.IUniqueMaterial;
 import com.existingeevee.moretcon.other.DamageScalar;
 import com.existingeevee.moretcon.other.utils.MirrorUtils.IField;
 import com.existingeevee.moretcon.other.utils.MirrorUtils.IMethod;
@@ -241,8 +241,8 @@ public class MiscUtils {
 
 	protected static final IField<Material> material$ModExtraTrait = MirrorUtils.reflectObfusField(ModExtraTrait.class, "material");
 
-	public static List<UniqueMaterial> getUniqueEmbossments(ItemStack stack) {
-		return getEmbossments(stack).stream().filter(m -> m instanceof UniqueMaterial).map(m -> ((UniqueMaterial) m)).collect(Collectors.toList());
+	public static List<IUniqueMaterial> getUniqueEmbossments(ItemStack stack) {
+		return getEmbossments(stack).stream().filter(m -> m instanceof IUniqueMaterial).map(m -> ((IUniqueMaterial) m)).collect(Collectors.toList());
 	}
 
 	public static List<Material> getEmbossments(ItemStack stack) {

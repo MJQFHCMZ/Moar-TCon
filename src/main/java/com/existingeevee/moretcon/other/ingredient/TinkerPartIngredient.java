@@ -6,6 +6,7 @@ import com.existingeevee.moretcon.materials.UniqueMaterial;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tinkering.IMaterialItem;
 
@@ -14,7 +15,7 @@ public class TinkerPartIngredient extends Ingredient {
 	private Material mat = null;
 
 	public TinkerPartIngredient(Material mat, String item) {
-		this(mat, UniqueMaterial.getToolPart(item));
+		this(mat, UniqueMaterial.getToolPartFromResourceLocation(new ResourceLocation(item)));
 	}
 
 	public TinkerPartIngredient(Material mat, IMaterialItem item) {
