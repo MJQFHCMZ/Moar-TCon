@@ -2,17 +2,15 @@ package com.existingeevee.moretcon.traits.modifiers;
 
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
 import com.existingeevee.moretcon.entity.entities.EntityBomb;
 import com.existingeevee.moretcon.inits.ModItems;
 import com.existingeevee.moretcon.other.DamageScalar;
-import com.existingeevee.moretcon.other.TempInvulnerability;
 import com.existingeevee.moretcon.other.utils.MiscUtils;
 import com.existingeevee.moretcon.other.utils.ReequipHack;
 import com.existingeevee.moretcon.traits.traits.abst.IAdditionalTraitMethods;
@@ -28,7 +26,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.scoreboard.Team;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -59,22 +56,7 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 				return;
 			}
 
-			Set<Entity> toImmune = new HashSet<>();
-
-			if (projectile.shootingEntity != null) {
-				toImmune.add(projectile.shootingEntity);
-				Team team = projectile.shootingEntity.getTeam();
-				if (team != null && !team.getAllowFriendlyFire()) {
-					for (Entity e : world.loadedEntityList) {
-						if (e.getTeam() == team) {
-							toImmune.add(e); // doesnt attack the thrower or team
-						}
-					}
-				}
-			}
-			TempInvulnerability.addAll(toImmune);
-			explode(toolStack, world, null, projectile.getPositionVector(), true);
-			TempInvulnerability.remAll(toImmune);
+			explode(toolStack, world, projectile.shootingEntity == null ? null : projectile.shootingEntity.getUniqueID(), null, projectile.getPositionVector(), true);
 
 			projectile.getTags().add("CelebratoryDefused");
 		}
@@ -89,23 +71,7 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 			return;
 		}
 
-		Set<Entity> toImmune = new HashSet<>();
-
-		if (attacker != null) {
-			toImmune.add(attacker);
-			Team team = attacker.getTeam();
-			if (team != null && !team.getAllowFriendlyFire()) {
-				for (Entity e : world.loadedEntityList) {
-					if (e.getTeam() == team) {
-						toImmune.add(e); // doesnt attack the thrower or team
-					}
-				}
-			}
-		}
-
-		TempInvulnerability.addAll(toImmune);
-		explode(tool, world, null, bomb.getPositionVector(), true);
-		TempInvulnerability.remAll(toImmune);
+		explode(tool, world, attacker == null ? null : attacker.getUniqueID(), null, bomb.getPositionVector(), true);
 	}
 
 	@Override
@@ -114,21 +80,8 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 			return; // we handle projectiles ( + bombs) seperately
 
 		if (wasHit) {
-			Set<Entity> toImmune = new HashSet<>();
 
-			toImmune.add(player);
-			Team team = player.getTeam();
-			if (team != null && !team.getAllowFriendlyFire()) {
-				for (Entity e : player.world.loadedEntityList) {
-					if (e.getTeam() == team) {
-						toImmune.add(e); // doesnt attack the thrower or team
-					}
-				}
-			}
-
-			TempInvulnerability.addAll(toImmune);
-			explode(tool, target.world, target, null, false);
-			TempInvulnerability.remAll(toImmune);
+			explode(tool, target.world, player == null ? null : player.getUniqueID(), target, null, false);
 		}
 	}
 
@@ -140,7 +93,7 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 		}
 	}
 
-	public void explode(ItemStack tool, World world, @Nullable Entity target, @Nullable Vec3d cent, boolean bypass) {
+	public void explode(ItemStack tool, World world, @Nullable UUID attacker, @Nullable Entity target, @Nullable Vec3d cent, boolean bypass) {
 		if (world.isRemote || (target == null && cent == null))
 			return;
 
@@ -168,6 +121,10 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 			rocket = new EntityFireworkRocket(world, makeFirework(world.rand, color, amount), (EntityLivingBase) target);
 		}
 
+		if (attacker != null) {
+			rocket.getEntityData().setUniqueId("moretcon.modcelebratory_uuid", attacker);
+		}
+		
 		rocket.motionX = 0;
 		rocket.motionY = -0.04; // it ticks upwards by 0.04
 		rocket.motionZ = 0;
@@ -286,23 +243,7 @@ public class Celebratory extends ModifierTrait implements IBombTrait, IProjectil
 				return;
 			}
 			
-			Set<Entity> toImmune = new HashSet<>();
-
-			if (attacker != null) {
-				toImmune.add(attacker);
-				Team team = attacker.getTeam();
-				if (team != null && !team.getAllowFriendlyFire()) {
-					for (Entity e : world.loadedEntityList) {
-						if (e.getTeam() == team) {
-							toImmune.add(e); // doesnt attack the thrower or team
-						}
-					}
-				}
-			}
-			
-			TempInvulnerability.addAll(toImmune);
-			explode(ammoStack, world, target, null, true);
-			TempInvulnerability.remAll(toImmune);
+			explode(ammoStack, world, attacker == null ? null : attacker.getUniqueID(), target, null, true);
 		}
 	}
 }
