@@ -156,8 +156,8 @@ public class MiscUtils {
 		return null;
 	}
 
-	protected static final IField<Boolean> isUnblockable$DamageSource = MirrorUtils.reflectObfusField(DamageSource.class, "func_76363_c");
-	protected static final IField<Float> hungerDamage$DamageSource = MirrorUtils.reflectObfusField(DamageSource.class, "func_76345_d");
+	protected static final IField<Boolean> isUnblockable$DamageSource = MirrorUtils.reflectObfusField(DamageSource.class, "field_76374_o");
+	protected static final IField<Float> hungerDamage$DamageSource = MirrorUtils.reflectObfusField(DamageSource.class, "field_76384_q");
 
 	public static void penetratingDamage(EntityLivingBase entity, int amount, DamageSource src, boolean bypassChecks) {
 		int iframe = entity.hurtResistantTime;
