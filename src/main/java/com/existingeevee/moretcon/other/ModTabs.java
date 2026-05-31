@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import slimeknights.tconstruct.library.materials.Material;
 
 public class ModTabs {
 
@@ -95,12 +96,16 @@ public class ModTabs {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void displayAllRelevantItems(NonNullList<ItemStack> list) {
-				for (IUniqueMaterial matObj : UniqueMaterial.uniqueMaterials) {
+				List<IUniqueMaterial> mats = new ArrayList<>(UniqueMaterial.uniqueMaterials);
+				mats.sort((a, b) -> {
+					return ((Material) a).getIdentifier().compareTo(((Material) b).getIdentifier());
+				});
+				for (IUniqueMaterial matObj : mats) {
 					ItemStack toolpart = matObj.getUniqueToolPart();
 					if (toolpart != null && !toolpart.isEmpty()) {
 						list.add(toolpart);
 					}
-				}
+				}				
 			}
 		});
 

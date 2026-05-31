@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.CompositeRegistry.CompositeData;
-import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.materials.IUniqueMaterial;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -45,8 +45,8 @@ public abstract class MixinContentMaterial {
 
 	@WrapOperation(method = "addStatsDisplay", at = @At(value = "INVOKE", ordinal = 0, target = "Lslimeknights/tconstruct/library/tools/IToolPart;hasUseForStat(Ljava/lang/String;)Z"), remap = false)
 	private boolean moretcon$INVOKE_Redirect$addStatsDisplay(IToolPart tp, String string, Operation<Boolean> original) {
-		if (material instanceof UniqueMaterial) {
-			UniqueMaterial unique = (UniqueMaterial) material;
+		if (material instanceof IUniqueMaterial) {
+			IUniqueMaterial unique = (IUniqueMaterial) material;
 			if (((Item) tp).getRegistryName().equals(unique.getPartResLoc())) {
 				return true;
 			}
@@ -70,8 +70,8 @@ public abstract class MixinContentMaterial {
 			displayTools.add(new ElementTinkerItem(material.getRepresentativeItem()));
 		}
 
-		if (material instanceof UniqueMaterial) {
-			UniqueMaterial unique = (UniqueMaterial) material;
+		if (material instanceof IUniqueMaterial) {
+			IUniqueMaterial unique = (IUniqueMaterial) material;
 			ElementItem elementItem = new ElementTinkerItem(unique.getCrafter());
 			elementItem.tooltip = Arrays.asList(I18n.format("text.uniquely_crafted." + unique.getCrafterString()).split("__n__"));
 			displayTools.add(elementItem);
@@ -106,8 +106,8 @@ public abstract class MixinContentMaterial {
 			return; 
 		}
 
-		if (material instanceof UniqueMaterial) {
-			UniqueMaterial unique = (UniqueMaterial) material;
+		if (material instanceof IUniqueMaterial) {
+			IUniqueMaterial unique = (IUniqueMaterial) material;
 			displayTools.add(new ElementTinkerItem(unique.buildSampleTool()));
 		} else {
 			ToolCore[] tools = new ToolCore[] { TinkerHarvestTools.pickaxe, TinkerHarvestTools.mattock, TinkerMeleeWeapons.broadSword,

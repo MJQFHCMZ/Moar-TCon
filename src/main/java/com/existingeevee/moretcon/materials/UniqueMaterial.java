@@ -51,7 +51,7 @@ public class UniqueMaterial extends Material implements IUniqueMaterial {
 
 	@Override
 	public String getLocalizedName() {
-		return this.getUniqueLocName();
+		return this.getUniqueLocName(null);
 	}
 
 	public static ToolPart getToolPartFromResourceLocation(ResourceLocation res) {

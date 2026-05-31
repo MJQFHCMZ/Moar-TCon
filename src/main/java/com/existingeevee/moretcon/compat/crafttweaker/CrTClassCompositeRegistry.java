@@ -39,7 +39,7 @@ public class CrTClassCompositeRegistry {
 
 			@Override
 			public String describe() {
-				return String.format("Registered composite material recipes for %s using %s. ", toMaterial, fluid.getName());
+				return String.format("Registered composite material recipes for %s using %s and %s.", toMaterial, fromMaterial, fluid.getName());
 			}
 		});	    
 	}
