@@ -65,6 +65,7 @@ public interface IUniqueMaterial {
 	}
 	
 	default String getUniqueLocName(@Nullable String defName) {
+
 		if (defName == null) {
 			defName = I18n.translateToLocal("uniquetoolpart." + ((Material) this).getIdentifier() + ".name");
 		}
@@ -83,10 +84,11 @@ public interface IUniqueMaterial {
 			}
 			
 			//book
-			if (stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.sectiontransformer.BowMaterialSectionTransformer") && (stacktrace[4].getMethodName().equals("generateContent"))) {
-				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
-			}
-			if (stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.content.ContentSingleStatMultMaterial") && (stacktrace[4].getMethodName().equals("build"))) {
+			if ((stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.sectiontransformer.AbstractMaterialSectionTransformer") && stacktrace[4].getMethodName().equals("transform")) ||
+					(stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.sectiontransformer.BowMaterialSectionTransformer") && (stacktrace[4].getMethodName().equals("generateContent"))) ||
+					(stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.content.ContentSingleStatMultMaterial") && (stacktrace[4].getMethodName().equals("build"))) ||
+					(stacktrace[4].getClassName().equals("slimeknights.tconstruct.library.book.content.ContentMaterial") && (stacktrace[4].getMethodName().equals("build")))
+					) {
 				return I18n.translateToLocal("material.uniquetoolpart.name") + " (" + defName + ")";
 			}
 			
