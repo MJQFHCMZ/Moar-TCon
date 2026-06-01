@@ -64,5 +64,11 @@ public class ItemCoTCatalyst extends ItemCatalyst implements IHasGeneratedModel,
         return models;
     }
 
+    @Override
+    public List<String> getModelNames(List<String> modelNames) {
+        modelNames.add(this.getUnlocalizedName().substring(5));
+        return modelNames;
+    }
 
+    
 }

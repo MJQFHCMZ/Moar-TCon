@@ -1,9 +1,16 @@
 package com.existingeevee.moretcon.compat.crafttweaker;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.ItemCoTCatalyst;
 import com.existingeevee.moretcon.item.ItemCatalyst;
+import com.existingeevee.moretcon.item.ItemCatalyst.CatalyzedAlloyRegisterEvent;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.CompositeRegistry.CompositeData;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer.GlowType;
@@ -18,6 +25,8 @@ import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
@@ -33,7 +42,7 @@ public class CrTClassMoreTCon {
     
     private static void init() {
         if(!init) {
-            MinecraftForge.EVENT_BUS.register(new CrTClassMoreTCon());
+            MinecraftForge.EVENT_BUS.register(CrTClassMoreTCon.class);
             init = true;
         }
     }
@@ -104,18 +113,28 @@ public class CrTClassMoreTCon {
 		});	 
     }
     
+	public static final Map<ItemCatalyst, Map<ILiquidStack, List<ILiquidStack>>> REMOVED_RECIPES = new HashMap<>();
+    
     @ZenMethod
     public static void removeCatalyzedAlloy(IItemStack catalyst, ILiquidStack output, @Optional ILiquidStack[] input) {
         init();
-		CraftTweakerAPI.apply(new IAction() {
+        
+        CraftTweakerAPI.apply(new IAction() {
 			@Override
 			public void apply() {
+		        List<ILiquidStack> in = new ArrayList<>();
+		        if(input == null || input.length == 0) {
+		            in = null;
+		        } else {
+		            Collections.addAll(in, input);
+		        }
+				
 				Item item = CraftTweakerMC.getItemStack(catalyst).getItem();
 				if (!(item instanceof ItemCatalyst)) {
 					throw new NoSuchElementException("Not a catalyst item: " + item.getRegistryName());
 				}
-				//TODO make you work
-				((ItemCatalyst) item).removeAlloy(CraftTweakerMC.getLiquidStack(output), CraftTweakerMC.getLiquidStacks(input));				
+
+	            REMOVED_RECIPES.computeIfAbsent((ItemCatalyst) item, i -> new LinkedHashMap<>()).put(output, in);
 			}
 
 			@Override
@@ -123,5 +142,38 @@ public class CrTClassMoreTCon {
 				return String.format("Removed catalyzed alloying recipe for %s.", CraftTweakerMC.getLiquidStack(output).getFluid());
 			}
 		});	 
+    }
+    
+    @SubscribeEvent
+    public static void onTinkerRegister(CatalyzedAlloyRegisterEvent event) {
+        if(event.getRecipe() instanceof CrTAlloyRecipe) {
+            return;
+        }
+        
+        for(Map.Entry<ILiquidStack, List<ILiquidStack>> entry : REMOVED_RECIPES.getOrDefault(event.catalyst, new LinkedHashMap<>()).entrySet()) {
+            
+            if(event.getRecipe().getResult().isFluidEqual(((FluidStack) entry.getKey().getInternal()))) {
+                if(entry.getValue() != null) {
+                    List<ILiquidStack> in = entry.getValue();
+                    List<FluidStack> rin = event.getRecipe().getFluids();
+                    if(rin.size() == in.size()) {
+                        boolean valid = true;
+                        for(int i = 0; i < in.size(); i++) {
+                            ILiquidStack stack = in.get(i);
+                            FluidStack lStack = rin.get(i);
+                            if(!lStack.isFluidEqual(((FluidStack) stack.getInternal()))) {
+                                valid = false;
+                                
+                            }
+                        }
+                        if(valid) {
+                            event.setCanceled(true);
+                        }
+                    }
+                } else {
+                    event.setCanceled(true);
+                }
+            }
+        }
     }
 }
