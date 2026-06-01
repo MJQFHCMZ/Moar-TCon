@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "tconstruct:blocks/smeltery/seared_brick",
+    "up": "moretcon:blocks/blockcatalyzationchambertop",
+    "north": "moretcon:blocks/blockcatalyzationchamberoff",
+    "east": "moretcon:blocks/blockcatalyzationchamberoff",
+    "south": "moretcon:blocks/blockcatalyzationchamberoff",
+    "west": "moretcon:blocks/blockcatalyzationchamberoff",
+    "particle": "moretcon:blocks/blockcatalyzationchamberoff"
+  }
+}

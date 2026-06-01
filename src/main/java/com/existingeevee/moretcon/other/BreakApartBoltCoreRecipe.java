@@ -1,6 +1,6 @@
 package com.existingeevee.moretcon.other;
 
-import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.materials.IUniqueMaterial;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -24,7 +24,7 @@ public class BreakApartBoltCoreRecipe extends Impl<IRecipe> implements IRecipe {
 			if (stack.isEmpty()) {
 				continue;
 			}
-			if (stack.getItem() instanceof BoltCore && !(BoltCore.getHeadMaterial(stack) instanceof UniqueMaterial) && !found) {
+			if (stack.getItem() instanceof BoltCore && !(BoltCore.getHeadMaterial(stack) instanceof IUniqueMaterial) && !found) {
 				found = true;
 			} else {
 				return false;

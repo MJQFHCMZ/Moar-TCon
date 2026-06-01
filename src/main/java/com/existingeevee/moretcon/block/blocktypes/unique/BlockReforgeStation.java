@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.block.blocktypes;
+package com.existingeevee.moretcon.block.blocktypes.unique;
 
 import javax.annotation.Nonnull;
 

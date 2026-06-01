@@ -46,7 +46,7 @@ public class BlockEtherealBase extends BlockBase {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {		
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
 		if (CompatManager.conarm && entity instanceof EntityLivingBase) {
 
 			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));// ;.contains(entity.getPositionVector())
@@ -60,13 +60,17 @@ public class BlockEtherealBase extends BlockBase {
 			boolean canWalkOn = false; // ScaffoldBlock
 
 			for (ItemStack stack : living.getArmorInventoryList()) {
-				if (ModArmorTraits.etherealTangibility.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
-					canWalkOn = true;
-					break;
+				try {
+					if (ModArmorTraits.etherealTangibility.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
+						canWalkOn = true;
+						break;
+					}
+				} catch (NoClassDefFoundError e) { //just in case
+					return;
 				}
 			}
 
-			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(worldIn, entity.getPositionVector());
+			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(entity, worldIn, entity.getPositionVector());
 
 			if (canWalkOn && !(living.isElytraFlying() || (living instanceof EntityPlayer && ((EntityPlayer) living).capabilities.isFlying))) {
 				entity.fallDistance = 0;
@@ -141,7 +145,7 @@ public class BlockEtherealBase extends BlockBase {
 				}
 			};
 		}
-		
+
 		if (this == ModBlocks.oreIonstone) {
 			return new ItemIonstoneBlock(this) {
 

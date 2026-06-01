@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "valid=false": {
+      "model": "moretcon:blockcatalyzationchamberoff"
+    },
+    "valid=true": {
+      "model": "moretcon:blockcatalyzationchamber"
+    }  
+  }
+}

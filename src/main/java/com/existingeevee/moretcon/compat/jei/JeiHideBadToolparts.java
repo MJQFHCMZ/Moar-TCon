@@ -1,9 +1,7 @@
 package com.existingeevee.moretcon.compat.jei;
 
-import java.util.Map.Entry;
-
+import com.existingeevee.moretcon.materials.IUniqueMaterial;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
-import com.existingeevee.moretcon.other.BiValue;
 
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ingredients.IIngredientBlacklist;
@@ -12,9 +10,9 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants.NBT;
 import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
@@ -28,14 +26,14 @@ public class JeiHideBadToolparts extends JeiCustomContainer {
 	@Override
 	public void onRun(IModRegistry r) {
 		IIngredientBlacklist blacklist = r.getJeiHelpers().getIngredientBlacklist();
-		for (Entry<String, BiValue<UniqueMaterial, String>> mat : UniqueMaterial.uniqueMaterials.entrySet()) {
+		for (IUniqueMaterial mat : IUniqueMaterial.uniqueMaterials) {
 			for (IToolPart part : TinkerRegistry.getToolParts()) {
-				blacklist.addIngredientToBlacklist(part.getItemstackWithMaterial(mat.getValue().getA()));
+				blacklist.addIngredientToBlacklist(part.getItemstackWithMaterial((Material) mat));
 			}
 
-			ToolPart part = UniqueMaterial.getToolPartFromResourceLocation(new ResourceLocation(mat.getValue().getA().getPartResLoc()));
+			ToolPart part = UniqueMaterial.getToolPartFromResourceLocation(mat.getPartResLoc());
 			if (part != null) {
-				blacklist.removeIngredientFromBlacklist(part.getItemstackWithMaterial(mat.getValue().getA()));
+				blacklist.removeIngredientFromBlacklist(part.getItemstackWithMaterial((Material) mat));
 			}
 
 			for (ToolCore tool : TinkerRegistry.getTools()) {
@@ -47,7 +45,7 @@ public class JeiHideBadToolparts extends JeiCustomContainer {
 					boolean found = false;
 					for (NBTBase base : list) {
 						String id = ((NBTTagString) base).getString();
-						if (mat.getValue().getA().getIdentifier().equals(id)) {
+						if (((Material) mat).getIdentifier().equals(id)) {
 							found = true;
 							blacklist.addIngredientToBlacklist(s);
 							break;

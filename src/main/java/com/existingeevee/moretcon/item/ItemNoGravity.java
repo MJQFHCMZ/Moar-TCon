@@ -16,7 +16,7 @@ public class ItemNoGravity extends ItemBase {
 
 	@Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entityItem.world, entityItem.getPositionVector()) == -0.08)
+		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entityItem, entityItem.world, entityItem.getPositionVector()) == -0.08)
 			entityItem.motionY += 0.039f;
         return false;
     }

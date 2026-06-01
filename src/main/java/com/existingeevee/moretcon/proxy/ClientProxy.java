@@ -2,19 +2,20 @@ package com.existingeevee.moretcon.proxy;
 
 import com.existingeevee.moretcon.ModInfo;
 import com.existingeevee.moretcon.compat.betweenlands.BLItems;
+import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.entity.EntityInit;
 import com.existingeevee.moretcon.inits.ModTools;
 import com.existingeevee.moretcon.item.ItemMDGel;
-import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MaterialClient;
 import com.existingeevee.moretcon.other.BookTransformerAppendTools;
 import com.existingeevee.moretcon.other.ContentLigntningModifier;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer;
 import com.existingeevee.moretcon.other.ICustomSlotRenderer.GlowType;
 import com.existingeevee.moretcon.other.SlotRendererRegistry;
+import com.existingeevee.moretcon.other.slotrender.ColoredGlowTicRender;
+import com.existingeevee.moretcon.other.slotrender.ShakeTicRender;
 import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
-import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.TraitClient;
 import com.existingeevee.moretcon.traits.book.BookTransformerAppendModifiers;
 import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
@@ -33,7 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.repository.FileRepository;
 import slimeknights.tconstruct.library.book.TinkerBook;
-import slimeknights.tconstruct.library.tinkering.MaterialItem;
 
 public class ClientProxy extends CommonProxy {
 
@@ -57,8 +57,12 @@ public class ClientProxy extends CommonProxy {
 
 		OBJLoader.INSTANCE.addDomain(ModInfo.MODID);
 
-		SlotRendererRegistry.register(ModTraits.luminescent::isToolWithTrait, (stack, x, y, bakedmodel) -> ICustomSlotRenderer.simpleRender(stack, x, y, bakedmodel, GlowType.CIRCLE_BIG, ModTraits.luminescent.calculateColor(stack)));
-		SlotRendererRegistry.register(s -> s.getItem() instanceof MaterialItem && ((MaterialItem) s.getItem()).getMaterial(s).getAllTraits().contains(ModTraits.luminescent), (stack, x, y, bakedmodel) -> ICustomSlotRenderer.simpleRender(stack, x, y, bakedmodel, GlowType.CIRCLE_BIG, ModTraits.luminescent.calculateColor(stack)));
+		if (!ConfigHandler.disableLuminescent) {
+			SlotRendererRegistry.register(ColoredGlowTicRender::isTool, (stack, x, y, bakedmodel) -> ICustomSlotRenderer.simpleRender(stack, x, y, bakedmodel, GlowType.CIRCLE_BIG, ColoredGlowTicRender.calculateColor(stack)));
+			SlotRendererRegistry.register(ColoredGlowTicRender::isPart, (stack, x, y, bakedmodel) -> ICustomSlotRenderer.simpleRender(stack, x, y, bakedmodel, GlowType.CIRCLE_BIG, ColoredGlowTicRender.calculateColor(stack)));
+		
+			SlotRendererRegistry.register(ShakeTicRender::isPart, ShakeTicRender.RENDERER_PART);	
+		}
 	}
 
 	@Override
@@ -72,8 +76,6 @@ public class ClientProxy extends CommonProxy {
 			BLItems.initBL(true);
 		}
 		ModTools.init(true);
-
-		CompositeRegistry.updateCompositeRenderer();
 
 		TraitClient.init(); //we have to do it here bc tinkers registered the stuff here
 	}

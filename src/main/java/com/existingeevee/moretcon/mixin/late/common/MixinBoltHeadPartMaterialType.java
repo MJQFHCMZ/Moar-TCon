@@ -22,7 +22,7 @@ public abstract class MixinBoltHeadPartMaterialType extends PartMaterialType {
 	public void moretcon$HEAD_Inject$isValidMaterial(Material material, CallbackInfoReturnable<Boolean> cir) {
 		if (material instanceof UniqueMaterial) {
 			UniqueMaterial uMat = (UniqueMaterial) material;
-			if (uMat.getPartResLoc().equals("tconstruct:bolt_core")) {
+			if (uMat.getPartResLoc().toString().equals("tconstruct:bolt_core")) {
 				cir.setReturnValue(super.isValidMaterial(material));
 			}
 		}

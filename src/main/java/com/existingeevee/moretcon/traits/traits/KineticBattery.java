@@ -75,4 +75,9 @@ public class KineticBattery extends NumberTrackerTrait {
 			}
 		}
 	}
+	
+	@Override
+	public int getPriority() {
+		return 20; //we want this to run lastish.
+	}
 }

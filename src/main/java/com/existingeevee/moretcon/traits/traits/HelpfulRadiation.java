@@ -19,13 +19,14 @@ public class HelpfulRadiation extends AbstractTrait {
 		if (target.world.isRemote || !wasHit) {
 			return;
 		}
+		int s = Math.max(5, Math.round(damageDealt));
 		if (random.nextBoolean()) {
-			target.addPotionEffect(new PotionEffect(MobEffects.GLOWING, Math.round(damageDealt) * 8, 0));
-			target.addPotionEffect(new PotionEffect(MobEffects.WITHER, Math.round(damageDealt) * 8, 1));
-			target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, Math.round(damageDealt) * 8, 0));
+			target.addPotionEffect(new PotionEffect(MobEffects.GLOWING, s * 8, 0));
+			target.addPotionEffect(new PotionEffect(MobEffects.WITHER, s * 8, 1));
+			target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, s * 8, 0));
 		}
 		if (random.nextBoolean()) {
-			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, Math.round(damageDealt) * 8, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, s * 8, 0));
 		}
 		super.afterHit(tool, player, target, damageDealt, wasCritical, wasHit);
 	}

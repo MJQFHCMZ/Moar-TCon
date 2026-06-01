@@ -34,7 +34,7 @@ public class MainOreGenerator extends WorldGenModifier {
 			runGenerator(ModBlocks.oreGalliumEthereal.getDefaultState(), 3, 1, 198, 202, BlockMatcher.forBlock(ModBlocks.blockOtherstone), ctx);
 		}
 		
-		if (ctx.rand.nextInt(4) == 0) {
+		if (ctx.rand.nextInt(3) == 0) {
 			runGenerator(ModBlocks.oreIonstone.getDefaultState(), 3, 1, 198, 202, BlockMatcher.forBlock(ModBlocks.blockOtherstone), ctx);
 			runGenerator(ModBlocks.oreVacuuite.getDefaultState(), 3, 1, 3, 7, BlockMatcher.forBlock(ModBlocks.blockOtherstone), ctx);
 		}

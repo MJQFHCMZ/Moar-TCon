@@ -16,7 +16,7 @@ public interface IAdditionalTraitMethods {
 
 	}
 
-	default void onAmmoConsumed(ItemStack ammo, @Nullable EntityLivingBase entity) {
+	default void onAmmoUsed(ItemStack ammo, @Nullable EntityLivingBase entity, boolean consumed) {
 
 	}
 

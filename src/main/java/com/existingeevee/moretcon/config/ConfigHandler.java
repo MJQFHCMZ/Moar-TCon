@@ -46,7 +46,8 @@ public class ConfigHandler {
 
 	public static int decayingEffectEntityID = 8690001;
 	public static int plasmaBoltEntityID = 8690002;
-	public static int bombEntityID = 8690003; //TODO
+	public static int bombEntityID = 8690003; 
+	public static int gasCloudEntityID = 8690004; 
 
 	public static boolean shouldDurabilityCapNonProjectiles = true;
 
@@ -110,7 +111,7 @@ public class ConfigHandler {
 		
 		unfracturedBedrockObtainable = config.getBoolean("unfracturedbedrockobtainable", category, unfracturedBedrockObtainable, "Whether or not regular (typically unbreakable) bedrock should be obtainable.");
 		ConfigHandler.inertiaOnlyWorksOnAdvancedTools = config.getBoolean("inertiaOnlyWorksOnAdvancedTools".toLowerCase(), category, false, "Set to \"true\" if you do not want inertia (betweenlands greataxe/greatsword trait) to function on basic tools.");
-		disableLuminescent = config.getBoolean("disableluminescent", category, disableLuminescent, "Whether or not the trait \"Luminescent\" should be enable. If diabled, Luminescent will not be added to materials.");
+		disableLuminescent = config.getBoolean("disableluminescent", category, disableLuminescent, "Whether or not advanced toolpart rendering should be enabled. If diabled, Luminescent and shaking tools and toolparts will not be added to materials.");
 		try {
 			ConfigHandler.trichromicRed = new ResourceLocation(triRed.split(";")[0]);
 			ConfigHandler.trichromicRedLvl = Integer.parseInt(triRed.split(";")[1]);
@@ -154,7 +155,9 @@ public class ConfigHandler {
 		config.addCustomCategoryComment(category, "A category dedicated to a list of ID's of various things which may cause errors if they are not unique");
 		ConfigHandler.decayingEffectEntityID = config.getInt("decayingEffectEntityID".toLowerCase(), category, 8690001, Integer.MIN_VALUE, Integer.MAX_VALUE, "Decaying Effect Entity ID");
 		ConfigHandler.plasmaBoltEntityID = config.getInt("plasmaBoltEntityID".toLowerCase(), category, 8690002, Integer.MIN_VALUE, Integer.MAX_VALUE, "Plasma Bolt Entity ID");
-		ConfigHandler.bombEntityID = config.getInt("bombEntityID".toLowerCase(), category, 8690004, Integer.MIN_VALUE, Integer.MAX_VALUE, "Bomb Entity ID");
+		ConfigHandler.bombEntityID = config.getInt("bombEntityID".toLowerCase(), category, 8690003, Integer.MIN_VALUE, Integer.MAX_VALUE, "Bomb Entity ID");
+		ConfigHandler.gasCloudEntityID = config.getInt("gasCloudEntityID".toLowerCase(), category, 8690004, Integer.MIN_VALUE, Integer.MAX_VALUE, "Bomb Entity ID");
+		
 		config.save();
 
 		MoreTConLogger.log("Finished Reading Config.");

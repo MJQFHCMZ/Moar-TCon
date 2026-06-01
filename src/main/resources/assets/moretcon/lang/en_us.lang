@@ -142,6 +142,7 @@ item.moretcon.gemperimidum.name=Perimidum
 item.moretcon.gemanthracite.name=Anthracite
 item.moretcon.gemionstone.name=Ionstone
 item.moretcon.gemvacuuite.name=Vacuuite
+item.moretcon.gemmalithyst.name=Malithyst
 
 item.moretcon.hydrogenrichredstonepowder.name=Hydrogen Rich Redstone Powder
 item.moretcon.solidlightning.name=Solid Lightning
@@ -201,6 +202,8 @@ item.moretcon.nuggetzracohlium.name=Zracohlium Nugget
 item.moretcon.nuggetslimesteel.name=Slimesteel Nugget
 item.moretcon.nuggetporksteel.name=Porksteel Nugget
 item.moretcon.nuggetgeodesium.name=Geodesium Nugget
+
+item.moretcon.catalystrunic.name=Runic Catalyst
 
 itemGroup.moarTConMaterials=Moar TCon: Materials
 itemGroup.moarTConMisc=Moar TCon: Misc
@@ -272,6 +275,7 @@ material.moretcon.brinkstone.name=Brinkstone
 material.moretcon.anthracite.name=Anthracite
 material.moretcon.ionstone.name=Ionstone
 material.moretcon.vacuuite.name=Vacuuite
+material.moretcon.malithyst.name=Malithyst
 
 material.uniquetoolpart.name=Unique
 
@@ -329,9 +333,10 @@ modifier.moretcon.modbetweenified.name=Betweenified
 modifier.moretcon.modcrushing.desc=NOW THATS A LOTTA DAMAGE!!§r\nYour tool will deal some additional true damage.
 modifier.moretcon.modcrushing.name=Crushing
 modifier.moretcon.modcrushing.extra=True Damage: +%s
-modifier.moretcon.modautocrit.desc=just skill no luck trust§r\nYour tool will occasionally automatically crit targets.
+modifier.moretcon.modautocrit.desc=just skill no luck trust§r\nYour tool will occasionally automatically crit targets. Grants additional critical hit damage.
 modifier.moretcon.modautocrit.name=Autocrit
-modifier.moretcon.modautocrit.extra=Crit Chance: %s
+modifier.moretcon.modautocrit.chance.extra=Crit Chance: %s
+modifier.moretcon.modautocrit.dmg.extra=Crit Damage: +%s
 modifier.moretcon.moddebug.desc=§o§kwhyareyouhere§r\nYour tool logs info about itself in the chat. Typically used by ExistingEevee to debug tools.
 modifier.moretcon.moddebug.name=Debug
 modifier.moretcon.modaquagem.desc=§oOoh Shiny§r\nYour tool occasionally weakens opponents when you attack.
@@ -348,7 +353,10 @@ modifier.moretcon.modtarred.desc=§oYuck§r\nYour tool occasionally gives oppone
 modifier.moretcon.modtarred.name=Tarred
 modifier.moretcon.modvalonite.desc=§oArmor... for swords...§r\nYour tool is twice as resilient, taking damage and corroding half as commonly.
 modifier.moretcon.modvalonite.name=Valonite
-modifier.moretcon.plasmatic.desc=§oI HAVE THE HIGH GROUND§r\nYour tool will be able to hit everything within your reach distance, including behind blocks and other entities.
+modifier.moretcon.modcelebratory.desc=§oWowie! Celebration!§r\nYour tool explodes on hit every 2 seconds. Kaboom! :3
+modifier.moretcon.modcelebratory.name=Celebratory
+modifier.moretcon.modcelebratory.extra=Explosive Damage: +%s
+modifier.moretcon.plasmatic.desc=§oI HAVE THE HIGH GROUND§r\nYour tool will be able to hit everything within your reach distance, including behind blocks and other entities. Attacking multiple entities at once deals a flat increasing additional damage for each additional target.
 modifier.moretcon.plasmatic.name=Plasmatic
 modifier.moretcon.pulsating.desc=§oSine wavy davie\n§rYour tool deals a bit of extra damage. This bonus fluctuates from high damage to low damage and then back to high.
 modifier.moretcon.pulsating.name=Pulsating
@@ -416,6 +424,9 @@ modifier.moretcon.blighted.name=Blighted
 modifier.moretcon.blighted.desc=§oLets not get here...§r\nYour tool will deal additional damage for every level of debuff on a target.
 modifier.moretcon.withered.name=Withered
 modifier.moretcon.withered.desc=§ospoopy scary skeletons§r\nYour tool will apply stacking wither every hit.
+modifier.moretcon.anguish.name=Anguish
+modifier.moretcon.anguish.desc=§oAUUUGHH HUEEHGHH§r\nYour tool will additional damage based on your tools base damage with very high scaling.
+modifier.moretcon.anguish.extra=Anguish Damage: %s
 modifier.moretcon.receptive.name=Receptive
 modifier.moretcon.receptive.desc=§oat your command...§r\nYour tool will grow and adapt to what you use it for.
 modifier.moretcon.receptive.unalloc.extra=Unallocated: %s
@@ -475,6 +486,8 @@ modifier.moretcon.voltrend.name=Voltrend
 modifier.moretcon.voltrend.desc=§oOne coulumb of electrons, ionize this man.§r\nYour tool will occasionally cause targets to become electrically charged, dealing damage over time as well as amplifying incoming damage.
 modifier.moretcon.nulltouched.name=Nulltouched 
 modifier.moretcon.nulltouched.desc=§oVisions of the beyond...§r\nYour tool deal additional void damage.
+modifier.moretcon.gaseous.name=Gaseous 
+modifier.moretcon.gaseous.desc=§owe love the geneva suggestions :3§r\nYour tool deal significantly reduced damage, but will spawn a lingering gas cloud that deals continuous AoE damage upon exploding.
 
 modifier.moretcon.galvanized_armor.name=Galvanized 
 modifier.moretcon.galvanized_armor.desc=§oMORE DAMAGEEEEE§r\nYour armor will grant you additional attack damage.
@@ -524,6 +537,10 @@ modifier.moretcon.evasive_armor.desc=§olmao imagine missing!\n§rYour armor wil
 modifier.moretcon.evasive_armor.name=Evasive
 modifier.moretcon.weightless_armor.desc=§oLight as a feather...\n§r...as if you could walk on a cloud...
 modifier.moretcon.weightless_armor.name=Weightless
+modifier.moretcon.velocibliteration.desc=§obro hit a red gauge. absolute jackhammer\n§rYour tool's charged frying pan attacks deal increased damage based on your speed when charged past a certain threshold. If this tool is used to attack at an absurd speed, it will deal 15% true damage and grant 3 seconds of invulnerability to the user.  
+modifier.moretcon.velocibliteration.name=Velocibliteration
+modifier.moretcon.executor.desc=§oPOV: youve insulted my glorious dictatorship\n§rYour tools 2000% damage to targets whose health is <10% of their maximum.
+modifier.moretcon.executor.name=Executor
 
 modifier.moretcon.reforgeheavy.name=Heavy
 modifier.moretcon.reforgeheavy.flavor=§oDo you even lift??
@@ -699,7 +716,8 @@ modifier.reforgeplaceholder.desc=Your tool might be awesomely reforged, or it mi
 
 moretcon.bloodgodsblessing=Blood God's Blessing
 moretcon.hyperflames=Hyperflames
-moretcon.bleeding=bleeding
+moretcon.bleeding=Bleeding
+moretcon.invulnerability=Invulnerability
 
 stat.moretcon.explosive_charge.name=Explosive Charge
 stat.explosive.radius.name=Radius
@@ -731,8 +749,6 @@ tile.moretcon.blockgallium.name=Block of Gallium
 tile.moretcon.blockgarstone.name=Block of Garstone
 tile.moretcon.blockgravitite.name=Block of Enchanted Gravitite
 tile.moretcon.blockgravitonium.name=Block of Gravitonium
-tile.moretcon.blockgravitoniumfaucet.desc=Drains tanks 6x faster than a standard faucet.
-tile.moretcon.blockgravitoniumfaucet.name=Gravitonium Infused Faucet
 tile.moretcon.blockigniglomerate.name=Block of Igniglomerate
 tile.moretcon.blockirradium.name=Block of Irradium
 tile.moretcon.blockvalasium.name=Block of Valasium
@@ -764,8 +780,14 @@ tile.moretcon.blockgeodesium.name=Block of Geodesium
 tile.moretcon.blockanthracite.name=Block of Anthracite
 tile.moretcon.blockionstone.name=Block of Ionstone
 tile.moretcon.blockvacuuite.name=Block of Vacuuite
+tile.moretcon.blockmalithyst.name=Block of Malithyst
 
 tile.moretcon.blockreforgestation.name=Reforge Station
+tile.moretcon.blockgravitoniumfaucet.desc=Drains tanks 6x faster than a standard faucet.
+tile.moretcon.blockgravitoniumfaucet.name=Gravitonium Infused Faucet
+tile.moretcon.blockcatalyzationchamber.desc=Place under a valid smeltery controller to catalyze exotic recipes...
+tile.moretcon.blockcatalyzationchamber.name=Catalyzation Chamber
+
 tile.moretcon.blockcobbledbedrock.name=Cobbled Bedrock
 tile.moretcon.blockcobbledbetweenbedrock.name=Cobbled Betweenlands Bedrock
 tile.moretcon.blockotherstone.name=Otherstone
@@ -838,6 +860,7 @@ tile.moretcon.oreanthracite.name=Anthracite Ore
 tile.moretcon.oreionstone.name=Ionstone Ore
 tile.moretcon.oregalliumethereal.name=Ethereal Gallium Ore
 tile.moretcon.orevacuuite.name=Vacuuite Ore
+tile.moretcon.oremalithyst.name=Malithyst Ore
 
 tile.moretcon.rottensludge.name=Rotten Sludge
 
@@ -864,10 +887,14 @@ uniquetoolpart.moretcon.dematerializer.name=Dematerializer
 uniquetoolpart.moretcon.shotgun.name=Shotgun
 uniquetoolpart.moretcon.impact.name=Impact
 uniquetoolpart.moretcon.inertial_redirector.name=Inertial Redirector
+uniquetoolpart.moretcon.impulse_concentrator.name=Impulse Concentrator
+uniquetoolpart.moretcon.gas_vials.name=Gas Vials
 
 gui.moretcon.reforgestation.name=Reforge Station
 gui.moretcon.reforgestation.info=Here you can reforge your tools for a small additional boost in power!\n\nTo reforge a tool, simply place it into the left slot with some material it can be repaired with. You can optionally add a reforge stone to get unusual reforges too!  
 gui.error.invalid_reforge_material=This tool cannot be reforged using %s!
+
+gui.jei.cata_alloy.title=Catalyzed Alloying 
 
 jei_info.melt_mummy.desc=Obtained by melting down a Dreadful Peat Mummy.
 
@@ -880,7 +907,7 @@ jei_info.oreenderal.desc=Found rare-ish-ly in all endstone-bearing dimensions fr
 jei_info.oregallium.desc=Found very rarely in all stonebearing dimensions from y = 12 <-> 24.
 jei_info.oreechostone.desc=Found rare-ish-ly in all endstone-bearing dimensions from y = 12 <-> 48 or in floating shards. Shards are generated approx. one in 750 chunks within the end.
 jei_info.oregarstone.desc=Found extremely rarely in all stonebearing dimensions from y = 75 <-> 100.
-jei_info.oregravitonium.desc=Found astronomically rarely in the end inside of floating asteroids. Asteroids are generated approx. one in 125 chunks.
+jei_info.oregravitonium.desc=Found somewhat rarely in the end inside of floating asteroids. Asteroids are generated approx. one in 125 chunks.
 jei_info.oreigniglomerate.desc=Found rarely in The Nether within the lava lake.
 jei_info.orebloodstone.desc=Found commonly in The Nether above the bedrock roof. \n\nMust be mined with a tool with "Bottom's End".
 jei_info.oreebonite.desc=Found very rarely in all bedrockbearing dimensions in the lower bedrock layer. \n\nMust be mined with a tool with "Bottom's End".
@@ -896,7 +923,8 @@ jei_info.oreanthracite.desc=Found more or less commonly within the stone of the 
 jei_info.oreionstone.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
 jei_info.oregalliumethereal.desc=Found extremely rarely in The End in the ethereal stone from y = 199 <-> 201. \n\nMust be mined with a tool with "Etheral Harvest".
 jei_info.orearkenium.desc=Found rarely in all holystone-bearing dimensions from y = 5 <-> 250.
-
+jei_info.oremalithyst.desc=Found very rarely inside of dark brinkstone spikes within the helltop isles on The Nether's roof.
+jei_info.orevacuuite.desc=Found astronomically rarely in The End in the ethereal stone from y = 4 <-> 6. \n\nMust be mined with a tool with "Etheral Harvest".
 
 jei_info.solid_lightning.desc=Created by placing an Electarite Block above y = 245 during a thunderstorm...
 jei_info.orefusionite.desc=

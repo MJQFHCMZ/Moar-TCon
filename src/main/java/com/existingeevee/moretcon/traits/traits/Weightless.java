@@ -19,7 +19,7 @@ public class Weightless extends AttributeTrait implements IAdditionalTraitMethod
 	
 	@Override
 	public void onEntityItemTick(ItemStack tool, EntityItem entity) {
-		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entity.world, entity.getPositionVector()) == -0.08)
+		if (WorldGravityUtils.getWorldGravitiationalAcceleration(entity, entity.world, entity.getPositionVector()) == -0.08)
 			entity.motionY += 0.039f;
 	}
 }

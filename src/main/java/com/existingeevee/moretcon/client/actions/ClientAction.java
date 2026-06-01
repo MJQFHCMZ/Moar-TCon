@@ -29,9 +29,10 @@ public abstract class ClientAction {
 	public abstract void runAsClient(World world, double x, double y, double z, NBTBase data);
 
 	public void run(World world, double x, double y, double z, NBTBase data) {
-		if (MoreTCon.proxy.isClient()) {
+		if (world.isRemote) {
 			Runnable r = () -> this.runAsClient(world, x, y, z, data);
-			r.run();
+			if (MoreTCon.proxy.isClient())
+				r.run();
 		} else {
 			NetworkHandler.HANDLER.sendToDimension(new SentClientActionMessage(this.getClass().getName(), x, y, z, data), world.provider.getDimension());
 		}

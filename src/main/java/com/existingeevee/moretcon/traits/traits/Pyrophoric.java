@@ -110,7 +110,8 @@ public class Pyrophoric extends AttributeTrait implements ISimpleArmorTrait {
 
 	@Override
 	public void onUpdate(ItemStack tool, World world, Entity entity, int itemSlot, boolean isSelected) {
-		this.update(tool);
+		if (!world.isRemote)
+			this.update(tool);
 
 		if (!isSelected || (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getActiveItemStack() == tool) || world.isRemote) {
 			return; // we only want things to execute if theyre holding it.
@@ -133,7 +134,7 @@ public class Pyrophoric extends AttributeTrait implements ISimpleArmorTrait {
 			}
 		}
 
-		if (random.nextInt(600) == 0 && !isBurning(tool) && !isOnCooldown(tool)) {
+		if (!world.isRemote && random.nextInt(600) == 0 && !isBurning(tool) && !isOnCooldown(tool)) {
 			setOnFire(tool);
 		}
 	}

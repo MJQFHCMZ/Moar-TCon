@@ -77,4 +77,20 @@ public class ItemShakeRender extends ItemBase implements ICustomSlotRenderer {
 		this.spinSpeed = spinSpeed;
 		return this;
 	}
+
+	public float getShakeIntensity() {
+		return shakeIntensity;
+	}
+
+	public float getPulseMin() {
+		return pulseMin;
+	}
+
+	public float getPulseStr() {
+		return pulseStr;
+	}
+
+	public float getSpinSpeed() {
+		return spinSpeed;
+	}
 }

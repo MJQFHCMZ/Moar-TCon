@@ -11,6 +11,7 @@ import com.existingeevee.moretcon.other.utils.CompatManager;
 import com.existingeevee.moretcon.other.utils.RegisterHelper;
 import com.existingeevee.moretcon.traits.modifiers.Autocrit;
 import com.existingeevee.moretcon.traits.modifiers.Betweenified;
+import com.existingeevee.moretcon.traits.modifiers.Celebratory;
 import com.existingeevee.moretcon.traits.modifiers.Crushing;
 import com.existingeevee.moretcon.traits.modifiers.Debug;
 import com.existingeevee.moretcon.traits.modifiers.Gem;
@@ -23,6 +24,7 @@ import com.existingeevee.moretcon.traits.modifiers.misc.MatterDeconstructionGel;
 import com.existingeevee.moretcon.traits.modifiers.misc.MatterReconstructionGel;
 import com.existingeevee.moretcon.traits.traits.Aetheric;
 import com.existingeevee.moretcon.traits.traits.Afterimage;
+import com.existingeevee.moretcon.traits.traits.Anguish;
 import com.existingeevee.moretcon.traits.traits.AntiGravity;
 import com.existingeevee.moretcon.traits.traits.Approximate;
 import com.existingeevee.moretcon.traits.traits.Blighted;
@@ -34,6 +36,7 @@ import com.existingeevee.moretcon.traits.traits.Darkened;
 import com.existingeevee.moretcon.traits.traits.Electrified;
 import com.existingeevee.moretcon.traits.traits.Embering;
 import com.existingeevee.moretcon.traits.traits.EulersWrath;
+import com.existingeevee.moretcon.traits.traits.Executor;
 import com.existingeevee.moretcon.traits.traits.Fireslime;
 import com.existingeevee.moretcon.traits.traits.Flashbang;
 import com.existingeevee.moretcon.traits.traits.Frostburn;
@@ -46,7 +49,6 @@ import com.existingeevee.moretcon.traits.traits.Inertia;
 import com.existingeevee.moretcon.traits.traits.KineticBattery;
 import com.existingeevee.moretcon.traits.traits.Leeching;
 import com.existingeevee.moretcon.traits.traits.Liquid;
-import com.existingeevee.moretcon.traits.traits.Luminescent;
 import com.existingeevee.moretcon.traits.traits.Macrocrystaline;
 import com.existingeevee.moretcon.traits.traits.Magical;
 import com.existingeevee.moretcon.traits.traits.MagicallyReactive;
@@ -89,6 +91,7 @@ import com.existingeevee.moretcon.traits.traits.unique.BloodyArc;
 import com.existingeevee.moretcon.traits.traits.unique.Boltforged;
 import com.existingeevee.moretcon.traits.traits.unique.Dematerializing;
 import com.existingeevee.moretcon.traits.traits.unique.EssentialObliteration;
+import com.existingeevee.moretcon.traits.traits.unique.Gaseous;
 import com.existingeevee.moretcon.traits.traits.unique.Hailshot;
 import com.existingeevee.moretcon.traits.traits.unique.ImpactDetonated;
 import com.existingeevee.moretcon.traits.traits.unique.Mirroring;
@@ -100,6 +103,7 @@ import com.existingeevee.moretcon.traits.traits.unique.Seismishock;
 import com.existingeevee.moretcon.traits.traits.unique.Shockwaving;
 import com.existingeevee.moretcon.traits.traits.unique.Skyburner;
 import com.existingeevee.moretcon.traits.traits.unique.TripleShot;
+import com.existingeevee.moretcon.traits.traits.unique.Velocibliteration;
 import com.existingeevee.moretcon.traits.traits.unique.Wormed;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -137,7 +141,7 @@ public class ModTraits {
 	public static Hyperheat hyperheat = new Hyperheat();
 	public static Frostburn frostburn = new Frostburn();
 	public static Tricromatic trichromic = new Tricromatic();
-	public static HelpfulRadiation radioactive = new HelpfulRadiation();
+	public static HelpfulRadiation helpfulRadiation = new HelpfulRadiation();
 	public static Voidic voidic = new Voidic();
 	public static Pulsating pulsating = new Pulsating();
 	public static Liquid liquid = new Liquid();
@@ -153,7 +157,6 @@ public class ModTraits {
 	public static Penetrant penetrant = new Penetrant();
 	public static Darkened darkened = new Darkened();
 	public static DummyTrait etheralHarvest = new DummyTrait("etheralharvest", 0);
-	public static Luminescent luminescent = new Luminescent("luminescent", 0);
 	public static Weightless weightless = new Weightless();
 	public static AttributeTrait warding = new AttributeTrait("shielding", 0, new AttributeModifier(UUID.fromString("aed073df-79af-4de9-b62c-44b5fcc44fef"), "shielding", 4, 0), SharedMonsterAttributes.ARMOR).setWorksInArmor(true).setWorksInOffhand(true);
 	public static Overdrive overdrive = new Overdrive();
@@ -199,7 +202,11 @@ public class ModTraits {
 	public static Voltrend voltrend = new Voltrend();
 	public static Nulltouched nulltouched = new Nulltouched(1);
 	public static Nulltouched nulltouched2 = new Nulltouched(2);
-	
+	public static Velocibliteration velocibliteration = new Velocibliteration();
+	public static Gaseous gaseous = new Gaseous();
+	public static Executor executor = new Executor();
+	public static Anguish anguish = new Anguish();
+
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
 	public static Stormcaller stormcaller = new Stormcaller();
@@ -214,10 +221,10 @@ public class ModTraits {
 	public static Tarred modTarred;
 	public static Betweenified modBetweenified;
 
-
 	public static Crushing modCrushing;
 	public static Autocrit modAutocrit;
-
+	public static Celebratory modCelebratory;
+	
 	public static Debug modDebug;
 
 	public static Corroding corroding;
@@ -262,9 +269,11 @@ public class ModTraits {
 			depair = new MatterDeconstructionGel();
 			modCrushing = new Crushing();
 			modAutocrit = new Autocrit();
+			modCelebratory = new Celebratory();
 			registerModifier(
 					modAutocrit,
-					modCrushing);
+					modCrushing,
+					modCelebratory);
 		}
 		if (CompatManager.thebetweenlands) {
 			modRedGem = new Gem(CircleGemType.CRIMSON, ItemRegistry.CRIMSON_MIDDLE_GEM, 0xFF0000);

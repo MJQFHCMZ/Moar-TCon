@@ -3,7 +3,7 @@ package com.existingeevee.moretcon;
 public class ModInfo {
     public static final String MODID = "moretcon";
     public static final String NAME = "Moar TCon";
-    public static final String VERSION = "V15b2";
+    public static final String VERSION = "V15b5";
     public static final boolean BETA = VERSION.contains("b") || VERSION.contains("rc");
     public static final String DEPENDANCY =
     		"required-after:tconstruct;" +
@@ -11,8 +11,9 @@ public class ModInfo {
     		"after:thebetweenlands;" +
     		"after:aether_legacy;" +
     		"after:iceandfire;" +
-    		"after:plustic;" +
-    		"after:crafttweaker";
+    		"after:plustic;" + 
+    		"after:crafttweaker;" + 
+    		"after:contenttweaker";
 
     public static final String ISSUE_TRACKER = "https://github.com/DabbingEevee/Moar-TCon/issues";
 

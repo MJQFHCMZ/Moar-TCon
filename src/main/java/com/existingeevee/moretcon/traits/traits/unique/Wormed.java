@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.entity.EntityProjectileBase;
 import slimeknights.tconstruct.library.traits.IProjectileTrait;
 import thebetweenlands.common.entity.mobs.EntityTinySludgeWormHelper;
 
+//TODO have worm hold the tool and cause damage and trait procs
 public class Wormed extends NumberTrackerTrait implements IAdditionalTraitMethods, IProjectileTrait {
 
 	public Wormed() {
@@ -52,7 +53,7 @@ public class Wormed extends NumberTrackerTrait implements IAdditionalTraitMethod
 	}
 
 	@Override
-	public void onAmmoConsumed(ItemStack ammo, @Nullable EntityLivingBase entity) {
+	public void onAmmoUsed(ItemStack ammo, @Nullable EntityLivingBase entity, boolean consumed) {
 		if (getNumber(ammo) > 0 && (entity == null ? true : entity.isSneaking())) {
 			removeNumber(ammo, 1);
 		}
@@ -67,6 +68,9 @@ public class Wormed extends NumberTrackerTrait implements IAdditionalTraitMethod
 			if (attacker instanceof EntityPlayer) {
 				worm.setOwnerId(attacker.getUniqueID());
 			}
+			worm.getEntityData().setBoolean("moretcon.wormed", true);
+			worm.getEntityData().setTag("moretcon.wormed.tool", ammoStack.serializeNBT());
+			
 			world.spawnEntity(worm);
 			projectile.setDead();
 		}

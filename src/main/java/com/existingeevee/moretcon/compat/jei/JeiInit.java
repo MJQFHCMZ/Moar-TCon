@@ -27,6 +27,7 @@ public class JeiInit {
 		CUSTOM.add(new JeiAddBoltCoreBreakingContainer());
 
 		CUSTOM.add(new JeiSupportDIRecipes());
+		CUSTOM.add(new JeiRegisterCatalyzedAlloys());
 		
 		if (CompatManager.thebetweenlands) {
 			CUSTOM.add(new JeiInformationContainer<>(fluidstack, new FluidStack(ModFluids.liquidMummySludge, 1000), "melt_mummy", () -> CompatManager.thebetweenlands));
@@ -57,6 +58,8 @@ public class JeiInit {
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreAnthracite, 1), "oreanthracite", () -> CompatManager.loadMain));
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreIonstone, 1), "oreionstone", () -> CompatManager.loadMain));
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreGalliumEthereal, 1), "oregalliumethereal", () -> CompatManager.loadMain));
+			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreVacuuite, 1), "orevacuuite", () -> CompatManager.loadMain));
+			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModBlocks.oreMalithyst, 1), "oremalithyst", () -> CompatManager.loadMain));
 
 			CUSTOM.add(new JeiInformationContainer<>(itemstack, new ItemStack(ModItems.solidLightning, 1), "solid_lightning", () -> CompatManager.loadMain));
 		}

@@ -21,9 +21,9 @@ import com.existingeevee.moretcon.inits.recipes.SmelteryInit;
 import com.existingeevee.moretcon.inits.recipes.UniqueToolpartRecipes;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.MTMaterialIntegration;
-import com.existingeevee.moretcon.materials.UniqueMaterial;
 import com.existingeevee.moretcon.other.ClusterTickingHandler;
 import com.existingeevee.moretcon.other.EventWatcherMain;
+import com.existingeevee.moretcon.other.ImpactFrameHelper;
 import com.existingeevee.moretcon.other.MTGuiHandler;
 import com.existingeevee.moretcon.other.ModTabs;
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
@@ -42,6 +42,8 @@ import com.existingeevee.moretcon.reforges.ReforgeHandler;
 import com.existingeevee.moretcon.traits.ModTraits;
 import com.existingeevee.moretcon.traits.traits.armor.ModArmorTraits;
 import com.existingeevee.moretcon.world.MoreTConWorldGen;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.UnmodifiableIterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.crafting.IRecipe;
@@ -64,6 +66,7 @@ import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ranged.IProjectile;
 import slimeknights.tconstruct.library.utils.Tags;
+import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import thebetweenlands.common.handler.OverworldItemHandler;
 
 @Mod(modid = ModInfo.MODID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDANCY)
@@ -79,9 +82,9 @@ public class MoreTCon {
 		CustomFireEffect.init();
 		MinecraftForge.EVENT_BUS.register(MoreTCon.class);
 	}
-	
+
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {		
+	public void preInit(FMLPreInitializationEvent event) {
 		CompatManager.init();
 		SoundHandler.registerInit();
 		NetworkHandler.init();
@@ -103,15 +106,16 @@ public class MoreTCon {
 		MinecraftForge.EVENT_BUS.register(ArrowReferenceHelper.class);
 		MinecraftForge.EVENT_BUS.register(ReforgeHandler.class);
 		MinecraftForge.EVENT_BUS.register(ClusterTickingHandler.class);
-		
+
 		ModTraits.init();
 		ModReforges.init();
 
 		OreDictionaryInit.preInit();
 
+		ImpactFrameHelper.init();
 		proxy.preInit();
 
-	} 
+	}
 
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event) {
@@ -126,12 +130,12 @@ public class MoreTCon {
 		OreDictionaryInit.init();
 
 		IForgeRegistry<IRecipe> registry = event.getRegistry();
-
+		
 		OreRecipes.init(event);
 		UniqueToolpartRecipes.init(event);
 		ReforgeRecipes.init(event);
 		ExplosiveChargeRecipes.init(event);
-		
+
 		SpongeRegistry.registerRecipes(event);
 
 		if (CompatManager.thebetweenlands) {
@@ -158,7 +162,7 @@ public class MoreTCon {
 		}
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new MTGuiHandler());
-		
+
 		proxy.init();
 	}
 
@@ -181,17 +185,25 @@ public class MoreTCon {
 		if (ConfigHandler.maxToolDurability >= 0) {
 			MinecraftForge.EVENT_BUS.register(new ExtremeToolDurabilityFix());
 		}
-		UniqueMaterial.onPostInit();
 		CompositeRegistry.onPostInit();
 
 		ModTraits.postInit();
 		if (CompatManager.conarm)
-			ModArmorTraits.postInit(); //EntityPlayer
-			
-		//You're welcome!
-		ReequipHack.registerIgnoredKey(Tags.TOOL_DATA); 
-		ReequipHack.registerIgnoredKey(Tags.TINKER_EXTRA); 
+			ModArmorTraits.postInit(); // EntityPlayer
+
+		// You're welcome!
+		ReequipHack.registerIgnoredKey(Tags.TOOL_DATA);
+		ReequipHack.registerIgnoredKey(Tags.TINKER_EXTRA);
 		ReequipHack.registerIgnoredKey(Tags.BASE_MODIFIERS);
+
+		//lets add the catalyzation chamber to the list of the valids
+		ImmutableSet.Builder<Block> builder = ImmutableSet.builder();
+		for (UnmodifiableIterator<Block> unmodifiableIterator = TinkerSmeltery.validSmelteryBlocks.iterator(); unmodifiableIterator.hasNext();) {
+			Block block = unmodifiableIterator.next();
+			builder.add(block);
+		}
+		builder.add(ModBlocks.blockCatalyzationChamber);
+		TinkerSmeltery.validSmelteryBlocks = builder.build();
 	}
 
 	@EventHandler

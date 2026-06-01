@@ -19,34 +19,44 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 @EventBusSubscriber(modid = ModInfo.MODID)
 public class DamageScalar {
 
-	private static Map<Thread,Boolean> filled = new WeakHashMap<>();
+	private static Map<Thread, StackTraceElement[]> filled = new WeakHashMap<>();
 	private static ThreadLocal<Stack<Float>> stack = ThreadLocal.withInitial(() -> new Stack<>());
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onHurt(LivingHurtEvent event) {
+		event.setAmount(event.getAmount() * getMult());
+	}
+	
+	public static float getMult() {
 		float mult = 1;
 		for (float f : stack.get()) {
 			mult *= f;
 		}
-		event.setAmount(event.getAmount() * mult);
+		return mult;
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onTick(ServerTickEvent event) {
-		if (event.phase != Phase.START) 
+		if (event.phase != Phase.START)
 			return;
-		
+
 		if (!filled.isEmpty()) {
-			MoreTConLogger.log("Damage scalar stack was not cleared last tick!!!", Level.WARN);
-			stack = ThreadLocal.withInitial(() -> new Stack<>());
+			//uh oh..
+//			int i = 0;
+//			MoreTConLogger.log("Damage scalar stack was not cleared last tick!!!", Level.WARN);
+//			for (StackTraceElement[] trace : filled.values()) {
+//				System.out.println("Potential Culprit #" + ++i + ":");
+//				for (StackTraceElement traceElement : trace)
+//					System.out.println("\tat " + traceElement);
+//			}
+			stack.remove();
 			filled = new WeakHashMap<>();
 		}
 	}
 
-	
 	public static void push(float val) {
 		stack.get().push(val);
-		filled.put(Thread.currentThread(), true);
+		filled.put(Thread.currentThread(), Thread.currentThread().getStackTrace());
 	}
 
 	public static void pop() {
@@ -59,7 +69,7 @@ public class DamageScalar {
 			e.printStackTrace();
 			empty = true;
 		}
-		
+
 		if (empty) {
 			reset();
 		}

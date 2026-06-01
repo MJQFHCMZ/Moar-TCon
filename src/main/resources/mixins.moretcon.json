@@ -12,7 +12,10 @@
   	"early.common.MixinForgeHooksClient",
   	"early.common.MixinBlockFalling",
   	"early.common.MixinWorld",
-  	"early.common.MixinEntityItem"
+  	"early.common.MixinEntityItem",
+  	"early.common.MixinEntityLivingBase",
+  	"early.common.MixinEntityFireworkRocket"
+  	
   ],
 
   "client": [

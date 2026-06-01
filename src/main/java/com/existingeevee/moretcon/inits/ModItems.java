@@ -3,7 +3,7 @@ package com.existingeevee.moretcon.inits;
 import com.existingeevee.moretcon.config.ConfigHandler;
 import com.existingeevee.moretcon.devtools.ItemDebugTool;
 import com.existingeevee.moretcon.item.ItemBase;
-import com.existingeevee.moretcon.item.ItemCompositeRep;
+import com.existingeevee.moretcon.item.ItemCatalyst;
 import com.existingeevee.moretcon.item.ItemMDGel;
 import com.existingeevee.moretcon.item.ItemNoGravity;
 import com.existingeevee.moretcon.item.ItemNonflamable;
@@ -150,6 +150,7 @@ public class ModItems {
 	public static final Item gemAnthracite = new ItemBase("gemAnthracite");
 	public static final Item gemIonstone = new ItemShakeRender("gemIonstone", GlowType.CIRCLE_BIG, 0xb4e5ff).withShakeIntensity(0.5f);
 	public static final Item gemVacuuite = new ItemBase("gemVacuuite", 0x300a6a);
+	public static final Item gemMalithyst = new ItemBase("gemMalithyst");
 
 	//Ingriedients
 	public static final Item itemSiltClay = new ItemBase("itemSiltClay").setTab(ModTabs.moarTConMisc);
@@ -173,6 +174,8 @@ public class ModItems {
 	public static final Item reforgeSharpened = new ItemReforgeStone("reforgesharpened", () -> ModReforges.reforgeSharpened);
 	public static final Item reforgeConsistant = new ItemReforgeStone("reforgeconsistant", () -> ModReforges.reforgeConsistant);
 
+	public static final ItemCatalyst catalystRunic = new ItemCatalyst("catalystrunic");
+	
 	/*---------------------------------------*/
 
 	public static void registerItems(Item... items) {
@@ -183,7 +186,6 @@ public class ModItems {
 
 	public static void init() {
 		ModItems.registerItems(
-				new ItemCompositeRep(),
 				new ItemDebugTool()
 		);
 
@@ -267,6 +269,7 @@ public class ModItems {
 					gemAnthracite,
 					gemIonstone,
 					gemVacuuite,
+					gemMalithyst,
 
 					crushingModifier,
 					autocritModifier,
@@ -283,7 +286,9 @@ public class ModItems {
 					
 					reforgeHeavy,
 					reforgeSharpened,
-					reforgeConsistant
+					reforgeConsistant,
+					
+					catalystRunic
 			);
 			if (ConfigHandler.shouldLoadDust) {
 				ModItems.registerItems(

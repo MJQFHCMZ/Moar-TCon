@@ -30,16 +30,13 @@ public class SmelteryInit {
 		}
 		
 		
-		//TODO
-		//EiO runsteel shitfuck
-		//mods.tconstruct.Alloy.addRecipe(<liquid:liquidrunesteel> * 2, [<liquid:dark_steel>*1,<liquid:steel>*17,<liquid:ardite>*18,<liquid:gold>*4]);
 		if (CompatManager.loadMain) {
 			TinkerRegistry.registerMelting(ModItems.hydrogenRichRedstonePowder, ModFluids.liquidHydrogen, Material.VALUE_Ingot);
 			TinkerRegistry.registerMelting(Blocks.SOUL_SAND, ModFluids.liquidLiquifiedSouls, Material.VALUE_Ingot / 16);
 			TinkerRegistry.registerMelting(ModItems.rawSteel, TinkerFluids.steel, Material.VALUE_Ingot);
 			TinkerRegistry.registerMelting(ModItems.cookedPorksteel, ModFluids.liquidPorksteel, Material.VALUE_Ingot);
 			TinkerRegistry.registerMelting(ModBlocks.oreGravitoniumDense, ModFluids.liquidGravitonium, Material.VALUE_Ore() * 4);
-			TinkerRegistry.registerAlloy(new FluidStack(ModFluids.liquidRuneSteel, 1), new FluidStack(TinkerFluids.obsidian, 1), new FluidStack(TinkerFluids.ardite, 9), new FluidStack(TinkerFluids.steel, 9), new FluidStack(TinkerFluids.gold, 2));
+			ModItems.catalystRunic.registerAlloy(new FluidStack(ModFluids.liquidRuneSteel, 1), new FluidStack(ModFluids.liquidLiquifiedSouls, 1), new FluidStack(TinkerFluids.ardite, 9), new FluidStack(TinkerFluids.steel, 9), new FluidStack(TinkerFluids.gold, 2));
 			TinkerRegistry.registerAlloy(new FluidStack(ModFluids.liquidBlightsteel, 2), new FluidStack(ModFluids.liquidHallowsite, 1), new FluidStack(ModFluids.liquidEbonite, 1));
 			TinkerRegistry.registerAlloy(new FluidStack(ModFluids.liquidFusionLava, 125), new FluidStack(ModFluids.liquidFusionite, 18), new FluidStack(FluidRegistry.LAVA, 125), new FluidStack(TinkerFluids.ardite, 9));
 			TinkerRegistry.registerSmelteryFuel(new FluidStack(ModFluids.liquidFusionLava, 16), 1024);

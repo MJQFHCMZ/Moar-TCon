@@ -36,7 +36,7 @@ public class Hailshot extends BooleanTrackerTrait implements IProjectileTrait, I
 	}
 
 	@Override
-	public void onAmmoConsumed(ItemStack ammo, @Nullable EntityLivingBase entity) {
+	public void onAmmoUsed(ItemStack ammo, @Nullable EntityLivingBase entity, boolean consumed) {
 		if (isActive(ammo) && (entity == null ? true : entity.isSneaking())) {
 			setActive(ammo, false);
 		}

@@ -84,10 +84,7 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	@Override
 	public int quantityDropped(Random random) {
-		if (this == ModBlocks.blockSiltClay) { // BlockGrass
-			return 4;
-		}
-		return 1;
+		return quantityDroppedWithBonus(0, random);
 	}
 
 	@Override
@@ -193,6 +190,11 @@ public class BlockBase extends Block implements ISimpleBlockItemProvider, IBedro
 
 	public Supplier<Block> getFireTransformer() {
 		return fireTransformer;
+	}
+	
+	public BlockBase setParticleGravity(float gravityMult) {
+		this.blockParticleGravity = gravityMult;
+		return this;
 	}
 
 	public BlockBase setFireTransformer(Supplier<Block> fireTransformer) {

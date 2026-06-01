@@ -44,15 +44,13 @@ public class PolyshotProj extends AbstractProjectileTrait {
 			return;
 		}
 
-		if (projectileBase != null && shooter != null) {			
+		if (projectileBase != null && shooter != null) {
 			if (shooter instanceof EntityPlayer && !world.isRemote) {
 				RecoilHandler.INSTANCE.recoil((EntityPlayer) shooter, 7);
 				BlastClientAction.INSTANCE.run(world, projectileBase.posX, projectileBase.posY, projectileBase.posZ, BlastClientAction.fromVec3d(new Vec3d(projectileBase.motionX, projectileBase.motionY, projectileBase.motionZ).normalize()));
 			}
 			world.playSound(null, projectileBase.getPosition(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 2, 2);
-			
-			
-			
+
 			TinkerProjectileHandler ticProjectile = projectileBase.tinkerProjectile;
 
 			float speed = ticProjectile.getPower();
@@ -161,7 +159,7 @@ public class PolyshotProj extends AbstractProjectileTrait {
 		}
 	}
 
-	private static final double DSQ_SCALAR = 0.125 / Math.sqrt(-Math.log(0.5));
+	public static final double DSQ_SCALAR = 0.125 / Math.sqrt(-Math.log(0.5));
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onLivingDamage(LivingHurtEvent event) {
@@ -191,5 +189,10 @@ public class PolyshotProj extends AbstractProjectileTrait {
 	@Override
 	public int getPriority() {
 		return -6942069; // we want this to run asap
+	}
+
+	@Override
+	public boolean isToolWithTrait(ItemStack itemStack) {
+		return super.isToolWithTrait(itemStack);
 	}
 }

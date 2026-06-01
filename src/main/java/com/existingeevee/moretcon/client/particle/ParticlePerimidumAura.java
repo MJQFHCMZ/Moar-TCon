@@ -63,6 +63,7 @@ public class ParticlePerimidumAura extends Particle {
 
 	@Override
 	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+		
 		try {
 			double interpEntPosX = entityIn.prevPosX + partialTicks * (entityIn.posX - entityIn.prevPosX);
 			double interpEntPosY = entityIn.prevPosY + partialTicks * (entityIn.posY - entityIn.prevPosY);

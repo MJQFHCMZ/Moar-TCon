@@ -9,7 +9,7 @@ import com.existingeevee.moretcon.devtools.DevEnvHandler;
 import com.existingeevee.moretcon.devtools.INoAutomodel;
 import com.existingeevee.moretcon.inits.misc.ModSponges;
 import com.existingeevee.moretcon.other.fires.CustomFireEffect;
-import com.existingeevee.moretcon.other.sponge.SpongeRegistry.GravitoniumSpongeItem;
+import com.existingeevee.moretcon.other.sponge.SpongeRegistry.ItemGravitoniumSponge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -51,7 +51,7 @@ public class ModelRegistryHelper {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void registerSponge(GravitoniumSpongeItem item) {
+	public static void registerSponge(ItemGravitoniumSponge item) {
 		ResourceLocation gsLocation = ModSponges.gravitoniumSponge.getRegistryName();
 
 		for (int i = 2; i <= item.recipe.steps.length; i++) {

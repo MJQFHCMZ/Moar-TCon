@@ -10,7 +10,6 @@ public class BLCrushedShockwaveRecipe implements IPestleAndMortarRecipe {
 
 	@Override
 	public ItemStack getOutput(ItemStack input) {
-		//return ((UniqueMaterial) Materials.materialShockwave).getUniqueToolPart();
 		return new ItemStack(ModItems.crushedShockwaveSword);
 	}
 
@@ -22,9 +21,6 @@ public class BLCrushedShockwaveRecipe implements IPestleAndMortarRecipe {
 	@Override
 	public boolean matchesOutput(ItemStack stack) {
 		return stack.getItem().getRegistryName().equals(ModItems.crushedShockwaveSword.getRegistryName());
-
-				//stack.getItem().getRegistryName().equals(CrashyBLItems.betweenSwordBlade.getRegistryName()) &&
-			//	TinkerUtil.getMaterialFromStack(stack).getIdentifier().equals(Materials.materialShockwave.getIdentifier());
 	}
 
 	@Override

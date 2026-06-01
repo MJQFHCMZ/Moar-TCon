@@ -21,6 +21,35 @@ public class MiscRecipes {
 
 	public static void init(Register<IRecipe> event) {
 		event.getRegistry().register(new BreakApartBoltCoreRecipe().setRegistryName("break_bolt_core"));
+
+		event.getRegistry().register(
+				RecipeHelper.createRecipe("runic_catalyst", new ItemStack(ModItems.catalystRunic),
+						new String[] {
+								" A ",
+								"MNM",
+								"EOP"
+						},
+						Pair.of('A', new OreIngredient("ingotArdite")),
+						Pair.of('N', new OreIngredient("netherStar")),
+						Pair.of('E', new OreIngredient("gemErythynite")),
+						Pair.of('O', new OreIngredient("obsidian")),
+						Pair.of('P', new OreIngredient("gemPerimidum")),
+						Pair.of('M', Ingredient.fromItem(ModItems.perimimoss))
+						));
+		
+		event.getRegistry().register(
+				RecipeHelper.createRecipe("catalyzation_chamber", new ItemStack(ModBlocks.blockCatalyzationChamber),
+						new String[] {
+								"SRS",
+								"LPL",
+								"SBS"
+						},
+						Pair.of('S', new OreIngredient("ingotBrickSeared")),
+						Pair.of('P', new OreIngredient("gemPerimidum")),
+						Pair.of('L', Ingredient.fromItem(ModItems.solidLightning)),
+						Pair.of('B', Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.blockCobbledBedrock))),
+						Pair.of('R', new OreIngredient("brinkstone"))));
+
 		
 		event.getRegistry().register(
 				RecipeHelper.createRecipe("reforge_station", new ItemStack(ModBlocks.blockReforgeStation),

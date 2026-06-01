@@ -56,7 +56,7 @@ public class Gravitating extends AbstractArmorTrait {
 
 		}
 
-		double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(e.getEntityLiving().world, entity.getPositionVector());
+		double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(e.getEntity(), e.getEntityLiving().world, entity.getPositionVector());
 		
 		if (entity.motionY < 0) {
 			for (ItemStack s : e.getEntityLiving().getArmorInventoryList()) {
