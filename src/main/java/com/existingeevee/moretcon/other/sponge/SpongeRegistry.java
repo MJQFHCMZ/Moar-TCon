@@ -55,7 +55,7 @@ public class SpongeRegistry {
 				OreDictionaryInit.registerOre(ore, s.getValue().result);
 			}
 
-			GameRegistry.addSmelting(new ItemStack(s.getValue().result, 1), s.getValue().smeltResult.copy(), 0F);
+			GameRegistry.addSmelting(new ItemStack(s.getValue().result, 1), s.getValue().smeltResult.get().copy(), 0F);
 			int i = 1;
 
 			for (SpongeStep s2 : s.getValue().steps) {
@@ -72,18 +72,22 @@ public class SpongeRegistry {
 		}
 	}
 
-	public static GravitoniumSpongeItem getSponge(SpongeRecipe sponge) {
-		return new GravitoniumSpongeItem(sponge);
+	public static ItemGravitoniumSponge getSponge(SpongeRecipe sponge) {
+		return new ItemGravitoniumSponge(sponge);
 	}
 
 	public static SpongeRecipe createSpongeRecipe(String recipeName, String resultOreDict, ItemStack smeltResult, ItemStack seed, SpongeStep... steps) {
-		return new SpongeRecipe(recipeName, resultOreDict, smeltResult, Ingredient.fromStacks(seed), steps);
+		return new SpongeRecipe(recipeName, resultOreDict, () -> smeltResult, () -> Ingredient.fromStacks(seed), steps);
 	}
 
 	public static SpongeRecipe createSpongeRecipe(String recipeName, String resultOreDict, ItemStack smeltResult, Ingredient seed, SpongeStep... steps) {
-		return new SpongeRecipe(recipeName, resultOreDict, smeltResult, seed, steps);
+		return new SpongeRecipe(recipeName, resultOreDict, () -> smeltResult, () -> seed, steps);
 	}
 
+	public static SpongeRecipe createSpongeRecipe(String recipeName, String resultOreDict, Supplier<ItemStack> smeltResult, Supplier<Ingredient> seed, SpongeStep... steps) {
+		return new SpongeRecipe(recipeName, resultOreDict, smeltResult, seed, steps);
+	}
+	
 	public static SpongeStep createSpongeStep(Supplier<Fluid> fluid, int amount) {
 		return new SpongeStep(fluid, amount);
 	}
@@ -91,12 +95,12 @@ public class SpongeRegistry {
 	public static class SpongeRecipe {
 		public SpongeStep[] steps;
 		private List<String> resultOreDict = new ArrayList<>();
-		private ItemStack smeltResult;
+		private Supplier<ItemStack> smeltResult;
 		private String recipeName;
-		private GravitoniumSpongeItem result;
-		private Ingredient seed;
+		private ItemGravitoniumSponge result;
+		private Supplier<Ingredient> seed;
 
-		public SpongeRecipe(String recipeName, String resultOreDict, ItemStack smeltResult, Ingredient seed, SpongeStep... steps) {
+		public SpongeRecipe(String recipeName, String resultOreDict, Supplier<ItemStack> smeltResult, Supplier<Ingredient> seed, SpongeStep... steps) {
 			this.resultOreDict.add(resultOreDict);
 			this.smeltResult = smeltResult;
 			this.steps = steps;
@@ -105,10 +109,10 @@ public class SpongeRegistry {
 		}
 
 		public ItemStack getSmeltResult() {
-			return smeltResult;
+			return smeltResult.get();
 		}
 
-		public void setSmeltResult(ItemStack smeltResult) {
+		public void setSmeltResult(Supplier<ItemStack> smeltResult) {
 			this.smeltResult = smeltResult;
 		}
 
@@ -126,17 +130,21 @@ public class SpongeRegistry {
 		}
 
 		public boolean isSeed(ItemStack input) {
-			return seed.test(input);
+			return seed.get().test(input);
 		}
 
 		public Ingredient getSeed() {
-			return seed;
+			return seed.get();
 		}
 
 		public ArrayList<SpongeStep> getSteps() {
 			ArrayList<SpongeStep> steps = new ArrayList<>();
 			steps.addAll(steps);
 			return steps;
+		}
+
+		public String getRecipeName() {
+			return recipeName;
 		}
 	}
 
@@ -162,11 +170,11 @@ public class SpongeRegistry {
 		}
 	}
 
-	public static class GravitoniumSpongeItem extends ItemBase {
+	public static class ItemGravitoniumSponge extends ItemBase {
 
 		public SpongeRecipe recipe;
 
-		private GravitoniumSpongeItem(SpongeRecipe recipe) {
+		protected ItemGravitoniumSponge(SpongeRecipe recipe) {
 			super("item" + recipe.recipeName + "sponge");
 			this.recipe = recipe;
 			this.recipe.result = this;

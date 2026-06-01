@@ -8,14 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import com.existingeevee.moretcon.compat.crafttweaker.contenttweaker.ItemCoTCatalyst;
+import com.existingeevee.moretcon.compat.crafttweaker.misc.CrTAlloyRecipe;
 import com.existingeevee.moretcon.item.ItemCatalyst;
 import com.existingeevee.moretcon.item.ItemCatalyst.CatalyzedAlloyRegisterEvent;
 import com.existingeevee.moretcon.materials.CompositeRegistry;
 import com.existingeevee.moretcon.materials.CompositeRegistry.CompositeData;
-import com.existingeevee.moretcon.other.ICustomSlotRenderer.GlowType;
-import com.teamacronymcoders.base.registrysystem.ItemRegistry;
-import com.teamacronymcoders.contenttweaker.ContentTweaker;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -38,15 +35,15 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.moretcon.MoreTCon")
 public class CrTClassMoreTCon {
 
-    private static boolean init = false;
-    
-    private static void init() {
-        if(!init) {
-            MinecraftForge.EVENT_BUS.register(CrTClassMoreTCon.class);
-            init = true;
-        }
-    }
-	
+	private static boolean init = false;
+
+	private static void init() {
+		if (!init) {
+			MinecraftForge.EVENT_BUS.register(CrTClassMoreTCon.class);
+			init = true;
+		}
+	}
+
 	@ZenMethod
 	public static void registerComposite(String fromMaterial, String toMaterial, ILiquidStack fluid, @Optional boolean onlyOne) {
 		CraftTweakerAPI.apply(new IAction() {
@@ -68,31 +65,12 @@ public class CrTClassMoreTCon {
 			public String describe() {
 				return String.format("Registered composite material recipe for %s.", toMaterial);
 			}
-		});	    
+		});
 	}
-	
-	//TODO removals of composites
-	
-    @ZenMethod
-    public static void createCatalyst(String name, @Optional(value = "-1") int glowColor, @Optional String glowType) {
-    	ItemCoTCatalyst instance;
-    	
-    	if (glowColor >= 0) {
-    		if (glowType == null || GlowType.valueOf(glowType.toUpperCase()) == null) {
-    			instance = new ItemCoTCatalyst(name, glowColor);
-    		} else {
-    			instance = new ItemCoTCatalyst(name, GlowType.valueOf(glowType.toUpperCase()), glowColor);
-    		}
-    	} else {
-        	instance = new ItemCoTCatalyst(name);
-    	}
-    	
-    	ContentTweaker.instance.getRegistry(ItemRegistry.class, "ITEM").register(instance);
-    }
-    
-    @ZenMethod
-    public static void addCatalyzedAlloy(IItemStack catalyst, ILiquidStack output, ILiquidStack[] inputs) {
-        init();
+
+	@ZenMethod
+	public static void addCatalyzedAlloy(IItemStack catalyst, ILiquidStack output, ILiquidStack[] inputs) {
+		init();
 		CraftTweakerAPI.apply(new IAction() {
 			@Override
 			public void apply() {
@@ -100,7 +78,7 @@ public class CrTClassMoreTCon {
 				if (!(item instanceof ItemCatalyst)) {
 					throw new NoSuchElementException("Not a catalyst item: " + item.getRegistryName());
 				}
-				
+
 				ItemCatalyst catalyst = (ItemCatalyst) item;
 				AlloyRecipe recipe = new AlloyRecipe(CraftTweakerMC.getLiquidStack(output), CraftTweakerMC.getLiquidStacks(inputs));
 				catalyst.registerAlloy(recipe);
@@ -108,72 +86,72 @@ public class CrTClassMoreTCon {
 
 			@Override
 			public String describe() {
-				return String.format("Registered catalyzed alloying recipe for %s.", CraftTweakerMC.getLiquidStack(output).getFluid());
+				return String.format("Registered catalyzed alloying recipe for %s.", CraftTweakerMC.getLiquidStack(output).getFluid().getName());
 			}
-		});	 
-    }
-    
+		});
+	}
+
 	public static final Map<ItemCatalyst, Map<ILiquidStack, List<ILiquidStack>>> REMOVED_RECIPES = new HashMap<>();
-    
-    @ZenMethod
-    public static void removeCatalyzedAlloy(IItemStack catalyst, ILiquidStack output, @Optional ILiquidStack[] input) {
-        init();
-        
-        CraftTweakerAPI.apply(new IAction() {
+
+	@ZenMethod
+	public static void removeCatalyzedAlloy(IItemStack catalyst, ILiquidStack output, @Optional ILiquidStack[] input) {
+		init();
+
+		CraftTweakerAPI.apply(new IAction() {
 			@Override
 			public void apply() {
-		        List<ILiquidStack> in = new ArrayList<>();
-		        if(input == null || input.length == 0) {
-		            in = null;
-		        } else {
-		            Collections.addAll(in, input);
-		        }
-				
+				List<ILiquidStack> in = new ArrayList<>();
+				if (input == null || input.length == 0) {
+					in = null;
+				} else {
+					Collections.addAll(in, input);
+				}
+
 				Item item = CraftTweakerMC.getItemStack(catalyst).getItem();
 				if (!(item instanceof ItemCatalyst)) {
 					throw new NoSuchElementException("Not a catalyst item: " + item.getRegistryName());
 				}
 
-	            REMOVED_RECIPES.computeIfAbsent((ItemCatalyst) item, i -> new LinkedHashMap<>()).put(output, in);
+				REMOVED_RECIPES.computeIfAbsent((ItemCatalyst) item, i -> new LinkedHashMap<>()).put(output, in);
 			}
 
 			@Override
 			public String describe() {
-				return String.format("Removed catalyzed alloying recipe for %s.", CraftTweakerMC.getLiquidStack(output).getFluid());
+				return String.format("Removed catalyzed alloying recipe for %s.", CraftTweakerMC.getLiquidStack(output).getFluid().getName());
 			}
-		});	 
-    }
-    
-    @SubscribeEvent
-    public static void onTinkerRegister(CatalyzedAlloyRegisterEvent event) {
-        if(event.getRecipe() instanceof CrTAlloyRecipe) {
-            return;
-        }
-        
-        for(Map.Entry<ILiquidStack, List<ILiquidStack>> entry : REMOVED_RECIPES.getOrDefault(event.catalyst, new LinkedHashMap<>()).entrySet()) {
-            
-            if(event.getRecipe().getResult().isFluidEqual(((FluidStack) entry.getKey().getInternal()))) {
-                if(entry.getValue() != null) {
-                    List<ILiquidStack> in = entry.getValue();
-                    List<FluidStack> rin = event.getRecipe().getFluids();
-                    if(rin.size() == in.size()) {
-                        boolean valid = true;
-                        for(int i = 0; i < in.size(); i++) {
-                            ILiquidStack stack = in.get(i);
-                            FluidStack lStack = rin.get(i);
-                            if(!lStack.isFluidEqual(((FluidStack) stack.getInternal()))) {
-                                valid = false;
-                                
-                            }
-                        }
-                        if(valid) {
-                            event.setCanceled(true);
-                        }
-                    }
-                } else {
-                    event.setCanceled(true);
-                }
-            }
-        }
-    }
+		});
+	}
+
+	@SubscribeEvent
+	public static void onTinkerRegister(CatalyzedAlloyRegisterEvent event) {
+		if (event.getRecipe() instanceof CrTAlloyRecipe) {
+			return;
+		}
+
+		for (Map.Entry<ILiquidStack, List<ILiquidStack>> entry : REMOVED_RECIPES.getOrDefault(event.catalyst, new LinkedHashMap<>()).entrySet()) {
+
+			if (event.getRecipe().getResult().isFluidEqual(((FluidStack) entry.getKey().getInternal()))) {
+				if (entry.getValue() != null) {
+					List<ILiquidStack> in = entry.getValue();
+					List<FluidStack> rin = event.getRecipe().getFluids();
+					if (rin.size() == in.size()) {
+						boolean valid = true;
+						for (int i = 0; i < in.size(); i++) {
+							ILiquidStack stack = in.get(i);
+							FluidStack lStack = rin.get(i);
+							if (!lStack.isFluidEqual(((FluidStack) stack.getInternal()))) {
+								valid = false;
+
+							}
+						}
+						if (valid) {
+							event.setCanceled(true);
+						}
+					}
+				} else {
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
 }

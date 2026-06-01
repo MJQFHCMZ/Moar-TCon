@@ -1,4 +1,4 @@
-package com.existingeevee.moretcon.compat.crafttweaker;
+package com.existingeevee.moretcon.compat.crafttweaker.misc;
 
 import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.library.smeltery.AlloyRecipe;
