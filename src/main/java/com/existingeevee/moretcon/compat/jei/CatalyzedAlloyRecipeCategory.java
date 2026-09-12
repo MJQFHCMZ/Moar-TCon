@@ -70,6 +70,7 @@ public class CatalyzedAlloyRecipeCategory implements IRecipeCategory<CatalyzedAl
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void setRecipe(IRecipeLayout recipeLayout, CatalyzedAlloyRecipeWrapper recipe, IIngredients ingredients) {
 		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
 
@@ -181,6 +182,7 @@ public class CatalyzedAlloyRecipeCategory implements IRecipeCategory<CatalyzedAl
 		}
 
 		@Override
+		@SuppressWarnings("deprecation")
 		public void getIngredients(IIngredients ingredients) {
 			ingredients.setInputs(FluidStack.class, inputs);
 			ingredients.setOutputs(FluidStack.class, outputs);

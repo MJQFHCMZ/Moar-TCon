@@ -127,6 +127,7 @@ public class BlockEtherealBase extends BlockBase {
 		return -1;// Float.MAX_VALUE * 0.99f;
 	}
 
+	@SuppressWarnings("deprecation")
 	public float getTrueHardness(IBlockState blockState, World worldIn, BlockPos pos) {
 		return super.getBlockHardness(blockState, worldIn, pos);
 	}

@@ -19,6 +19,7 @@ public class Searing extends AbstractTraitLeveled {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void miningSpeed(ItemStack tool, PlayerEvent.BreakSpeed event) {
 		NBTTagList tagList = TagUtil.getModifiersTagList(tool);
 		int index = TinkerUtil.getIndexInCompoundList(tagList, getModifierIdentifier());

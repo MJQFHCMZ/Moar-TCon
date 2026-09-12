@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.events.TinkerToolEvent.OnBowShoot;
  * Class 2 make projectiles interact wiht traits better grahhhh
  */
 
+@SuppressWarnings("deprecation")
 public class ArrowReferenceHelper {
 
 	@SubscribeEvent

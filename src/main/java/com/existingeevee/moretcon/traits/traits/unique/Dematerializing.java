@@ -42,6 +42,7 @@ import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
+@SuppressWarnings("deprecation")
 public class Dematerializing extends AbstractTrait {
 
 	public Dematerializing() {

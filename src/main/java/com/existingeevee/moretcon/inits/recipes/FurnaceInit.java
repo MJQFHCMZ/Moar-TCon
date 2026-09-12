@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.tools.TinkerTools;
 import twilightforest.item.TFItems;
 
+@SuppressWarnings("deprecation")
 public class FurnaceInit {
 	public static void init() {
 

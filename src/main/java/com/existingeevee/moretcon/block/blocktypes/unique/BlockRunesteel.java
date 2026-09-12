@@ -35,6 +35,7 @@ public class BlockRunesteel extends BlockBase {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		boolean useAltTexture = meta == 1;
