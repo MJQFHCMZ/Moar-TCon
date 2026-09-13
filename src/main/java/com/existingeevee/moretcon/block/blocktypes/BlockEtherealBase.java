@@ -1,5 +1,9 @@
 package com.existingeevee.moretcon.block.blocktypes;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.existingeevee.moretcon.inits.ModBlocks;
 import com.existingeevee.moretcon.item.ItemIonstoneBlock;
 import com.existingeevee.moretcon.item.ItemVacuuiteBlock;
@@ -49,7 +53,7 @@ public class BlockEtherealBase extends BlockBase {
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
 		if (CompatManager.conarm && entity instanceof EntityLivingBase) {
 
-			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));// ;.contains(entity.getPositionVector())
+			AxisAlignedBB blockBB = new AxisAlignedBB(pos, pos.add(1, 1, 1));
 			AxisAlignedBB foot = entity.getEntityBoundingBox().setMaxY(entity.getEntityBoundingBox().minY + 0.0001);
 			if (!foot.intersects(blockBB)) {
 				return;
@@ -57,26 +61,13 @@ public class BlockEtherealBase extends BlockBase {
 
 			EntityLivingBase living = (EntityLivingBase) entity;
 
-			boolean canWalkOn = false; // ScaffoldBlock
-
-			for (ItemStack stack : living.getArmorInventoryList()) {
-				try {
-					if (ModArmorTraits.etherealTangibility.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
-						canWalkOn = true;
-						break;
-					}
-				} catch (NoClassDefFoundError e) { //just in case
-					return;
-				}
-			}
+			boolean canWalkOn = isWearingEtherealTangibility(living);
 
 			double gravity = WorldGravityUtils.getWorldGravitiationalAcceleration(entity, worldIn, entity.getPositionVector());
 
 			if (canWalkOn && !(living.isElytraFlying() || (living instanceof EntityPlayer && ((EntityPlayer) living).capabilities.isFlying))) {
-				entity.fallDistance = 0;
-				entity.onGround = true;
-				if (entity.motionY < 0.01) {
-					entity.motionY = entity.isSneaking() ? gravity / 8 : -gravity;
+				if (entity.motionY < 0.01 && entity.isSneaking()) {
+					entity.motionY = gravity / 8;
 				}
 			}
 		}
@@ -192,6 +183,59 @@ public class BlockEtherealBase extends BlockBase {
 			}
 		}
 		return EMPTY_AABB;
+	}
+
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
+			List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+		if (!(entityIn instanceof EntityLivingBase)) {
+			return;
+		}
+
+		EntityLivingBase living = (EntityLivingBase) entityIn;
+
+		if (!isWearingEtherealTangibility(living)) {
+			return;
+		}
+
+		if (living.motionY >= 0.0D) {
+			return;
+		}
+
+		if (living.isElytraFlying() || living instanceof EntityPlayer && ((EntityPlayer) living).capabilities.isFlying || living.isSneaking()) {
+			return;
+		}
+
+		AxisAlignedBB box = living.getEntityBoundingBox();
+
+		double previousMinY = box.minY - (living.posY - living.prevPosY);
+		double height = Math.min(1.0D, previousMinY - pos.getY());
+
+		if (height < 0.0D) {
+			return;
+		}
+
+		double thickness = 1.0E-4D;
+
+		addCollisionBoxToList(pos, entityBox, collidingBoxes,
+				new AxisAlignedBB(0.0D, height - thickness, 0.0D, 1.0D, height, 1.0D));
+	}
+
+	private static boolean flagNCDF = false;
+
+	private boolean isWearingEtherealTangibility(EntityLivingBase living) {
+		if (flagNCDF)
+			return false;
+		for (ItemStack stack : living.getArmorInventoryList()) {
+			try {
+				if (ModArmorTraits.etherealTangibility.isToolWithTrait(stack) && !ToolHelper.isBroken(stack)) {
+					return true;
+				}
+			} catch (NoClassDefFoundError e) { // just in case
+				flagNCDF = true;
+			}
+		}
+		return false;
 	}
 
 	@Override
