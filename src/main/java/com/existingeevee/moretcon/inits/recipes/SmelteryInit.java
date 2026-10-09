@@ -28,7 +28,7 @@ public class SmelteryInit {
 		if (CompatManager.tic3backport) {
 			TinkerRegistry.registerAlloy(new FluidStack(ModFluids.liquidSlimesteel, 288), new FluidStack(TinkerFluids.iron, 72), new FluidStack(TinkerFluids.blueslime, 125), new FluidStack(TinkerFluids.searedStone, 144));
 
-			TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(ModBlocks.compositeSlimewood, 1), RecipeMatch.of("plankWood"), CompatManager.tinkersAntique ? TinkerFluids.purpleslime : TinkerFluids.blueslime, 144, true, false));
+			TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(ModBlocks.compositeSlimewood, 1), RecipeMatch.of("plankWood"), CompatManager.tinkersAntique ? TinkerFluids.purpleSlime : TinkerFluids.blueslime, 144, true, false));
 			TinkerRegistry.registerBasinCasting(new CastingRecipe(new ItemStack(ModBlocks.compositeNahuatl, 1), RecipeMatch.of("plankWood"), TinkerFluids.obsidian, 144, true, false));
 		}
 		
