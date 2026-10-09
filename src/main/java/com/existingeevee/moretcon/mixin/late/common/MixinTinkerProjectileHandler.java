@@ -24,6 +24,7 @@ import slimeknights.tconstruct.library.traits.IProjectileTrait;
 import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
+@SuppressWarnings("deprecation")
 @Mixin(TinkerProjectileHandler.class)
 public abstract class MixinTinkerProjectileHandler {
 

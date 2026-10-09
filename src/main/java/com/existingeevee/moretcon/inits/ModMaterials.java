@@ -10,6 +10,8 @@ import com.existingeevee.moretcon.materials.CompositeRegistry.CompositeData;
 import com.existingeevee.moretcon.materials.DelagateFluidMaterial;
 import com.existingeevee.moretcon.materials.MTMaterialIntegration;
 import com.existingeevee.moretcon.materials.UniqueMaterial;
+import com.existingeevee.moretcon.other.CustomBookCraftingDisplay;
+import com.existingeevee.moretcon.other.CustomBookCraftingDisplay.SimpleDisplayData;
 import com.existingeevee.moretcon.other.MoreTConLogger;
 import com.existingeevee.moretcon.other.slotrender.ColoredGlowTicRender;
 import com.existingeevee.moretcon.other.slotrender.ShakeTicRender;
@@ -112,6 +114,8 @@ public class ModMaterials implements MaterialTypes {
 	public static final Material materialIonstone = new Material(MiscUtils.createNonConflictiveName("ionstone"), 0x05a8f3);
 	public static final Material materialVacuuite = new Material(MiscUtils.createNonConflictiveName("vacuuite"), 0x300a6a);
 	public static final Material materialMalithyst = new Material(MiscUtils.createNonConflictiveName("malithyst"), 0x00df00);
+	public static final Material materialShatterglass = new Material(MiscUtils.createNonConflictiveName("shatterglass"), 0x362f36);
+	public static final Material materialMossyBrinkstone = new Material(MiscUtils.createNonConflictiveName("mossybrinkstone"), 0xfcf0fc);
 
 	public static final Material materialNahuatl = new Material(MiscUtils.createNonConflictiveName("nahuatl"), 0x3B2754);
 	public static final Material materialSlimewood = new Material(MiscUtils.createNonConflictiveName("slimewood"), 0x96dd8f);
@@ -226,6 +230,10 @@ public class ModMaterials implements MaterialTypes {
 			MiscUtils.createNonConflictiveName("gas_vials"), 0x009400, "moretcon:shrapnel",
 			"moretcon:bomb");
 	
+	public static final UniqueMaterial materialCapacitor = new UniqueMaterial(
+			MiscUtils.createNonConflictiveName("capacitor"), 0x009400, "tconstruct:bow_limb",
+			"tconstruct:shortbow");
+	
 	private static void initMats() {
 		BowMaterialStats whyWouldYouMakeABowOutOfThis = new BowMaterialStats(0.2f, 0.4f, -1f);
 		HeadMaterialStats thankYouTinkersForNeedingAHeadMat = new HeadMaterialStats(700, 6f, 4f, 5);
@@ -278,7 +286,6 @@ public class ModMaterials implements MaterialTypes {
 				ArmorMaterials.addArmorTrait(materialNahuatl, ArmorTraits.dense);
 				materialNahuatl.addTrait(ModTraits.darkened, CORE);
 				materialNahuatl.addTrait(ModArmorTraits.serrated, CORE);
-
 			}
 
 			materialSlimewood.setCastable(false);
@@ -303,7 +310,6 @@ public class ModMaterials implements MaterialTypes {
 				TinkerRegistry.addMaterialStats(materialSlimewood, new TrimMaterialStats(3.75f));
 
 				ArmorMaterials.addArmorTrait(materialSlimewood, ArmorTraits.slimeyGreen);
-
 			}
 
 			// Overslime for the win!
@@ -449,6 +455,28 @@ public class ModMaterials implements MaterialTypes {
 				ArmorMaterials.addArmorTrait(materialBrinkstone, ArmorTraits.steady);
 			}
 
+			materialMossyBrinkstone.setCastable(false);
+			materialMossyBrinkstone.setCraftable(false);
+			MaterialUtils.forceSetRepItem(new ItemStack(ModItems.perimimoss), materialMossyBrinkstone);
+			CustomBookCraftingDisplay.register(materialMossyBrinkstone, new SimpleDisplayData("text.mossy_helltop_isles", () -> new ItemStack(ModBlocks.blockMossyBrinkstone)));
+			materialMossyBrinkstone.addTrait(TinkerTraits.stonebound);
+			materialMossyBrinkstone.addTrait(TinkerTraits.ecological);
+			materialMossyBrinkstone.addTrait(ModTraits.bottomsEnd, HEAD);
+			materialMossyBrinkstone.addTrait(ModTraits.mosstacular, HEAD);
+			materialMossyBrinkstone.addTrait(TinkerTraits.hellish, HEAD);
+			TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new HeadMaterialStats(600, 4f, 9f, 3));
+			TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new HandleMaterialStats(1.2f, -20));
+			TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new ExtraMaterialStats(50));
+			TinkerRegistry.addMaterialStats(materialMossyBrinkstone, whyWouldYouMakeABowOutOfThis);
+			TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new ArrowShaftMaterialStats(1.2f, 30));
+			if (CompatManager.conarm) {
+				TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new CoreMaterialStats(17.3f, 22.4f));
+				TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new PlatesMaterialStats(1.2f, -1.3f, 0.4f));
+				TinkerRegistry.addMaterialStats(materialMossyBrinkstone, new TrimMaterialStats(2.5f));
+
+				ArmorMaterials.addArmorTrait(materialMossyBrinkstone, ArmorTraits.steady);
+			}
+			
 			// MinecraftMixin TextureManager TextureAtlasSprite
 
 			materialValasium.addItem("oreValasium", 1, Material.VALUE_Ore());
@@ -541,6 +569,7 @@ public class ModMaterials implements MaterialTypes {
 			materialSolsteel.setRepresentativeItem("ingotSolarsteel");
 			materialSolsteel.addTrait(TinkerTraits.flammable, HEAD);
 			materialSolsteel.addTrait(TinkerTraits.autosmelt, HEAD);
+			materialSolsteel.addTrait(ModTraits.sunstrike, HEAD);//TinkerTraits
 			materialSolsteel.addTrait(ModTraits.burning, HEAD);
 			materialSolsteel.addTrait(ModTraits.burning);
 			materialSolsteel.addTrait(TinkerTraits.superheat);
@@ -660,10 +689,15 @@ public class ModMaterials implements MaterialTypes {
 			materialSpaceTimeDisruption.addTrait(TinkerTraits.dense);
 			materialSpaceTimeDisruption.addTrait(ModTraits.blinkdrawn);
 			ColoredGlowTicRender.MATERIAL_COLORS.put(materialSpaceTimeDisruption, null);
-			ShakeTicRender.MATERIAL_SHAKE.put(materialSpaceTimeDisruption, new MaterialShakeData((ItemShakeRender) ModItems.spaceTimeDisruptionPowder));
+			ShakeTicRender.MATERIAL_SHAKE.put(materialSpaceTimeDisruption, new MaterialShakeData((ItemShakeRender) ModItems.spaceTimeDisruptionPowder).setSpinSpeed(0));
 			TinkerRegistry.addMaterialStats(materialSpaceTimeDisruption, new BowMaterialStats(Float.MAX_VALUE, 3f, 3f)); // big
 			TinkerRegistry.addMaterialStats(materialSpaceTimeDisruption, new HeadMaterialStats(500, 10f, 8f, 6));
 
+			materialCapacitor.addTrait(ModTraits.pumpCharged);
+			ShakeTicRender.MATERIAL_SHAKE.put(materialCapacitor, new MaterialShakeData(0.4f, 0.9f, 0.2f, 0));
+			TinkerRegistry.addMaterialStats(materialCapacitor, new BowMaterialStats(1.1f, 3f, 4f)); 
+			TinkerRegistry.addMaterialStats(materialCapacitor, new HeadMaterialStats(750, 10f, 8f, 6));
+			
 			materialVoidSpar.addItem("gemVoidSpar", 1, Material.VALUE_Ingot);
 			materialVoidSpar.addItem("blockVoidSpar", 1, Material.VALUE_Block);
 			materialVoidSpar.setCastable(false);
@@ -1369,6 +1403,24 @@ public class ModMaterials implements MaterialTypes {
 				ArmorMaterials.addArmorTrait(materialMalithyst, ModArmorTraits.woeful);
 			}
 			
+			materialShatterglass.setCastable(false);
+			materialShatterglass.setCraftable(true);
+//			materialShatterglass.setRepresentativeItem("gemMalithyst");
+			materialShatterglass.addTrait(ModTraits.bottomsEnd, HEAD);
+			materialShatterglass.addTrait(ModTraits.fragile, HEAD);
+			materialShatterglass.addTrait(TinkerTraits.fractured);
+			TinkerRegistry.addMaterialStats(materialShatterglass, new HeadMaterialStats(250, 8.5f, 9.25f, 7));
+			TinkerRegistry.addMaterialStats(materialShatterglass, new HandleMaterialStats(1.1f, 50));
+			TinkerRegistry.addMaterialStats(materialShatterglass, new ExtraMaterialStats(30));
+			TinkerRegistry.addMaterialStats(materialShatterglass, new ArrowShaftMaterialStats(1.2f, 13));
+			TinkerRegistry.addMaterialStats(materialShatterglass, whyWouldYouMakeABowOutOfThis);
+			if (CompatManager.conarm) {
+				TinkerRegistry.addMaterialStats(materialShatterglass, new CoreMaterialStats(14.6f, 18f));
+				TinkerRegistry.addMaterialStats(materialShatterglass, new PlatesMaterialStats(1.8f, 1.6f, 1.1f));
+				TinkerRegistry.addMaterialStats(materialShatterglass, new TrimMaterialStats(0.4f));
+
+				ArmorMaterials.addArmorTrait(materialShatterglass, ModArmorTraits.serrated);
+			}
 			
 			materialImpulseConcentrator.addTrait(ModTraits.velocibliteration);
 			ColoredGlowTicRender.MATERIAL_COLORS.put(materialImpulseConcentrator, null);
@@ -1868,6 +1920,9 @@ public class ModMaterials implements MaterialTypes {
 			ModMaterials.registerMaterial(materialImpulseConcentrator, null);
 			ModMaterials.registerMaterial(materialGasVials, null);
 			ModMaterials.registerMaterial(materialMalithyst).toolforge();
+			ModMaterials.registerMaterial(materialShatterglass);
+			ModMaterials.registerMaterial(materialMossyBrinkstone);
+			ModMaterials.registerMaterial(materialCapacitor);
 			
 		}
 

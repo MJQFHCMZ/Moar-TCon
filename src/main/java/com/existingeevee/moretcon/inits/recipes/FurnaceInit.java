@@ -15,8 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.tconstruct.library.tools.ToolPart;
+import slimeknights.tconstruct.tools.TinkerTools;
 import twilightforest.item.TFItems;
 
+@SuppressWarnings("deprecation")
 public class FurnaceInit {
 	public static void init() {
 
@@ -78,6 +80,10 @@ public class FurnaceInit {
 		GameRegistry.addSmelting(new ItemStack(ModItems.rawPorksteel, 1), new ItemStack(ModItems.cookedPorksteel, 1), 0F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.cookedPorksteel, 1), new ItemStack(ModItems.ingotPorksteel, 1), 0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreGravitoniumDense, 1), new ItemStack(ModItems.ingotGravitonium, 4), 0F);
+		
+		//TODO temp recipe until the glass is actually added
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockBrokenSand, 1), TinkerTools.shard.getItemstackWithMaterial(ModMaterials.materialShadowglass), 0F);
+
 		
 		GameRegistry.registerFuelHandler(new IFuelHandler() {
 			@Override

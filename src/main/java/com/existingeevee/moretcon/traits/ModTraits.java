@@ -39,6 +39,7 @@ import com.existingeevee.moretcon.traits.traits.EulersWrath;
 import com.existingeevee.moretcon.traits.traits.Executor;
 import com.existingeevee.moretcon.traits.traits.Fireslime;
 import com.existingeevee.moretcon.traits.traits.Flashbang;
+import com.existingeevee.moretcon.traits.traits.Fragile;
 import com.existingeevee.moretcon.traits.traits.Frostburn;
 import com.existingeevee.moretcon.traits.traits.Hardcore;
 import com.existingeevee.moretcon.traits.traits.Haunted;
@@ -52,6 +53,7 @@ import com.existingeevee.moretcon.traits.traits.Liquid;
 import com.existingeevee.moretcon.traits.traits.Macrocrystaline;
 import com.existingeevee.moretcon.traits.traits.Magical;
 import com.existingeevee.moretcon.traits.traits.MagicallyReactive;
+import com.existingeevee.moretcon.traits.traits.Mosstacular;
 import com.existingeevee.moretcon.traits.traits.Nulltouched;
 import com.existingeevee.moretcon.traits.traits.Overdrive;
 import com.existingeevee.moretcon.traits.traits.Overgrowth;
@@ -73,6 +75,7 @@ import com.existingeevee.moretcon.traits.traits.Slicing;
 import com.existingeevee.moretcon.traits.traits.Slimesharp;
 import com.existingeevee.moretcon.traits.traits.Soulforged;
 import com.existingeevee.moretcon.traits.traits.Stormcaller;
+import com.existingeevee.moretcon.traits.traits.Sunstrike;
 import com.existingeevee.moretcon.traits.traits.Supercritical;
 import com.existingeevee.moretcon.traits.traits.Treetap;
 import com.existingeevee.moretcon.traits.traits.Tricromatic;
@@ -83,6 +86,7 @@ import com.existingeevee.moretcon.traits.traits.Withered;
 import com.existingeevee.moretcon.traits.traits.abst.AttributeTrait;
 import com.existingeevee.moretcon.traits.traits.abst.DummyTrait;
 import com.existingeevee.moretcon.traits.traits.internal.PolyshotProj;
+import com.existingeevee.moretcon.traits.traits.internal.PumpChargedProj;
 import com.existingeevee.moretcon.traits.traits.internal.ReforgeProj;
 import com.existingeevee.moretcon.traits.traits.unique.Autoloading;
 import com.existingeevee.moretcon.traits.traits.unique.Blinkdrawn;
@@ -98,6 +102,7 @@ import com.existingeevee.moretcon.traits.traits.unique.Mirroring;
 import com.existingeevee.moretcon.traits.traits.unique.Offense;
 import com.existingeevee.moretcon.traits.traits.unique.Plasmatic;
 import com.existingeevee.moretcon.traits.traits.unique.Polyshot;
+import com.existingeevee.moretcon.traits.traits.unique.PumpCharged;
 import com.existingeevee.moretcon.traits.traits.unique.Ricoshot;
 import com.existingeevee.moretcon.traits.traits.unique.Seismishock;
 import com.existingeevee.moretcon.traits.traits.unique.Shockwaving;
@@ -150,6 +155,7 @@ public class ModTraits {
 	public static Hardcore hardcore = new Hardcore();
 	public static Hypergravity hypergravity = new Hypergravity();
 	public static BottomsEnd bottomsEnd = new BottomsEnd();
+	public static Fragile fragile = new Fragile();
 	public static Slicing slicing = new Slicing();
 	public static Leeching leeching = new Leeching();
 	public static Afterimage afterimage = new Afterimage();
@@ -206,10 +212,16 @@ public class ModTraits {
 	public static Gaseous gaseous = new Gaseous();
 	public static Executor executor = new Executor();
 	public static Anguish anguish = new Anguish();
+	public static Sunstrike sunstrike = new Sunstrike();
+	public static PumpCharged pumpCharged = new PumpCharged();
 
 	public static PolyshotProj polyshotProj = new PolyshotProj();
 	public static ReforgeProj reforgeProj = new ReforgeProj();
+	public static PumpChargedProj pumpChargedProj = new PumpChargedProj();
+	
 	public static Stormcaller stormcaller = new Stormcaller();
+
+	public static Mosstacular mosstacular = new Mosstacular();
 
 	public static AntiGravity antigravity;
 

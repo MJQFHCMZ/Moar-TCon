@@ -28,10 +28,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
 import slimeknights.tconstruct.library.events.ProjectileEvent;
 import slimeknights.tconstruct.library.events.ProjectileEvent.OnLaunch;
+import slimeknights.tconstruct.library.events.TinkerToolEvent.OnBowShoot;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.ProjectileLauncherNBT;
 import slimeknights.tconstruct.library.tools.ranged.BowCore;
@@ -40,6 +42,7 @@ import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 
+@SuppressWarnings("deprecation")
 public class Dematerializing extends AbstractTrait {
 
 	public Dematerializing() {
@@ -55,6 +58,27 @@ public class Dematerializing extends AbstractTrait {
 	public static final Method onHit$EntityArrow = ObfuscationReflectionHelper.findMethod(EntityArrow.class, "func_184549_a", void.class, RayTraceResult.class);
 	public static final Method baseProjectileSpeed$BowCore = ObfuscationReflectionHelper.findMethod(BowCore.class, "baseProjectileSpeed", float.class);
 
+	public static final ThreadLocal<Integer> ARROW_COUNT = ThreadLocal.withInitial(() -> 1);
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onBowShoot(OnBowShoot event) {
+		if (!isToolWithTrait(event.itemStack) || event.entityPlayer == null) {
+			return;
+		}
+		
+		BowCore bow = event.bowCore;
+		float progress = bow.getDrawbackProgress(event.itemStack, event.entityPlayer);
+
+		boolean fullyDrawn = progress >= 1;
+
+		if (!fullyDrawn) {
+			return;
+		}		
+		
+		ARROW_COUNT.set(event.projectileCount);
+		event.setProjectileCount(1);
+	}
+	
 	@SubscribeEvent
 	public void onLaunch(OnLaunch event) {
 		EntityArrow arrow = event.projectileEntity instanceof EntityArrow ? (EntityArrow) event.projectileEntity : null;
@@ -105,6 +129,12 @@ public class Dematerializing extends AbstractTrait {
 		ItemStack arrowLastFired = StaticVars.lastArrowFired.get().copy();
 		
 		EntityArrow arrowToShoot = bow.getProjectileEntity(arrowLastFired.copy(), event.launcher, world, (EntityPlayer) shooter, power, 0, progress, false);
+		
+		for (String key : arrow.getEntityData().getKeySet()) {
+			arrowToShoot.getEntityData().setTag(key, arrow.getEntityData().getTag(key));
+		}
+		arrowToShoot.getTags().addAll(arrow.getTags());
+		
 		arrowToShoot.setPosition(posStart.x, posStart.y, posStart.z);
 		arrowToShoot.setSilent(true);
 		
@@ -116,10 +146,15 @@ public class Dematerializing extends AbstractTrait {
 		this.shoot(world, posStart, arrowLastFired, shooter, arrowToShoot, dist, progress, event.launcher, volleyID, true, false);
 		DamageScalar.pop();
 
-		for (int i = 1; i < 4; i++) {
+		for (int i = 1; i < 4 + ARROW_COUNT.get() - 1; i++) {
 			EntityArrow arrowToShoot2 = bow.getProjectileEntity(arrowLastFired, event.launcher, world, (EntityPlayer) shooter, power, 0, progress, false);
 			arrowToShoot2.setPosition(posStart.x, posStart.y, posStart.z);
 			arrowToShoot2.setSilent(true);
+			
+			for (String key : arrow.getEntityData().getKeySet()) {
+				arrowToShoot2.getEntityData().setTag(key, arrow.getEntityData().getTag(key));
+			}
+			arrowToShoot2.getTags().addAll(arrow.getTags());
 			
 			arrowToShoot2.motionX = motionX;
 			arrowToShoot2.motionY = motionY;
@@ -131,6 +166,8 @@ public class Dematerializing extends AbstractTrait {
 				DamageScalar.pop();
 			}, 3 * i);
 		}
+		
+		ARROW_COUNT.remove();
 	}
 
 	public void shoot(World world, Vec3d posStart, ItemStack arrowLastFired, EntityLivingBase shooter, EntityArrow arrow, double dist, float progress, ItemStack bow, long volleyId, boolean firstVolley, boolean silent) {
@@ -198,8 +235,15 @@ public class Dematerializing extends AbstractTrait {
 
 			if (intercept != null) {
 				EntityArrow arrowToHit = ((BowCore) bow.getItem()).getProjectileEntity(arrowLastFired.copy(), bow, world, (EntityPlayer) shooter, power, 0, progress, false);
+				
+				for (String key : arrow.getEntityData().getKeySet()) {
+					arrowToHit.getEntityData().setTag(key, arrow.getEntityData().getTag(key));
+				}
+				
+				arrowToHit.getTags().addAll(arrow.getTags());
+				
 				arrowToHit.setPosition(intercept.hitVec.x, intercept.hitVec.y, intercept.hitVec.z);
-				arrowToHit.setSilent(true);
+				arrowToHit.setSilent(true); 
 								
 				arrow.getTags().forEach(arrowToHit::addTag);
 				
